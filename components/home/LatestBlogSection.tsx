@@ -47,8 +47,14 @@ export default async function LatestBlogSection({
   if (blogs.length === 0) return null;
 
   return (
-    <section className="bg-gray-50 py-16">
+    // Brand-blue tint, not gray-50 — the featured-jobs section directly above is
+    // gray-50, so the two read as one continuous slab. This also steps the page
+    // toward the solid-blue newsletter CTA below.
+    <section className="bg-blue-50 border-t border-blue-100 py-16">
       <div className="max-w-7xl mx-auto px-4 text-center">
+        <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#1D4ED8] mb-3">
+          From the blog
+        </span>
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
           AI Careers, Explained
         </h2>
