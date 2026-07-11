@@ -30,7 +30,8 @@ export default function BlogContentPage({
       const supabase = createSupabaseClient();
       const { data, error } = await supabase
         .from('blogs')
-        .select('id, title, slug, category, featured_image')
+        .select('id, title, slug, category, featured_image, excerpt')
+        .eq('status', 'published')
         .order('date', { ascending: false, nullsFirst: false });
 
       if (!error) setBlogs(data || []);
@@ -44,10 +45,10 @@ export default function BlogContentPage({
     <section className="max-w-7xl mx-auto px-4 py-24">
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-          Remote Working Insights & Guides
+          AI Careers Insights & Guides
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Dive into our curated resources on remote work, hiring, and productivity across APAC.
+          Guides on breaking into AI, ML and data roles, upskilling, and hiring across Malaysia and Singapore.
         </p>
       </div>
 
