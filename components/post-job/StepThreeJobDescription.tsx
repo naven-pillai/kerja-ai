@@ -39,7 +39,7 @@ export default function StepThreeJobDescription({ formData, handleChange, nextSt
           <label className="flex items-center text-sm font-medium text-gray-700 mb-1.5">
             Job Description
           </label>
-          <p className="text-xs text-gray-400 mb-2">
+          <p className="text-xs text-gray-500 mb-2">
             Include responsibilities, requirements, and what makes this role exciting. Aim for at least 150 words.
           </p>
           <div className={errors.description ? 'ring-1 ring-red-400 rounded-lg' : ''}>
@@ -66,7 +66,7 @@ export default function StepThreeJobDescription({ formData, handleChange, nextSt
               errors.applyUrl ? 'border-red-400 focus:ring-red-300 bg-red-50' : 'border-gray-300 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8]'
             }`}
           />
-          <p className="text-xs text-gray-400 mt-1">Enter a URL to your application form, or an email address where candidates can apply.</p>
+          <p className="text-xs text-gray-500 mt-1">Enter a URL to your application form, or an email address where candidates can apply.</p>
           {errors.applyUrl && <p className="text-red-500 text-xs mt-1">{errors.applyUrl}</p>}
         </div>
       </div>

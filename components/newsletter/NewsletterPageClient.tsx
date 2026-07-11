@@ -140,6 +140,7 @@ export default function NewsletterPageClient({ issues }: Props) {
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="text"
+                  aria-label="First name"
                   placeholder="First name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -148,6 +149,7 @@ export default function NewsletterPageClient({ issues }: Props) {
                 />
                 <input
                   type="email"
+                  aria-label="Email address"
                   placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -177,7 +179,7 @@ export default function NewsletterPageClient({ issues }: Props) {
               <p className="text-red-600 text-sm mt-3">{error}</p>
             )}
 
-            <p className="text-xs text-gray-400 mt-3">
+            <p className="text-xs text-gray-500 mt-3">
               One email a week — new AI and data roles across Malaysia and Singapore. Unsubscribe anytime.
             </p>
           </form>
@@ -228,7 +230,7 @@ export default function NewsletterPageClient({ issues }: Props) {
 
                   {/* Content */}
                   <div className="p-4">
-                    <p className="text-xs font-medium text-gray-400 mb-1.5">
+                    <p className="text-xs font-medium text-gray-500 mb-1.5">
                       {issue.sentAt
                         ? new Date(issue.sentAt).toLocaleDateString('en-US', {
                             month: 'short',
@@ -245,7 +247,7 @@ export default function NewsletterPageClient({ issues }: Props) {
               ))}
             </div>
           ) : (
-            <p className="text-center text-sm text-gray-400">
+            <p className="text-center text-sm text-gray-500">
               Our first issues are on the way — subscribe to be first in line.
             </p>
           )}
@@ -274,7 +276,7 @@ export default function NewsletterPageClient({ issues }: Props) {
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`text-gray-400 shrink-0 transition-transform ${
+                    className={`text-gray-500 shrink-0 transition-transform ${
                       openFaq === i ? 'rotate-180' : ''
                     }`}
                   />

@@ -77,9 +77,9 @@ export default function CompanyCard({
 
         {/* Name + tagline */}
         <div className="mt-4">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900 group-hover:text-[#1D4ED8] transition">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900 group-hover:text-[#1D4ED8] transition">
             {company.name}
-          </h3>
+          </h2>
 
           {company.tagline && (
             <p className="mt-1 text-sm text-gray-600 line-clamp-2">

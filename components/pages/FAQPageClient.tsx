@@ -134,7 +134,7 @@ export default function FAQPageClient() {
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 text-gray-400 shrink-0 mt-1 transition-transform duration-200 ${
+                  className={`w-4 h-4 text-gray-500 shrink-0 mt-1 transition-transform duration-200 ${
                     openIndex === i ? 'rotate-180' : ''
                   }`}
                 />

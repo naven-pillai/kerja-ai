@@ -63,7 +63,7 @@ export default function JobsSidebar({
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal size={15} className="text-gray-400" />
+          <SlidersHorizontal size={15} className="text-gray-500" />
           <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Filters</h3>
           {activeFilterCount > 0 && (
             <span className="bg-[#1D4ED8] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
@@ -165,7 +165,7 @@ export default function JobsSidebar({
               ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -189,7 +189,7 @@ export default function JobsSidebar({
               ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -208,7 +208,7 @@ export default function JobsSidebar({
             value={filters.skills}
             onChange={(e) => set('skills', e.target.value)}
           />
-          <p className="text-[11px] text-gray-400 mt-1.5">Separate multiple skills with commas</p>
+          <p className="text-[11px] text-gray-500 mt-1.5">Separate multiple skills with commas</p>
         </div>
 
       </div>

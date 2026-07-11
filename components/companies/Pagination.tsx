@@ -41,9 +41,9 @@ export default function Pagination({ page, totalPages, onPageChange, className =
     'inline-flex items-center justify-center rounded-xl border text-sm font-semibold transition select-none';
   const enabled =
     'bg-white border-gray-200 text-gray-900 hover:border-gray-300 hover:bg-slate-50 cursor-pointer';
-  const disabled = 'bg-white border-gray-200 text-gray-400 cursor-not-allowed opacity-60';
+  const disabled = 'bg-white border-gray-200 text-gray-500 cursor-not-allowed opacity-60';
   const active = 'bg-gray-900 border-gray-900 text-white cursor-pointer';
-  const ghost = 'border-transparent bg-transparent text-gray-400';
+  const ghost = 'border-transparent bg-transparent text-gray-500';
 
   return (
     <nav className={['flex items-center justify-center pt-2', className].join(' ')} aria-label="Pagination">

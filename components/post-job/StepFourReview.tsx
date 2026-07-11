@@ -185,7 +185,7 @@ export default function StepFourReview({ formData, prevStep, handleSubmit, goToS
                 dangerouslySetInnerHTML={{ __html: cleanedDescriptionHtml }}
               />
             ) : (
-              <p className="text-sm text-gray-400">No description provided.</p>
+              <p className="text-sm text-gray-500">No description provided.</p>
             )}
           </div>
           {errors.description && (

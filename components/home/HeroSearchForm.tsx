@@ -30,7 +30,7 @@ export default function HeroSearchForm() {
       {/* Search bar */}
       <form onSubmit={handleSearch} className="flex items-center gap-2 max-w-xl mx-auto mb-3">
         <div className="relative flex-1">
-          <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+          <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
           <input
             type="text"
             value={query}

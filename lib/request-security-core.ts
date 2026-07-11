@@ -76,6 +76,13 @@ export function isRequestOversized(request: Request, maxBytes: number) {
 }
 
 export function getClientIp(request: Request) {
+  // Prefer the header the platform sets itself and a client cannot forge. On
+  // Vercel x-forwarded-for is overwritten at the edge, so the fallbacks below
+  // are safe there — but behind a proxy that *appends* instead, a client could
+  // inject a leftmost token and mint a fresh rate-limit bucket per request.
+  const platformIp = request.headers.get('x-vercel-forwarded-for');
+  if (platformIp?.trim()) return platformIp.trim();
+
   const forwardedFor = request.headers.get('x-forwarded-for');
   if (forwardedFor) {
     const first = forwardedFor.split(',')[0]?.trim();

@@ -85,6 +85,7 @@ export default function NewsletterCard() {
           type="email"
           value={email}
           required
+          aria-label="Email address"
           placeholder="Your email"
           onChange={(e) => setEmail(e.target.value)}
           className="hidden sm:block w-48 px-3 py-2 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"

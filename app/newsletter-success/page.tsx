@@ -29,7 +29,7 @@ export default function NewsletterSuccessPage() {
         <p className="text-gray-600 text-sm md:text-base mb-2">
           Check your inbox and confirm your subscription — then you&apos;ll get new AI and data roles across Malaysia and Singapore every week.
         </p>
-        <p className="text-gray-400 text-xs">
+        <p className="text-gray-500 text-xs">
           Not seeing it? Check your spam or promotions tab.
         </p>
       </div>
@@ -51,19 +51,19 @@ export default function NewsletterSuccessPage() {
 
         <div className="space-y-3 mb-6">
           <div className="flex items-start gap-3">
-            <Eye className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+            <Eye className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
             <p className="text-sm text-gray-600">
               Filter by role, location and remote type to find the ones that fit you.
             </p>
           </div>
           <div className="flex items-start gap-3">
-            <Zap className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+            <Zap className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
             <p className="text-sm text-gray-600">
               New roles added regularly across both Malaysia and Singapore.
             </p>
           </div>
           <div className="flex items-start gap-3">
-            <Briefcase className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+            <Briefcase className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
             <p className="text-sm text-gray-600">
               Free to browse, no account needed. Apply straight to the employer.
             </p>
@@ -78,7 +78,7 @@ export default function NewsletterSuccessPage() {
           <ArrowRight className="w-4 h-4" />
         </Link>
 
-        <p className="text-center text-xs text-gray-400 mt-3">
+        <p className="text-center text-xs text-gray-500 mt-3">
           New AI and data roles across Malaysia and Singapore.
         </p>
       </div>

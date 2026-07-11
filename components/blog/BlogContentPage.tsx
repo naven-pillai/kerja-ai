@@ -85,9 +85,9 @@ export default function BlogContentPage({
                     {blog.category}
                   </span>
                 )}
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-[#1D4ED8] transition">
+                <h2 className="text-lg font-bold text-gray-900 group-hover:text-[#1D4ED8] transition">
                   {blog.title}
-                </h3>
+                </h2>
               </div>
             </Link>
           ))}

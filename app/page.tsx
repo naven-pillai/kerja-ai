@@ -63,7 +63,9 @@ function FeaturedJobsSkeleton() {
 
 function LatestBlogSkeleton() {
   return (
-    <section className="bg-gray-50 py-16">
+    // Must match LatestBlogSection's background, or the Suspense fallback
+    // flashes gray before snapping to blue.
+    <section className="bg-blue-50 border-t border-blue-100 py-16">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <div className="h-9 w-56 bg-gray-200 rounded animate-pulse mx-auto mb-4" />
         <div className="h-4 w-96 bg-gray-100 rounded animate-pulse mx-auto mb-10" />

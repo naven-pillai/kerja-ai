@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { getResend } from '@/lib/resend';
 import { z } from 'zod';
 import {
   rejectCrossSiteRequest,
   rejectOversizedRequest,
   rejectRateLimitedRequest,
 } from '@/lib/request-security';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@kerja-ai.com';
 const FROM_EMAIL = process.env.RESEND_FROM || 'Kerja-AI <noreply@kerja-ai.com>';
@@ -112,36 +110,23 @@ export async function POST(req: Request) {
       </div>
     `;
 
-    const userConfirmationHtml = `
-      <div style="font-family: ui-sans-serif, system-ui; line-height:1.6">
-        <h2>✅ Your job listing has been received!</h2>
-        <p>Thank you for posting <strong>${safe.jobTitle}</strong> at <strong>${safe.companyName}</strong>.</p>
-        <p>We will review your submission and make it live shortly if it meets our guidelines.</p>
-        <p>If you need help, contact us at <strong>support@kerja-ai.com</strong>.</p>
-        <p style="margin-top:16px"><strong>– Kerja-AI Team</strong></p>
-      </div>
-    `;
-
-    await Promise.all([
-      resend.emails.send({
-        from: FROM_EMAIL,
-        to: [ADMIN_EMAIL],
-        subject: `🆕 New Job Posted: ${jobTitle}`,
-        html: jobSummaryHtml,
-      }),
-      resend.emails.send({
-        from: FROM_EMAIL,
-        to: [contactEmail],
-        subject: `🎉 Your job post has been received: ${jobTitle}`,
-        html: userConfirmationHtml,
-      }),
-    ]);
+    // Only ever mail the admin. This endpoint is public and unauthenticated, so
+    // sending a confirmation to the request-supplied contactEmail would let
+    // anyone relay mail from our domain, with an attacker-chosen subject, to any
+    // recipient. The submitter's confirmation belongs on the moderation step,
+    // once the address is known to be theirs.
+    await getResend().emails.send({
+      from: FROM_EMAIL,
+      to: [ADMIN_EMAIL],
+      subject: `🆕 New Job Posted: ${jobTitle}`,
+      html: jobSummaryHtml,
+    });
 
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
     console.error('Email sending failed:', err);
     return NextResponse.json(
-      { success: false, error: err instanceof Error ? err.message : 'Failed to send emails' },
+      { success: false, error: 'Failed to send emails' },
       { status: 500 }
     );
   }

@@ -11,7 +11,7 @@ export default function AuthorBox() {
         className="rounded-full object-cover shrink-0 ring-2 ring-white shadow"
       />
       <div className="min-w-0">
-        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">About the Author</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1">About the Author</p>
         <p className="text-base font-bold text-gray-900 leading-tight">Naven Pillai</p>
         <p className="text-sm text-gray-600 mt-1 leading-relaxed">
           Founder of Kerja-AI, the job board for AI, machine learning and data careers in Malaysia and Singapore. Writes about how AI is reshaping work across the region, and where the real openings are.

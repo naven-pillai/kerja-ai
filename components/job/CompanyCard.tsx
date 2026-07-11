@@ -21,8 +21,8 @@ export default function CompanyCard({
     <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
       {/* Header label */}
       <div className="flex items-center gap-1.5 px-4 py-3 border-b border-gray-100">
-        <Building2 size={11} className="text-gray-400" />
-        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+        <Building2 size={11} className="text-gray-500" />
+        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
           About the Company
         </span>
       </div>
@@ -41,7 +41,7 @@ export default function CompanyCard({
               {companyName}
             </h4>
             {typeof jobCount === 'number' && jobCount > 0 && (
-              <p className="text-[11px] text-gray-400 mt-0.5">
+              <p className="text-[11px] text-gray-500 mt-0.5">
                 {jobCount} open {jobCount === 1 ? 'role' : 'roles'}
               </p>
             )}

@@ -112,14 +112,14 @@ export default function JobMetaBox({ job }: Props) {
 
       <div className="grid grid-cols-2 gap-3 text-sm text-gray-800">
         <div className="flex flex-col">
-          <span className="text-[10px] text-gray-400 uppercase tracking-wide mb-1">Posted</span>
+          <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Posted</span>
           <span className="bg-gray-100 text-gray-700 text-xs font-medium px-2.5 py-0.5 rounded-md w-fit">
             {getPostedLabel(job.postedOn)}
           </span>
         </div>
 
         <div className="flex flex-col">
-          <span className="text-[10px] text-gray-400 uppercase tracking-wide mb-1">Apply Before</span>
+          <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Apply Before</span>
           <span
             className={`text-xs font-medium px-2.5 py-0.5 rounded-md w-fit ${
               expired ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
@@ -131,7 +131,7 @@ export default function JobMetaBox({ job }: Props) {
 
         {job.jobType && (
           <div className="flex flex-col">
-            <span className="text-[10px] text-gray-400 uppercase tracking-wide mb-1">Type</span>
+            <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Type</span>
             <Link
               href={`/job-type/${slugify(job.jobType)}`}
               className="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-md hover:bg-blue-200 transition w-fit"
@@ -143,14 +143,14 @@ export default function JobMetaBox({ job }: Props) {
 
         {job.remoteType && (
           <div className="flex flex-col">
-            <span className="text-[10px] text-gray-400 uppercase tracking-wide mb-1">Work Setup</span>
+            <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Work Setup</span>
             <RemoteTypePill remoteType={job.remoteType} />
           </div>
         )}
 
         {job.category && (
           <div className="flex flex-col">
-            <span className="text-[10px] text-gray-400 uppercase tracking-wide mb-1">Category</span>
+            <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Category</span>
             <Link
               href={`/job-category/${slugify(job.category)}`}
               className="bg-green-100 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-md hover:bg-green-200 transition w-fit"
@@ -162,7 +162,7 @@ export default function JobMetaBox({ job }: Props) {
 
         {job.location && (
           <div className="flex flex-col col-span-2">
-            <span className="text-[10px] text-gray-400 uppercase tracking-wide mb-1">Location</span>
+            <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Location</span>
             <Link
               href={`/job-location/${slugify(cleanLocation(job.location))}`}
               className="bg-purple-100 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-md hover:bg-purple-200 transition w-fit"
@@ -175,7 +175,7 @@ export default function JobMetaBox({ job }: Props) {
 
       {job.tags && job.tags.length > 0 && (
         <div>
-          <h5 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Skills / Tags</h5>
+          <h5 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Skills / Tags</h5>
           <div className="flex flex-wrap gap-1.5">
             {job.tags.map((tag) => (
               <span
@@ -189,7 +189,7 @@ export default function JobMetaBox({ job }: Props) {
 
           {salaryDisplay && (
             <div className="mt-2.5">
-              <h5 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Salary</h5>
+              <h5 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Salary</h5>
               <span className="inline-flex bg-amber-100 text-amber-900 text-xs font-semibold px-2.5 py-0.5 rounded-md">
                 {salaryDisplay}
               </span>
@@ -200,7 +200,7 @@ export default function JobMetaBox({ job }: Props) {
 
       {(!job.tags || job.tags.length === 0) && salaryDisplay && (
         <div>
-          <h5 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Salary</h5>
+          <h5 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Salary</h5>
           <span className="inline-flex bg-amber-100 text-amber-900 text-xs font-semibold px-2.5 py-0.5 rounded-md">
             {salaryDisplay}
           </span>

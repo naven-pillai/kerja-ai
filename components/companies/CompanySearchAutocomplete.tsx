@@ -74,7 +74,7 @@ export default function CompanySearchAutocomplete({
   return (
     <div className="w-full lg:w-[420px]" ref={wrapperRef}>
       <div className="relative">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
 
         <input
           ref={inputRef}
@@ -116,7 +116,7 @@ export default function CompanySearchAutocomplete({
             }
           }}
           placeholder="Search companies…"
-          className="w-full rounded-xl border border-gray-200 bg-white pl-9 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/20 focus:border-[#1D4ED8] placeholder:text-gray-400"
+          className="w-full rounded-xl border border-gray-200 bg-white pl-9 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/20 focus:border-[#1D4ED8] placeholder:text-gray-500"
         />
 
         {!!query.trim() && (

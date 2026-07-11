@@ -95,9 +95,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch (err: unknown) {
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : 'Server error' },
-      { status: 500 }
-    );
+    // Log the detail server-side; never reflect upstream (Resend) errors to the
+    // caller — they leak internals and provider state.
+    console.error('Contact form failed:', err);
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }

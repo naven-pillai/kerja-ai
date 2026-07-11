@@ -12,15 +12,14 @@ export default function HeroSection() {
         </div>
 
         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5 text-slate-900">
-          AI is reshaping careers in{' '}
-          <span className="text-[#1D4ED8]">Malaysia and Singapore</span>{' '}
-          — here are the roles.
+          AI and data jobs in{' '}
+          <span className="text-[#1D4ED8]">Malaysia and Singapore</span>.
         </h1>
 
         <p className="text-lg text-slate-600 mb-8">
-          TalentCorp expects ~697,000 Malaysian jobs to be reshaped by AI within
-          three to five years. Kerja-AI is where you find the AI, machine learning
-          and data roles that come out of it — across Malaysia and Singapore.
+          Every listing is a real AI, machine learning or data role at a company
+          hiring here — no scraped noise, no jobs that closed months ago. Just the
+          roles this shift is creating, in one place.
         </p>
 
         <HeroSearchForm />

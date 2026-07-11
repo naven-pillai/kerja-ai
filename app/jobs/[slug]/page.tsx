@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { after } from 'next/server';
@@ -19,16 +20,38 @@ import JobSummarizeBar from '@/components/summarize/JobSummarizeBar';
 type PageParams = { slug: string };
 
 /* ------------------------------------------------
+   Fetch — shared by generateMetadata and the page.
+
+   Both run in the same request, so React's cache() collapses them into a single
+   round-trip. Previously each issued its own query for the same slug.
+
+   Use supabaseAdmin so archived (expired) jobs are still fetchable for the
+   expired-job banner — the anon client won't return status='archived' rows.
+------------------------------------------------ */
+const getJob = cache(async (slug: string) => {
+  const { data, error } = await supabaseAdmin
+    .from('jobs')
+    .select(`
+      id, title, slug, description, created_at, apply_url,
+      expires_at, goes_public_at, status,
+      seo_title, seo_description,
+      job_type, job_category, job_location, remote_type, tags,
+      min_salary, max_salary, currency,
+      company:companies(name, slug, logo_url)
+    `)
+    .eq('slug', slug)
+    .maybeSingle();
+
+  return { job: data, error };
+});
+
+/* ------------------------------------------------
    Metadata
 ------------------------------------------------ */
 export async function generateMetadata({ params }: { params: Promise<PageParams> }) {
   const { slug } = await params;
 
-  const { data: job } = await supabaseAdmin
-    .from('jobs')
-    .select('slug, seo_title, seo_description, expires_at, status, company:companies(name, logo_url)')
-    .eq('slug', slug)
-    .maybeSingle();
+  const { job } = await getJob(slug);
 
   if (!job) return {};
 
@@ -70,20 +93,8 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 export default async function JobSlugPage({ params }: { params: Promise<PageParams> }) {
   const { slug } = await params;
 
-  // Use supabaseAdmin so archived (expired) jobs are still fetchable for the
-  // expired-job banner — the anon client won't return status='archived' rows.
-  const { data: job, error } = await supabaseAdmin
-    .from('jobs')
-    .select(`
-      id, title, slug, description, created_at, apply_url,
-      expires_at, goes_public_at, status,
-      seo_title, seo_description,
-      job_type, job_category, job_location, remote_type, tags,
-      min_salary, max_salary, currency,
-      company:companies(name, slug, logo_url)
-    `)
-    .eq('slug', slug)
-    .maybeSingle();
+  // Deduped against generateMetadata's call above — one query, not two.
+  const { job, error } = await getJob(slug);
 
   if (error || !job) return notFound();
 
@@ -207,7 +218,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
             </div>
             <Link
               href="/jobs"
-              className="shrink-0 text-xs font-semibold bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition"
+              className="shrink-0 text-xs font-semibold bg-amber-700 hover:bg-amber-800 text-white px-4 py-2 rounded-lg transition"
             >
               Browse open jobs →
             </Link>

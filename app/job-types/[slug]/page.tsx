@@ -201,7 +201,7 @@ export default async function JobTypePage({
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 py-12">
-          <nav className="text-xs text-gray-400 mb-4 flex items-center gap-1.5">
+          <nav className="text-xs text-gray-500 mb-4 flex items-center gap-1.5">
             <Link href="/" className="hover:text-gray-600 transition">Home</Link>
             <span>/</span>
             <Link href="/job-types" className="hover:text-gray-600 transition">Job Types</Link>
@@ -219,7 +219,7 @@ export default async function JobTypePage({
           </p>
 
           {jobs.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-400">
+            <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-500">
               <span>
                 <span className="font-bold text-gray-700 text-base">{jobs.length}</span> open roles
               </span>
@@ -288,7 +288,7 @@ export default async function JobTypePage({
 
       {/* Other job types pill cloud */}
       <div className="max-w-5xl mx-auto px-4 pb-16">
-        <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">
+        <h2 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">
           Explore Other Job Types
         </h2>
         <div className="flex flex-wrap gap-2">

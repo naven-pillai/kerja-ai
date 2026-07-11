@@ -46,6 +46,18 @@ test('getClientIp prefers x-forwarded-for', () => {
   assert.equal(getClientIp(request), '203.0.113.10');
 });
 
+test('getClientIp prefers the platform header over a spoofable x-forwarded-for', () => {
+  const request = new Request('https://kerja-ai.com/api/test', {
+    headers: {
+      // A caller can forge x-forwarded-for to mint a fresh rate-limit bucket.
+      'x-forwarded-for': '203.0.113.10, 10.0.0.1',
+      'x-vercel-forwarded-for': '198.51.100.2',
+    },
+  });
+
+  assert.equal(getClientIp(request), '198.51.100.2');
+});
+
 test('rejectCrossSiteRequest allows same-origin requests', () => {
   process.env.NEXT_PUBLIC_SITE_URL = 'https://kerja-ai.com';
 

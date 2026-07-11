@@ -70,33 +70,44 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
 
   const now = new Date().toISOString();
 
-  const { data: jobs, error: jobsError } = await supabase
-    .from('jobs')
-    .select(`
-      id, title, slug, created_at, apply_url,
-      job_type, job_category, job_location, remote_type,
-      min_salary, max_salary, tags, is_featured, expires_at,
-      company:companies(name, slug, logo_url)
-    `)
-    .eq('company_id', company.id)
-    .eq('status', 'published')
-    .or(`expires_at.is.null,expires_at.gt.${now}`)
-    .order('created_at', { ascending: false });
+  // Both depend on `company`, but not on each other — run them together rather
+  // than one after the other.
+  const similarQuery = supabase
+    .from('companies')
+    .select(SIMILAR_SELECT)
+    .neq('slug', slug)
+    .limit(4);
+
+  // Filter by industry in the query. This previously pulled 50 rows and threw
+  // away 46 in JS, which also meant a same-industry match outside the first 50
+  // was never found.
+  if (company.industry) similarQuery.eq('industry', company.industry);
+
+  const [
+    { data: jobs, error: jobsError },
+    { data: similarRaw },
+  ] = await Promise.all([
+    supabase
+      .from('jobs')
+      .select(`
+        id, title, slug, created_at, apply_url,
+        job_type, job_category, job_location, remote_type,
+        min_salary, max_salary, tags, is_featured, expires_at,
+        company:companies(name, slug, logo_url)
+      `)
+      .eq('company_id', company.id)
+      .eq('status', 'published')
+      .or(`expires_at.is.null,expires_at.gt.${now}`)
+      .order('created_at', { ascending: false }),
+    similarQuery,
+  ]);
 
   if (jobsError) console.error('❌ Jobs fetch error:', jobsError);
 
   const typedJobs = (jobs ?? []) as JobWithCompany[];
   const hasJobs = typedJobs.length > 0;
 
-  const { data: similarRaw } = await supabase
-    .from('companies')
-    .select(SIMILAR_SELECT)
-    .neq('slug', slug)
-    .limit(50);
-
   const similarCompanies = (similarRaw ?? [])
-    .filter((c) => (company.industry ? c.industry === company.industry : true))
-    .slice(0, 4)
     .map((c) => ({
       id: c.id,
       name: c.name,
@@ -137,9 +148,9 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-1.5 text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:text-[#1D4ED8] transition">Home</Link>
-          <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+          <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
           <Link href="/companies" className="hover:text-[#1D4ED8] transition">Companies</Link>
-          <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+          <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
           <span className="text-gray-900 font-medium">{company.name}</span>
         </nav>
 
@@ -185,19 +196,19 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                   <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4 text-sm text-gray-500">
                     {company.industry && (
                       <span className="inline-flex items-center gap-1.5">
-                        <Briefcase className="w-4 h-4 text-gray-400" />
+                        <Briefcase className="w-4 h-4 text-gray-500" />
                         {company.industry}
                       </span>
                     )}
                     {company.hq_location && (
                       <span className="inline-flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4 text-gray-400" />
+                        <MapPin className="w-4 h-4 text-gray-500" />
                         {company.hq_location}
                       </span>
                     )}
                     {company.remote_policy && (
                       <span className="inline-flex items-center gap-1.5">
-                        <Globe className="w-4 h-4 text-gray-400" />
+                        <Globe className="w-4 h-4 text-gray-500" />
                         {company.remote_policy}
                       </span>
                     )}
@@ -251,7 +262,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="LinkedIn"
-                      className="w-9 h-9 flex items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-50 transition"
+                      className="w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 hover:text-blue-600 hover:bg-gray-50 transition"
                     >
                       <FaLinkedinIn className="w-4 h-4" />
                     </a>
@@ -262,7 +273,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="X / Twitter"
-                      className="w-9 h-9 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition"
+                      className="w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition"
                     >
                       <FaXTwitter className="w-4 h-4" />
                     </a>
@@ -273,7 +284,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Facebook"
-                      className="w-9 h-9 flex items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-50 transition"
+                      className="w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 hover:text-blue-600 hover:bg-gray-50 transition"
                     >
                       <FaFacebookF className="w-4 h-4" />
                     </a>
@@ -361,7 +372,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Company Info</h3>
                 {metaItems.map(({ icon: Icon, label, value }) => (
                   <div key={label} className="flex items-start gap-3">
-                    <Icon className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+                    <Icon className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
                     <div>
                       <p className="text-xs text-gray-500">{label}</p>
                       <p className="text-sm font-medium text-gray-800">{value}</p>

@@ -36,7 +36,7 @@ export default function StepNavigation({ currentStep, goToStep }: Props) {
                       ? 'bg-[#1D4ED8] text-white shadow-md shadow-[#1D4ED8]/30'
                       : isCompleted
                       ? 'bg-[#1D4ED8] text-white cursor-pointer hover:opacity-80'
-                      : 'bg-gray-100 text-gray-400 cursor-default'
+                      : 'bg-gray-100 text-gray-600 cursor-default'
                   }`}
                 >
                   {isCompleted ? <Check className="w-4 h-4 stroke-[2.5]" /> : step.number}
@@ -47,7 +47,7 @@ export default function StepNavigation({ currentStep, goToStep }: Props) {
                       ? 'text-[#1D4ED8]'
                       : isCompleted
                       ? 'text-[#1D4ED8]/80'
-                      : 'text-gray-400'
+                      : 'text-gray-500'
                   }`}
                 >
                   {step.label}
