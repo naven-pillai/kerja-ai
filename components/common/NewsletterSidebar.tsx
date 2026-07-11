@@ -99,6 +99,7 @@ export default function NewsletterSidebar() {
 
         <input
           type="text"
+          aria-label="First name"
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -108,6 +109,7 @@ export default function NewsletterSidebar() {
 
         <input
           type="email"
+          aria-label="Email address"
           placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -138,7 +140,7 @@ export default function NewsletterSidebar() {
           {loading ? 'Subscribing...' : 'Send Me Jobs →'}
         </button>
 
-        <p className="text-[10px] text-gray-400 text-center pt-0.5">
+        <p className="text-[10px] text-gray-500 text-center pt-0.5">
           Free · No spam · Unsubscribe anytime
         </p>
       </form>

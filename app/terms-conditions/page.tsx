@@ -45,7 +45,7 @@ export default function TermsAndConditionsPage() {
 
           {/* TOC — desktop */}
           <aside className="hidden lg:block w-52 shrink-0 sticky top-8">
-            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Contents</p>
+            <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">Contents</p>
             <nav className="space-y-1">
               {sections.map((s) => (
                 <a
@@ -154,7 +154,7 @@ export default function TermsAndConditionsPage() {
               </p>
             </section>
 
-            <div className="border-t border-gray-100 pt-6 text-xs text-gray-400">
+            <div className="border-t border-gray-100 pt-6 text-xs text-gray-500">
               © {new Date().getFullYear()} Kerja-AI. All rights reserved.
             </div>
           </article>

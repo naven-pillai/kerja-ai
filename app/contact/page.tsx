@@ -13,7 +13,7 @@ const topics = [
 ];
 
 const inputClass =
-  "w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/20 focus:border-[#1D4ED8] focus:bg-white transition";
+  "w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/20 focus:border-[#1D4ED8] focus:bg-white transition";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -122,7 +122,7 @@ export default function ContactPage() {
                 className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                   selectedTopic === value
                     ? "bg-[#1D4ED8]/10 text-[#1D4ED8]"
-                    : "bg-gray-100 text-gray-400"
+                    : "bg-gray-100 text-gray-600"
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -135,7 +135,7 @@ export default function ContactPage() {
                 >
                   {label}
                 </span>
-                <span className="block text-xs text-gray-400 mt-0.5">{desc}</span>
+                <span className="block text-xs text-gray-500 mt-0.5">{desc}</span>
               </div>
             </button>
           ))}
@@ -231,7 +231,7 @@ export default function ContactPage() {
 
         {/* Alternative */}
         <div className="mt-10 pt-8 border-t border-gray-100 text-center">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-500">
             Prefer email? Reach me at{" "}
             <a
               href="mailto:info@kerja-ai.com"

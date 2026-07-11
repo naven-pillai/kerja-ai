@@ -63,7 +63,7 @@ export default function FeaturedImageCard({ formData, handleChange }: Props) {
           />
         </div>
       ) : (
-        <div className="w-full h-48 flex items-center justify-center text-gray-400 border border-dashed border-gray-300 rounded-lg mt-4">
+        <div className="w-full h-48 flex items-center justify-center text-gray-500 border border-dashed border-gray-300 rounded-lg mt-4">
           No image preview
         </div>
       )}

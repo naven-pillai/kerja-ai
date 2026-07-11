@@ -128,7 +128,7 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
                     {blog.category}
                   </span>
                 )}
-                <span className="text-xs text-gray-400">·</span>
+                <span className="text-xs text-gray-500">·</span>
                 <span className="text-xs text-gray-600">
                   Written &amp; Reviewed by{' '}
                   <span className="font-semibold text-gray-800">Naven Pillai</span>
@@ -136,7 +136,7 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
               </div>
 
               {/* Date + reading time row */}
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
                 <span>Published {formatDate(blog.created_at)}</span>
                 {blog.updated_at && blog.updated_at !== blog.created_at && (
                   <>

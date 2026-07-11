@@ -59,7 +59,7 @@ export default function SocialShare({ job }: Props) {
   return (
     <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden">
       <div className="px-4 pt-4 pb-3">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">
           Share this Job
         </p>
 
@@ -79,7 +79,7 @@ export default function SocialShare({ job }: Props) {
               <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
                 Share on {name}
               </span>
-              <span className="ml-auto text-gray-300 group-hover:text-gray-400 text-xs">→</span>
+              <span className="ml-auto text-gray-300 group-hover:text-gray-500 text-xs">→</span>
             </a>
           ))}
         </div>
@@ -91,12 +91,12 @@ export default function SocialShare({ job }: Props) {
           onClick={handleCopy}
           className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50 border border-dashed border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition-all cursor-pointer group"
         >
-          <span className="flex-1 text-[11px] text-gray-400 truncate text-left">
+          <span className="flex-1 text-[11px] text-gray-500 truncate text-left">
             {jobUrl || 'Loading...'}
           </span>
           <span
             className={`flex items-center gap-1 text-[11px] font-semibold shrink-0 transition-colors ${
-              copied ? 'text-green-600' : 'text-gray-400 group-hover:text-gray-600'
+              copied ? 'text-green-600' : 'text-gray-500 group-hover:text-gray-600'
             }`}
           >
             {copied ? (

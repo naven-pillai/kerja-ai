@@ -62,7 +62,7 @@ export default function AboutContent() {
       <section className="max-w-4xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div>
-            <h2 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">
+            <h2 className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-3">
               Jobs
             </h2>
             <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -78,7 +78,7 @@ export default function AboutContent() {
             </p>
           </div>
           <div>
-            <h2 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">
+            <h2 className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-3">
               Context
             </h2>
             <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -104,7 +104,7 @@ export default function AboutContent() {
             pay on each side of the border, and the anxiety turns into a decision
             you can actually make.&rdquo;
           </blockquote>
-          <p className="mt-4 text-sm text-gray-400 font-medium">
+          <p className="mt-4 text-sm text-gray-500 font-medium">
             — Naven, Founder
           </p>
         </div>
@@ -112,7 +112,7 @@ export default function AboutContent() {
 
       {/* Differentiators */}
       <section className="max-w-4xl mx-auto px-6 py-16">
-        <h2 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-8 text-center">
+        <h2 className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-8 text-center">
           How we&apos;re different
         </h2>
         <div className="grid sm:grid-cols-2 gap-5">
@@ -122,7 +122,7 @@ export default function AboutContent() {
               className="group relative border border-gray-200 bg-white p-6 rounded-2xl hover:border-gray-300 hover:shadow-sm transition-all"
             >
               <div className="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center mb-4 group-hover:bg-[#1D4ED8]/10 transition-colors">
-                <Icon className="w-4.5 h-4.5 text-gray-400 group-hover:text-[#1D4ED8] transition-colors" />
+                <Icon className="w-4.5 h-4.5 text-gray-500 group-hover:text-[#1D4ED8] transition-colors" />
               </div>
               <h3 className="text-sm font-semibold text-gray-900 mb-1.5">
                 {title}

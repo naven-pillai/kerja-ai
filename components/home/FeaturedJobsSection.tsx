@@ -44,7 +44,7 @@ export default async function FeaturedJobsSection() {
           {featured.length > 0 && (
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-[11px] font-bold text-amber-600 uppercase tracking-widest">Featured</span>
+                <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest">Featured</span>
                 <div className="flex-1 h-px bg-amber-100" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -59,7 +59,7 @@ export default async function FeaturedJobsSection() {
             <>
               {featured.length > 0 && (
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">All Jobs</span>
+                  <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">All Jobs</span>
                   <div className="flex-1 h-px bg-gray-200" />
                 </div>
               )}

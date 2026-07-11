@@ -31,7 +31,7 @@ export default function JobTypesIndexPage() {
     <main className="bg-[#f8f7f4] min-h-screen">
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 py-12">
-          <nav className="text-xs text-gray-400 mb-4 flex items-center gap-1.5">
+          <nav className="text-xs text-gray-500 mb-4 flex items-center gap-1.5">
             <Link href="/" className="hover:text-gray-600 transition">Home</Link>
             <span>/</span>
             <span className="text-gray-600">Job Types</span>
@@ -56,7 +56,7 @@ export default function JobTypesIndexPage() {
               <h2 className="font-bold text-gray-900 group-hover:text-[#1D4ED8] transition mb-1">
                 {type}
               </h2>
-              <p className="text-xs text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-500 leading-relaxed">
                 {typeDescriptions[type] ?? `${type} AI and data roles in Malaysia and Singapore.`}
               </p>
               <span className="mt-3 inline-block text-xs font-semibold text-[#1D4ED8]">

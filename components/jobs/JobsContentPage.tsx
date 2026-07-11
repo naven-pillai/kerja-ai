@@ -293,7 +293,7 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
                       className="inline-flex items-center gap-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-medium px-3 py-1.5 rounded-full hover:border-[#1D4ED8] hover:text-[#1D4ED8] transition group"
                     >
                       {chip.label}
-                      <X size={11} className="text-gray-400 group-hover:text-[#1D4ED8]" />
+                      <X size={11} className="text-gray-500 group-hover:text-[#1D4ED8]" />
                     </button>
                   ))}
                   <button
@@ -318,7 +318,7 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
               {!loading && featuredJobs.length > 0 && (
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[11px] font-bold text-amber-600 uppercase tracking-widest">Featured</span>
+                    <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest">Featured</span>
                     <div className="flex-1 h-px bg-amber-100" />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -334,7 +334,7 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
                 <>
                   {featuredJobs.length > 0 && (
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">All Jobs</span>
+                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">All Jobs</span>
                       <div className="flex-1 h-px bg-gray-100" />
                     </div>
                   )}
@@ -380,7 +380,7 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
                         className="inline-flex items-center gap-2 border border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-sm font-semibold text-gray-700 px-6 py-3 rounded-xl transition"
                       >
                         Load more jobs
-                        <span className="text-xs font-normal text-gray-400">
+                        <span className="text-xs font-normal text-gray-500">
                           ({allRegularJobs.length - visibleCount} remaining)
                         </span>
                       </button>

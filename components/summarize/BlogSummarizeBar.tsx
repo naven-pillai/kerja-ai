@@ -51,7 +51,7 @@ export default function BlogSummarizeBar({ slug, title }: BlogSummarizeBarProps)
     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 mb-6">
       <div className="flex items-center gap-2 mb-3">
         <span className="text-sm font-semibold text-slate-700">⚡ AI Quick Summary</span>
-        <span className="text-xs text-slate-400">— open in your favourite tool</span>
+        <span className="text-xs text-slate-600">— open in your favourite tool</span>
       </div>
       <div className="flex flex-wrap gap-2">
         {tools.map((tool) => (

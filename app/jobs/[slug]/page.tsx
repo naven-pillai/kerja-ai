@@ -207,7 +207,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
             </div>
             <Link
               href="/jobs"
-              className="shrink-0 text-xs font-semibold bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition"
+              className="shrink-0 text-xs font-semibold bg-amber-700 hover:bg-amber-800 text-white px-4 py-2 rounded-lg transition"
             >
               Browse open jobs →
             </Link>

@@ -17,7 +17,7 @@ function Label({ children, htmlFor, optional }: { children: ReactNode; htmlFor?:
     <label htmlFor={htmlFor} className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-1.5">
       {children}
       {optional && (
-        <span className="text-[10px] font-normal text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">Optional</span>
+        <span className="text-[10px] font-normal text-gray-600 bg-gray-100 px-1.5 py-0.5 rounded">Optional</span>
       )}
     </label>
   );
@@ -131,7 +131,7 @@ export default function StepOneCompany({ formData, handleChange, nextStep }: Pro
             onChange={(e) => handleChange('contactEmail', e.target.value)}
             className={inputClass('contactEmail')}
           />
-          <p className="text-xs text-gray-400 mt-1">Where we email you about your listing. Never shown on the job.</p>
+          <p className="text-xs text-gray-500 mt-1">Where we email you about your listing. Never shown on the job.</p>
           {errors.contactEmail && (
             <p className="text-red-500 text-xs mt-1">{errors.contactEmail}</p>
           )}
@@ -178,12 +178,12 @@ export default function StepOneCompany({ formData, handleChange, nextStep }: Pro
               />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-700 truncate">{formData.companyLogo?.name}</p>
-                <p className="text-xs text-gray-400 mt-0.5">Logo uploaded</p>
+                <p className="text-xs text-gray-500 mt-0.5">Logo uploaded</p>
               </div>
               <button
                 type="button"
                 onClick={() => handleChange('companyLogo', null)}
-                className="p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors flex-shrink-0"
+                className="p-1.5 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors flex-shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -204,7 +204,7 @@ export default function StepOneCompany({ formData, handleChange, nextStep }: Pro
               ) : (
                 <>
                   <p className="text-sm text-gray-500">Drag & drop logo, or <span className="text-[#1D4ED8] font-medium">browse</span></p>
-                  <p className="text-xs text-gray-400 mt-1">PNG, JPG, SVG up to 5MB</p>
+                  <p className="text-xs text-gray-500 mt-1">PNG, JPG, SVG up to 5MB</p>
                 </>
               )}
             </div>
