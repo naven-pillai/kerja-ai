@@ -6,7 +6,7 @@ export type JobLocation = (typeof jobLocations)[number];
 export type JobType = (typeof jobTypes)[number];
 
 /** Work setup options — must match the jobs.remote_type check constraint. */
-export const REMOTE_TYPES = ['100% Remote', 'Hybrid'] as const;
+export const REMOTE_TYPES = ['100% Remote', 'Hybrid', 'Onsite'] as const;
 
 export type Filters = {
   keyword: string;

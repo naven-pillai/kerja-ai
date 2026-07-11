@@ -97,13 +97,13 @@ export default function JobPostingStructuredData({
     max: number;
     currency: string;
   };
-  /** '100% Remote' | 'Hybrid'. Anything other than 'Hybrid' is treated as fully remote. */
+  /** '100% Remote' | 'Hybrid' | 'Onsite'. Only '100% Remote' is fully remote. */
   remoteType?: string | null;
 }) {
   // Google only allows jobLocationType=TELECOMMUTE (and its companion
-  // applicantLocationRequirements) for fully-remote roles. A hybrid role must
-  // advertise a physical jobLocation instead, or the listing is invalid.
-  const isFullyRemote = remoteType !== 'Hybrid';
+  // applicantLocationRequirements) for fully-remote roles. Hybrid and onsite
+  // roles must advertise a physical jobLocation instead, or the listing is invalid.
+  const isFullyRemote = remoteType === '100% Remote';
   // Ensure validThrough is always in the future — default to 60 days from datePosted
   let safeValidThrough = validThrough;
   if (!validThrough || validThrough <= datePosted) {

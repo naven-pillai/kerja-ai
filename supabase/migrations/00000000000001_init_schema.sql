@@ -142,7 +142,7 @@ create table if not exists public.jobs (
   company_id           uuid references public.companies(id) on delete set null,
   status               text default 'pending',
   remote_type          text not null default '100% Remote'
-                         check (remote_type in ('100% Remote','Hybrid')),
+                         check (remote_type in ('100% Remote','Hybrid','Onsite')),
   billing_plan         text not null default 'free' check (billing_plan in ('free','paid')),
   visibility_plan      text not null default 'public'
                          check (visibility_plan in ('public','private_early_access')),
