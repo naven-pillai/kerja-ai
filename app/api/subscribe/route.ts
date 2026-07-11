@@ -86,10 +86,9 @@ export async function POST(req: Request) {
     const data = await res.json()
 
     if (!res.ok) {
-      return NextResponse.json(
-        { message: data?.error?.message || 'Subscription failed' },
-        { status: res.status }
-      )
+      // Log upstream (MailerLite) detail server-side rather than reflecting it.
+      console.error('MailerLite subscribe failed:', res.status, data)
+      return NextResponse.json({ message: 'Subscription failed' }, { status: res.status })
     }
 
     // 2. Save to Supabase
