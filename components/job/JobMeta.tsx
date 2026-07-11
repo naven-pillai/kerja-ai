@@ -4,6 +4,7 @@ import Link from 'next/link';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { appendUTM } from '@/utils/appendUTM';
+import { shouldShowCity } from '@/lib/formatLocation';
 import { slugify } from '@/utils/slugify';
 import { formatApplyUrl } from '@/utils/formatApplyUrl';
 import { formatSalaryRange } from '@/utils/formatSalary';
@@ -168,7 +169,7 @@ export default function JobMetaBox({ job }: Props) {
           const city = job.city?.trim();
           // Cities are Malaysia-only — Singapore is a city-state, and remote
           // roles have no office. Both fall back to the country alone.
-          const showCity = Boolean(city) && country === 'Malaysia';
+          const showCity = shouldShowCity(country, city);
 
           return (
             <div className="flex flex-col col-span-2">

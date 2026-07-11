@@ -10,6 +10,14 @@
  *
  * Every one of those cases falls back to the country alone.
  */
+/** The single rule for whether a city may be shown. */
+export function shouldShowCity(
+  country: string | null | undefined,
+  city: string | null | undefined
+): boolean {
+  return Boolean((city ?? '').trim()) && (country ?? '').trim() === 'Malaysia';
+}
+
 export function formatJobLocation(
   country: string | null | undefined,
   city: string | null | undefined
@@ -18,7 +26,7 @@ export function formatJobLocation(
   const cityName = (city ?? '').trim();
 
   if (!countryName) return cityName;
-  if (cityName && countryName === 'Malaysia') return `${cityName}, ${countryName}`;
+  if (shouldShowCity(countryName, cityName)) return `${cityName}, ${countryName}`;
 
   return countryName;
 }

@@ -189,7 +189,7 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
           <div className="flex gap-8">
 
             {/* Desktop sidebar */}
-            <div className="hidden lg:block w-[260px] shrink-0">
+            <div className="hidden lg:block w-65 shrink-0">
               <JobsSidebar
                 onApply={handleApply}
                 onClear={handleClear}
@@ -318,7 +318,7 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
                         {index === 2 && (
                           <Link
                             href="/newsletter"
-                            className="group mt-3 flex items-center gap-4 p-5 rounded-xl border border-dashed border-[#1D4ED8]/30 bg-gradient-to-r from-blue-50/60 to-cyan-50/40 hover:border-[#1D4ED8]/60 hover:from-blue-50 hover:to-cyan-50/60 transition-all duration-200"
+                            className="group mt-3 flex items-center gap-4 p-5 rounded-xl border border-dashed border-[#1D4ED8]/30 bg-linear-to-r from-blue-50/60 to-cyan-50/40 hover:border-[#1D4ED8]/60 hover:from-blue-50 hover:to-cyan-50/60 transition-all duration-200"
                           >
                             <div className="w-11 h-11 rounded-xl bg-[#1D4ED8]/10 flex items-center justify-center shrink-0">
                               <Sparkles className="w-5 h-5 text-[#1D4ED8]" />
