@@ -349,15 +349,13 @@ create policy "anon read authors" on public.authors for select to anon using (tr
 drop policy if exists "anon read categories" on public.categories;
 create policy "anon read categories" on public.categories for select to anon using (true);
 
--- Public submission surfaces (moderation queue)
+-- Public job submission goes through the /api/submit-job server route (service
+-- role), so anon does NOT insert jobs/companies directly. Drop any legacy anon
+-- insert policies from earlier revisions.
 drop policy if exists "anon submit pending job" on public.jobs;
-create policy "anon submit pending job" on public.jobs
-  for insert to anon with check (status = 'pending' and billing_plan = 'free');
-
 drop policy if exists "anon create company" on public.companies;
-create policy "anon create company" on public.companies
-  for insert to anon with check (true);
 
+-- Analytics: anyone can log a view/click; nobody anon can read the stream.
 drop policy if exists "anon insert job events" on public.job_events;
 create policy "anon insert job events" on public.job_events
   for insert to anon with check (true);
@@ -395,7 +393,7 @@ grant usage on schema public to anon, authenticated, service_role;
 grant select on public.jobs, public.blogs, public.companies, public.authors,
   public.categories, public.companies_with_job_count, public.sorted_companies,
   public.jobs_with_payment to anon;
-grant insert on public.jobs, public.companies, public.job_events to anon;
+grant insert on public.job_events to anon;
 grant all on public.jobs, public.companies, public.blogs, public.authors,
   public.categories, public.job_events, public.job_payments,
   public.newsletter_subscribers, public.job_ingestion to authenticated, service_role;

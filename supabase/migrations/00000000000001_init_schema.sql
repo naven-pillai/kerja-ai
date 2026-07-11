@@ -361,13 +361,8 @@ create policy "anon read companies"  on public.companies  for select to anon usi
 create policy "anon read authors"     on public.authors    for select to anon using (true);
 create policy "anon read categories"  on public.categories for select to anon using (true);
 
--- Public submission surfaces (moderation queue) ------------------------------
--- Public post-a-job form inserts a pending, free job + (optionally) a company.
--- Scoped so anon can never self-publish or read others' drafts.
-create policy "anon submit pending job" on public.jobs
-  for insert to anon with check (status = 'pending' and billing_plan = 'free');
-create policy "anon create company" on public.companies
-  for insert to anon with check (true);
+-- Public job submission goes through the /api/submit-job server route (service
+-- role), so anon does NOT insert jobs/companies directly.
 -- Analytics: anyone can log a view/click, nobody anon can read the stream.
 create policy "anon insert job events" on public.job_events
   for insert to anon with check (true);
@@ -392,7 +387,7 @@ grant usage on schema public to anon, authenticated, service_role;
 grant select on public.jobs, public.blogs, public.companies, public.authors,
   public.categories, public.companies_with_job_count, public.sorted_companies,
   public.jobs_with_payment to anon;
-grant insert on public.jobs, public.companies, public.job_events to anon;
+grant insert on public.job_events to anon;
 
 grant all on public.jobs, public.companies, public.blogs, public.authors,
   public.categories, public.job_events, public.job_payments,

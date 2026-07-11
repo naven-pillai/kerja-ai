@@ -36,38 +36,6 @@ type FormData = {
   is_featured: boolean;
 };
 
-function slugify(str: string) {
-  return str
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)+/g, '');
-}
-
-async function generateUniqueJobSlug(title: string, company: string, supabase: ReturnType<typeof createSupabaseClient>) {
-  const baseSlug = `${slugify(title)}-${slugify(company)}`;
-  let finalSlug = baseSlug;
-  let suffix = 1;
-
-  let { data: existing } = await supabase
-    .from('jobs')
-    .select('id')
-    .eq('slug', finalSlug)
-    .maybeSingle();
-
-  while (existing) {
-    finalSlug = `${baseSlug}-${suffix}`;
-    const { data } = await supabase
-      .from('jobs')
-      .select('id')
-      .eq('slug', finalSlug)
-      .maybeSingle();
-    existing = data;
-    suffix++;
-  }
-
-  return finalSlug;
-}
-
 type Props = {
   isPaid?: boolean;
   isFeatured?: boolean;
@@ -163,84 +131,38 @@ export default function PostJobForm({ isPaid = false, isFeatured = false, stripe
         logoUrl = urlData?.publicUrl || '';
       }
 
-      // ── Company: reuse existing by name (case-insensitive) or website (www-agnostic) ──
-      let companyId: string;
-
-      // Build www and non-www variants of the entered website
-      const websiteUrl = formData.companyWebsite;
-      const wwwVariant = websiteUrl.includes('://www.')
-        ? websiteUrl
-        : websiteUrl.replace('://', '://www.');
-      const nonWwwVariant = websiteUrl.replace('://www.', '://');
-
-      // 1. Match by company name (case-insensitive)
-      const { data: byName } = await supabase
-        .from('companies')
-        .select('id')
-        .ilike('name', companyName)
-        .limit(1);
-
-      // 2. If no name match, try website (www + non-www variants)
-      let byWebsite: { id: string }[] | null = null;
-      if (!byName?.length) {
-        const { data } = await supabase
-          .from('companies')
-          .select('id')
-          .in('website', [websiteUrl, wwwVariant, nonWwwVariant])
-          .limit(1);
-        byWebsite = data;
-      }
-
-      const existingCompany = byName?.[0] ?? byWebsite?.[0] ?? null;
-
-      if (existingCompany?.id) {
-        companyId = existingCompany.id;
-      } else {
-        const { data: newCompany, error: companyError } = await supabase
-          .from('companies')
-          .insert([{
-            name: companyName,
-            slug: slugify(companyName),
-            tagline: formData.companyTagline,
-            website: formData.companyWebsite,
-            facebook: formData.companyFacebook,
-            twitter: formData.companyX,
-            linkedin: formData.companyLinkedIn,
-            logo_url: logoUrl,
-            contact_email: formData.contactEmail,
-          }])
-          .select()
-          .single();
-
-        if (companyError) throw new Error(`Company insert failed: ${companyError.message} (${companyError.code})`);
-        companyId = newCompany!.id;
-      }
-
-      // ── Job insert ───────────────────────────────────────────────────────
-      const jobSlug = await generateUniqueJobSlug(jobTitle, companyName, supabase);
-
-      // Phase 1: every public submission is free and goes to the moderation
-      // queue (status='pending'). Expiry is set by the DB trigger. Admin decides
-      // featuring after review. billing_plan MUST be 'free' (RLS + CHECK).
-      const { error: jobError } = await supabase.from('jobs').insert({
-        title: jobTitle,
-        slug: jobSlug,
-        job_category: formData.jobCategory ? [formData.jobCategory] : [],
-        job_type: formData.jobType ? [formData.jobType] : [],
-        job_location: formData.jobLocation ? [formData.jobLocation] : [],
-        remote_type: formData.remoteType || '100% Remote',
-        currency: formData.currency,
-        min_salary: formData.minSalary ? parseFloat(formData.minSalary) : null,
-        max_salary: formData.maxSalary ? parseFloat(formData.maxSalary) : null,
-        tags: formData.tags.split(',').map((t) => t.trim()).filter(Boolean),
-        description: formData.description,
-        apply_url: formData.applyUrl,
-        company_id: companyId,
-        status: 'pending',
-        billing_plan: 'free',
+      // ── Submit via the hardened server route (service role + rate limit).
+      // The public anon client no longer writes jobs/companies directly.
+      const submitRes = await fetch('/api/submit-job', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jobTitle,
+          companyName,
+          companyTagline: formData.companyTagline,
+          companyWebsite: formData.companyWebsite,
+          companyFacebook: formData.companyFacebook,
+          companyX: formData.companyX,
+          companyLinkedIn: formData.companyLinkedIn,
+          contactEmail: formData.contactEmail,
+          logoUrl,
+          jobCategory: formData.jobCategory,
+          jobType: formData.jobType,
+          jobLocation: formData.jobLocation,
+          remoteType: formData.remoteType || '100% Remote',
+          currency: formData.currency,
+          minSalary: formData.minSalary ? parseFloat(formData.minSalary) : null,
+          maxSalary: formData.maxSalary ? parseFloat(formData.maxSalary) : null,
+          tags: formData.tags.split(',').map((t) => t.trim()).filter(Boolean),
+          description: formData.description,
+          applyUrl: formData.applyUrl,
+        }),
       });
 
-      if (jobError) throw new Error(`Job insert failed: ${jobError.message} (${jobError.code})`);
+      if (!submitRes.ok) {
+        const err = await submitRes.json().catch(() => ({}));
+        throw new Error(err.error || 'Job submission failed');
+      }
 
       // ── Notification emails (admin + submitter) ──────────────────────────
       // Fire-and-forget — don't block success on email failure
