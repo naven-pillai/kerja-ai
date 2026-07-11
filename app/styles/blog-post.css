@@ -1,0 +1,233 @@
+/* Root container */
+.blog-post {
+  color: #1e1e1e;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.0625rem; /* 17px — optimal reading size */
+  line-height: 1.85;
+  max-width: 100%;
+  word-break: break-word;
+  padding-bottom: 3rem;
+}
+
+/* Paragraphs */
+.blog-post p {
+  margin: 1.35em 0;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.85;
+}
+
+/* First paragraph after a heading — no extra top margin */
+.blog-post h1 + p,
+.blog-post h2 + p,
+.blog-post h3 + p,
+.blog-post h4 + p {
+  margin-top: 0.5em;
+}
+
+/* Headings */
+.blog-post h1,
+.blog-post h2,
+.blog-post h3,
+.blog-post h4 {
+  font-weight: 700;
+  color: #0f172a;
+  scroll-margin-top: 100px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.blog-post h1 {
+  font-size: clamp(1.625rem, 4vw, 2.25rem);
+  margin: 2.5rem 0 1rem;
+}
+
+.blog-post h2 {
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
+  margin: 2.5rem 0 1rem;
+}
+
+.blog-post h3 {
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  margin: 2rem 0 0.75rem;
+}
+
+.blog-post h4 {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  margin: 1.5rem 0 0.5rem;
+}
+
+/* Lists */
+.blog-post ul,
+.blog-post ol {
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  line-height: 1.8;
+}
+
+.blog-post ul {
+  list-style-type: disc;
+}
+
+.blog-post ol {
+  list-style-type: decimal;
+}
+
+.blog-post li {
+  margin-bottom: 0.6rem;
+}
+
+.blog-post li::marker {
+  color: #1D4ED8;
+}
+
+/* Blockquotes */
+.blog-post blockquote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  font-style: italic;
+  background: #fdf6ec;
+  border-left: 4px solid #f59e0b;
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: #78350f;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.blog-post blockquote p {
+  margin: 0;
+}
+
+/* Links — stable layout, no shift on hover */
+.blog-post a {
+  color: #1e40af;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding: 1px 3px;
+  border-radius: 3px;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.blog-post a:hover {
+  color: #dc2626;
+  background-color: rgba(220, 38, 38, 0.06);
+  border-bottom-color: #dc2626;
+}
+
+/* Images */
+.blog-post img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2rem auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+}
+
+/* Tables — horizontally scrollable on mobile */
+.blog-post .table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.blog-post table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  background-color: #fff;
+}
+
+.blog-post th,
+.blog-post td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.blog-post thead {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.blog-post tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Inline Code */
+.blog-post code {
+  background: #f3f4f6;
+  color: #b91c1c;
+  padding: 2px 6px;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* Code Blocks */
+.blog-post pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 2rem 0;
+}
+
+/* Reset inline code styles inside pre */
+.blog-post pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* Horizontal Rule */
+.blog-post hr {
+  margin: 3rem 0;
+  border: none;
+  border-top: 2px solid #f1f5f9;
+}
+
+/* Emphasis */
+.blog-post strong {
+  font-weight: 700;
+  color: #111827;
+}
+
+.blog-post em {
+  font-style: italic;
+  color: #374151;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .blog-post {
+    font-size: 1rem;
+  }
+
+  .blog-post p {
+    line-height: 1.8;
+  }
+
+  .blog-post pre {
+    font-size: 0.8125rem;
+    padding: 1rem;
+  }
+
+  .blog-post th,
+  .blog-post td {
+    padding: 0.6rem 0.75rem;
+  }
+}

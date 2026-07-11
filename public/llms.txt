@@ -1,0 +1,31 @@
+# Kerja-AI
+
+> Kerja-AI is the dedicated job board for artificial intelligence, machine learning and data careers in Malaysia and Singapore. Every role is reviewed before it goes live — no aggregated noise, no fake listings.
+
+The name comes from Malay: *"kerja"* means work. Kerja-AI is built for AI, ML and data professionals in the Malaysia–Singapore talent corridor, and for employers hiring them. It is a sister site to Kerja-Remote (remote jobs for APAC).
+
+## Focus
+
+Roles covered: AI Engineering, Machine Learning Engineering, Data Science, AI/ML Research, Data Engineering, Computer Vision Engineering, NLP Engineering, Deep Learning Engineering, AI Architecture, Prompt Engineering, and Data Annotation. Locations: Malaysia and Singapore.
+
+## Core pages
+
+- [Home](https://kerja-ai.com/): Search verified AI & data jobs in Malaysia and Singapore
+- [Browse Jobs](https://kerja-ai.com/jobs): All active AI/ML/data roles, filterable by category, type, and location
+- [Jobs by Category](https://kerja-ai.com/job-categories): AI role hubs (AI engineering, ML, data science, NLP, computer vision, …)
+- [Jobs by Location](https://kerja-ai.com/job-location): Malaysia and Singapore
+- [Companies](https://kerja-ai.com/companies): Companies hiring AI & data talent
+- [Newsletter](https://kerja-ai.com/newsletter): Weekly AI & data jobs — free, no spam
+- [Post a Job](https://kerja-ai.com/post-a-job): Free job listings for employers
+- [Advertise with Us](https://kerja-ai.com/advertise): Reach AI & data professionals in MY/SG
+
+## Content & resources
+
+- [Blog](https://kerja-ai.com/blog): AI careers, upskilling, and hiring insights for Malaysia and Singapore
+- [FAQ](https://kerja-ai.com/faq): Common questions about Kerja-AI
+- [About](https://kerja-ai.com/about): Why Kerja-AI exists
+- [Contact](https://kerja-ai.com/contact): info@kerja-ai.com
+
+## Sitemap
+
+- [Sitemap](https://kerja-ai.com/sitemap.xml)
