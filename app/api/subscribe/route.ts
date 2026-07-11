@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { resend } from '@/lib/resend'
+import { getResend } from '@/lib/resend'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 import {
   isValidEmail,
@@ -108,7 +108,7 @@ export async function POST(req: Request) {
     }
 
     // 3. Send email notification to admin
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'Kerja-AI <noreply@kerja-ai.com>',
       to: ADMIN_EMAIL,
       subject: '🆕 New Newsletter Subscriber',

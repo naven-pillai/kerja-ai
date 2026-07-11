@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { getResend } from '@/lib/resend';
 import { z } from 'zod';
 import {
   rejectCrossSiteRequest,
   rejectOversizedRequest,
   rejectRateLimitedRequest,
 } from '@/lib/request-security';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@kerja-ai.com';
 const FROM_EMAIL = process.env.RESEND_FROM || 'Kerja-AI <noreply@kerja-ai.com>';
@@ -117,7 +115,7 @@ export async function POST(req: Request) {
     // anyone relay mail from our domain, with an attacker-chosen subject, to any
     // recipient. The submitter's confirmation belongs on the moderation step,
     // once the address is known to be theirs.
-    await resend.emails.send({
+    await getResend().emails.send({
       from: FROM_EMAIL,
       to: [ADMIN_EMAIL],
       subject: `🆕 New Job Posted: ${jobTitle}`,
