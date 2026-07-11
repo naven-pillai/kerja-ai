@@ -190,6 +190,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
           url: `https://kerja-ai.com/companies/${companySlug}`,
         }}
         jobLocation={jobLocationArray}
+        city={job.city}
         remoteType={job.remote_type}
         applyUrl={job.apply_url ?? ''}
         salary={

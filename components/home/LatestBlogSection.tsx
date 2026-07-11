@@ -80,7 +80,7 @@ export default async function LatestBlogSection({
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-blue-50 to-cyan-100 flex items-center justify-center">
+                  <div className="w-full h-full bg-linear-to-br from-blue-50 to-cyan-100 flex items-center justify-center">
                     <DocumentTextIcon className="w-10 h-10 text-[#1D4ED8]/40" />
                   </div>
                 )}

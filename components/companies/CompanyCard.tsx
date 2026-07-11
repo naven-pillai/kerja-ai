@@ -43,12 +43,12 @@ export default function CompanyCard({
       href={`/companies/${company.companySlug}`}
       className={[
         'group relative block overflow-hidden rounded-2xl border border-gray-200 bg-white',
-        'transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg hover:border-gray-300',
+        'transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:border-gray-300',
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1D4ED8] focus-visible:ring-offset-2',
         className,
       ].join(' ')}
     >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-white opacity-100" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-slate-50 via-white to-white opacity-100" />
       <div className="pointer-events-none absolute -top-24 -right-24 h-48 w-48 rounded-full bg-[#1D4ED8]/10 blur-3xl" />
 
       <div className="relative p-5 sm:p-6">

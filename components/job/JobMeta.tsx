@@ -4,6 +4,7 @@ import Link from 'next/link';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { appendUTM } from '@/utils/appendUTM';
+import { shouldShowCity } from '@/lib/formatLocation';
 import { slugify } from '@/utils/slugify';
 import { formatApplyUrl } from '@/utils/formatApplyUrl';
 import { formatSalaryRange } from '@/utils/formatSalary';
@@ -168,17 +169,27 @@ export default function JobMetaBox({ job }: Props) {
           const city = job.city?.trim();
           // Cities are Malaysia-only — Singapore is a city-state, and remote
           // roles have no office. Both fall back to the country alone.
-          const showCity = Boolean(city) && country === 'Malaysia';
+          const showCity = shouldShowCity(country, city);
 
+          // City and Country are separate labelled cells, matching every other
+          // field in this grid (Posted / Type / Work Setup / Category). With a
+          // city they sit side by side and fill the row; without one, Country
+          // spans the full width on its own.
           return (
-            <div className="flex flex-col col-span-2">
-              <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Location</span>
-              <div className="flex items-center gap-1.5 flex-wrap">
-                {showCity && (
-                  <span className="text-xs font-medium text-gray-700">{city},</span>
-                )}
-                {/* The country is the link — it's the only real taxonomy. There
-                    are no city landing pages, so the city stays plain text. */}
+            <>
+              {showCity && (
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">City</span>
+                  {/* Not a link: there are deliberately no city landing pages —
+                      at this volume they'd be thin and hurt SEO. */}
+                  <span className="bg-purple-50 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-md w-fit">
+                    {city}
+                  </span>
+                </div>
+              )}
+
+              <div className={`flex flex-col${showCity ? '' : ' col-span-2'}`}>
+                <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Country</span>
                 <Link
                   href={`/job-location/${slugify(country)}`}
                   className="bg-purple-100 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-md hover:bg-purple-200 transition w-fit"
@@ -186,7 +197,7 @@ export default function JobMetaBox({ job }: Props) {
                   {country}
                 </Link>
               </div>
-            </div>
+            </>
           );
         })()}
       </div>
