@@ -91,20 +91,21 @@ const homeStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Kerja AI',
+    name: 'Kerja-AI',
     url: 'https://kerja-ai.com',
     logo: 'https://kerja-ai.com/logo.png',
     description:
       'The dedicated job board for AI, machine learning and data careers in Malaysia and Singapore. Every listing is an AI, ML or data role — not a general board with a few tech jobs mixed in.',
     sameAs: [
-      'https://www.linkedin.com/company/kerjaai',
-      'https://x.com/KerjaAI_',
+      'https://www.linkedin.com/company/kerja-ai',
+      'https://x.com/KerjaAI',
+      'https://www.facebook.com/kerjaai',
     ],
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Kerja AI',
+    name: 'Kerja-AI',
     url: 'https://kerja-ai.com',
     potentialAction: {
       '@type': 'SearchAction',

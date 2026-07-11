@@ -79,7 +79,7 @@ export default function NewsletterCTA() {
           </h2>
 
           <p className="text-gray-500 text-base md:text-lg max-w-xl mx-auto">
-            Every week, <span className="font-semibold text-gray-700">Kerja AI</span> rounds up the newest AI, machine learning and data roles across Malaysia and Singapore — straight to your inbox. No spam.
+            Every week, <span className="font-semibold text-gray-700">Kerja-AI</span> rounds up the newest AI, machine learning and data roles across Malaysia and Singapore — straight to your inbox. No spam.
           </p>
 
           <form

@@ -98,11 +98,11 @@ export default function NewsletterPageClient({ issues }: Props) {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-orange-50/60 to-white pt-20 pb-16 md:pt-28 md:pb-24">
+      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50/60 to-white pt-20 pb-16 md:pt-28 md:pb-24">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1D4ED8]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
         <div className="relative max-w-3xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 bg-white border border-orange-200 rounded-full px-4 py-1.5 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 bg-white border border-blue-200 rounded-full px-4 py-1.5 mb-6 shadow-sm">
             <Mail size={14} className="text-[#1D4ED8]" />
             <span className="text-xs font-semibold text-[#1D4ED8] uppercase tracking-wider">
               Free Weekly Newsletter
@@ -110,7 +110,7 @@ export default function NewsletterPageClient({ issues }: Props) {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1]">
-            The Kerja AI newsletter
+            The Kerja-AI newsletter
             <br className="hidden sm:block" />
             <span className="text-[#1D4ED8]"> actually worth opening.</span>
           </h1>

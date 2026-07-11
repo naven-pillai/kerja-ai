@@ -4,6 +4,6 @@
         "NEXT_PRIVATE_SKIP_TS_CONFIG_REWRITE": "true"
       }
     },
-    "ignoreCommand": "git diff --quiet HEAD^ HEAD -- app components lib public next.config.ts package.json tailwind.config.ts"
+    "ignoreCommand": "git diff --quiet HEAD^ HEAD -- app components lib constants config utils types hooks public next.config.ts package.json tailwind.config.ts"
   }
   

@@ -218,13 +218,10 @@ export default function PostJobForm({ isPaid = false, isFeatured = false, stripe
 
       // ── Job insert ───────────────────────────────────────────────────────
       const jobSlug = await generateUniqueJobSlug(jobTitle, companyName, supabase);
-      const today = new Date();
-      const expiresAt = new Date(today);
-      expiresAt.setDate(today.getDate() + (isPaid || formData.is_featured ? 60 : 30));
 
-      const billingPlan = formData.is_featured ? 'featured' : isPaid ? 'standard' : 'free';
-      const paidAmountUsd = formData.is_featured ? 69 : isPaid ? 49 : 0;
-
+      // Phase 1: every public submission is free and goes to the moderation
+      // queue (status='pending'). Expiry is set by the DB trigger. Admin decides
+      // featuring after review. billing_plan MUST be 'free' (RLS + CHECK).
       const { error: jobError } = await supabase.from('jobs').insert({
         title: jobTitle,
         slug: jobSlug,
@@ -239,16 +236,8 @@ export default function PostJobForm({ isPaid = false, isFeatured = false, stripe
         description: formData.description,
         apply_url: formData.applyUrl,
         company_id: companyId,
-        is_featured: formData.is_featured,
         status: 'pending',
-        expires_at: expiresAt.toISOString().split('T')[0],
-        billing_plan: billingPlan,
-        ...(formData.is_featured && { visibility_plan: 'featured' }),
-        featured_addon_paid: formData.is_featured,
-        paid_amount_total: paidAmountUsd,
-        paid_currency: isPaid ? 'USD' : null,
-        paid_at: isPaid ? new Date().toISOString() : null,
-        stripe_session_id: stripeSessionId ?? null,
+        billing_plan: 'free',
       });
 
       if (jobError) throw new Error(`Job insert failed: ${jobError.message} (${jobError.code})`);

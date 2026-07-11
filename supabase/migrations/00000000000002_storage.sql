@@ -5,11 +5,11 @@
 -- featured_images: blog featured images (public read)
 -- ============================================================================
 
-insert into storage.buckets (id, name, public)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values
-  ('company-logos',  'company-logos',  true),
-  ('blog-images',    'blog-images',    true),
-  ('featured_images','featured_images',true)
+  ('company-logos',  'company-logos',  true, 2097152, array['image/png','image/jpeg','image/webp','image/svg+xml']),
+  ('blog-images',    'blog-images',    true, 5242880, array['image/png','image/jpeg','image/webp','image/gif']),
+  ('featured_images','featured_images',true, 5242880, array['image/png','image/jpeg','image/webp'])
 on conflict (id) do nothing;
 
 -- Public read for all three public buckets ----------------------------------

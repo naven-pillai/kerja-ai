@@ -28,6 +28,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE}/newsletter`,          lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.5 },
   { url: `${BASE}/about`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
   { url: `${BASE}/faq`,                 lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
+  { url: `${BASE}/contact`,             lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
   { url: `${BASE}/privacy-policy`,      lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.2 },
   { url: `${BASE}/terms-conditions`,    lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.2 },
 ];

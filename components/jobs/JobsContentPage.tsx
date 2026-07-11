@@ -401,7 +401,7 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
                   </p>
                   <button
                     onClick={handleClear}
-                    className="inline-flex items-center gap-2 bg-[#1D4ED8] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#c42705] transition"
+                    className="inline-flex items-center gap-2 bg-[#1D4ED8] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#1E40AF] transition"
                   >
                     <X size={14} />
                     Clear all filters

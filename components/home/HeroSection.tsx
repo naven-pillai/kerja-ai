@@ -3,7 +3,7 @@ import HeroSearchForm from '@/components/home/HeroSearchForm';
 
 export default function HeroSection() {
   return (
-    <section className="bg-orange-50/30 py-16 md:py-24">
+    <section className="bg-blue-50/30 py-16 md:py-24">
       <div className="max-w-3xl mx-auto px-4 text-center">
         {/* Social proof badge */}
         <div className="inline-flex items-center gap-2 bg-blue-50 text-[#1D4ED8] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
@@ -34,7 +34,7 @@ export default function HeroSection() {
           </Link>
           <Link
             href="/post-job"
-            className="border border-[#1D4ED8] text-[#1D4ED8] px-6 py-3 rounded-lg text-base font-semibold hover:bg-red-50 transition"
+            className="border border-[#1D4ED8] text-[#1D4ED8] px-6 py-3 rounded-lg text-base font-semibold hover:bg-blue-50 transition"
           >
             Post a Job — Free
           </Link>

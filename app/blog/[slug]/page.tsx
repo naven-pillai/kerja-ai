@@ -104,7 +104,7 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
         datePublished={blog.created_at ?? blog.updated_at ?? new Date().toISOString()}
         dateModified={blog.updated_at ?? new Date().toISOString()}
         featuredImage={featuredImage}
-        authorName="Kerja AI Team"
+        authorName="Kerja-AI Team"
       />
 
       {/* Page body */}

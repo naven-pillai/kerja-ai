@@ -101,7 +101,7 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
                 Featured
               </span>
               {showEarlyAccessBadge && (
-                <span className="inline-flex items-center gap-1 bg-orange-50 text-orange-700 border border-orange-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                <span className="inline-flex items-center gap-1 bg-blue-50 text-[#1D4ED8] border border-blue-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
                   <Lock className="w-2.5 h-2.5" />
                   Early Access
                 </span>
@@ -215,7 +215,7 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
         {/* Badges row */}
         <div className="flex flex-wrap gap-1.5 mt-3 items-center">
           {showEarlyAccessBadge && (
-            <span className="inline-flex items-center gap-1 bg-orange-50 text-orange-700 border border-orange-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+            <span className="inline-flex items-center gap-1 bg-blue-50 text-[#1D4ED8] border border-blue-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
               <Lock className="w-2.5 h-2.5" />
               Early Access
             </span>

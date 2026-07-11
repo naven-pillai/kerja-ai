@@ -74,7 +74,7 @@ export default async function LatestBlogSection({
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-orange-50 to-red-100 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-blue-50 to-cyan-100 flex items-center justify-center">
                     <DocumentTextIcon className="w-10 h-10 text-[#1D4ED8]/40" />
                   </div>
                 )}
@@ -83,7 +83,7 @@ export default async function LatestBlogSection({
               <div className="p-6 space-y-3 text-left">
                 <div className="flex flex-wrap items-center gap-2 text-xs font-medium">
                   {blog.category && (
-                    <span className="bg-orange-100 text-orange-700 px-2 py-1 rounded-md">
+                    <span className="bg-blue-100 text-[#1D4ED8] px-2 py-1 rounded-md">
                       {blog.category}
                     </span>
                   )}

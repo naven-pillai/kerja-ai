@@ -410,10 +410,10 @@ grant execute on function public.get_jobs_stats(uuid[]),
 -- ============================================================================
 -- Storage buckets + policies
 -- ============================================================================
-insert into storage.buckets (id, name, public) values
-  ('company-logos',   'company-logos',   true),
-  ('blog-images',     'blog-images',     true),
-  ('featured_images', 'featured_images', true)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types) values
+  ('company-logos',   'company-logos',   true, 2097152, array['image/png','image/jpeg','image/webp','image/svg+xml']),
+  ('blog-images',     'blog-images',     true, 5242880, array['image/png','image/jpeg','image/webp','image/gif']),
+  ('featured_images', 'featured_images', true, 5242880, array['image/png','image/jpeg','image/webp'])
 on conflict (id) do nothing;
 
 drop policy if exists "public read kerja-ai buckets" on storage.objects;

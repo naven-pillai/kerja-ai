@@ -35,7 +35,7 @@ const StructuredDataBlogPost: FC<StructuredDataBlogPostProps> = ({
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Kerja AI',
+      name: 'Kerja-AI',
       logo: {
         '@type': 'ImageObject',
         url: 'https://kerja-ai.com/logo.png',

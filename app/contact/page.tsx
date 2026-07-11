@@ -114,7 +114,7 @@ export default function ContactPage() {
               onClick={() => setSelectedTopic(value)}
               className={`flex items-start gap-4 p-5 rounded-2xl border text-left transition-all ${
                 selectedTopic === value
-                  ? "border-[#1D4ED8] bg-red-50/60 ring-1 ring-[#1D4ED8]/10"
+                  ? "border-[#1D4ED8] bg-blue-50/60 ring-1 ring-[#1D4ED8]/10"
                   : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50/50"
               }`}
             >

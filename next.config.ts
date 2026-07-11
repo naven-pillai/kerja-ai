@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 2592000, // 30 days — cache optimised images longer
     remotePatterns: [
       {
-        // Any Supabase project (storage bucket public objects). Works across
-        // environments without hardcoding the project ref.
+        // Kerja-AI Supabase project storage (public bucket objects). Pinned to
+        // the project ref so the image optimizer isn't an open proxy.
         protocol: 'https',
-        hostname: '*.supabase.co',
+        hostname: 'igmtoqxfbjcsxnaqtyrc.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
       {

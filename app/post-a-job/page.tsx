@@ -6,7 +6,8 @@ export const metadata = {
   title: `Post an AI or Data Job in Malaysia & Singapore | ${SITE.name}`,
   description:
     'Reach people actively looking for AI, machine learning and data jobs in Malaysia and Singapore — not the whole internet. Posting is free at launch.',
-  alternates: { canonical: `${SITE.url}/post-a-job` },
+  // Thin marketing variant of /post-job — canonicalize to the real form.
+  alternates: { canonical: `${SITE.url}/post-job` },
 };
 
 export default function PostAJobPage() {

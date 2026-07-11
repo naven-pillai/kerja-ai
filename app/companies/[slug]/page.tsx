@@ -40,6 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   return {
     title: `${company.name} AI & Data Jobs | Kerja-AI`,
     description,
+    alternates: { canonical: `https://kerja-ai.com/companies/${slug}` },
   };
 }
 
@@ -145,7 +146,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
         {/* ── Hero ── */}
         <div className="relative rounded-3xl border border-gray-200 bg-white overflow-hidden mb-10">
           {/* Gradient top strip */}
-          <div className="h-24 bg-linear-to-r from-orange-50 via-red-50 to-amber-50" />
+          <div className="h-24 bg-linear-to-r from-blue-50 via-cyan-50 to-teal-50" />
 
           <div className="px-6 sm:px-8 pb-8 -mt-12">
             <div className="flex flex-col sm:flex-row sm:items-end sm:gap-6">
@@ -330,7 +331,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                       href={appendUTM(company.careers_url, { utm_source: 'kerja-ai', utm_medium: 'referral', utm_campaign: 'company-careers' })}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-[#1D4ED8] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#c42705] transition"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#1D4ED8] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#1E40AF] transition"
                     >
                       <ExternalLink className="w-4 h-4" />
                       View {company.name} Careers Page

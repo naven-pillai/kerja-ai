@@ -81,7 +81,7 @@ export default function BlogContentPage({
               )}
               <div className="p-6 space-y-4">
                 {blog.category && (
-                  <span className="inline-block bg-orange-100 text-orange-700 text-xs font-medium px-2 py-1 rounded-md">
+                  <span className="inline-block bg-blue-100 text-[#1D4ED8] text-xs font-medium px-2 py-1 rounded-md">
                     {blog.category}
                   </span>
                 )}

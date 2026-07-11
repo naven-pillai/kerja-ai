@@ -208,7 +208,7 @@ export default async function LocationPage({
                 <Link
                   key={cat}
                   href={`/job-categories/${catSlugify(cat)}`}
-                  className="text-xs font-medium bg-orange-50 text-orange-700 px-3 py-1.5 rounded-full hover:bg-orange-100 transition"
+                  className="text-xs font-medium bg-blue-50 text-[#1D4ED8] px-3 py-1.5 rounded-full hover:bg-blue-100 transition"
                 >
                   {cat}
                 </Link>

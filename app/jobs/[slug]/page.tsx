@@ -11,7 +11,6 @@ import CompanyCard from '@/components/job/CompanyCard';
 import SocialShare from '@/components/job/SocialShare';
 import JobDescription from '@/components/job/JobDescription';
 import RelatedJobs from '@/components/job/RelatedJobs';
-import OpenGraphMeta from '@/components/seo/OpenGraphMeta';
 import ScrollToTopOnRouteChange from '@/components/common/ScrollToTopOnRouteChange';
 import JobPostingStructuredData from '@/components/seo/JobPostingStructuredData';
 import NewsletterSidebar from '@/components/common/NewsletterSidebar';
@@ -47,6 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   return {
     title: isExpired ? `[Expired] ${ogTitle}` : ogTitle,
     description: ogDescription,
+    alternates: { canonical: jobUrl },
     // Tell search engines to drop expired job pages — no 404 penalty
     ...(isExpired && { robots: { index: false, follow: false } }),
     openGraph: {
@@ -135,17 +135,6 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
   return (
     <>
       <ScrollToTopOnRouteChange />
-
-      <OpenGraphMeta
-        title={job.seo_title ?? `${job.title} – AI & Data Job | Kerja-AI`}
-        description={
-          job.seo_description ??
-          `Apply for the ${job.title} role at ${companyName}. One of the AI and data jobs hiring across Malaysia and Singapore on Kerja-AI.`
-        }
-        url={jobUrl}
-        image={companyLogo}
-        twitterCardType="summary"
-      />
 
       <script
         type="application/ld+json"
