@@ -70,33 +70,44 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
 
   const now = new Date().toISOString();
 
-  const { data: jobs, error: jobsError } = await supabase
-    .from('jobs')
-    .select(`
-      id, title, slug, created_at, apply_url,
-      job_type, job_category, job_location, remote_type,
-      min_salary, max_salary, tags, is_featured, expires_at,
-      company:companies(name, slug, logo_url)
-    `)
-    .eq('company_id', company.id)
-    .eq('status', 'published')
-    .or(`expires_at.is.null,expires_at.gt.${now}`)
-    .order('created_at', { ascending: false });
+  // Both depend on `company`, but not on each other — run them together rather
+  // than one after the other.
+  const similarQuery = supabase
+    .from('companies')
+    .select(SIMILAR_SELECT)
+    .neq('slug', slug)
+    .limit(4);
+
+  // Filter by industry in the query. This previously pulled 50 rows and threw
+  // away 46 in JS, which also meant a same-industry match outside the first 50
+  // was never found.
+  if (company.industry) similarQuery.eq('industry', company.industry);
+
+  const [
+    { data: jobs, error: jobsError },
+    { data: similarRaw },
+  ] = await Promise.all([
+    supabase
+      .from('jobs')
+      .select(`
+        id, title, slug, created_at, apply_url,
+        job_type, job_category, job_location, remote_type,
+        min_salary, max_salary, tags, is_featured, expires_at,
+        company:companies(name, slug, logo_url)
+      `)
+      .eq('company_id', company.id)
+      .eq('status', 'published')
+      .or(`expires_at.is.null,expires_at.gt.${now}`)
+      .order('created_at', { ascending: false }),
+    similarQuery,
+  ]);
 
   if (jobsError) console.error('❌ Jobs fetch error:', jobsError);
 
   const typedJobs = (jobs ?? []) as JobWithCompany[];
   const hasJobs = typedJobs.length > 0;
 
-  const { data: similarRaw } = await supabase
-    .from('companies')
-    .select(SIMILAR_SELECT)
-    .neq('slug', slug)
-    .limit(50);
-
   const similarCompanies = (similarRaw ?? [])
-    .filter((c) => (company.industry ? c.industry === company.industry : true))
-    .slice(0, 4)
     .map((c) => ({
       id: c.id,
       name: c.name,

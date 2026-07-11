@@ -4,12 +4,10 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { SlidersHorizontal, X, SearchX, ChevronDown, Sparkles } from 'lucide-react';
-import { createSupabaseBrowserClient } from '@/lib/supabase-browser';
 import { JobWithCompany } from '@/types/custom';
 import { Filters } from '@/types/filters';
 
 import JobCard from '@/components/common/JobCard';
-import JobCardSkeleton from '@/components/jobs/JobCardSkeleton';
 import JobsSidebar from '@/components/jobs/JobsSidebar';
 import NewsletterCard from '@/components/common/NewsletterCard';
 import ScrollToTopOnRouteChange from '@/components/common/ScrollToTopOnRouteChange';
@@ -28,48 +26,22 @@ const emptyFilters: Filters = {
   skills: '',
 };
 
-export default function JobsContentPage({ initialKeyword = '' }: { initialKeyword?: string }) {
-  const [allJobs, setAllJobs] = useState<JobWithCompany[]>([]);
-  const [filteredJobs, setFilteredJobs] = useState<JobWithCompany[]>([]);
+type Props = {
+  initialKeyword?: string;
+  /** Fetched on the server (app/jobs/page.tsx) and rendered into the HTML. */
+  jobs: JobWithCompany[];
+  /** True when the server query failed — distinct from "the board is empty". */
+  loadError?: boolean;
+};
+
+export default function JobsContentPage({ initialKeyword = '', jobs, loadError = false }: Props) {
+  const [allJobs] = useState<JobWithCompany[]>(jobs);
+  const [filteredJobs, setFilteredJobs] = useState<JobWithCompany[]>(jobs);
   const [activeFilters, setActiveFilters] = useState<Filters>({ ...emptyFilters, keyword: initialKeyword });
-  const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(15);
-
-  useEffect(() => {
-    const fetchJobs = async () => {
-      setLoading(true);
-      const supabase = createSupabaseBrowserClient();
-
-      const { data, error } = await supabase
-        .from('jobs')
-        .select(`
-          id, title, slug, created_at, is_featured, status, expires_at,
-          valid_through, job_type, job_category, job_location, remote_type,
-          min_salary, max_salary, currency, tags, apply_url,
-          company_id, description, seo_title, seo_description,
-          goes_public_at,
-          company:companies(name, slug, logo_url)
-        `)
-        .eq('status', 'published')
-        .lte('goes_public_at', new Date().toISOString())
-        .not('goes_public_at', 'is', null)
-        .order('is_featured', { ascending: false })
-        .order('created_at', { ascending: false });
-
-      if (error) { console.error('Error fetching jobs:', error); setLoading(false); return; }
-
-      const jobs = (data ?? []) as JobWithCompany[];
-      const valid = jobs.filter((j) => !j.expires_at || dayjs().isBefore(dayjs(j.expires_at)));
-
-      setAllJobs(valid);
-      setFilteredJobs(valid);
-      setLoading(false);
-    };
-    fetchJobs();
-  }, []);
 
   // Close mobile drawer when clicking outside / on overlay
   useEffect(() => {
@@ -232,10 +204,8 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
               {/* Top bar: count + sort + mobile filter button */}
               <div className="flex items-center justify-between mb-4 gap-3">
                 <p className="text-sm text-gray-500">
-                  {loading
-                    ? <span className="inline-block w-24 h-4 bg-gray-100 rounded animate-pulse" />
-                    : <><span className="font-semibold text-gray-900">{displayedJobs.length}</span> {displayedJobs.length === 1 ? 'job' : 'jobs'} found</>
-                  }
+                  <span className="font-semibold text-gray-900">{displayedJobs.length}</span>{' '}
+                  {displayedJobs.length === 1 ? 'job' : 'jobs'} found
                 </p>
 
                 <div className="flex items-center gap-2">
@@ -305,17 +275,20 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
                 </div>
               )}
 
-              {/* Loading skeletons */}
-              {loading && (
-                <div className="space-y-3">
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <JobCardSkeleton key={i} />
-                  ))}
+              {/* Load failure — must not be mistaken for an empty board */}
+              {loadError && (
+                <div className="rounded-xl border border-red-200 bg-red-50 p-5 text-center">
+                  <h3 className="text-base font-semibold text-red-900 mb-1">
+                    Couldn&apos;t load jobs
+                  </h3>
+                  <p className="text-sm text-red-700">
+                    Something went wrong on our end, not yours. Please refresh in a moment.
+                  </p>
                 </div>
               )}
 
               {/* Featured spotlight */}
-              {!loading && featuredJobs.length > 0 && (
+              {featuredJobs.length > 0 && (
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest">Featured</span>
@@ -330,7 +303,7 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
               )}
 
               {/* Regular job list */}
-              {!loading && regularJobs.length > 0 && (
+              {regularJobs.length > 0 && (
                 <>
                   {featuredJobs.length > 0 && (
                     <div className="flex items-center gap-2 mb-3">
@@ -390,7 +363,7 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
               )}
 
               {/* Empty state */}
-              {!loading && displayedJobs.length === 0 && (
+              {!loadError && displayedJobs.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-20 text-center">
                   <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
                     <SearchX size={28} className="text-gray-300" />
