@@ -1,5 +1,34 @@
 // components/seo/JobPostingStructuredData.tsx
 import { countrySchemaMap } from '@/lib/countryMap';
+import { shouldShowCity, MALAYSIAN_CITY_REGIONS } from '@/lib/formatLocation';
+
+/**
+ * Build a schema.org PostalAddress for one country.
+ *
+ * Adds addressLocality (+ addressRegion) when we actually know the city. This is
+ * what lets Google Jobs surface a listing for "AI jobs in Kuala Lumpur" rather
+ * than only for country-level searches.
+ *
+ * Deliberately NOT added for fully-remote roles: a 100% remote job has no
+ * office, so claiming a physical locality would misrepresent it (Google expects
+ * TELECOMMUTE + applicantLocationRequirements for those instead).
+ */
+function buildAddress(country: string, city: string | null | undefined, isFullyRemote: boolean) {
+  const address: Record<string, string> = {
+    '@type': 'PostalAddress',
+    addressCountry: country,
+  };
+
+  if (!isFullyRemote && shouldShowCity(country, city)) {
+    const cityName = (city ?? '').trim();
+    address.addressLocality = cityName;
+
+    const region = MALAYSIAN_CITY_REGIONS[cityName];
+    if (region) address.addressRegion = region;
+  }
+
+  return address;
+}
 
 // Strip HTML tags and decode basic entities for schema plain-text fields
 function stripHtml(html: string): string {
@@ -76,6 +105,7 @@ export default function JobPostingStructuredData({
   employmentType,
   hiringOrganization,
   jobLocation, // string | string[]
+  city,
   applyUrl,
   salary,
   remoteType,
@@ -91,6 +121,8 @@ export default function JobPostingStructuredData({
     url: string;
   };
   jobLocation: string | string[]; // ⬅️ updated
+  /** Malaysian city, if set. Feeds addressLocality/addressRegion. */
+  city?: string | null;
   applyUrl: string;
   salary?: {
     min: number;
@@ -191,15 +223,17 @@ export default function JobPostingStructuredData({
       }
       schema.jobLocation = {
         '@type': 'Place',
-        address: { '@type': 'PostalAddress', addressCountry: uniqueCountries[0] },
+        address: buildAddress(uniqueCountries[0], city, isFullyRemote),
       };
     } else if (uniqueCountries.length > 1) {
       if (isFullyRemote) {
         schema.applicantLocationRequirements = uniqueCountries.map(c => ({ '@type': 'Country', name: c }));
       }
+      // buildAddress only attaches the city to Malaysia, so a multi-country job
+      // can't leak a Malaysian city onto its Singapore Place.
       schema.jobLocation = uniqueCountries.map(c => ({
         '@type': 'Place',
-        address: { '@type': 'PostalAddress', addressCountry: c },
+        address: buildAddress(c, city, isFullyRemote),
       }));
     }
   } else {

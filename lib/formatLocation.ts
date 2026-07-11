@@ -10,6 +10,30 @@
  *
  * Every one of those cases falls back to the country alone.
  */
+/**
+ * City -> Malaysian state, for schema.org PostalAddress.addressRegion.
+ *
+ * Google recommends addressLocality + addressRegion + addressCountry together on
+ * a JobPosting's jobLocation; region alone is what disambiguates, say, a Subang
+ * Jaya role as being in Selangor.
+ *
+ * Keys must match constants/job-filters.ts `malaysianCities` in kerja-ai-admin —
+ * that list is what the admin can actually save.
+ */
+export const MALAYSIAN_CITY_REGIONS: Record<string, string> = {
+  'Kuala Lumpur': 'Federal Territory of Kuala Lumpur',
+  'Petaling Jaya': 'Selangor',
+  'Cyberjaya': 'Selangor',
+  'Subang Jaya': 'Selangor',
+  'Shah Alam': 'Selangor',
+  'Penang': 'Penang',
+  'Johor Bahru': 'Johor',
+  'Ipoh': 'Perak',
+  'Melaka': 'Melaka',
+  'Kuching': 'Sarawak',
+  'Kota Kinabalu': 'Sabah',
+};
+
 /** The single rule for whether a city may be shown. */
 export function shouldShowCity(
   country: string | null | undefined,
