@@ -180,9 +180,11 @@ export default function JobMetaBox({ job }: Props) {
               {showCity && (
                 <div className="flex flex-col">
                   <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">City</span>
-                  {/* Not a link: there are deliberately no city landing pages —
-                      at this volume they'd be thin and hurt SEO. */}
-                  <span className="bg-purple-50 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-md w-fit">
+                  {/* Teal, to read as its own field rather than a shade of the
+                      purple Country pill. Not a link: there are deliberately no
+                      city landing pages — at this volume they'd be thin and hurt
+                      SEO. Contrast 6.73:1. */}
+                  <span className="bg-teal-100 text-teal-800 text-xs font-medium px-2.5 py-0.5 rounded-md w-fit">
                     {city}
                   </span>
                 </div>

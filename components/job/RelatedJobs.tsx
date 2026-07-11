@@ -80,8 +80,13 @@ export default function RelatedJobs({ category, tags, excludeJobId }: Props) {
 
   return (
     <div className="pt-12 border-t border-gray-200">
+      {/* Built as a template literal, not JSX text. Written as
+          `More {label} roles in ...` the compiler dropped the space between the
+          expression and the following text, rendering "AI Engineeringroles". */}
       <h3 className="text-xl font-bold text-gray-900 mb-6">
-        More {label} roles in Malaysia &amp; Singapore
+        {label
+          ? `More ${label} roles in Malaysia & Singapore`
+          : 'More roles in Malaysia & Singapore'}
       </h3>
 
       {relatedJobs.length > 0 ? (
