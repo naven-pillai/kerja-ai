@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase-admin'
+import { getSupabaseAdmin } from '@/lib/supabase-admin'
 import { appendUTM } from '@/utils/appendUTM'
 import { formatApplyUrl } from '@/utils/formatApplyUrl'
 
@@ -21,7 +21,7 @@ export async function GET(
 ) {
   const { slug } = await params
 
-  const { data: job } = await supabaseAdmin
+  const { data: job } = await getSupabaseAdmin()
     .from('jobs')
     .select('id, apply_url, title')
     .eq('slug', slug)
@@ -41,7 +41,7 @@ export async function GET(
     }
   )
 
-  await supabaseAdmin
+  await getSupabaseAdmin()
     .from('job_events')
     .insert({ job_id: job.id, event_type: 'click' })
 

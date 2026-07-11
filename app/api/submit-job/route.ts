@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import slugify from 'slugify';
-import { supabaseAdmin } from '@/lib/supabase-admin';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import {
   rejectCrossSiteRequest,
   rejectOversizedRequest,
@@ -45,7 +45,7 @@ function toNum(v: unknown): number | null {
 
 async function uniqueSlug(title: string, company: string): Promise<string> {
   const base = slugify(`${title}-${company}`, { lower: true, strict: true }).slice(0, 90) || 'job';
-  const { data } = await supabaseAdmin.from('jobs').select('id').eq('slug', base).maybeSingle();
+  const { data } = await getSupabaseAdmin().from('jobs').select('id').eq('slug', base).maybeSingle();
   return data ? `${base}-${Date.now().toString(36)}` : base;
 }
 
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
   try {
     // Company: reuse an existing match by name or website, else create.
     let companyId: string | null = null;
-    const { data: byName } = await supabaseAdmin
+    const { data: byName } = await getSupabaseAdmin()
       .from('companies')
       .select('id')
       .ilike('name', d.companyName)
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
         ? d.companyWebsite
         : d.companyWebsite.replace('://', '://www.');
       const nonWww = d.companyWebsite.replace('://www.', '://');
-      const { data: byWeb } = await supabaseAdmin
+      const { data: byWeb } = await getSupabaseAdmin()
         .from('companies')
         .select('id')
         .in('website', [d.companyWebsite, www, nonWww])
@@ -101,7 +101,7 @@ export async function POST(request: Request) {
     }
 
     if (!companyId) {
-      const { data: newCo, error: coErr } = await supabaseAdmin
+      const { data: newCo, error: coErr } = await getSupabaseAdmin()
         .from('companies')
         .insert({
           name: d.companyName,
@@ -122,7 +122,7 @@ export async function POST(request: Request) {
 
     const slug = await uniqueSlug(d.jobTitle, d.companyName);
 
-    const { error: jobErr } = await supabaseAdmin.from('jobs').insert({
+    const { error: jobErr } = await getSupabaseAdmin().from('jobs').insert({
       title: d.jobTitle,
       slug,
       job_category: d.jobCategory ? [d.jobCategory] : [],
