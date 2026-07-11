@@ -28,7 +28,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" aria-label="Go to homepage" className="flex items-center shrink-0">
-          <Image src="/kerja-ai-logo.png" alt="KerjaAI" width={534} height={460} priority style={{ height: '48px', width: 'auto' }} />
+          <Image src="/kerja-ai-logo.png" alt="KerjaAI" width={48} height={48} priority sizes="48px" style={{ height: '48px', width: 'auto' }} />
         </Link>
 
         {/* Desktop nav */}

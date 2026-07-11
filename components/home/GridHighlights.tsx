@@ -13,6 +13,7 @@ export default function GridHighlights() {
           alt="Kerja-AI background"
           fill
           priority
+          quality={70}
           className="object-cover object-[center_25%] md:object-center"
           sizes="100vw"
         />

@@ -49,10 +49,10 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
     return (
       <Link
         href={`/jobs/${job.slug}`}
-        className="group relative w-full flex flex-col overflow-hidden rounded-xl border border-amber-200/80 bg-gradient-to-b from-amber-50/60 to-white shadow-sm shadow-amber-100/60 transition-all duration-200 hover:shadow-md hover:shadow-amber-100 hover:border-amber-300"
+        className="group relative w-full flex flex-col overflow-hidden rounded-xl border border-amber-200/80 bg-linear-to-b from-amber-50/60 to-white shadow-sm shadow-amber-100/60 transition-all duration-200 hover:shadow-md hover:shadow-amber-100 hover:border-amber-300"
       >
         {/* Top gradient bar */}
-        <div className="h-[3px] w-full bg-gradient-to-r from-amber-400 via-[#1D4ED8] to-[#1D4ED8]" />
+        <div className="h-0.75 w-full bg-linear-to-r from-amber-400 via-[#1D4ED8] to-[#1D4ED8]" />
 
         <div className="flex flex-col sm:flex-row gap-4 p-5">
           {/* Company logo */}
@@ -61,7 +61,7 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
               src={job.company?.logo_url || ''}
               alt={job.company?.name || 'Company Logo'}
               size={52}
-              className="w-12 h-12 sm:w-[52px] sm:h-[52px] rounded-xl ring-1 ring-amber-200 bg-white shadow-sm"
+              className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl ring-1 ring-amber-200 bg-white shadow-sm"
             />
           </div>
 
@@ -73,9 +73,9 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
               </h3>
               <div className="hidden sm:flex flex-col items-end gap-1 shrink-0">
                 {isNew && (
-                  <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">NEW</span>
+                  <span className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">NEW</span>
                 )}
-                <span className="text-[11px] text-gray-400 whitespace-nowrap">
+                <span className="text-[11px] text-gray-500 whitespace-nowrap">
                   {createdAt ? createdAt.fromNow() : 'Recently'}
                 </span>
               </div>
@@ -96,8 +96,8 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
 
             <div className="flex flex-wrap gap-1.5 mt-3 items-center">
               {/* Featured badge — solid */}
-              <span className="inline-flex items-center gap-1 bg-amber-400 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
-                <Star className="w-2.5 h-2.5 fill-white text-white" />
+              <span className="inline-flex items-center gap-1 bg-amber-400 text-amber-950 text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                <Star className="w-2.5 h-2.5 fill-amber-950 text-amber-950" />
                 Featured
               </span>
               {showEarlyAccessBadge && (
@@ -121,12 +121,12 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
                 </span>
               )}
               {extraCategories.slice(0, 1).map((cat) => (
-                <span key={cat} className="bg-gray-100 text-gray-500 text-[11px] font-medium px-2.5 py-0.5 rounded-full">
+                <span key={cat} className="bg-gray-100 text-gray-600 text-[11px] font-medium px-2.5 py-0.5 rounded-full">
                   {cat}
                 </span>
               ))}
               {extraCategories.length > 1 && (
-                <span className="bg-gray-100 text-gray-400 text-[11px] font-medium px-2 py-0.5 rounded-full">
+                <span className="bg-gray-100 text-gray-600 text-[11px] font-medium px-2 py-0.5 rounded-full">
                   +{extraCategories.length - 1}
                 </span>
               )}
@@ -136,7 +136,7 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
                 const amount = match?.[2] ?? salary;
                 return (
                   <span className="inline-flex items-center gap-0.5 bg-emerald-50 text-emerald-700 text-[11px] px-2.5 py-0.5 rounded-full">
-                    <span className="font-normal opacity-70">{prefix}</span>
+                    <span className="font-normal">{prefix}</span>
                     <span className="font-bold tracking-tight">{amount}</span>
                   </span>
                 );
@@ -151,9 +151,9 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
         </div>
 
         {/* Mobile date */}
-        <div className="flex sm:hidden items-center justify-between text-xs text-gray-400 px-5 pb-4 -mt-1">
+        <div className="flex sm:hidden items-center justify-between text-xs text-gray-500 px-5 pb-4 -mt-1">
           {isNew
-            ? <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">NEW</span>
+            ? <span className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">NEW</span>
             : <span />
           }
           <span className="text-[11px]">{createdAt ? createdAt.fromNow() : 'Recently'}</span>
@@ -173,7 +173,7 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
           src={job.company?.logo_url || ''}
           alt={job.company?.name || 'Company Logo'}
           size={52}
-          className="w-12 h-12 sm:w-[52px] sm:h-[52px] rounded-xl ring-1 ring-gray-200 bg-white shadow-sm"
+          className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl ring-1 ring-gray-200 bg-white shadow-sm"
         />
       </div>
 
@@ -188,11 +188,11 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
           {/* Date + NEW — desktop */}
           <div className="hidden sm:flex flex-col items-end gap-1 shrink-0">
             {isNew && (
-              <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">
+              <span className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">
                 NEW
               </span>
             )}
-            <span className="text-[11px] text-gray-400 whitespace-nowrap">
+            <span className="text-[11px] text-gray-500 whitespace-nowrap">
               {createdAt ? createdAt.fromNow() : 'Recently'}
             </span>
           </div>
@@ -235,12 +235,12 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
             </span>
           )}
           {extraCategories.slice(0, 1).map((cat) => (
-            <span key={cat} className="bg-gray-100 text-gray-500 text-[11px] font-medium px-2.5 py-0.5 rounded-full">
+            <span key={cat} className="bg-gray-100 text-gray-600 text-[11px] font-medium px-2.5 py-0.5 rounded-full">
               {cat}
             </span>
           ))}
           {extraCategories.length > 1 && (
-            <span className="bg-gray-100 text-gray-400 text-[11px] font-medium px-2 py-0.5 rounded-full">
+            <span className="bg-gray-100 text-gray-600 text-[11px] font-medium px-2 py-0.5 rounded-full">
               +{extraCategories.length - 1}
             </span>
           )}
@@ -264,9 +264,9 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
       </div>
 
       {/* Date + NEW — mobile */}
-      <div className="flex sm:hidden items-center justify-between text-xs text-gray-400 mt-1">
+      <div className="flex sm:hidden items-center justify-between text-xs text-gray-500 mt-1">
         {isNew
-          ? <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">NEW</span>
+          ? <span className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide">NEW</span>
           : <span />
         }
         <span className="text-[11px]">{createdAt ? createdAt.fromNow() : 'Recently'}</span>

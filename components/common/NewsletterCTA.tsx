@@ -103,10 +103,10 @@ export default function NewsletterCTA() {
               placeholder="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full sm:w-[260px] px-5 py-3 rounded-full border border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] text-sm"
+              className="w-full sm:w-65 px-5 py-3 rounded-full border border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] text-sm"
             />
 
-            <div className="w-full sm:w-[200px]">
+            <div className="w-full sm:w-50">
               <CountryCombobox selected={country} onChange={setCountry} />
             </div>
 
@@ -123,7 +123,7 @@ export default function NewsletterCTA() {
             <p className="text-red-600 text-sm">{error}</p>
           )}
 
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-500">
             New AI and data roles in Malaysia and Singapore, once a week · Unsubscribe anytime
           </p>
         </div>

@@ -48,7 +48,7 @@ export default function Footer() {
               />
               <span className="text-base font-bold text-white tracking-tight">Kerja-AI</span>
             </Link>
-            <p className="text-sm leading-relaxed text-gray-500 max-w-65">
+            <p className="text-sm leading-relaxed text-gray-400 max-w-65">
               The dedicated job board for AI, machine learning and data careers in Malaysia and Singapore. Built for the region&apos;s AI talent.
             </p>
             <div className="flex items-center gap-3 mt-5">
@@ -67,7 +67,7 @@ export default function Footer() {
             </div>
             <div className="mt-6">
               <p className="text-xs font-bold text-white uppercase tracking-widest mb-3">Stay in the Loop</p>
-              <p className="text-sm text-gray-500 mb-3 leading-relaxed">
+              <p className="text-sm text-gray-400 mb-3 leading-relaxed">
                 Latest AI &amp; data jobs in Malaysia and Singapore, straight to your inbox. No spam.
               </p>
               <Link
@@ -81,11 +81,11 @@ export default function Footer() {
 
           {/* For Job Seekers */}
           <div>
-            <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-4">For Job Seekers</h4>
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-4">For Job Seekers</h3>
             <ul className="space-y-2.5">
               {links.seekers.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-gray-500 hover:text-white transition">
+                  <Link href={l.href} className="text-sm text-gray-400 hover:text-white transition">
                     {l.label}
                   </Link>
                 </li>
@@ -95,21 +95,21 @@ export default function Footer() {
 
           {/* For Employers + Legal */}
           <div>
-            <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-4">For Employers</h4>
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-4">For Employers</h3>
             <ul className="space-y-2.5">
               {links.employers.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-gray-500 hover:text-white transition">
+                  <Link href={l.href} className="text-sm text-gray-400 hover:text-white transition">
                     {l.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <h4 className="text-xs font-bold text-white uppercase tracking-widest mt-8 mb-4">Legal</h4>
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mt-8 mb-4">Legal</h3>
             <ul className="space-y-2.5">
               {links.legal.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-gray-500 hover:text-white transition">
+                  <Link href={l.href} className="text-sm text-gray-400 hover:text-white transition">
                     {l.label}
                   </Link>
                 </li>
@@ -122,7 +122,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-600">
+        <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-400">
           <span>© {new Date().getFullYear()} Kerja-AI. All rights reserved.</span>
           <span>Built for AI &amp; data talent in Malaysia and Singapore 🇲🇾 🇸🇬</span>
         </div>

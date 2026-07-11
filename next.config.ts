@@ -28,6 +28,28 @@ const nextConfig: NextConfig = {
   // can fire in a single hop. Without this, `/foo/` becomes a 2-hop chain
   // (auto-strip → user redirect), which Google reports as "No Follow Attribute".
   skipTrailingSlashRedirect: true,
+  async headers() {
+    // NOTE: there is deliberately no script-src CSP here. The app serves an inline
+    // ld+json block, TinyMCE and Vercel Speed Insights, so a script-src policy needs
+    // a nonce emitted from middleware — adding one blind would break the page. The
+    // frame-ancestors policy below is script-agnostic and safe to set on its own.
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'none'" },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          // No OAuth popups on the public site, so full same-origin isolation is safe.
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+          // No includeSubDomains/preload: not every kerja-ai.com subdomain is
+          // confirmed HTTPS-only, and both directives are painful to unwind.
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000' },
+        ],
+      },
+    ];
+  },
   async redirects() {
     // Each redirect is duplicated for its trailing-slash variant so they fire
     // in a single hop instead of chaining through Next.js's auto-normalization.
