@@ -37,11 +37,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${titillium.variable}`} suppressHydrationWarning>
-      <head>
-        {/* AdSense account meta (fine to keep) */}
-        <meta name="google-adsense-account" content="ca-pub-7483313879152211" />
-      </head>
-
       <body className="bg-background text-foreground font-sans antialiased">
         <Navbar />
         <main className="min-h-[80vh]">{children}</main>

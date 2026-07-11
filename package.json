@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.mjs,.cjs",
-    "test": "node --experimental-strip-types --experimental-default-type=module --test tests/*.test.mjs",
+    "test": "node --test tests/*.test.mjs",
     "gen:types": "npx supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" > types/supabase.ts"
   },
   "dependencies": {
