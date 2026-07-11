@@ -112,7 +112,7 @@ export default function StepTwoJob(props: Props) {
       {/* Header */}
       <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
         <h2 className="text-base font-semibold text-gray-900">Job Details</h2>
-        <p className="text-xs text-gray-500 mt-0.5">Describe the role and how candidates should apply.</p>
+        <p className="text-xs text-gray-500 mt-0.5">The core details candidates filter and search by.</p>
       </div>
 
       <div className="p-6 space-y-5">
@@ -122,7 +122,7 @@ export default function StepTwoJob(props: Props) {
           <input
             id="jobTitle"
             type="text"
-            placeholder="e.g. Senior Frontend Engineer"
+            placeholder="e.g. Senior Machine Learning Engineer"
             value={formData.jobTitle}
             onChange={(e) => handleChange('jobTitle', e.target.value)}
             className={inputClass('jobTitle')}
@@ -294,7 +294,7 @@ export default function StepTwoJob(props: Props) {
           )}
           <input
             type="text"
-            placeholder="e.g. React, Remote, TypeScript — press Enter or comma to add"
+            placeholder="e.g. PyTorch, LLMs, MLOps — press Enter or comma to add"
             value={tagInput}
             onChange={(e) => setTagInput(e.target.value)}
             onKeyDown={(e) => {

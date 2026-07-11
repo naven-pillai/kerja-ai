@@ -8,18 +8,19 @@ export default function HeroSection() {
         {/* Social proof badge */}
         <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
           <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-          6,000+ job seekers across APAC finding remote &amp; hybrid work here
+          6,000+ Malaysians and Singaporeans tracking AI &amp; data roles here
         </div>
 
         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5 text-slate-900">
-          Find Your Next{' '}
-          <span className="text-[#1D4ED8]">Remote or Hybrid Job</span>{' '}
-          in APAC
+          AI is reshaping careers in{' '}
+          <span className="text-[#1D4ED8]">Malaysia and Singapore</span>{' '}
+          — here are the roles.
         </h1>
 
         <p className="text-lg text-slate-600 mb-8">
-          Verified remote and hybrid roles across APAC — curated, not aggregated.
-          Every job is labelled, so you know what you&apos;re applying to.
+          TalentCorp expects ~697,000 Malaysian jobs to be reshaped by AI within
+          three to five years. Kerja-AI is where you find the AI, machine learning
+          and data roles that come out of it — across Malaysia and Singapore.
         </p>
 
         <HeroSearchForm />
@@ -29,13 +30,13 @@ export default function HeroSection() {
             href="/newsletter"
             className="bg-[#1D4ED8] text-white px-6 py-3 rounded-lg text-base font-semibold hover:bg-[#1E40AF] transition"
           >
-            Get Jobs by Email
+            Get AI Job Alerts
           </Link>
           <Link
             href="/post-job"
             className="border border-[#1D4ED8] text-[#1D4ED8] px-6 py-3 rounded-lg text-base font-semibold hover:bg-red-50 transition"
           >
-            Post a Job
+            Post a Job — Free
           </Link>
         </div>
       </div>

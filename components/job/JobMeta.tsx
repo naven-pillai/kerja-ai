@@ -106,7 +106,7 @@ export default function JobMetaBox({ job }: Props) {
 
       {expired && (
         <div className="bg-red-50 text-red-600 text-xs font-medium px-3 py-1.5 rounded-md">
-          ⚠️ This posting has expired. Applications may no longer be accepted.
+          ⚠️ This role has closed. Applications may no longer be accepted.
         </div>
       )}
 
@@ -218,7 +218,7 @@ export default function JobMetaBox({ job }: Props) {
           rel={finalApplyUrl.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
           className="block w-full text-center bg-[#1D4ED8] hover:bg-[#1E40AF] text-white font-semibold py-2.5 rounded-lg text-sm transition"
         >
-          {finalApplyUrl.startsWith('mailto:') ? 'Send Email to Apply' : 'Apply Now'}
+          {finalApplyUrl.startsWith('mailto:') ? 'Email your application' : 'Apply for this role'}
         </a>
       )}
     </div>

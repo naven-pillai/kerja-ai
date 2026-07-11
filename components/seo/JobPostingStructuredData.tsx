@@ -203,9 +203,9 @@ export default function JobPostingStructuredData({
       }));
     }
   } else {
-    // Worldwide/global/empty — Google requires applicantLocationRequirements for
-    // TELECOMMUTE roles only. Default to core APAC countries since the platform is APAC-focused.
-    const apacDefault = ['Malaysia', 'Singapore', 'Philippines', 'Indonesia', 'Thailand', 'Vietnam'];
+    // Location unset — Google requires applicantLocationRequirements for
+    // TELECOMMUTE roles only. Default to Kerja-AI's two markets.
+    const apacDefault = ['Malaysia', 'Singapore'];
     if (isFullyRemote) {
       schema.applicantLocationRequirements = apacDefault.map(c => ({ '@type': 'Country', name: c }));
     }

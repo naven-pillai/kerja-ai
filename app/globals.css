@@ -4,7 +4,9 @@
 
 /* Root variables */
 :root {
-  --font-sans: 'Inter', sans-serif;
+  /* Body font = Titillium Web; heading font = Inter. Both loaded via next/font
+     in app/layout.tsx (which sets --font-body / --font-heading on <html>). */
+  --font-sans: var(--font-body), 'Titillium Web', sans-serif;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -23,6 +25,11 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+  }
+
+  /* Keep Inter for headings; body copy uses Titillium Web. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), 'Inter', sans-serif;
   }
 }
 

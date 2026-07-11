@@ -36,8 +36,8 @@ export default async function FeaturedJobsSection() {
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Latest Remote &amp; Hybrid Jobs in APAC</h2>
-          <p className="text-sm text-gray-500 mt-1">New roles added weekly across tech, marketing, design, and more.</p>
+          <h2 className="text-2xl font-bold text-gray-900">Latest AI, ML &amp; Data Jobs in Malaysia and Singapore</h2>
+          <p className="text-sm text-gray-500 mt-1">New AI engineering, machine learning, data science and data engineering roles added every week.</p>
         </div>
 
         <div>
@@ -69,22 +69,22 @@ export default async function FeaturedJobsSection() {
                     <JobCard job={job} />
                     {index === 2 && (
                       <Link
-                        href="/talents/signup"
-                        className="group mt-3 flex items-center gap-4 p-5 rounded-xl border border-dashed border-[#1D4ED8]/30 bg-linear-to-r from-red-50/60 to-orange-50/40 hover:border-[#1D4ED8]/60 hover:from-red-50 hover:to-orange-50/60 transition-all duration-200"
+                        href="/newsletter"
+                        className="group mt-3 flex items-center gap-4 p-5 rounded-xl border border-dashed border-[#1D4ED8]/30 bg-linear-to-r from-blue-50/60 to-cyan-50/40 hover:border-[#1D4ED8]/60 hover:from-blue-50 hover:to-cyan-50/60 transition-all duration-200"
                       >
                         <div className="w-11 h-11 rounded-xl bg-[#1D4ED8]/10 flex items-center justify-center shrink-0">
                           <Sparkles className="w-5 h-5 text-[#1D4ED8]" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-bold text-gray-900 group-hover:text-[#1D4ED8] transition-colors">
-                            Looking for remote or hybrid work in APAC?
+                            Want AI and data roles to come to you?
                           </p>
                           <p className="text-xs text-gray-500 mt-0.5">
-                            Create a free talent profile and let employers find you — no cold applying.
+                            Get one email a week with new AI, machine learning and data roles in Malaysia and Singapore.
                           </p>
                         </div>
                         <span className="hidden sm:inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-white bg-[#1D4ED8] group-hover:bg-[#1E40AF] px-3 py-1.5 rounded-lg transition">
-                          Get Listed Free →
+                          Get Job Alerts →
                         </span>
                       </Link>
                     )}
@@ -100,7 +100,7 @@ export default async function FeaturedJobsSection() {
             href="/jobs"
             className="inline-block bg-[#1D4ED8] hover:bg-[#1E40AF] text-white font-semibold py-3 px-6 rounded-lg transition"
           >
-            Explore More Jobs →
+            Browse All AI &amp; Data Jobs →
           </Link>
         </div>
       </div>

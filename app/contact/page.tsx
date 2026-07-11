@@ -6,10 +6,10 @@ import { Mail, Send, MessageSquare, Building2, Briefcase, Bug, ArrowLeft } from 
 import { toast } from "sonner";
 
 const topics = [
-  { value: "general", label: "General question", desc: "Ask us anything", icon: MessageSquare },
-  { value: "employer", label: "Hiring", desc: "Post jobs or hire talent", icon: Briefcase },
-  { value: "partnership", label: "Partnership", desc: "Collaborate with us", icon: Building2 },
-  { value: "bug", label: "Report a bug", desc: "Something broken?", icon: Bug },
+  { value: "general", label: "General question", desc: "Ask me anything", icon: MessageSquare },
+  { value: "employer", label: "Hiring", desc: "Post a role or hire AI/data talent", icon: Briefcase },
+  { value: "partnership", label: "Partnership", desc: "Build something together", icon: Building2 },
+  { value: "bug", label: "Report a bug", desc: "Found something broken", icon: Bug },
 ];
 
 const inputClass =
@@ -46,7 +46,7 @@ export default function ContactPage() {
       if (!res.ok) throw new Error(data?.error || "Something went wrong");
 
       setStatus("success");
-      toast.success("Thanks! We\u2019ve received your message.");
+      toast.success("Thanks \u2014 I\u2019ve got your message.");
       form.reset();
       setSelectedTopic("general");
     } catch (err: unknown) {
@@ -64,7 +64,7 @@ export default function ContactPage() {
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-3">Message sent</h1>
           <p className="text-gray-500 text-base leading-relaxed mb-8">
-            We&apos;ll get back to you within 1–2 business days.
+            I&apos;ll get back to you within 1–2 business days.
           </p>
           <Link
             href="/"
@@ -97,7 +97,7 @@ export default function ContactPage() {
             Let&apos;s talk
           </h1>
           <p className="text-base sm:text-lg text-gray-500 max-w-lg mx-auto leading-relaxed">
-            Question, partnership, or feedback — drop us a message and we&apos;ll reply within 1–2 business days.
+            A question about a role, hiring on Kerja-AI, a partnership, or feedback — send it over and I&apos;ll reply within 1–2 business days.
           </p>
         </div>
       </section>
@@ -209,7 +209,7 @@ export default function ContactPage() {
               rows={6}
               required
               className={`${inputClass} resize-none`}
-              placeholder="Tell us more..."
+              placeholder="Tell me a bit more..."
             />
           </div>
 
@@ -232,7 +232,7 @@ export default function ContactPage() {
         {/* Alternative */}
         <div className="mt-10 pt-8 border-t border-gray-100 text-center">
           <p className="text-sm text-gray-400">
-            Prefer email? Reach us at{" "}
+            Prefer email? Reach me at{" "}
             <a
               href="mailto:info@kerja-ai.com"
               className="text-gray-600 font-medium hover:text-gray-900 transition"

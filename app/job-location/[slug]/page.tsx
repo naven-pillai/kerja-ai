@@ -26,12 +26,12 @@ export async function generateMetadata({
   const name = jobLocations.find((l) => slugify(l) === slug);
   if (!name) return {};
 
-  const title = `Remote & Hybrid Jobs in ${name}`;
-  const description = `Browse verified remote and hybrid jobs open to candidates in ${name}. New roles added weekly across tech, marketing, design, and more.`;
+  const title = `AI, Machine Learning & Data Jobs in ${name} (2026)`;
+  const description = `${name} AI, machine learning and data roles on Kerja-AI — the niche board for the KL–Singapore corridor. Compare RM and SGD offers, updated weekly.`;
   const url = `${BASE_URL}/job-location/${slug}`;
 
   return {
-    title: `${title} | Kerja-AI`,
+    title,
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, type: 'website' },
@@ -108,23 +108,23 @@ export default async function LocationPage({
   // FAQs
   const faqs = [
     {
-      q: `Are the remote jobs in ${name} fully remote or hybrid?`,
-      a: `Every listing on Kerja-AI for ${name} is labelled either 100% Remote or Hybrid, so you know before you apply. Fully remote roles let you work from anywhere within ${name} or the broader APAC region; hybrid roles note their office requirements on the listing.`,
+      q: `What do AI and data jobs in ${name} pay?`,
+      a: `Pay depends on the role and your level, and it is quoted in ${name}'s local currency — RM in Malaysia, SGD in Singapore. Because Kerja-AI covers both sides of the KL–Singapore corridor, you can line up ${name} offers against the other market before you decide.`,
     },
     {
-      q: `What industries have the most remote and hybrid jobs in ${name}?`,
+      q: `Which AI and data roles are hiring most in ${name}?`,
       a:
         topCategories.length > 0
-          ? `The top categories for remote and hybrid jobs in ${name} currently include ${topCategories.slice(0, 3).join(', ')}. Tech, marketing, and design roles consistently see the most remote hiring across the region.`
-          : `Tech, marketing, design, and customer support tend to have the most remote and hybrid openings in ${name}. Kerja-AI features verified roles across all these industries.`,
+          ? `Right now the most active ${name} categories on Kerja-AI are ${topCategories.slice(0, 3).join(', ')}. Demand tracks what companies are actually building — model work, data pipelines, and applied AI.`
+          : `AI Engineering, Machine Learning Engineering, and Data Science tend to lead hiring in ${name}. Kerja-AI lists roles across all eleven AI and data categories.`,
     },
     {
-      q: `Do I need to be physically based in ${name} to apply?`,
-      a: `It depends on the employer. Some roles require candidates to reside in ${name} for tax, timezone, or compliance reasons. Others are open to anyone in APAC. Each listing clearly states its location requirements.`,
+      q: `Do I need to be based in ${name} to apply?`,
+      a: `It depends on the employer. Some ${name} roles need you on the ground for tax or work-pass reasons; others hire across the KL–Singapore corridor. Each listing states its requirement, so you know before you apply.`,
     },
     {
-      q: `How do I apply for remote jobs in ${name} on Kerja-AI?`,
-      a: `Browse the listings on this page, click any job that interests you, and follow the direct application link. Kerja-AI links you straight to the employer's application — no account required to apply.`,
+      q: `How do I apply for ${name} AI jobs on Kerja-AI?`,
+      a: `Pick any role on this page and follow the link straight to the employer's own application. Kerja-AI sends you direct — no account, no middleman. Posting a role is free for employers, so new ${name} listings arrive often.`,
     },
   ];
 
@@ -176,12 +176,12 @@ export default async function LocationPage({
           </nav>
 
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Remote &amp; Hybrid Jobs in <span className="text-[#1D4ED8]">{name}</span>
+            AI &amp; Data Jobs in <span className="text-[#1D4ED8]">{name}</span>
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl leading-relaxed">
             {jobs.length > 0
-              ? `Browse ${jobs.length} verified remote and hybrid job${jobs.length === 1 ? '' : 's'} open to candidates in ${name}. New roles added weekly across tech, marketing, design, and more.`
-              : `Remote and hybrid job opportunities for candidates based in ${name}. New roles are added weekly — check back soon.`}
+              ? `${jobs.length} AI, machine learning and data role${jobs.length === 1 ? '' : 's'} open in ${name} right now. Kerja-AI tracks only this work — the roles AI is creating, on one board built for it.`
+              : `AI, machine learning and data roles in ${name}. New listings go up every week as AI reshapes hiring here — check back soon.`}
           </p>
 
           {jobs.length > 0 && (
@@ -228,9 +228,9 @@ export default async function LocationPage({
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-500">No remote jobs found for {name} right now.</p>
+            <p className="text-gray-500">No AI or data roles open in {name} right now.</p>
             <Link href="/jobs" className="mt-4 inline-block text-[#1D4ED8] font-semibold hover:underline">
-              Browse all remote jobs →
+              Browse all open roles →
             </Link>
           </div>
         )}

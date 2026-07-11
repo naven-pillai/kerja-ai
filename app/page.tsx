@@ -10,14 +10,14 @@ import HomeScrollFix from '@/components/home/HomeScrollFix';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Kerja AI: Remote & Hybrid Jobs in APAC',
-  description: 'Discover verified remote and hybrid jobs across Malaysia, Singapore, Philippines, Indonesia and the wider APAC region. Every role is labelled 100% Remote or Hybrid. New roles added daily.',
+  title: 'AI & Data Jobs in Malaysia & Singapore | Kerja-AI 2026',
+  description: 'AI, machine learning and data jobs in Malaysia and Singapore. TalentCorp projects ~697,000 roles will be reshaped by AI — Kerja-AI lists the ones hiring now.',
   alternates: {
     canonical: 'https://kerja-ai.com',
   },
   openGraph: {
-    title: 'Kerja AI: Remote & Hybrid Jobs in APAC',
-    description: 'Discover verified remote and hybrid jobs across Malaysia, Singapore, Philippines, Indonesia and the wider APAC region. Every role is labelled 100% Remote or Hybrid.',
+    title: 'AI & Data Jobs in Malaysia & Singapore | Kerja-AI 2026',
+    description: 'The job board for AI, machine learning and data careers in Malaysia and Singapore. One place for the roles AI is creating across the KL–Singapore corridor.',
     url: 'https://kerja-ai.com',
     siteName: 'Kerja-AI',
     type: 'website',
@@ -26,14 +26,14 @@ export const metadata: Metadata = {
         url: 'https://kerja-ai.com/default-og-image-1200x630.png',
         width: 1200,
         height: 630,
-        alt: 'Kerja-AI — Remote & Hybrid Jobs in APAC',
+        alt: 'Kerja-AI — AI, ML & Data Jobs in Malaysia & Singapore',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kerja AI: Remote & Hybrid Jobs in APAC',
-    description: 'Discover verified remote and hybrid jobs across Malaysia, Singapore, Philippines, Indonesia and the wider APAC region.',
+    title: 'AI & Data Jobs in Malaysia & Singapore | Kerja-AI 2026',
+    description: 'The job board for AI, machine learning and data careers in Malaysia and Singapore — the roles AI is creating across the KL–Singapore corridor.',
     images: ['https://kerja-ai.com/default-og-image-1200x630.png'],
   },
 };
@@ -95,7 +95,7 @@ const homeStructuredData = [
     url: 'https://kerja-ai.com',
     logo: 'https://kerja-ai.com/logo.png',
     description:
-      'Curated remote and hybrid job board for APAC. Verified roles across Malaysia, Singapore, Indonesia, Philippines, and the wider APAC region, each labelled 100% Remote or Hybrid.',
+      'The dedicated job board for AI, machine learning and data careers in Malaysia and Singapore. Every listing is an AI, ML or data role — not a general board with a few tech jobs mixed in.',
     sameAs: [
       'https://www.linkedin.com/company/kerjaai',
       'https://x.com/KerjaAI_',

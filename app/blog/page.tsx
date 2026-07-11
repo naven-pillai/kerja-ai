@@ -1,12 +1,12 @@
 import BlogContent from '@/components/blog/BlogContentPage';
 
 export const metadata = {
-  title: 'Remote Work & Hiring Insights | Kerja-AI',
-  description: 'Get expert insights, guides, and updates on remote working, hiring, and productivity — tailored for APAC professionals.',
+  title: 'AI Career Guides for Malaysia & Singapore 2026 | Kerja-AI',
+  description: 'Guides on breaking into AI, machine learning and data roles in Malaysia and Singapore — what to learn, what pays, and how AI is reshaping careers here.',
   alternates: { canonical: 'https://kerja-ai.com/blog' },
   openGraph: {
-    title: 'Remote Work & Hiring Insights | Kerja-AI',
-    description: 'Get expert insights, guides, and updates on remote working, hiring, and productivity — tailored for APAC professionals.',
+    title: 'AI Career Guides for Malaysia & Singapore 2026 | Kerja-AI',
+    description: 'Guides on breaking into AI, machine learning and data roles in Malaysia and Singapore — what to learn, what pays, and how AI is reshaping careers here.',
     url: 'https://kerja-ai.com/blog',
     siteName: 'Kerja-AI',
     type: 'website',

@@ -4,13 +4,13 @@ const POINTS = [
   {
     icon: Target,
     title: 'Intent-matched audience',
-    body: "Everyone here opted in for remote or hybrid work in APAC. That's a fundamentally different signal vs LinkedIn or generic banners.",
+    body: "Everyone here is looking at AI, ML and data work in Malaysia and Singapore. That's a different signal from LinkedIn or a generic banner network.",
     tone: 'red',
   },
   {
     icon: ShieldCheck,
     title: 'No spammy noise',
-    body: 'We review every job listing manually. Same standard applies to ad placements — we curate so your message lands in a trusted environment.',
+    body: 'We review every job listing by hand, and ads get the same treatment. Your message runs in a place people already trust, not a wall of noise.',
     tone: 'emerald',
   },
   {
@@ -46,8 +46,9 @@ export default function AdvertiseWhy() {
             Niche reach beats broad noise
           </h2>
           <p className="mt-2 text-sm text-gray-500 max-w-xl mx-auto">
-            We&apos;re not the biggest job board. We&apos;re the most-engaged APAC remote-focused
-            one — which is what you actually want when you&apos;re paying for attention.
+            We&apos;re not the biggest job board. We&apos;re the one AI and data people in
+            Malaysia and Singapore actually open — which is what you want when you&apos;re paying
+            for attention.
           </p>
         </div>
 

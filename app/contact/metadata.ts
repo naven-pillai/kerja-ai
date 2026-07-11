@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact | Kerja-AI — Remote Jobs for Southeast Asia",
+  title: "Contact Kerja-AI — AI & Data Jobs, Malaysia & Singapore",
   description:
-    "Get in touch with the Kerja-AI team. Questions, partnerships, hiring, or feedback — we reply within 1–2 business days.",
+    "Reach Kerja-AI, the AI and data job board for Malaysia and Singapore. Questions, hiring, partnerships or feedback — we reply within 1–2 business days.",
   alternates: { canonical: "https://kerja-ai.com/contact" },
   openGraph: {
     title: "Contact | Kerja-AI",
-    description: "Get in touch with the Kerja-AI team. We reply within 1–2 business days.",
+    description: "Reach Kerja-AI, the AI and data job board for Malaysia and Singapore. We reply within 1–2 business days.",
     url: "https://kerja-ai.com/contact",
     siteName: "Kerja-AI",
     type: "website",

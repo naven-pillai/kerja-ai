@@ -26,7 +26,7 @@ export default function TwitterCardMeta({
 
   const resolvedCardType = cardType || autoCardType;
 
-  const safeTitle = title || 'Kerja-AI | Remote Jobs for APAC Talent';
+  const safeTitle = title || 'Kerja-AI | AI & Data Jobs in Malaysia & Singapore';
   const safeDescription =
     description || 'Discover verified remote jobs curated for talents across Malaysia and APAC.';
   const safeImage = image || 'https://kerja-ai.com/default-og-image.png';

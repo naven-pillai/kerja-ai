@@ -3,9 +3,9 @@ import WhyPostHere from '@/components/post-a-job/WhyPostHere';
 import { SITE } from '@/config/site';
 
 export const metadata = {
-  title: `Post an AI or Data Job in Malaysia & Singapore — Free | ${SITE.name}`,
+  title: `Post an AI or Data Job in Malaysia & Singapore | ${SITE.name}`,
   description:
-    'Reach candidates who are actively looking for AI, machine learning and data roles across Malaysia and Singapore. Posting is free at launch.',
+    'Reach people actively looking for AI, machine learning and data jobs in Malaysia and Singapore — not the whole internet. Posting is free at launch.',
   alternates: { canonical: `${SITE.url}/post-a-job` },
 };
 
@@ -20,9 +20,9 @@ export default function PostAJobPage() {
           Hire AI &amp; data talent in Malaysia and Singapore
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-          Kerja-AI is the dedicated board for artificial intelligence, machine learning
-          and data careers. Post your role in minutes and reach candidates who are
-          looking specifically for AI work — no low-intent noise.
+          Kerja-AI is the job board for AI, machine learning and data careers in
+          Malaysia and Singapore. Post your role in minutes and reach people who came
+          here for exactly this work — not the whole internet.
         </p>
         <Link
           href="/post-job"

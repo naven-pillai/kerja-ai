@@ -45,7 +45,7 @@ export default function JobDescription({ description, applyUrl, expiresAt, jobTi
       <div className="px-6 py-5 md:px-8 border-t border-gray-100 bg-gray-50">
         {isExpired ? (
           <div className="text-sm text-red-600 font-medium bg-red-50 border border-red-100 px-4 py-2.5 rounded-lg">
-            ⚠️ This job listing has expired. Applications are no longer being accepted.
+            ⚠️ This role has closed. The team is no longer taking applications.
           </div>
         ) : (
           <a
@@ -54,7 +54,7 @@ export default function JobDescription({ description, applyUrl, expiresAt, jobTi
             rel={finalApplyUrl.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
             className="inline-block bg-[#1D4ED8] hover:bg-[#1E40AF] text-white font-semibold py-2.5 px-7 rounded-lg text-sm transition cursor-pointer shadow-sm"
           >
-            {finalApplyUrl.startsWith('mailto:') ? 'Send Email to Apply' : 'Apply Now →'}
+            {finalApplyUrl.startsWith('mailto:') ? 'Email your application' : 'Apply for this role →'}
           </a>
         )}
       </div>

@@ -23,28 +23,28 @@ export default function GridHighlights() {
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
         {/* Headline */}
         <h2 className="text-xl md:text-3xl font-extrabold text-white mb-4 tracking-tight">
-          Join 6,000+ remote &amp; hybrid job seekers across APAC.
+          Join 6,000+ people tracking AI and data roles in Malaysia and Singapore.
         </h2>
         <p className="text-gray-200 text-base md:text-lg mb-10 md:mb-16 max-w-xl mx-auto">
-          Real remote and hybrid roles. Less noise. Curated for Malaysia, Singapore, Indonesia — and the rest of APAC.
+          Real AI, machine learning and data roles. Less noise, no general-board clutter. Built for Malaysia and Singapore.
         </p>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-10 md:mb-12">
           <HighlightCard
             icon={<BriefcaseIcon className="w-8 h-8" />}
-            title="Jobs worth your time"
-            description="Only verified, quality remote and hybrid roles — hand-picked for APAC professionals."
+            title="Roles, not noise"
+            description="Every listing is an AI, ML or data job — not a general board with a few tech roles mixed in."
           />
           <HighlightCard
             icon={<UsersIcon className="w-8 h-8" />}
-            title="Where remote &amp; hybrid teams hire"
-            description="Startups, agencies, and digital teams across APAC post here."
+            title="Where AI teams hire"
+            description="Startups, labs and data teams across Malaysia and Singapore post their openings here."
           />
           <HighlightCard
             icon={<GlobeAltIcon className="w-8 h-8" />}
-            title="Work from anywhere in APAC"
-            description="Kuala Lumpur to Singapore to Bali — pick your base. Keep your career."
+            title="KL to Singapore, one board"
+            description="Compare RM and SGD offers across the corridor without switching between five job sites."
           />
         </div>
 
@@ -53,7 +53,7 @@ export default function GridHighlights() {
           href="/jobs"
           className="inline-flex items-center justify-center rounded-xl bg-[#1D4ED8] px-6 py-4 font-semibold text-white shadow-md transition hover:bg-[#1E40AF] hover:-translate-y-0.5"
         >
-          Browse Remote &amp; Hybrid Jobs
+          Browse AI &amp; Data Jobs
         </Link>
       </div>
     </section>

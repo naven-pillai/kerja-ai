@@ -38,8 +38,8 @@ const platforms = [
 
 export default function SocialShare({ job }: Props) {
   const tweetText = job.companyName
-    ? `${job.companyName} is hiring. Looking for a Remote ${job.title}. Apply with the link:`
-    : `Looking for a Remote ${job.title}. Apply with the link:`;
+    ? `${job.companyName} is hiring a ${job.title} in Malaysia/Singapore. Apply here:`
+    : `${job.title} role open in Malaysia/Singapore. Apply here:`;
   const [jobUrl, setJobUrl] = useState('');
   const [copied, setCopied] = useState(false);
 

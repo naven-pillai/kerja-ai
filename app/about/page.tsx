@@ -2,12 +2,12 @@
 import AboutContent from '@/components/about/AboutContent';
 
 export const metadata = {
-  title: 'About | Kerja-AI — Remote & Hybrid Jobs for Southeast Asia',
-  description: 'Kerja-AI is an APAC-first job board for remote and hybrid roles, built for talent in Malaysia, Philippines, Singapore, and Indonesia. Every job is verified and labelled 100% Remote or Hybrid. Every tool is reviewed for the region.',
+  title: 'About Kerja-AI | AI & Data Careers in Malaysia & Singapore',
+  description: 'Why Naven built Kerja-AI: the AI and data job board for Malaysia and Singapore, for people watching AI reshape their careers in the KL–Singapore corridor.',
   alternates: { canonical: 'https://kerja-ai.com/about' },
   openGraph: {
-    title: 'About | Kerja-AI — Remote & Hybrid Jobs for Southeast Asia',
-    description: 'Kerja-AI is an APAC-first job board for remote and hybrid roles, built for talent in Malaysia, Philippines, Singapore, and Indonesia.',
+    title: 'About Kerja-AI | AI & Data Careers in Malaysia & Singapore',
+    description: 'The AI, machine learning and data job board for Malaysia and Singapore — built for career-anxious talent in the KL–Singapore corridor.',
     url: 'https://kerja-ai.com/about',
     siteName: 'Kerja-AI',
     type: 'website',

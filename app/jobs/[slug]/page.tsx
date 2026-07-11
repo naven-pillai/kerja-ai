@@ -37,10 +37,10 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
     job.status === 'archived' ||
     (job.expires_at != null && dayjs().isAfter(dayjs(job.expires_at)));
 
-  const ogTitle = job.seo_title ?? `Remote Job Opening | Kerja-AI`;
+  const ogTitle = job.seo_title ?? `AI & Data Job Opening in Malaysia & Singapore | Kerja-AI`;
   const ogDescription =
     job.seo_description ??
-    `Explore remote job listings in Southeast Asia. Find verified, flexible, and high-quality remote opportunities at Kerja-AI.`;
+    `An open AI, machine learning or data role in Malaysia or Singapore. Read the full brief, salary context and how to apply, on Kerja-AI.`;
   const ogImage = job.company?.logo_url ?? 'https://kerja-ai.com/default-og-image.png';
   const jobUrl = `https://kerja-ai.com/jobs/${slug}`;
 
@@ -137,10 +137,10 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
       <ScrollToTopOnRouteChange />
 
       <OpenGraphMeta
-        title={job.seo_title ?? `${job.title} – Remote Job | Kerja-AI`}
+        title={job.seo_title ?? `${job.title} – AI & Data Job | Kerja-AI`}
         description={
           job.seo_description ??
-          `Apply for the ${job.title} position at ${companyName}. Explore verified remote jobs across Asia on Kerja-AI.`
+          `Apply for the ${job.title} role at ${companyName}. One of the AI and data jobs hiring across Malaysia and Singapore on Kerja-AI.`
         }
         url={jobUrl}
         image={companyLogo}
@@ -163,7 +163,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
               {
                 '@type': 'ListItem',
                 position: 2,
-                name: 'Remote Jobs',
+                name: 'AI & Data Jobs',
                 item: 'https://kerja-ai.com/jobs',
               },
               {
@@ -210,9 +210,9 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
             <div className="flex items-center gap-2.5">
               <span className="text-amber-500 text-lg">⚠</span>
               <div>
-                <p className="text-sm font-semibold text-amber-900">This job listing has expired</p>
+                <p className="text-sm font-semibold text-amber-900">This role has closed</p>
                 <p className="text-xs text-amber-700 mt-0.5">
-                  Applications are no longer being accepted. Browse similar open roles below.
+                  The team is no longer taking applications. Similar AI and data roles are open below.
                 </p>
               </div>
             </div>

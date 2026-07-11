@@ -14,7 +14,7 @@ export default function AuthorBox() {
         <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">About the Author</p>
         <p className="text-base font-bold text-gray-900 leading-tight">Naven Pillai</p>
         <p className="text-sm text-gray-600 mt-1 leading-relaxed">
-          Regional Marketer, APAC at Zoho. Helping businesses grow with simple, scalable systems.
+          Founder of Kerja-AI, the job board for AI, machine learning and data careers in Malaysia and Singapore. Writes about how AI is reshaping work across the region, and where the real openings are.
         </p>
         <div className="mt-3 flex flex-wrap gap-3 text-sm">
           <a

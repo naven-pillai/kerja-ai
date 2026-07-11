@@ -89,14 +89,14 @@ export default function PrivacyPolicyContentPage() {
             <section id="newsletter">
               <h2 className="text-lg font-bold text-gray-900 mb-3">4. Newsletter & Emails</h2>
               <p>
-                If you subscribe to our newsletter, we will send you curated job updates, platform news, and occasional promotional content. You can unsubscribe at any time via the unsubscribe link at the bottom of every email. We use MailerLite to manage our mailing list.
+                If you subscribe to our newsletter, we will send you AI and data job updates, platform news, and the occasional promotional email. You can unsubscribe at any time via the link at the bottom of every email. We use MailerLite to manage our mailing list.
               </p>
             </section>
 
             <section id="third-party">
               <h2 className="text-lg font-bold text-gray-900 mb-3">5. Third-Party Services</h2>
               <p>
-                We use trusted third-party services to operate our platform, including Google Analytics (site analytics), MailerLite (email marketing), Supabase (database and storage), and payment processors for job listing fees. Each of these services operates under its own privacy policy and data processing terms.
+                We use third-party services to run the platform, including Google Analytics (site analytics), MailerLite (email marketing), Supabase (database and storage), and, if we introduce paid listings in future, a payment processor to handle them. Each of these services operates under its own privacy policy and data processing terms.
               </p>
             </section>
 

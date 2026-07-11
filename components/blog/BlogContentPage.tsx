@@ -45,17 +45,17 @@ export default function BlogContentPage({
     <section className="max-w-7xl mx-auto px-4 py-24">
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-          AI Careers Insights & Guides
+          AI Careers in Malaysia and Singapore
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Guides on breaking into AI, ML and data roles, upskilling, and hiring across Malaysia and Singapore.
+          AI is changing what a good job looks like across Malaysia and Singapore. These guides break down which roles are growing, what they pay in RM and SGD, and how to move into them — no hype, just what the numbers say.
         </p>
       </div>
 
       {loading ? (
         <div className="text-center py-24 text-gray-600">Loading blogs...</div>
       ) : blogs.length === 0 ? (
-        <div className="text-center py-24 text-gray-600">No blogs found.</div>
+        <div className="text-center py-24 text-gray-600">No guides published yet — check back soon.</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {blogs.map((blog) => (

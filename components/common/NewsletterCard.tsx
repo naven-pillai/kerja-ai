@@ -66,7 +66,7 @@ export default function NewsletterCard() {
 
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-gray-900">Get weekly remote job alerts</p>
-        <p className="text-xs text-gray-500 mt-0.5">Fresh APAC remote jobs to your inbox. No spam.</p>
+        <p className="text-xs text-gray-500 mt-0.5">New AI &amp; data jobs in Malaysia and Singapore. No spam.</p>
         {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
       </div>
 

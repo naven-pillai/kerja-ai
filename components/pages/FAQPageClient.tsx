@@ -6,69 +6,69 @@ import { ChevronDown, Mail } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'What is Kerja-AI.com?',
+    question: 'What is Kerja-AI?',
     answer:
-      'A remote and hybrid job board built for Southeast Asia. We list verified remote and hybrid roles open to talent in Malaysia, Singapore, Philippines, Indonesia, and the rest of APAC. We also review remote work tools and publish salary data \u2014all focused on this region.',
+      'The job board for AI, machine learning and data careers in Malaysia and Singapore. Not a general board \u2014 you won\u2019t find retail or admin roles here, only AI, ML and data work. Think of JobStreet\u2019s territory narrowed to one field that\u2019s growing fast.',
   },
   {
-    question: 'What does "kerja-ai" mean?',
+    question: 'Is it really free?',
     answer:
-      'In Malay, "kerja" means work. So kerja-ai = remote work. The name reflects where we started and who we built this for.',
+      'For job seekers, completely \u2014 no account wall, no paywall, no premium tier. For employers, posting a role is free right now too. There\u2019s no paid plan waiting behind it.',
   },
   {
-    question: 'What kind of jobs are listed here?',
+    question: 'Is this only for Malaysia?',
     answer:
-      'Mostly tech, design, marketing, product, and customer success roles \u2014the kind of work that can be done remotely. You\u2019ll find a mix of fully remote jobs (open to anywhere), hybrid roles, and APAC-specific ones that match your timezone.',
+      'No. It\u2019s Malaysia and Singapore, and that pairing is the whole point. Plenty of Malaysians weigh an RM offer in KL against an SGD one across the border, so the Singapore roles here are written for people making exactly that comparison.',
   },
   {
-    question: 'How do I find jobs open to my country?',
+    question: 'Are these real jobs, or scraped listings?',
     answer:
-      'Use the location filter on the jobs page. Select your country (e.g. Malaysia, Philippines) or pick "APAC" to see everything in the region. There is also a Work Setup filter for 100% Remote or Hybrid. Every listing shows which locations the company hires from.',
+      'Real openings at companies actually hiring for AI, ML and data roles in Malaysia or Singapore. We\u2019re not mass-scraping the internet and hoping. If a role isn\u2019t genuine AI, ML or data work in one of the two countries, it doesn\u2019t go up.',
   },
   {
-    question: 'Are these jobs verified?',
+    question: 'How is this different from JobStreet or Hiredly?',
     answer:
-      'Yes. Every listing is checked before it goes live \u2014we verify the company is real, the work setup is accurately labelled 100% Remote or Hybrid, and applications are actually open. No scraped junk, no bait-and-switch listings.',
+      'Those are general boards \u2014 thousands of roles across every industry, with AI and data jobs buried somewhere inside. Kerja-AI does one thing: AI, ML and data careers in MY and SG. You skip the filtering and see only what\u2019s relevant to you.',
+  },
+  {
+    question: 'What roles count as AI and data here?',
+    answer:
+      'Eleven categories: AI Engineering, Machine Learning Engineering, Data Science, AI/ML Research, Data Engineering, Computer Vision, NLP, Deep Learning, AI Architecture, Prompt Engineering and Data Annotation. If your work sits in that space, there\u2019s a lane for it.',
+  },
+  {
+    question: 'I\u2019m a fresh grad worried AI is closing doors. Is this for me?',
+    answer:
+      'Yes \u2014 you\u2019re exactly who I built it for. AI is reshaping the job market, but it\u2019s also creating the roles listed here. TalentCorp projects around 120 emerging roles as AI and digitalisation reshape work over the next few years, and this board is where those show up.',
   },
   {
     question: 'Do I need an account to apply?',
     answer:
-      'No. Click "Apply" and you go straight to the company\u2019s application page. No sign-up wall, no middleman.',
+      'No. Hit apply and you go straight to the company\u2019s own application page. No sign-up wall, no middleman sitting between you and the employer.',
   },
   {
-    question: 'How do I hear about new jobs?',
+    question: 'How do I hear about new roles?',
     answer:
-      'Subscribe to our weekly newsletter at kerja-ai.com/newsletter \u2014we send hand-picked APAC remote and hybrid jobs every week. Free, no spam, unsubscribe any time.',
+      'Subscribe to the weekly newsletter at kerja-ai.com/newsletter. One email a week with new AI and data roles across Malaysia and Singapore \u2014 free, no spam, one-click unsubscribe.',
   },
   {
-    question: 'What\u2019s the Remote Work Tools section?',
+    question: 'Why should I care about Singapore roles if I\u2019m in Malaysia?',
     answer:
-      'We review tools that remote workers use daily \u2014project management, communication, VPNs, payroll, design tools \u2014and rate them specifically for how well they work in APAC. Pricing, latency, local payment methods, customer support hours. The stuff global review sites don\u2019t cover.',
+      'Because the KL\u2013Singapore corridor is real money. An SGD salary can be worth far more than its RM equivalent even after cost of living, and Singapore hires a lot of Malaysian AI and data talent. Seeing both sides on one board makes that decision concrete instead of hypothetical.',
   },
   {
-    question: 'How do salary guides work?',
+    question: 'How current is the salary information?',
     answer:
-      'We publish remote salary data broken down by role and location. So you can see what a remote software engineer in Malaysia typically earns vs one in Singapore. It\u2019s not perfect \u2014salary data never is \u2014but it gives you a realistic baseline for negotiations.',
+      'Where we show pay, it\u2019s context for the role \u2014 RM or SGD ranges to anchor a negotiation, not a promise. Salary data is never exact, but a realistic baseline beats walking in blind.',
   },
   {
-    question: 'How are taxes handled for remote workers in APAC?',
+    question: 'I\u2019m hiring. How do I post a role?',
     answer:
-      'It depends on how you\u2019re hired. Full-time employees usually have taxes handled by the company or an EOR (Employer of Record). Contractors and freelancers handle their own taxes locally. If you\u2019re unsure, talk to a tax advisor in your country \u2014don\u2019t wing it.',
+      'Go to kerja-ai.com/post-job and post it free. Your listing reaches people specifically looking for AI, ML and data work in Malaysia and Singapore \u2014 not the whole internet, just the audience that matches.',
   },
   {
-    question: 'How do I spot a remote job scam?',
+    question: 'Can I partner or advertise with Kerja-AI?',
     answer:
-      'Red flags: vague job descriptions, Gmail or Yahoo email addresses, requests for money upfront, "guaranteed" high pay for no experience. If it feels too good to be true, it probably is. We vet every listing on Kerja-AI, but stay sharp on other platforms.',
-  },
-  {
-    question: 'I\u2019m an employer. How do I post a job?',
-    answer:
-      'Head to kerja-ai.com/post-job. You can post a free listing or go featured for more visibility. Featured jobs appear at the top of search results and get highlighted across the site.',
-  },
-  {
-    question: 'Can I partner with Kerja-AI?',
-    answer:
-      'If you\u2019re building something for remote workers in APAC \u2014tools, communities, education \u2014we\u2019re open to partnerships. Drop us a message at info@kerja-ai.com.',
+      'If you\u2019re building something for AI and data professionals in MY or SG \u2014 a tool, a community, a course \u2014 I\u2019m open to it. Email info@kerja-ai.com and tell me what you have in mind.',
   },
 ];
 
@@ -115,7 +115,8 @@ export default function FAQPageClient() {
             Questions we get asked a lot
           </h1>
           <p className="text-base sm:text-lg text-gray-500 max-w-lg mx-auto leading-relaxed">
-            About the platform, remote work in APAC, and how things work here.
+            The honest answers on what Kerja-AI is, who it&apos;s for, and how
+            it&apos;s different from a general job board.
           </p>
         </div>
       </section>

@@ -102,11 +102,12 @@ export default async function RemoteCompaniesPage() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Explore Top Remote Companies
+            Companies hiring AI and data talent in Malaysia and Singapore
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Discover remote-friendly companies across APAC. Profiles stay
-            available even if jobs are closed.
+            The teams building AI, ML and data functions across Malaysia and
+            Singapore, in one place. Profiles stay up even after a role closes,
+            so you can keep tracking a company you want to work for.
           </p>
         </div>
 

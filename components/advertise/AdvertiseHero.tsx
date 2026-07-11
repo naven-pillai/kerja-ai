@@ -16,15 +16,15 @@ export default function AdvertiseHero() {
         </span>
 
         <h1 className="mt-5 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight">
-          Reach APAC&apos;s most-engaged
+          Reach the AI and data crowd
           <br className="hidden sm:block" />
-          <span className="text-[#1D4ED8]"> remote workforce</span>
+          <span className="text-[#1D4ED8]"> in Malaysia &amp; Singapore</span>
         </h1>
 
         <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-          Kerja AI is read weekly by founders, engineers, designers, marketers and operators
-          across Malaysia, Singapore, Indonesia, Philippines and beyond. Niche reach, intent
-          signal, no fluff.
+          Kerja-AI is read weekly by AI engineers, data scientists, ML practitioners and the
+          people hiring them across Malaysia and Singapore. One niche audience, high intent, no
+          spray-and-pray.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">

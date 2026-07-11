@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: 'What content do you not accept?',
-    a: "We don't run crypto / token sales, gambling, get-rich-quick schemes, multi-level marketing, or anything that doesn't fit a remote-work or APAC-careers context. If unsure, just ask.",
+    a: "We don't run crypto / token sales, gambling, get-rich-quick schemes, multi-level marketing, or anything that doesn't fit an AI, data or careers context for Malaysia and Singapore. If unsure, just ask.",
   },
   {
     q: 'Can I cancel after booking?',

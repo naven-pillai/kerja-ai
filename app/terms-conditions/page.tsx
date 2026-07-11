@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions | Kerja-AI',
+  title: 'Terms & Conditions for Kerja-AI — AI & Data Job Board',
   description:
-    'Review the Terms & Conditions for using Kerja-AI.com — the remote job board for Southeast Asia. Learn about listings, talent profiles, privacy, and user responsibilities.',
+    'Terms & Conditions for Kerja-AI — the job board for AI, machine learning and data careers in Malaysia and Singapore. Listings, IP, privacy, and user conduct.',
   alternates: {
     canonical: 'https://kerja-ai.com/terms-conditions',
   },
@@ -65,7 +65,7 @@ export default function TermsAndConditionsPage() {
             <section id="overview">
               <h2 className="text-lg font-bold text-gray-900 mb-3">1. Overview</h2>
               <p>
-                Kerja-AI is a curated remote job board built for Southeast Asia. We connect remote-first companies with professionals across Malaysia, Singapore, the Philippines, Indonesia, and beyond. By using this platform — whether to post jobs, browse listings, or submit a talent profile — you agree to these terms.
+                Kerja-AI is the job board for AI, machine learning and data careers in Malaysia and Singapore. We connect companies hiring for these roles with professionals across both markets. By using this platform — whether to post jobs, browse listings, or submit a talent profile — you agree to these terms.
               </p>
             </section>
 
@@ -97,7 +97,7 @@ export default function TermsAndConditionsPage() {
             <section id="featured">
               <h2 className="text-lg font-bold text-gray-900 mb-3">5. Featured Listings</h2>
               <p>
-                Employers may upgrade to a <strong>Featured Listing</strong> for increased visibility. Featured jobs appear prominently at the top of listings, on the homepage, and may be promoted via email and social channels. All payments for featured listings are final and non-refundable unless otherwise agreed in writing.
+                Posting a job is free while we are in Phase 1. If we introduce paid <strong>Featured Listings</strong> in future, employers will be able to upgrade a job for extra visibility — placed higher in listings, on the homepage, and promoted via email and social channels. Any payments for featured listings are final and non-refundable unless otherwise agreed in writing.
               </p>
             </section>
 

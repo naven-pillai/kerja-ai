@@ -6,23 +6,23 @@ import { Mail, Briefcase, MapPin, ShieldCheck, Wrench, User } from 'lucide-react
 const differentiators = [
   {
     icon: MapPin,
-    title: 'APAC-first, not APAC-afterthought',
-    desc: 'Jobs filtered for Southeast Asian timezone and hiring eligibility. Not a global dump with a region filter.',
+    title: 'Malaysia and Singapore, nothing else',
+    desc: 'One board for the KL\u2013Singapore corridor. Compare an RM offer in KL against an SGD one across the border, instead of digging through a global list that was never meant for you.',
   },
   {
     icon: ShieldCheck,
-    title: 'Every job is verified',
-    desc: 'We check that listings are actively hiring and open to APAC applicants, and label each one 100% Remote or Hybrid before it goes live.',
+    title: 'Real AI and data roles, current',
+    desc: 'Every listing is a genuine AI, machine learning or data opening at a company hiring in Malaysia or Singapore \u2014 not scraped noise or a job that closed six months ago.',
   },
   {
     icon: Wrench,
-    title: 'Tool reviews for this region',
-    desc: 'We review remote work tools for local pricing, payment methods, latency, and APAC customer support.',
+    title: 'One niche, eleven role types',
+    desc: 'AI Engineering, Machine Learning, Data Science, NLP, Computer Vision, Prompt Engineering and more \u2014 the roles this shift is creating, in one place.',
   },
   {
     icon: User,
-    title: 'Built by someone who gets it',
-    desc: 'I work remotely from Malaysia. The problems this platform solves are ones I\u2019ve hit myself.',
+    title: 'Built by someone watching the same shift',
+    desc: 'I\u2019m not selling you hype about AI. I\u2019m tracking where the jobs are actually going in Malaysia and Singapore, and putting them on one board.',
   },
 ];
 
@@ -44,14 +44,16 @@ export default function AboutContent() {
             About Kerja-AI
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
-            Remote and hybrid jobs shouldn&apos;t be a{' '}
-            <span className="text-[#1D4ED8]">Western-only</span> thing.
+            AI is reshaping Malaysian and Singaporean careers. This is the{' '}
+            <span className="text-[#1D4ED8]">board</span> built for it.
           </h1>
           <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
-            I&apos;m Naven. I built Kerja-AI because most job boards ignore
-            Southeast Asia. The talent is here — Malaysia, Philippines,
-            Singapore, Indonesia — but the platforms weren&apos;t built for us.
-            So I made one that is, covering both fully remote and hybrid roles.
+            I&apos;m Naven. I built Kerja-AI because there was no board built for
+            one thing: AI, machine learning and data careers in Malaysia and
+            Singapore. TalentCorp expects around 697,000 jobs to be highly
+            affected by AI within three to five years — so I wanted one place
+            that tracks the roles coming out of that shift, for the people
+            feeling it most.
           </p>
         </div>
       </section>
@@ -64,27 +66,30 @@ export default function AboutContent() {
               Jobs
             </h2>
             <h3 className="text-xl font-bold text-gray-900 mb-3">
-              Verified remote &amp; hybrid roles open to APAC
+              AI and data roles, Malaysia &amp; Singapore
             </h3>
             <p className="text-gray-500 leading-relaxed text-[15px]">
-              Every listing is checked — no scams, no bait-and-switch. We label
-              each role <strong>100% Remote</strong> or <strong>Hybrid</strong>{' '}
-              up front, so you know exactly what you&apos;re applying to before
-              you click.
+              Every listing is a genuine <strong>AI</strong>,{' '}
+              <strong>machine learning</strong> or <strong>data</strong> opening
+              at a company hiring here. No general software jobs padding the
+              list, no scraped roles that closed months ago. You see the title,
+              the location, and whether it&apos;s an RM or SGD offer before you
+              click.
             </p>
           </div>
           <div>
             <h2 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">
-              Tools
+              Context
             </h2>
             <h3 className="text-xl font-bold text-gray-900 mb-3">
-              Reviews built for this region
+              SG offers, read from a Malaysian seat
             </h3>
             <p className="text-gray-500 leading-relaxed text-[15px]">
-              We review tools remote workers actually use — project management,
-              communication, payroll, VPNs — and rate them for how well they
-              work here. A tool that&apos;s great in San Francisco can be
-              unusable in Jakarta if the pricing or support isn&apos;t there.
+              A lot of the value is comparing across the border — an RM salary in
+              KL against an SGD one in Singapore, and what actually clears after
+              cost of living. The Singapore roles here are framed for Malaysians
+              weighing the jump, not for locals. Salary is context for the
+              decision, never the whole pitch.
             </p>
           </div>
         </div>
@@ -94,10 +99,10 @@ export default function AboutContent() {
       <section className="bg-gray-50 border-y border-gray-100">
         <div className="max-w-3xl mx-auto px-6 py-16 text-center">
           <blockquote className="text-xl sm:text-2xl font-medium text-gray-700 leading-relaxed">
-            &ldquo;Someone in Johor should be able to work for a company in
-            Berlin. A designer in Manila should have the same shot as one in
-            London. Where you live shouldn&apos;t cap what you earn or who you
-            work with.&rdquo;
+            &ldquo;A fresh grad in KL shouldn&apos;t have to guess where AI is
+            taking their field. Put the real roles in one place, show what they
+            pay on each side of the border, and the anxiety turns into a decision
+            you can actually make.&rdquo;
           </blockquote>
           <p className="mt-4 text-sm text-gray-400 font-medium">
             — Naven, Founder
@@ -131,11 +136,12 @@ export default function AboutContent() {
       {/* CTA */}
       <section className="max-w-3xl mx-auto px-6 pb-24 text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          Let&apos;s work together
+          Post a role, or find your next one
         </h2>
         <p className="text-gray-500 mb-6 text-[15px]">
-          Whether you&apos;re hiring, job hunting, or building for remote and
-          hybrid teams — we&apos;d like to hear from you.
+          Hiring for AI, ML or data work in Malaysia or Singapore? Posting is
+          free right now. Looking for your next role? The board and the weekly
+          newsletter are built for you. Either way, say hello.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link

@@ -97,7 +97,7 @@ export default function StepOneCompany({ formData, handleChange, nextStep }: Pro
           <input
             id="companyTagline"
             type="text"
-            placeholder="e.g. Building the future of work"
+            placeholder="e.g. Applied AI for banks and insurers"
             value={formData.companyTagline}
             onChange={(e) => handleChange('companyTagline', e.target.value)}
             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] transition-colors"
@@ -131,7 +131,7 @@ export default function StepOneCompany({ formData, handleChange, nextStep }: Pro
             onChange={(e) => handleChange('contactEmail', e.target.value)}
             className={inputClass('contactEmail')}
           />
-          <p className="text-xs text-gray-400 mt-1">Used to notify you about your job posting status. Not shown publicly.</p>
+          <p className="text-xs text-gray-400 mt-1">Where we email you about your listing. Never shown on the job.</p>
           {errors.contactEmail && (
             <p className="text-red-500 text-xs mt-1">{errors.contactEmail}</p>
           )}

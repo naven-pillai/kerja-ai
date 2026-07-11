@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'What kind of jobs do you feature?',
-    a: 'Remote and hybrid roles that are genuinely open to APAC candidates — engineering, product, design, marketing, ops, and more. We verify every listing before it goes out.',
+    a: 'New AI, machine learning and data roles at companies hiring in Malaysia and Singapore. Every listing is a real opening in the field — nothing scraped, nothing padded with general software jobs.',
   },
   {
     q: 'Is this really free?',
@@ -116,8 +116,8 @@ export default function NewsletterPageClient({ issues }: Props) {
           </h1>
 
           <p className="mt-5 text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Every week, we send you the best remote and hybrid roles across Southeast Asia and APAC.
-            Hand-picked. Verified. No filler jobs from Indeed.
+            One email a week with new AI, machine learning and data roles across Malaysia and
+            Singapore. Real openings only — no filler, no general jobs padding the list.
           </p>
 
           {/* Inline signup form */}
@@ -178,7 +178,7 @@ export default function NewsletterPageClient({ issues }: Props) {
             )}
 
             <p className="text-xs text-gray-400 mt-3">
-              Joined by 6,000+ remote & hybrid professionals across APAC. Unsubscribe anytime.
+              Joined by 6,000+ AI and data professionals across Malaysia and Singapore. Unsubscribe anytime.
             </p>
           </form>
         </div>

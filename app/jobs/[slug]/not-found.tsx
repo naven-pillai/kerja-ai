@@ -35,11 +35,11 @@ export default async function JobNotFound() {
           <Briefcase className="w-5 h-5 text-gray-500" />
         </div>
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-          This job is no longer available
+          This role is no longer open
         </h1>
         <p className="text-gray-500 text-base max-w-lg mx-auto">
-          The listing may have closed or been removed. Plenty of remote roles
-          across APAC are still open — take a look below.
+          The listing has closed or been taken down. Plenty of AI and data roles
+          across Malaysia and Singapore are still open — start with these.
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-3 mt-6">
@@ -62,7 +62,7 @@ export default async function JobNotFound() {
       {jobs.length > 0 && (
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-4">
-            Latest remote jobs
+            Latest AI &amp; data jobs
           </h2>
           <div className="space-y-3">
             {jobs.map((job) => (

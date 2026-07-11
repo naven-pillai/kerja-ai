@@ -94,8 +94,8 @@ export default function SmartSummarizeBar({
 
   const resolvedUrl = clientUrl || pageUrl || articleUrl || 'https://kerja-ai.com';
   const defaultNotes = {
-    blog: 'from Kerja-AI.com (trusted APAC remote work & careers resource)',
-    jobs: 'from Kerja-AI.com (APAC-focused remote & hybrid jobs)',
+    blog: 'from Kerja-AI.com (AI & data careers in Malaysia & Singapore)',
+    jobs: 'from Kerja-AI.com (AI & data jobs in Malaysia & Singapore)',
     custom: 'from Kerja-AI.com',
   } as const;
 
@@ -152,7 +152,7 @@ export default function SmartSummarizeBar({
             {variant === 'jobs'
               ? jobSlug
                 ? 'Summarise this job post'
-                : 'Summarise today’s remote & hybrid jobs'
+                : 'Summarise today’s AI & data jobs'
               : title || 'Summarise this article'}
           </p>
         </div>

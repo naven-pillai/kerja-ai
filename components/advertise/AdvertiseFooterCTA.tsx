@@ -12,10 +12,10 @@ export default function AdvertiseFooterCTA() {
       <section id="book" className="py-16 md:py-24 bg-linear-to-br from-[#1e0a02] via-[#3b0d00] to-[#1D4ED8]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            Ready to reach APAC&apos;s remote &amp; hybrid workforce?
+            Ready to reach AI and data talent in Malaysia and Singapore?
           </h2>
           <p className="mt-4 text-base text-white/80 max-w-xl mx-auto">
-            Send us a note. We&apos;ll reply within 1 business day with availability,
+            Send a note and we&apos;ll reply within 1 business day with availability,
             mockups, and an invoice.
           </p>
 

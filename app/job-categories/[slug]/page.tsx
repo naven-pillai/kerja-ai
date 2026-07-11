@@ -26,12 +26,12 @@ export async function generateMetadata({
   const name = jobCategories.find((c) => slugify(c) === slug);
   if (!name) return {};
 
-  const title = `Remote & Hybrid ${name} Jobs`;
-  const description = `Browse verified remote and hybrid ${name.toLowerCase()} jobs across Southeast Asia and APAC. New roles added weekly for all experience levels.`;
+  const title = `${name} Jobs in Malaysia & Singapore (2026)`;
+  const description = `${name} jobs across Malaysia and Singapore. Kerja-AI is the board built only for AI and data careers, with new roles added every week.`;
   const url = `${BASE_URL}/job-categories/${slug}`;
 
   return {
-    title: `${title} | Kerja-AI`,
+    title,
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, type: 'website' },
@@ -110,26 +110,26 @@ export default async function CategoryPage({
   // FAQs
   const faqs = [
     {
-      q: `What does a remote ${name} role typically involve?`,
-      a: `Remote ${name} roles cover the same responsibilities as on-site positions — done asynchronously and online. Communication tools like Slack, Notion, and Zoom are standard. Employers on Kerja-AI look for self-directed candidates comfortable working across timezones.`,
+      q: `What does a ${name} role in Malaysia or Singapore involve?`,
+      a: `A ${name} role covers the build-and-ship side of AI: shaping data, training or wiring up models, and getting them into production. Employers on Kerja-AI hire for real AI, machine learning and data teams across Malaysia and Singapore, not generic tech work.`,
     },
     {
-      q: `What skills are most in-demand for remote ${nameLower} jobs in APAC?`,
+      q: `Which skills get you hired for ${nameLower} jobs in MY and SG?`,
       a:
         topTypes.length > 0
-          ? `Remote ${nameLower} jobs in APAC often require strong communication, adaptability, and domain expertise. Most openings on Kerja-AI are ${topTypes.join(', ')} positions. Check individual listings for specific skill requirements.`
-          : `Strong communication, domain expertise, and the ability to work independently are the most valued skills for remote ${nameLower} roles. Each listing specifies exact requirements.`,
+          ? `Most ${nameLower} openings on Kerja-AI are ${topTypes.join(', ')} positions. Employers weigh real project work — models shipped, data problems solved — over titles alone. Each listing spells out the exact stack it wants.`
+          : `Employers hiring ${nameLower} talent weigh shipped project work — models, pipelines, real data problems — over titles alone. Each listing spells out the exact stack and level it wants.`,
     },
     {
-      q: `Which locations have the most remote ${nameLower} jobs?`,
+      q: `Where are most ${nameLower} jobs — Malaysia or Singapore?`,
       a:
         topLocations.length > 0
-          ? `Remote ${nameLower} jobs on Kerja-AI are most commonly open to candidates in ${topLocations.slice(0, 3).join(', ')}. Many roles are also open Worldwide or across APAC.`
-          : `Remote ${nameLower} jobs on Kerja-AI are open across Malaysia, Singapore, Philippines, and the broader APAC region. Many are also open Worldwide.`,
+          ? `Right now ${nameLower} roles on Kerja-AI concentrate in ${topLocations.slice(0, 3).join(', ')}. The KL–Singapore corridor is where most AI and data hiring happens, and comparing RM against SGD offers is worth the effort.`
+          : `${name} roles on Kerja-AI run across Malaysia and Singapore — the KL–Singapore corridor, where most AI and data hiring sits. Comparing RM against SGD offers is worth the effort.`,
     },
     {
-      q: `How do I apply for remote ${nameLower} jobs on Kerja-AI?`,
-      a: `Browse the listings on this page and click any role that matches your profile. Each listing links directly to the employer's application — no account needed. You can also create a free talent profile so employers can find you directly.`,
+      q: `How do I apply for ${nameLower} jobs on Kerja-AI?`,
+      a: `Click any role on this page that fits, and you go straight to the employer's own application — no account, no middleman. New ${nameLower} roles land regularly, so it is worth bookmarking this page and checking back.`,
     },
   ];
 
@@ -181,12 +181,12 @@ export default async function CategoryPage({
           </nav>
 
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Remote &amp; Hybrid <span className="text-[#1D4ED8]">{name}</span> Jobs
+            <span className="text-[#1D4ED8]">{name}</span> Jobs in Malaysia &amp; Singapore
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl leading-relaxed">
             {jobs.length > 0
-              ? `${jobs.length} verified remote and hybrid ${nameLower} job${jobs.length === 1 ? '' : 's'} in Southeast Asia and APAC. Roles range from entry-level to senior across various companies and industries.`
-              : `Remote ${nameLower} opportunities across Southeast Asia and APAC. New roles are posted regularly — check back soon.`}
+              ? `${jobs.length} ${nameLower} role${jobs.length === 1 ? '' : 's'} open across Malaysia and Singapore right now. Kerja-AI lists only AI, machine learning and data work — the jobs AI is creating, not the whole board.`
+              : `${name} roles across Malaysia and Singapore. New listings go up as AI reshapes hiring here — check back soon.`}
           </p>
 
           {jobs.length > 0 && (
@@ -233,9 +233,9 @@ export default async function CategoryPage({
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-500">No remote {nameLower} jobs found right now.</p>
+            <p className="text-gray-500">No {nameLower} roles open right now.</p>
             <Link href="/jobs" className="mt-4 inline-block text-[#1D4ED8] font-semibold hover:underline">
-              Browse all remote & hybrid jobs →
+              Browse all AI &amp; data jobs →
             </Link>
           </div>
         )}

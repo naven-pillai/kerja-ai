@@ -50,10 +50,10 @@ export default async function LatestBlogSection({
     <section className="bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-          Remote Work Insights
+          AI Careers, Explained
         </h2>
         <p className="text-gray-600 mb-10 max-w-2xl mx-auto">
-          Guides, career tips, and hiring trends for remote professionals across APAC.
+          Guides on AI and data careers, salary benchmarks, and what the AI shift means for Malaysia and Singapore.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -104,7 +104,7 @@ export default async function LatestBlogSection({
             href="/blog"
             className="inline-block bg-[#1D4ED8] text-white text-base font-semibold px-6 py-3 rounded-lg hover:bg-[#1E40AF] transition"
           >
-            Explore All Articles
+            Read All Guides
           </Link>
         </div>
       </div>

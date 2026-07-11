@@ -155,8 +155,8 @@ export default function CompaniesDirectoryClient({
 
       {sorted.length === 0 ? (
         <div className="rounded-xl border border-gray-200 bg-white p-8 text-center">
-          <p className="font-semibold text-gray-900">No companies found.</p>
-          <p className="mt-1 text-gray-600">Try switching filters or clearing your search.</p>
+          <p className="font-semibold text-gray-900">No companies match that.</p>
+          <p className="mt-1 text-gray-600">Try clearing a filter or your search to see more.</p>
         </div>
       ) : (
         <>

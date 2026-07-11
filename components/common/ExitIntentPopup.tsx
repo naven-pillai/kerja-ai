@@ -193,11 +193,11 @@ export default function ExitIntentPopup() {
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight leading-snug">
             Don&apos;t miss the best<br className="hidden sm:block" />
-            remote &amp; hybrid jobs in APAC
+            AI and data jobs in Malaysia and Singapore
           </h2>
 
           <p className="text-gray-500 text-sm md:text-base max-w-sm mx-auto">
-            Join the <span className="font-semibold text-gray-700">Kerja AI</span> newsletter — 6,000+ professionals getting curated remote and hybrid roles across Malaysia, Singapore, Indonesia &amp; beyond every week.
+            Join the <span className="font-semibold text-gray-700">Kerja AI</span> newsletter — 6,000+ professionals getting the newest AI, machine learning and data roles in Malaysia and Singapore every week.
           </p>
 
           <form

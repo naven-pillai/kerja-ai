@@ -2,10 +2,10 @@ import { Metadata } from 'next';
 
 export const blogListingMetadata: Metadata = {
   title: 'Latest Remote Work Blogs | Kerja AI',
-  description: 'Discover the latest insights on remote jobs, productivity tools, and career growth across Southeast Asia.',
+  description: 'AI careers, salaries and hiring in Malaysia and Singapore — guides on which roles are growing and what they pay in RM and SGD.',
   openGraph: {
     title: 'Latest Remote Work Blogs | Kerja AI',
-    description: 'Discover the latest insights on remote jobs, productivity tools, and career growth across Southeast Asia.',
+    description: 'AI careers, salaries and hiring in Malaysia and Singapore — guides on which roles are growing and what they pay in RM and SGD.',
     url: 'https://kerja-ai.com/blog',
     siteName: 'Kerja AI',
     images: [

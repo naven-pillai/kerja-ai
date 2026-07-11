@@ -202,10 +202,10 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
           <div className="max-w-7xl mx-auto px-4 py-10">
             <div>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
-                Remote Jobs in APAC
+                AI, Machine Learning &amp; Data Jobs
               </h1>
               <p className="text-gray-500 mt-1 text-sm">
-                Verified opportunities updated daily across Southeast Asia &amp; beyond.
+                Every open AI and data role in Malaysia and Singapore, on one board. Filter down to the ones that fit you.
               </p>
             </div>
 
@@ -344,22 +344,22 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
                         <JobCard job={job} />
                         {index === 2 && (
                           <Link
-                            href="/talents/signup"
-                            className="group mt-3 flex items-center gap-4 p-5 rounded-xl border border-dashed border-[#1D4ED8]/30 bg-gradient-to-r from-red-50/60 to-orange-50/40 hover:border-[#1D4ED8]/60 hover:from-red-50 hover:to-orange-50/60 transition-all duration-200"
+                            href="/newsletter"
+                            className="group mt-3 flex items-center gap-4 p-5 rounded-xl border border-dashed border-[#1D4ED8]/30 bg-gradient-to-r from-blue-50/60 to-cyan-50/40 hover:border-[#1D4ED8]/60 hover:from-blue-50 hover:to-cyan-50/60 transition-all duration-200"
                           >
                             <div className="w-11 h-11 rounded-xl bg-[#1D4ED8]/10 flex items-center justify-center shrink-0">
                               <Sparkles className="w-5 h-5 text-[#1D4ED8]" />
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-bold text-gray-900 group-hover:text-[#1D4ED8] transition-colors">
-                                Looking for remote work in APAC?
+                                Don&apos;t want to check back every day?
                               </p>
                               <p className="text-xs text-gray-500 mt-0.5">
-                                Create a free talent profile and let employers find you — no cold applying.
+                                Get new AI and data roles in Malaysia and Singapore emailed to you once a week.
                               </p>
                             </div>
                             <span className="hidden sm:inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-white bg-[#1D4ED8] group-hover:bg-[#1E40AF] px-3 py-1.5 rounded-lg transition">
-                              Get Listed Free →
+                              Get Job Alerts →
                             </span>
                           </Link>
                         )}
@@ -395,9 +395,9 @@ export default function JobsContentPage({ initialKeyword = '' }: { initialKeywor
                   <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
                     <SearchX size={28} className="text-gray-300" />
                   </div>
-                  <h3 className="text-base font-semibold text-gray-900 mb-1">No jobs match your filters</h3>
+                  <h3 className="text-base font-semibold text-gray-900 mb-1">No AI or data roles match that filter yet</h3>
                   <p className="text-sm text-gray-500 max-w-xs mb-5">
-                    Try broadening your search or clearing some filters to see more opportunities.
+                    New roles land here often. Loosen a filter or clear it, and you&apos;ll see everything open across Malaysia and Singapore.
                   </p>
                   <button
                     onClick={handleClear}

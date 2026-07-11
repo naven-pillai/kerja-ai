@@ -30,7 +30,7 @@ export default function StepThreeJobDescription({ formData, handleChange, nextSt
       {/* Header */}
       <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
         <h2 className="text-base font-semibold text-gray-900">Job Description & Apply</h2>
-        <p className="text-xs text-gray-500 mt-0.5">Write a compelling description and tell candidates how to apply.</p>
+        <p className="text-xs text-gray-500 mt-0.5">Sell the role, then tell candidates exactly how to apply.</p>
       </div>
 
       <div className="p-6 space-y-6">

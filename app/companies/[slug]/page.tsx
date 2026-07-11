@@ -28,17 +28,17 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   if (!company) {
     return {
       title: 'Company Not Found | Kerja-AI',
-      description: 'Sorry, this remote company was not found on Kerja-AI.',
+      description: 'We could not find this company on Kerja-AI. Browse companies hiring AI and data talent in Malaysia and Singapore instead.',
     };
   }
 
   const description =
     company.description?.slice(0, 160) ??
     company.tagline ??
-    `Discover remote job opportunities from ${company.name} on Kerja-AI.com.`;
+    `See open AI, machine learning and data roles at ${company.name} on Kerja-AI.`;
 
   return {
-    title: `${company.name} Remote Jobs | Kerja-AI`,
+    title: `${company.name} AI & Data Jobs | Kerja-AI`,
     description,
   };
 }
@@ -137,7 +137,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
         <nav className="flex items-center gap-1.5 text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:text-[#1D4ED8] transition">Home</Link>
           <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-          <Link href="/companies" className="hover:text-[#1D4ED8] transition">Remote Companies</Link>
+          <Link href="/companies" className="hover:text-[#1D4ED8] transition">Companies</Link>
           <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
           <span className="text-gray-900 font-medium">{company.name}</span>
         </nav>
@@ -318,10 +318,10 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                 <div className="rounded-2xl border border-gray-200 bg-white p-8 space-y-6">
                   <div>
                     <p className="text-gray-700 font-medium">
-                      {company.name} doesn&apos;t have any active remote roles listed right now.
+                      {company.name} doesn&apos;t have any open AI or data roles listed right now.
                     </p>
                     <p className="text-sm text-gray-500 mt-1">
-                      Follow us for updates or explore other companies that are hiring.
+                      Check their careers page below, or browse other companies hiring across Malaysia and Singapore.
                     </p>
                   </div>
 
@@ -339,13 +339,13 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
 
                   <div className="pt-4 border-t border-gray-100">
                     <p className="text-sm font-medium text-gray-700 mb-1">
-                      Get notified when {company.name} posts a job
+                      Get an alert when {company.name} posts a role
                     </p>
                     <Link
                       href="/#newsletter"
                       className="text-sm text-[#1D4ED8] hover:underline"
                     >
-                      Subscribe to our remote jobs newsletter →
+                      Get new AI and data roles in your inbox →
                     </Link>
                   </div>
                 </div>
@@ -388,7 +388,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
         {similarCompanies.length > 0 && (
           <div className="mt-16">
             <h2 className="text-lg font-semibold text-gray-900 mb-6">
-              {company.industry ? `More ${company.industry} Companies` : 'More Remote Companies'}
+              {company.industry ? `More ${company.industry} Companies` : 'More Companies Hiring'}
             </h2>
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
               {similarCompanies.map((c) => (
@@ -400,7 +400,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
                 href="/companies"
                 className="text-sm font-semibold text-[#1D4ED8] hover:underline"
               >
-                Browse all remote companies →
+                Browse all companies →
               </Link>
             </div>
           </div>

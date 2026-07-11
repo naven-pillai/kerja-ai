@@ -97,7 +97,7 @@ export default function JobsSidebar({
           </label>
           <input
             type="text"
-            placeholder="Job title, keyword..."
+            placeholder="e.g. ML Engineer, Data Scientist"
             className={inputClass}
             value={filters.keyword}
             onChange={(e) => set('keyword', e.target.value)}
@@ -203,7 +203,7 @@ export default function JobsSidebar({
           </label>
           <input
             type="text"
-            placeholder="e.g. React, SEO, Python"
+            placeholder="e.g. Python, PyTorch, SQL"
             className={inputClass}
             value={filters.skills}
             onChange={(e) => set('skills', e.target.value)}

@@ -11,14 +11,14 @@ import AdvertiseAnalytics from '@/components/advertise/dashboard/AdvertiseAnalyt
 export const revalidate = 1800; // refresh audience data every 30 min
 
 export const metadata: Metadata = {
-  title: 'Advertise with Kerja-AI · AI & Data talent in Malaysia & Singapore',
+  title: 'Advertise on Kerja-AI — Reach AI & Data Talent in MY & SG',
   description:
-    "Reach AI, machine learning and data professionals in Malaysia and Singapore via Kerja-AI's newsletter, sidebar banners and sponsored content. Niche, intent-matched audience.",
+    "Reach AI, machine learning and data professionals in Malaysia and Singapore through Kerja-AI's newsletter, sidebar banners and sponsored posts.",
   alternates: { canonical: 'https://kerja-ai.com/advertise' },
   openGraph: {
     title: 'Advertise with Kerja-AI',
     description:
-      "Reach Malaysia and Singapore's most-engaged AI & data audience. Newsletter, sidebar, sponsored posts — niche reach, intent signal, no fluff.",
+      "Reach Malaysia and Singapore's most-engaged AI and data audience. Newsletter, sidebar, sponsored posts — niche reach, real intent, no fluff.",
     url: 'https://kerja-ai.com/advertise',
     siteName: 'Kerja-AI',
     type: 'website',
@@ -67,8 +67,8 @@ export default async function AdvertisePage() {
   // Channel reach (manually maintained)
   const reach = [
     { channel: 'Newsletter', size: '6,000+', note: 'Weekly · 35%+ open rate' },
-    { channel: 'LinkedIn', size: '3,000+', note: 'Founders + remote talent' },
-    { channel: 'X (Twitter)', size: '4,500+', note: 'APAC remote community' },
+    { channel: 'LinkedIn', size: '3,000+', note: 'Founders + AI/data talent' },
+    { channel: 'X (Twitter)', size: '4,500+', note: 'MY & SG AI community' },
     { channel: 'Site traffic', size: '~12,000', note: 'Monthly pageviews' },
   ];
 

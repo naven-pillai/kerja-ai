@@ -15,11 +15,11 @@ export default function AdvertiseAudience({ topCountries, topRoles, reach }: Pro
             Who you&apos;re reaching
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            APAC-first audience, intent-matched
+            One niche audience, high intent
           </h2>
           <p className="mt-2 text-sm text-gray-500 max-w-xl mx-auto">
-            Every person on Kerja AI opted in for remote work in APAC. That&apos;s
-            the difference vs LinkedIn or generic job boards.
+            Everyone here came for AI, ML and data work in Malaysia and Singapore.
+            That&apos;s a sharper signal than LinkedIn or a general job board can give you.
           </p>
         </div>
 
@@ -130,10 +130,10 @@ export default function AdvertiseAudience({ topCountries, topRoles, reach }: Pro
           </div>
           <div>
             <p className="text-sm font-semibold text-gray-900">
-              Newsletter open rate consistently above 35% — well above the 21% remote-work category average.
+              Newsletter open rate stays above 35% — well past the ~21% average for job and careers newsletters.
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Real eyeballs, not bot inflation. Sent once a week, every week, no fluff.
+              Real opens, not bot inflation. Sent once a week, every week, no fluff.
             </p>
           </div>
         </div>

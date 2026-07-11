@@ -70,32 +70,32 @@ export default function WhyPostHere() {
     <section className="text-center">
       <div className="mx-auto max-w-3xl space-y-4">
         <span className="inline-flex items-center gap-2 rounded-full bg-[#fff7f3] px-3 py-1 text-xs font-semibold text-[#1D4ED8] ring-1 ring-[#1D4ED8]/15">
-          Built for APAC remote hiring
+          Built for AI &amp; data hiring in Malaysia &amp; Singapore
         </span>
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
-          If you’re hiring remote in APAC,
-          <span className="text-[#1D4ED8]"> distribution</span> matters.
+          Reach people who came here for
+          <span className="text-[#1D4ED8]"> AI and data work</span> — not the whole internet.
         </h2>
 
         <p className="text-base sm:text-lg text-gray-600">
-          Posting a job is easy.
+          Posting a job anywhere is easy.
           <br className="hidden sm:block" />
-          Getting it seen by the right candidates — that’s the hard part.
-          <span className="text-gray-900 font-medium"> Kerja-AI is built for that.</span>
+          Getting it in front of people who actually do AI and data work — that&apos;s the hard part.
+          <span className="text-gray-900 font-medium"> Kerja-AI is built for exactly that.</span>
         </p>
 
         {/* proof row */}
         <div className="mx-auto mt-6 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-          <Stat value="6,000+" label="Email subscribers" />
-          <Stat value="3,000+" label="LinkedIn followers" />
-          <Stat value="4,500+" label="X (Twitter)" />
-          <Stat value="~12,000+" label="Pageviews" />
+          <Stat value="Free" label="To post your role — Phase 1" />
+          <Stat value="11" label="AI, ML &amp; data role categories" />
+          <Stat value="Minutes" label="From first field to submitted" />
+          <Stat value="2" label="Markets — Malaysia &amp; Singapore" />
         </div>
 
         <p className="text-[12px] text-gray-500">
-          And yes — every listing is <span className="font-semibold text-gray-900">manually reviewed</span> by an
-          admin to keep the board clean.
+          And every listing is <span className="font-semibold text-gray-900">reviewed by a human</span> before it
+          goes live — so the board stays worth browsing.
         </p>
       </div>
 
@@ -103,45 +103,45 @@ export default function WhyPostHere() {
         <Card
           tone="brand"
           icon={<GlobeAltIcon className="h-6 w-6 text-[#1D4ED8]" />}
-          kicker="Reach, but targeted"
-          title="APAC remote &amp; hybrid talent — not global noise"
-          desc="You’re not paying to be one tiny card on a generic job board. You’re reaching remote-ready candidates across Malaysia, Singapore, Philippines, Vietnam and beyond — people actively searching for remote and hybrid work in this region."
+          kicker="Targeted reach"
+          title="People who came here for AI &amp; data — not the whole internet"
+          desc="You are not one more card on a giant, general job board. Your role goes in front of people in Malaysia and Singapore who are actively looking for AI, machine learning and data work."
         />
 
         <Card
           icon={<BriefcaseIcon className="h-6 w-6 text-emerald-600" />}
-          kicker="No surprises"
-          title="Flat pricing. No commissions. No games."
-          desc="No recruiters taking a cut. No hidden fees. Just a clean listing model that keeps your cost predictable — and your hiring process in your control."
+          kicker="Free at launch"
+          title="Post for free. No recruiter taking a cut."
+          desc="Posting is free while we are in Phase 1 — no commissions, no middleman, no games. Candidates apply straight through your own link or email, and you stay in control of the process."
         />
 
         <Card
           icon={<RocketLaunchIcon className="h-6 w-6 text-indigo-600" />}
-          kicker="Remote-first by design"
-          title="Every listing is remote. That’s the point."
-          desc="Candidates don’t have to filter through onsite and hybrid roles. You don’t have to compete with irrelevant listings. It’s a remote-only environment — which means faster matching and fewer wasted clicks."
+          kicker="One focus"
+          title="Every listing is AI, ML or data. That is the point."
+          desc="Candidates do not wade through sales, ops and admin roles to find yours. It is a single-focus board, which means less noise for them and faster, better-matched applications for you."
         />
 
         <Card
           tone="brand"
           icon={<CheckCircleIcon className="h-6 w-6 text-[#1D4ED8]" />}
-          kicker="Trust layer"
-          title="Human-reviewed listings (keeps quality high)"
-          desc="Spam and scam listings destroy conversion. We review listings before publishing to protect candidates — and to protect your employer brand from being placed next to junk."
+          kicker="Quality control"
+          title="Every listing is reviewed by a human"
+          desc="Spam and scam posts wreck a job board fast. We check each listing before it publishes — to protect candidates, and to keep your company off a page full of junk."
         />
 
         <Card
           icon={<BoltIcon className="h-6 w-6 text-amber-600" />}
-          kicker="For urgent roles"
-          title="Private Early Access for paid jobs"
-          desc="Paid listings can be placed into Private Early Access before they go public — so you get attention from high-intent candidates first, not last."
+          kicker="Fast"
+          title="Live in minutes, not days"
+          desc="Fill in four short steps, submit, and your role is queued for a quick review. No sales call, no waiting on an account manager — most listings are reviewed and live the same day."
         />
 
         <Card
           icon={<MegaphoneIcon className="h-6 w-6 text-sky-600" />}
-          kicker="Distribution engine"
-          title="We don’t just ‘list’ it. We push it."
-          desc="Paid jobs get included in our weekly newsletter to 6,000+ APAC subscribers and boosted on social — after admin approval. Free jobs are public-only and don’t enter the newsletter."
+          kicker="Right audience"
+          title="In front of people already searching for this"
+          desc="Kerja-AI is a content-led board built around AI and data careers in Malaysia and Singapore. Your role sits where that audience already reads, searches and browses — not lost in a feed of unrelated jobs."
         />
       </div>
 

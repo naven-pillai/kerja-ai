@@ -6,24 +6,24 @@ import { slugify } from '@/lib/slugify';
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kerja-ai.com';
 
 export const metadata: Metadata = {
-  title: 'Remote Jobs by Type | Full-Time, Contract, Freelance & More | Kerja-AI',
+  title: 'AI & Data Jobs by Type in Malaysia & Singapore | Kerja-AI',
   description:
-    'Find remote jobs by employment type across Southeast Asia and APAC — full-time, part-time, contract, freelance, and internship roles.',
+    'Filter AI, machine learning and data jobs in Malaysia and Singapore by type — full-time, part-time, contract, freelance, or internship.',
   alternates: { canonical: `${BASE_URL}/job-types` },
   openGraph: {
-    title: 'Remote Jobs by Type | Kerja-AI',
-    description: 'Full-time, part-time, contract, freelance, and internship remote roles across APAC.',
+    title: 'AI & Data Jobs by Type | Kerja-AI',
+    description: 'Full-time, part-time, contract, freelance, and internship AI and data roles in Malaysia and Singapore.',
     url: `${BASE_URL}/job-types`,
     type: 'website',
   },
 };
 
 const typeDescriptions: Record<string, string> = {
-  'Full-Time': 'Stable, salaried remote roles with full benefits. Typically 40 hours/week.',
-  'Part-Time': 'Flexible remote work at reduced hours. Ideal for side income or caregivers.',
-  Contract: 'Fixed-term engagements with defined scope and higher hourly rates.',
-  Freelance: 'Project-based remote work with full schedule independence.',
-  Internship: 'Structured remote learning roles for students and graduates.',
+  'Full-Time': 'Salaried AI and data roles with benefits — usually around 40 hours a week.',
+  'Part-Time': 'Reduced-hours AI and data work. Good for study, side income, or caregiving.',
+  Contract: 'Fixed-term AI and data engagements with defined scope and higher rates.',
+  Freelance: 'Project-based AI and data work — you pick the clients and the schedule.',
+  Internship: 'Structured entry roles to break into AI and data as a student or grad.',
 };
 
 export default function JobTypesIndexPage() {
@@ -37,10 +37,10 @@ export default function JobTypesIndexPage() {
             <span className="text-gray-600">Job Types</span>
           </nav>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Remote Jobs by <span className="text-[#1D4ED8]">Type</span>
+            AI &amp; Data Jobs by <span className="text-[#1D4ED8]">Type</span>
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl">
-            Whether you want full-time stability, freelance flexibility, or an internship to kick-start your remote career — find it here.
+            Full-time stability, freelance flexibility, or an internship to break into AI — filter AI, machine learning and data roles by how you want to work.
           </p>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function JobTypesIndexPage() {
                 {type}
               </h2>
               <p className="text-xs text-gray-400 leading-relaxed">
-                {typeDescriptions[type] ?? `Remote ${type.toLowerCase()} jobs across APAC.`}
+                {typeDescriptions[type] ?? `${type} AI and data roles in Malaysia and Singapore.`}
               </p>
               <span className="mt-3 inline-block text-xs font-semibold text-[#1D4ED8]">
                 View jobs →

@@ -4,14 +4,14 @@ import NewsletterPageClient from '@/components/newsletter/NewsletterPageClient';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Newsletter | Kerja-AI — Weekly Remote & Hybrid Jobs in APAC',
+  title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
   description:
-    'Get handpicked remote and hybrid jobs across Malaysia, Singapore, Philippines, Indonesia and beyond — delivered to your inbox every week. Free, no spam.',
+    'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam, one-click unsubscribe.',
   alternates: { canonical: 'https://kerja-ai.com/newsletter' },
   openGraph: {
-    title: 'Newsletter | Kerja-AI — Weekly Remote & Hybrid Jobs in APAC',
+    title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
     description:
-      'Get handpicked remote and hybrid jobs across Malaysia, Singapore, Philippines, Indonesia and beyond — delivered to your inbox every week.',
+      'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam.',
     url: 'https://kerja-ai.com/newsletter',
     siteName: 'Kerja-AI',
     type: 'website',
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
         url: 'https://kerja-ai.com/default-og-image-1200x630.png',
         width: 1200,
         height: 630,
-        alt: 'Kerja-AI Newsletter — Weekly Remote & Hybrid Jobs in APAC',
+        alt: 'Kerja-AI Newsletter — Weekly AI & Data Jobs in Malaysia & Singapore',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Newsletter | Kerja-AI — Weekly Remote & Hybrid Jobs in APAC',
+    title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
     description:
-      'Get handpicked remote and hybrid jobs across Malaysia, Singapore, Philippines, Indonesia and beyond — delivered to your inbox every week.',
+      'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam.',
     images: ['https://kerja-ai.com/default-og-image-1200x630.png'],
   },
 };
@@ -99,7 +99,7 @@ const faqStructuredData = {
       name: 'What kind of jobs do you feature?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Remote roles that are genuinely open to APAC candidates — engineering, product, design, marketing, ops, and more. We verify every listing before it goes out.',
+        text: 'New AI, machine learning and data roles at companies hiring in Malaysia and Singapore. Every listing is a real opening in the field — nothing scraped, nothing padded with general software jobs.',
       },
     },
     {
@@ -124,9 +124,9 @@ const faqStructuredData = {
 const webPageStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Kerja-AI Weekly Newsletter — Remote & Hybrid Jobs in APAC',
+  name: 'Kerja-AI Weekly Newsletter — AI & Data Jobs in Malaysia & Singapore',
   description:
-    'Get handpicked remote and hybrid jobs across Malaysia, Singapore, Philippines, Indonesia and beyond — delivered to your inbox every week.',
+    'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore — delivered to your inbox, free.',
   url: 'https://kerja-ai.com/newsletter',
   publisher: {
     '@type': 'Organization',

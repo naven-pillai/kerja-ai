@@ -1,9 +1,9 @@
 import JobsContentPage from '@/components/jobs/JobsContentPage';
 
 export const metadata = {
-  title: 'Remote & Hybrid Jobs in APAC | Kerja-AI.com',
+  title: 'AI, ML & Data Jobs in Malaysia & Singapore 2026 | Kerja-AI',
   description:
-    'Find verified remote and hybrid jobs across APAC. Filter by work setup, category, location, salary, and skill — curated daily for APAC professionals. Every role is labelled 100% Remote or Hybrid.',
+    'AI, machine learning and data jobs across Malaysia and Singapore. One board built for these roles — filter by category, salary and location, and post free.',
   alternates: {
     canonical: 'https://kerja-ai.com/jobs',
   },

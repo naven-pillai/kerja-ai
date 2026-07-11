@@ -27,7 +27,7 @@ export default function NewsletterSuccessPage() {
           You&apos;re in.
         </h1>
         <p className="text-gray-600 text-sm md:text-base mb-2">
-          Check your email and confirm your subscription — we&apos;ll start sending you remote jobs across APAC every week.
+          Check your inbox and confirm your subscription — then you&apos;ll get new AI and data roles across Malaysia and Singapore every week.
         </p>
         <p className="text-gray-400 text-xs">
           Not seeing it? Check your spam or promotions tab.
@@ -41,45 +41,45 @@ export default function NewsletterSuccessPage() {
             <UserPlus className="w-4 h-4 text-[#1D4ED8]" />
           </div>
           <h2 className="text-lg font-bold text-gray-900">
-            Want companies to find you instead?
+            While you wait, start browsing
           </h2>
         </div>
 
         <p className="text-gray-600 text-sm mb-6">
-          Getting the newsletter is a good start. But if you&apos;re actively looking, submit your talent profile — let employers come to you.
+          Your first email lands next week. In the meantime, every open AI, machine learning and data role in Malaysia and Singapore is already on the board.
         </p>
 
         <div className="space-y-3 mb-6">
           <div className="flex items-start gap-3">
             <Eye className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
             <p className="text-sm text-gray-600">
-              Your profile is visible to companies hiring across Malaysia, Singapore, Indonesia, Philippines and beyond.
+              Filter by role, location and remote type to find the ones that fit you.
             </p>
           </div>
           <div className="flex items-start gap-3">
             <Zap className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
             <p className="text-sm text-gray-600">
-              No cold applying. Employers reach out to you directly.
+              New roles added regularly across both Malaysia and Singapore.
             </p>
           </div>
           <div className="flex items-start gap-3">
             <Briefcase className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
             <p className="text-sm text-gray-600">
-              Takes 5 minutes. No CV upload needed. 100% free.
+              Free to browse, no account needed. Apply straight to the employer.
             </p>
           </div>
         </div>
 
         <Link
-          href="/talents/signup"
+          href="/jobs"
           className="flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-lg bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-sm font-semibold transition"
         >
-          Submit your profile
+          Browse AI &amp; data jobs
           <ArrowRight className="w-4 h-4" />
         </Link>
 
         <p className="text-center text-xs text-gray-400 mt-3">
-          Every profile is manually reviewed before going live.
+          New AI and data roles across Malaysia and Singapore.
         </p>
       </div>
 

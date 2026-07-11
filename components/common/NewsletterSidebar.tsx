@@ -74,11 +74,11 @@ export default function NewsletterSidebar() {
           </div>
 
           <h3 className="text-[15px] font-bold text-white leading-snug">
-            Remote &amp; hybrid jobs,<br />straight to your inbox
+            AI &amp; data jobs,<br />straight to your inbox
           </h3>
 
           <p className="text-[11px] text-white/60 mt-1.5 leading-relaxed">
-            Handpicked APAC opportunities every week.<br />
+            New Malaysia and Singapore roles every week.<br />
             Early access. Zero spam.
           </p>
         </div>

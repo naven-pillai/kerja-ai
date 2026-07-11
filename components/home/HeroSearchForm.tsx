@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const QUICK_SEARCHES = [
-  { term: 'Support',   bg: 'bg-blue-50',   text: 'text-blue-600',   border: 'border-blue-200',   hover: 'hover:bg-blue-100' },
-  { term: 'Marketing', bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-200', hover: 'hover:bg-purple-100' },
-  { term: 'Design',    bg: 'bg-pink-50',   text: 'text-pink-600',   border: 'border-pink-200',   hover: 'hover:bg-pink-100' },
-  { term: 'Product',   bg: 'bg-emerald-50',text: 'text-emerald-600',border: 'border-emerald-200',hover: 'hover:bg-emerald-100' },
-  { term: 'Data',      bg: 'bg-amber-50',  text: 'text-amber-600',  border: 'border-amber-200',  hover: 'hover:bg-amber-100' },
+  { term: 'AI Engineering',    bg: 'bg-blue-50',   text: 'text-blue-600',   border: 'border-blue-200',   hover: 'hover:bg-blue-100' },
+  { term: 'Machine Learning',  bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-200', hover: 'hover:bg-purple-100' },
+  { term: 'Data Science',      bg: 'bg-pink-50',   text: 'text-pink-600',   border: 'border-pink-200',   hover: 'hover:bg-pink-100' },
+  { term: 'Data Engineering',  bg: 'bg-emerald-50',text: 'text-emerald-600',border: 'border-emerald-200',hover: 'hover:bg-emerald-100' },
+  { term: 'Prompt Engineering',bg: 'bg-amber-50',  text: 'text-amber-600',  border: 'border-amber-200',  hover: 'hover:bg-amber-100' },
 ];
 
 export default function HeroSearchForm() {
@@ -35,7 +35,7 @@ export default function HeroSearchForm() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Job title, skill, or company..."
+            placeholder="Try 'AI Engineer', 'Data Scientist', or a company..."
             className="w-full pl-11 pr-4 py-3.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] transition"
           />
         </div>

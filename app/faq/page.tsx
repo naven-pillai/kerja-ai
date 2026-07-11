@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import FAQPageClient from "@/components/pages/FAQPageClient";
 
 export const metadata: Metadata = {
-  title: "FAQ | Kerja-AI - Remote & Hybrid Jobs for Southeast Asia",
+  title: "FAQ | Kerja-AI — AI & Data Jobs in Malaysia & Singapore",
   description:
-    "Common questions about Kerja-AI, remote work in APAC, job alerts, salary guides, and how to spot scams. Straight answers, no fluff.",
+    "Straight answers about Kerja-AI, the AI and data job board for Malaysia and Singapore — is it free, are the jobs real, and how it differs from JobStreet.",
   openGraph: {
     title: "FAQ | Kerja-AI",
     description:
-      "Common questions about Kerja-AI, remote work in APAC, and how things work here.",
+      "Is Kerja-AI free? Are the jobs real? Only Malaysia? Straight answers on the AI and data job board for MY and SG.",
     url: "https://kerja-ai.com/faq",
     siteName: "Kerja-AI",
     type: "website",

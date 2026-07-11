@@ -81,7 +81,7 @@ export default function RelatedJobs({ category, tags, excludeJobId }: Props) {
   return (
     <div className="pt-12 border-t border-gray-200">
       <h3 className="text-xl font-bold text-gray-900 mb-6">
-        Related Remote {label} Jobs
+        More {label} roles in Malaysia &amp; Singapore
       </h3>
 
       {relatedJobs.length > 0 ? (
@@ -92,7 +92,7 @@ export default function RelatedJobs({ category, tags, excludeJobId }: Props) {
         </div>
       ) : (
         <p className="text-gray-500 text-sm">
-          No related jobs found at the moment.
+          Nothing similar open right now. Check back soon — new AI and data roles land here often.
         </p>
       )}
     </div>

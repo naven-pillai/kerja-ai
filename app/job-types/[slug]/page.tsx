@@ -26,12 +26,12 @@ export async function generateMetadata({
   const name = jobTypes.find((t) => slugify(t) === slug);
   if (!name) return {};
 
-  const title = `Remote & Hybrid ${name} Jobs`;
-  const description = `Find remote and hybrid ${name.toLowerCase()} opportunities across Southeast Asia and APAC. Browse verified listings for all experience levels.`;
+  const title = `${name} AI & Data Jobs in Malaysia & Singapore (2026)`;
+  const description = `${name} AI, machine learning and data jobs in Malaysia and Singapore. Kerja-AI is the niche board for these roles — post one free, browse the rest.`;
   const url = `${BASE_URL}/job-types/${slug}`;
 
   return {
-    title: `${title} | Kerja-AI`,
+    title,
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, type: 'website' },
@@ -145,20 +145,20 @@ export default async function JobTypePage({
   // FAQs
   const faqs = [
     {
-      q: `What is a remote ${name} job?`,
-      a: `A remote ${name} job involves ${ctx.what}. The key difference from on-site roles is that all work is done remotely — typically from home or a co-working space. Listings on Kerja-AI include ${nameLower} roles across APAC and globally.`,
+      q: `What does a ${name} AI or data job mean?`,
+      a: `A ${name} role means ${ctx.what}. On Kerja-AI every one of these is an AI, machine learning or data job — from AI Engineering to Data Annotation — hiring across Malaysia and Singapore.`,
     },
     {
-      q: `How many hours does a remote ${nameLower} role involve?`,
-      a: `Remote ${nameLower} jobs on Kerja-AI typically require ${ctx.hours}. Always review the specific listing for exact expectations, as hours can vary by employer and project scope.`,
+      q: `How many hours does a ${nameLower} role involve?`,
+      a: `${name} roles on Kerja-AI are ${ctx.hours}. Hours shift by employer and project, so check each listing for what a given team expects.`,
     },
     {
-      q: `What are the benefits of remote ${nameLower} work?`,
-      a: `Remote ${nameLower} roles offer ${ctx.benefit}. Combined with the flexibility of working from anywhere in APAC, they're increasingly popular among professionals across Southeast Asia.`,
+      q: `Why choose ${nameLower} AI or data work?`,
+      a: `${name} roles offer ${ctx.benefit}. With AI reshaping hiring across Malaysia and Singapore, this is a fast way into the work that is actually growing.`,
     },
     {
-      q: `How do I find remote ${nameLower} jobs in APAC on Kerja-AI?`,
-      a: `Browse the listings on this page — all are verified remote or hybrid ${nameLower} positions. You can also filter by location or category using our jobs page, or create a free talent profile so employers in APAC can find you directly.`,
+      q: `How do I find ${nameLower} AI jobs on Kerja-AI?`,
+      a: `Every listing on this page is a ${nameLower} AI, machine learning or data role. Filter further by category or location on the jobs page, and check back often — posting is free for employers, so new roles land regularly.`,
     },
   ];
 
@@ -210,12 +210,12 @@ export default async function JobTypePage({
           </nav>
 
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Remote &amp; Hybrid <span className="text-[#1D4ED8]">{name}</span> Jobs
+            <span className="text-[#1D4ED8]">{name}</span> AI &amp; Data Jobs
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl leading-relaxed">
             {jobs.length > 0
-              ? `${jobs.length} verified remote and hybrid ${nameLower} job${jobs.length === 1 ? '' : 's'} across Southeast Asia and APAC. All listings are reviewed before going live.`
-              : `Remote ${nameLower} opportunities across Southeast Asia and APAC. New roles are posted regularly — check back soon.`}
+              ? `${jobs.length} ${nameLower} AI and data role${jobs.length === 1 ? '' : 's'} open across Malaysia and Singapore. Every listing is checked before it goes live.`
+              : `${name} AI and data roles across Malaysia and Singapore. New listings are posted regularly — check back soon.`}
           </p>
 
           {jobs.length > 0 && (
@@ -262,12 +262,12 @@ export default async function JobTypePage({
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-500">No remote {nameLower} jobs found right now.</p>
+            <p className="text-gray-500">No {nameLower} roles open right now.</p>
             <Link
               href="/jobs"
               className="mt-4 inline-block text-[#1D4ED8] font-semibold hover:underline"
             >
-              Browse all remote & hybrid jobs →
+              Browse all AI &amp; data jobs →
             </Link>
           </div>
         )}

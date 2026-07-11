@@ -75,11 +75,11 @@ export default function NewsletterCTA() {
 
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
             Stop missing the best <br className="hidden sm:block" />
-            remote &amp; hybrid jobs in APAC.
+            AI and data jobs in Malaysia and Singapore.
           </h2>
 
           <p className="text-gray-500 text-base md:text-lg max-w-xl mx-auto">
-            Every week, <span className="font-semibold text-gray-700">Kerja AI</span> hand-picks the top remote and hybrid roles across Malaysia, Singapore, Indonesia and beyond — straight to your inbox.
+            Every week, <span className="font-semibold text-gray-700">Kerja AI</span> rounds up the newest AI, machine learning and data roles across Malaysia and Singapore — straight to your inbox. No spam.
           </p>
 
           <form
@@ -124,7 +124,7 @@ export default function NewsletterCTA() {
           )}
 
           <p className="text-xs text-gray-400">
-            Joined by 6,000+ remote &amp; hybrid professionals across APAC · Unsubscribe anytime
+            Joined by 6,000+ AI and data professionals in Malaysia and Singapore · Unsubscribe anytime
           </p>
         </div>
       </div>

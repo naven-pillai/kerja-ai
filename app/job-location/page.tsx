@@ -6,29 +6,21 @@ import { slugify } from '@/lib/slugify';
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kerja-ai.com';
 
 export const metadata: Metadata = {
-  title: 'Remote & Hybrid Jobs by Location | Southeast Asia & APAC | Kerja-AI',
+  title: 'AI & Data Jobs by Location: Malaysia & Singapore | Kerja-AI',
   description:
-    'Browse remote and hybrid job opportunities by country across Southeast Asia and APAC — Malaysia, Singapore, Philippines, Indonesia, and more.',
+    'Compare AI, machine learning and data jobs in Malaysia and Singapore — the KL–Singapore corridor — and weigh RM against SGD offers on Kerja-AI.',
   alternates: { canonical: `${BASE_URL}/job-location` },
   openGraph: {
-    title: 'Remote & Hybrid Jobs by Location | Kerja-AI',
-    description: 'Find remote and hybrid jobs in Malaysia, Singapore, Philippines, Indonesia, and across the APAC region.',
+    title: 'AI & Data Jobs by Location | Kerja-AI',
+    description: 'AI, machine learning and data jobs in Malaysia and Singapore — compare RM and SGD offers on Kerja-AI.',
     url: `${BASE_URL}/job-location`,
     type: 'website',
   },
 };
 
 const locationDescriptions: Record<string, string> = {
-  Malaysia: 'Tech, marketing, and finance roles for candidates based in Malaysia.',
-  Singapore: 'High-paying remote roles open to Singapore-based professionals.',
-  Philippines: 'Customer support, design, and software jobs for Filipino talent.',
-  Indonesia: 'Growing remote opportunities for candidates across Indonesia.',
-  Thailand: 'Remote roles open to professionals based in Thailand.',
-  Vietnam: 'Tech and marketing jobs for candidates in Vietnam.',
-  'Hong Kong': 'Finance, legal, and tech roles for Hong Kong professionals.',
-  Taiwan: 'Remote positions open to talent based in Taiwan.',
-  APAC: 'Roles open to candidates anywhere across the Asia-Pacific region.',
-  Worldwide: 'Fully location-agnostic remote roles open globally.',
+  Malaysia: 'AI, ML and data roles for candidates based in Malaysia — RM salaries, KL and beyond.',
+  Singapore: 'AI and data roles in Singapore — strong SGD pay, written for Malaysians weighing the move.',
 };
 
 export default function LocationIndexPage() {
@@ -42,10 +34,10 @@ export default function LocationIndexPage() {
             <span className="text-gray-600">Locations</span>
           </nav>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Remote &amp; Hybrid Jobs by <span className="text-[#1D4ED8]">Location</span>
+            AI &amp; Data Jobs by <span className="text-[#1D4ED8]">Location</span>
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl">
-            Browse verified remote and hybrid jobs filtered by country or region across Southeast Asia and the wider APAC market.
+            Two markets, one corridor. Browse AI, machine learning and data roles in Malaysia and Singapore, and compare what each pays.
           </p>
         </div>
       </div>
@@ -62,7 +54,7 @@ export default function LocationIndexPage() {
                 {loc}
               </h2>
               <p className="text-xs text-gray-400 leading-relaxed">
-                {locationDescriptions[loc] ?? `Remote jobs open to candidates in ${loc}.`}
+                {locationDescriptions[loc] ?? `AI and data roles open to candidates in ${loc}.`}
               </p>
               <span className="mt-3 inline-block text-xs font-semibold text-[#1D4ED8]">
                 View jobs →
