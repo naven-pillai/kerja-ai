@@ -11,14 +11,14 @@ import AdvertiseAnalytics from '@/components/advertise/dashboard/AdvertiseAnalyt
 export const revalidate = 1800; // refresh audience data every 30 min
 
 export const metadata: Metadata = {
-  title: 'Advertise with Kerja AI · APAC Remote Workforce',
+  title: 'Advertise with Kerja-AI · AI & Data talent in Malaysia & Singapore',
   description:
-    "Reach 6,000+ APAC remote professionals via Kerja AI's weekly newsletter, sidebar banners and sponsored content. Niche, intent-matched audience across Malaysia, Singapore, Indonesia and the wider APAC region.",
+    "Reach AI, machine learning and data professionals in Malaysia and Singapore via Kerja-AI's newsletter, sidebar banners and sponsored content. Niche, intent-matched audience.",
   alternates: { canonical: 'https://kerja-ai.com/advertise' },
   openGraph: {
-    title: 'Advertise with Kerja AI',
+    title: 'Advertise with Kerja-AI',
     description:
-      "Reach APAC's most-engaged remote workforce. Newsletter, sidebar, sponsored posts — niche reach, intent signal, no fluff.",
+      "Reach Malaysia and Singapore's most-engaged AI & data audience. Newsletter, sidebar, sponsored posts — niche reach, intent signal, no fluff.",
     url: 'https://kerja-ai.com/advertise',
     siteName: 'Kerja-AI',
     type: 'website',
@@ -29,36 +29,24 @@ export default async function AdvertisePage() {
   const supabase = await createSupabaseServerClient();
   const nowIso = new Date().toISOString();
 
-  // Audience snapshot data — talent residency + job categories.
-  const [talentRes, jobsRes] = await Promise.all([
-    supabase
-      .from('talent_profiles')
-      .select('residency, primary_role_category')
-      .eq('is_public', true)
-      .eq('approval_status', 'approved'),
-    supabase
-      .from('jobs')
-      .select('job_location, job_category')
-      .eq('status', 'published')
-      .lte('goes_public_at', nowIso),
-  ]);
+  // Audience snapshot data — derived from published jobs (location + category).
+  const jobsRes = await supabase
+    .from('jobs')
+    .select('job_location, job_category')
+    .eq('status', 'published')
+    .lte('goes_public_at', nowIso);
 
-  // Top countries — derived from talent residency
+  // Top countries — derived from job locations
   const countryCounts: Record<string, number> = {};
-  for (const t of talentRes.data ?? []) {
-    if (t.residency) countryCounts[t.residency] = (countryCounts[t.residency] ?? 0) + 1;
+  for (const j of jobsRes.data ?? []) {
+    const locs = Array.isArray(j.job_location) ? j.job_location : j.job_location ? [j.job_location] : [];
+    for (const l of locs as string[]) {
+      if (l) countryCounts[l] = (countryCounts[l] ?? 0) + 1;
+    }
   }
   const flagMap: Record<string, string> = {
     Malaysia: '🇲🇾',
     Singapore: '🇸🇬',
-    Indonesia: '🇮🇩',
-    Philippines: '🇵🇭',
-    Vietnam: '🇻🇳',
-    Thailand: '🇹🇭',
-    India: '🇮🇳',
-    'South Korea': '🇰🇷',
-    Japan: '🇯🇵',
-    Australia: '🇦🇺',
   };
   const topCountries = Object.entries(countryCounts)
     .sort((a, b) => b[1] - a[1])
