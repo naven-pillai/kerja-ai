@@ -6,9 +6,9 @@ export default function HeroSection() {
     <section className="bg-orange-50/30 py-16 md:py-24">
       <div className="max-w-3xl mx-auto px-4 text-center">
         {/* Social proof badge */}
-        <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-          <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-          6,000+ Malaysians and Singaporeans tracking AI &amp; data roles here
+        <div className="inline-flex items-center gap-2 bg-blue-50 text-[#1D4ED8] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+          <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
+          Malaysia&apos;s first job board built only for AI &amp; data roles
         </div>
 
         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5 text-slate-900">

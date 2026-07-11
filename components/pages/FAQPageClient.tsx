@@ -66,7 +66,7 @@ const faqs = [
       'Go to kerja-ai.com/post-job and post it free. Your listing reaches people specifically looking for AI, ML and data work in Malaysia and Singapore \u2014 not the whole internet, just the audience that matches.',
   },
   {
-    question: 'Can I partner or advertise with Kerja-AI?',
+    question: 'Can I partner with Kerja-AI?',
     answer:
       'If you\u2019re building something for AI and data professionals in MY or SG \u2014 a tool, a community, a course \u2014 I\u2019m open to it. Email info@kerja-ai.com and tell me what you have in mind.',
   },

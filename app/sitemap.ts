@@ -26,7 +26,6 @@ const taxonomyRootRoutes: MetadataRoute.Sitemap = [
 const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE}/post-job`,            lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
   { url: `${BASE}/newsletter`,          lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.5 },
-  { url: `${BASE}/advertise`,           lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
   { url: `${BASE}/about`,               lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
   { url: `${BASE}/faq`,                 lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
   { url: `${BASE}/privacy-policy`,      lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.2 },

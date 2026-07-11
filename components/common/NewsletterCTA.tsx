@@ -124,7 +124,7 @@ export default function NewsletterCTA() {
           )}
 
           <p className="text-xs text-gray-400">
-            Joined by 6,000+ AI and data professionals in Malaysia and Singapore · Unsubscribe anytime
+            New AI and data roles in Malaysia and Singapore, once a week · Unsubscribe anytime
           </p>
         </div>
       </div>

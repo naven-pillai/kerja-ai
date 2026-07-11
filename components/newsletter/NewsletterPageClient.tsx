@@ -178,7 +178,7 @@ export default function NewsletterPageClient({ issues }: Props) {
             )}
 
             <p className="text-xs text-gray-400 mt-3">
-              Joined by 6,000+ AI and data professionals across Malaysia and Singapore. Unsubscribe anytime.
+              One email a week — new AI and data roles across Malaysia and Singapore. Unsubscribe anytime.
             </p>
           </form>
         </div>

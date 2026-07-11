@@ -14,7 +14,6 @@ const links = {
   ],
   employers: [
     { label: "Post a Job", href: "/post-job" },
-    { label: "Advertise with Us", href: "/advertise" },
     { label: "Companies", href: "/companies" },
     { label: "About Us", href: "/about" },
     { label: "Contact Us", href: "/contact" },

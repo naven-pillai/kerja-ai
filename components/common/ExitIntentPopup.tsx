@@ -197,7 +197,7 @@ export default function ExitIntentPopup() {
           </h2>
 
           <p className="text-gray-500 text-sm md:text-base max-w-sm mx-auto">
-            Join the <span className="font-semibold text-gray-700">Kerja AI</span> newsletter — 6,000+ professionals getting the newest AI, machine learning and data roles in Malaysia and Singapore every week.
+            Join the <span className="font-semibold text-gray-700">Kerja-AI</span> newsletter — the newest AI, machine learning and data roles in Malaysia and Singapore, every week.
           </p>
 
           <form

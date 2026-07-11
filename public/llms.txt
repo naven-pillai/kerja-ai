@@ -17,7 +17,6 @@ Roles covered: AI Engineering, Machine Learning Engineering, Data Science, AI/ML
 - [Companies](https://kerja-ai.com/companies): Companies hiring AI & data talent
 - [Newsletter](https://kerja-ai.com/newsletter): Weekly AI & data jobs — free, no spam
 - [Post a Job](https://kerja-ai.com/post-a-job): Free job listings for employers
-- [Advertise with Us](https://kerja-ai.com/advertise): Reach AI & data professionals in MY/SG
 
 ## Content & resources
 

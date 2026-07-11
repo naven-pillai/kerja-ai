@@ -23,7 +23,7 @@ export default function GridHighlights() {
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
         {/* Headline */}
         <h2 className="text-xl md:text-3xl font-extrabold text-white mb-4 tracking-tight">
-          Join 6,000+ people tracking AI and data roles in Malaysia and Singapore.
+          One board, built only for AI and data roles in Malaysia and Singapore.
         </h2>
         <p className="text-gray-200 text-base md:text-lg mb-10 md:mb-16 max-w-xl mx-auto">
           Real AI, machine learning and data roles. Less noise, no general-board clutter. Built for Malaysia and Singapore.
