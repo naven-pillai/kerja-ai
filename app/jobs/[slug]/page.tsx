@@ -35,7 +35,7 @@ const getJob = cache(async (slug: string) => {
       id, title, slug, description, created_at, apply_url,
       expires_at, goes_public_at, status,
       seo_title, seo_description,
-      job_type, job_category, job_location, remote_type, tags,
+      job_type, job_category, job_location, city, remote_type, tags,
       min_salary, max_salary, currency,
       company:companies(name, slug, logo_url)
     `)
@@ -252,6 +252,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
               remoteType: job.remote_type,
               category: jobCategory,
               location: jobLocation,
+              city: job.city,
               tags: job.tags ?? [],
               applyUrl: job.apply_url ?? '',
               title: job.title,
@@ -276,6 +277,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
               remoteType: job.remote_type,
               category: jobCategory,
               location: jobLocation,
+              city: job.city,
               tags: job.tags ?? [],
               applyUrl: job.apply_url ?? '',
               title: job.title,

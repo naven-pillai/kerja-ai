@@ -56,7 +56,7 @@ export default async function JobTypePage({
     .select(`
       id, title, slug, created_at, is_featured,
       expires_at, goes_public_at,
-      job_type, job_category, job_location, remote_type,
+      job_type, job_category, job_location, city, remote_type,
       min_salary, max_salary, currency, tags, apply_url,
       company:companies(name, slug, logo_url)
     `)

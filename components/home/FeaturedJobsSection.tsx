@@ -12,7 +12,7 @@ export default async function FeaturedJobsSection() {
   const { data } = await supabase
     .from('jobs')
     .select(`
-      id, slug, title, job_type, job_category, job_location, remote_type,
+      id, slug, title, job_type, job_category, job_location, city, remote_type,
       min_salary, max_salary, currency, tags, created_at, is_featured,
       company_id, expires_at, status, goes_public_at,
       company:companies(name, logo_url, slug)

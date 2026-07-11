@@ -32,7 +32,7 @@ export default async function JobsPage({
     .from('jobs')
     .select(`
       id, title, slug, created_at, is_featured, status, expires_at,
-      valid_through, job_type, job_category, job_location, remote_type,
+      valid_through, job_type, job_category, job_location, city, remote_type,
       min_salary, max_salary, currency, tags, apply_url,
       company_id, goes_public_at,
       company:companies(name, slug, logo_url)
