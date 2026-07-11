@@ -88,7 +88,7 @@ create table if not exists public.authors (
 -- ---------------------------------------------------------------------------
 create table if not exists public.categories (
   id          uuid primary key default uuid_generate_v4(),
-  name        text not null,
+  name        text not null unique,
   created_at  timestamptz default timezone('utc', now())
 );
 
@@ -407,7 +407,9 @@ grant execute on function public.get_jobs_stats(uuid[]), public.job_events_daily
 -- ---------------------------------------------------------------------------
 -- Seed: blog categories relevant to an AI/ML board
 -- ---------------------------------------------------------------------------
-insert into public.categories (name) values
-  ('AI Careers'), ('Machine Learning'), ('Data Science'),
-  ('Career Guides'), ('Salary & Hiring'), ('Industry News')
-on conflict do nothing;
+-- Conditional insert: idempotent even if categories.name has no unique constraint yet.
+insert into public.categories (name)
+select v.name
+from (values ('AI Careers'), ('Machine Learning'), ('Data Science'),
+             ('Career Guides'), ('Salary & Hiring'), ('Industry News')) as v(name)
+where not exists (select 1 from public.categories c where c.name = v.name);
