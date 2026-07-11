@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getResend } from '@/lib/resend'
-import { supabaseAdmin } from '@/lib/supabase-admin'
+import { getSupabaseAdmin } from '@/lib/supabase-admin'
 import {
   isValidEmail,
   normalizeOptionalString,
@@ -92,7 +92,7 @@ export async function POST(req: Request) {
     }
 
     // 2. Save to Supabase
-    const { error: supabaseError } = await supabaseAdmin.from('newsletter_subscribers').upsert(
+    const { error: supabaseError } = await getSupabaseAdmin().from('newsletter_subscribers').upsert(
       {
         email: normalizedEmail,
         name: normalizedName,

@@ -25,7 +25,7 @@ export default function RelatedJobs({ category, tags, excludeJobId }: Props) {
       const jobSelect = `
         id, slug, title, created_at, is_featured,
         expires_at, goes_public_at,
-        job_type, job_category, job_location, remote_type,
+        job_type, job_category, job_location, city, remote_type,
         min_salary, max_salary, currency, tags,
         company:companies(name, logo_url, slug)
       `;

@@ -9,6 +9,7 @@ import { JobWithCompany } from '@/types/custom';
 import CompanyLogo from '@/components/common/CompanyLogo';
 import RemoteTypePill from '@/components/common/RemoteTypePill';
 import { formatSalaryRange } from '@/utils/formatSalary';
+import { formatJobLocation } from '@/lib/formatLocation';
 import { categoryColorMap, jobTypeColorMap } from '@/lib/categoryStyles';
 
 dayjs.extend(relativeTime);
@@ -28,6 +29,9 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
   const extraCategories = jobCategories.slice(1);
   const jobType = Array.isArray(job.job_type) ? job.job_type[0] : job.job_type;
   const jobLocation = Array.isArray(job.job_location) ? job.job_location[0] : job.job_location;
+  // "Kuala Lumpur, Malaysia" when a city is set; the country alone otherwise
+  // (Singapore, remote roles, and jobs that predate the city column).
+  const locationLabel = formatJobLocation(jobLocation, job.city);
   const currency = Array.isArray(job.currency) ? job.currency[0] : job.currency;
 
   const isFeatured = job.is_featured === true;
@@ -88,7 +92,7 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
                   <span className="text-gray-300">·</span>
                   <span className="flex items-center gap-0.5">
                     <MapPin className="w-3 h-3 shrink-0" />
-                    {jobLocation}
+                    {locationLabel}
                   </span>
                 </>
               )}
@@ -206,7 +210,7 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
               <span className="text-gray-300">·</span>
               <span className="flex items-center gap-0.5">
                 <MapPin className="w-3 h-3 shrink-0" />
-                {jobLocation}
+                {locationLabel}
               </span>
             </>
           )}

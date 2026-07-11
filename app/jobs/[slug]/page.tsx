@@ -2,7 +2,7 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { after } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase-admin';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import dayjs from 'dayjs';
 
 // Components
@@ -25,17 +25,17 @@ type PageParams = { slug: string };
    Both run in the same request, so React's cache() collapses them into a single
    round-trip. Previously each issued its own query for the same slug.
 
-   Use supabaseAdmin so archived (expired) jobs are still fetchable for the
+   Use the service-role client so archived (expired) jobs are still fetchable for the
    expired-job banner — the anon client won't return status='archived' rows.
 ------------------------------------------------ */
 const getJob = cache(async (slug: string) => {
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from('jobs')
     .select(`
       id, title, slug, description, created_at, apply_url,
       expires_at, goes_public_at, status,
       seo_title, seo_description,
-      job_type, job_category, job_location, remote_type, tags,
+      job_type, job_category, job_location, city, remote_type, tags,
       min_salary, max_salary, currency,
       company:companies(name, slug, logo_url)
     `)
@@ -116,7 +116,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
 
   // Track view — fires after response, doesn't slow down page render
   after(async () => {
-    await supabaseAdmin.from('job_events').insert({ job_id: job.id, event_type: 'view' })
+    await getSupabaseAdmin().from('job_events').insert({ job_id: job.id, event_type: 'view' })
   })
 
   /* ------------------------------------------------
@@ -252,6 +252,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
               remoteType: job.remote_type,
               category: jobCategory,
               location: jobLocation,
+              city: job.city,
               tags: job.tags ?? [],
               applyUrl: job.apply_url ?? '',
               title: job.title,
@@ -276,6 +277,7 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
               remoteType: job.remote_type,
               category: jobCategory,
               location: jobLocation,
+              city: job.city,
               tags: job.tags ?? [],
               applyUrl: job.apply_url ?? '',
               title: job.title,

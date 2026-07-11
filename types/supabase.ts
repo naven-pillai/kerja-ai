@@ -10,84 +10,35 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
+    PostgrestVersion: "14.4"
+  }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
   public: {
     Tables: {
-      affiliate_clicks: {
-        Row: {
-          clicked_at: string
-          country: string | null
-          id: string
-          ip_address: string | null
-          link_id: string
-          referrer: string | null
-          user_agent: string | null
-        }
-        Insert: {
-          clicked_at?: string
-          country?: string | null
-          id?: string
-          ip_address?: string | null
-          link_id: string
-          referrer?: string | null
-          user_agent?: string | null
-        }
-        Update: {
-          clicked_at?: string
-          country?: string | null
-          id?: string
-          ip_address?: string | null
-          link_id?: string
-          referrer?: string | null
-          user_agent?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "affiliate_clicks_link_id_fkey"
-            columns: ["link_id"]
-            isOneToOne: false
-            referencedRelation: "affiliate_links"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      affiliate_links: {
-        Row: {
-          category: string | null
-          created_at: string
-          description: string | null
-          destination_url: string
-          id: string
-          is_active: boolean
-          name: string
-          slug: string
-          updated_at: string
-        }
-        Insert: {
-          category?: string | null
-          created_at?: string
-          description?: string | null
-          destination_url: string
-          id?: string
-          is_active?: boolean
-          name: string
-          slug: string
-          updated_at?: string
-        }
-        Update: {
-          category?: string | null
-          created_at?: string
-          description?: string | null
-          destination_url?: string
-          id?: string
-          is_active?: boolean
-          name?: string
-          slug?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       authors: {
         Row: {
           avatar_url: string | null
@@ -297,72 +248,95 @@ export type Database = {
         }
         Relationships: []
       }
-      expense_services: {
+      comparisons: {
         Row: {
-          created_at: string | null
-          id: string
-          name: string
+          cost_of_living_note: string | null
+          is_published: boolean
+          role_slug: string
+          updated_at: string
+          verdict: string
+          visa_note: string | null
         }
         Insert: {
-          created_at?: string | null
-          id?: string
-          name: string
+          cost_of_living_note?: string | null
+          is_published?: boolean
+          role_slug: string
+          updated_at?: string
+          verdict: string
+          visa_note?: string | null
         }
         Update: {
-          created_at?: string | null
-          id?: string
-          name?: string
+          cost_of_living_note?: string | null
+          is_published?: boolean
+          role_slug?: string
+          updated_at?: string
+          verdict?: string
+          visa_note?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "comparisons_role_slug_fkey"
+            columns: ["role_slug"]
+            isOneToOne: true
+            referencedRelation: "roles"
+            referencedColumns: ["slug"]
+          },
+        ]
       }
-      expenses: {
+      guides: {
         Row: {
-          amount_usd: number
-          created_at: string | null
-          exchange_rate: number
+          author_id: string | null
+          content: string
+          country: string | null
+          cover_image: string | null
+          created_at: string
+          excerpt: string | null
+          faq: Json
           id: string
-          is_edited: boolean | null
-          month: string
-          service_name: string
+          is_published: boolean
+          published_at: string | null
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          title: string
+          tldr: string
+          updated_at: string | null
         }
         Insert: {
-          amount_usd: number
-          created_at?: string | null
-          exchange_rate: number
+          author_id?: string | null
+          content: string
+          country?: string | null
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string | null
+          faq?: Json
           id?: string
-          is_edited?: boolean | null
-          month: string
-          service_name: string
+          is_published?: boolean
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          title: string
+          tldr: string
+          updated_at?: string | null
         }
         Update: {
-          amount_usd?: number
-          created_at?: string | null
-          exchange_rate?: number
+          author_id?: string | null
+          content?: string
+          country?: string | null
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string | null
+          faq?: Json
           id?: string
-          is_edited?: boolean | null
-          month?: string
-          service_name?: string
-        }
-        Relationships: []
-      }
-      job_alerts_sent: {
-        Row: {
-          id: string
-          job_id: string
-          sent_at: string | null
-          telegram_chat_id: number
-        }
-        Insert: {
-          id?: string
-          job_id: string
-          sent_at?: string | null
-          telegram_chat_id: number
-        }
-        Update: {
-          id?: string
-          job_id?: string
-          sent_at?: string | null
-          telegram_chat_id?: number
+          is_published?: boolean
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          title?: string
+          tldr?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -390,13 +364,6 @@ export type Database = {
             foreignKeyName: "job_events_job_id_fkey"
             columns: ["job_id"]
             isOneToOne: false
-            referencedRelation: "get_matching_chat_ids"
-            referencedColumns: ["job_id"]
-          },
-          {
-            foreignKeyName: "job_events_job_id_fkey"
-            columns: ["job_id"]
-            isOneToOne: false
             referencedRelation: "jobs"
             referencedColumns: ["id"]
           },
@@ -407,19 +374,71 @@ export type Database = {
             referencedRelation: "jobs_with_payment"
             referencedColumns: ["id"]
           },
+        ]
+      }
+      job_ingestion: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          error: string | null
+          extracted: Json | null
+          id: string
+          job_id: string | null
+          raw_company: string | null
+          raw_location: string | null
+          raw_title: string | null
+          source_name: string | null
+          source_url: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          error?: string | null
+          extracted?: Json | null
+          id?: string
+          job_id?: string | null
+          raw_company?: string | null
+          raw_location?: string | null
+          raw_title?: string | null
+          source_name?: string | null
+          source_url: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          error?: string | null
+          extracted?: Json | null
+          id?: string
+          job_id?: string | null
+          raw_company?: string | null
+          raw_location?: string | null
+          raw_title?: string | null
+          source_name?: string | null
+          source_url?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
           {
-            foreignKeyName: "job_events_job_id_fkey"
+            foreignKeyName: "job_ingestion_job_id_fkey"
             columns: ["job_id"]
             isOneToOne: false
-            referencedRelation: "matching_telegram_early_access"
-            referencedColumns: ["job_id"]
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "job_events_job_id_fkey"
+            foreignKeyName: "job_ingestion_job_id_fkey"
             columns: ["job_id"]
             isOneToOne: false
-            referencedRelation: "matching_telegram_jobs"
-            referencedColumns: ["job_id"]
+            referencedRelation: "jobs_with_payment"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -465,13 +484,6 @@ export type Database = {
             foreignKeyName: "job_payments_job_id_fkey"
             columns: ["job_id"]
             isOneToOne: false
-            referencedRelation: "get_matching_chat_ids"
-            referencedColumns: ["job_id"]
-          },
-          {
-            foreignKeyName: "job_payments_job_id_fkey"
-            columns: ["job_id"]
-            isOneToOne: false
             referencedRelation: "jobs"
             referencedColumns: ["id"]
           },
@@ -482,26 +494,13 @@ export type Database = {
             referencedRelation: "jobs_with_payment"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "job_payments_job_id_fkey"
-            columns: ["job_id"]
-            isOneToOne: false
-            referencedRelation: "matching_telegram_early_access"
-            referencedColumns: ["job_id"]
-          },
-          {
-            foreignKeyName: "job_payments_job_id_fkey"
-            columns: ["job_id"]
-            isOneToOne: false
-            referencedRelation: "matching_telegram_jobs"
-            referencedColumns: ["job_id"]
-          },
         ]
       }
       jobs: {
         Row: {
           apply_url: string
           billing_plan: string
+          city: string | null
           company_id: string | null
           created_at: string | null
           currency: string
@@ -520,6 +519,7 @@ export type Database = {
           paid_amount_total: number | null
           paid_at: string | null
           paid_currency: string | null
+          remote_type: string
           seo_description: string | null
           seo_title: string | null
           slug: string
@@ -530,12 +530,11 @@ export type Database = {
           updated_at: string | null
           valid_through: string | null
           visibility_plan: string
-          zapier_posted: boolean | null
-          remote_type: string
         }
         Insert: {
           apply_url: string
           billing_plan?: string
+          city?: string | null
           company_id?: string | null
           created_at?: string | null
           currency?: string
@@ -554,6 +553,7 @@ export type Database = {
           paid_amount_total?: number | null
           paid_at?: string | null
           paid_currency?: string | null
+          remote_type?: string
           seo_description?: string | null
           seo_title?: string | null
           slug: string
@@ -564,12 +564,11 @@ export type Database = {
           updated_at?: string | null
           valid_through?: string | null
           visibility_plan?: string
-          zapier_posted?: boolean | null
-          remote_type?: string
         }
         Update: {
           apply_url?: string
           billing_plan?: string
+          city?: string | null
           company_id?: string | null
           created_at?: string | null
           currency?: string
@@ -588,6 +587,7 @@ export type Database = {
           paid_amount_total?: number | null
           paid_at?: string | null
           paid_currency?: string | null
+          remote_type?: string
           seo_description?: string | null
           seo_title?: string | null
           slug?: string
@@ -598,8 +598,6 @@ export type Database = {
           updated_at?: string | null
           valid_through?: string | null
           visibility_plan?: string
-          zapier_posted?: boolean | null
-          remote_type?: string
         }
         Relationships: [
           {
@@ -652,617 +650,88 @@ export type Database = {
         }
         Relationships: []
       }
-      price_logs: {
-        Row: {
-          country: string
-          created_at: string | null
-          id: string
-          plan: string
-        }
-        Insert: {
-          country: string
-          created_at?: string | null
-          id?: string
-          plan: string
-        }
-        Update: {
-          country?: string
-          created_at?: string | null
-          id?: string
-          plan?: string
-        }
-        Relationships: []
-      }
-      stripe_customers: {
-        Row: {
-          created_at: string | null
-          email: string
-          expires_at: string
-          id: string
-          interval: string | null
-          is_paid: boolean | null
-          plan: string
-          telegram_chat_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          email: string
-          expires_at: string
-          id?: string
-          interval?: string | null
-          is_paid?: boolean | null
-          plan: string
-          telegram_chat_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          email?: string
-          expires_at?: string
-          id?: string
-          interval?: string | null
-          is_paid?: boolean | null
-          plan?: string
-          telegram_chat_id?: string | null
-        }
-        Relationships: []
-      }
-      talent_admin_notes: {
+      roles: {
         Row: {
           created_at: string
-          created_by: string
-          id: string
-          note: string
-          profile_id: string
-        }
-        Insert: {
-          created_at?: string
-          created_by: string
-          id?: string
-          note: string
-          profile_id: string
-        }
-        Update: {
-          created_at?: string
-          created_by?: string
-          id?: string
-          note?: string
-          profile_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "talent_admin_notes_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "talent_profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      talent_education: {
-        Row: {
-          created_at: string
-          degree: string
-          description: string | null
-          field_of_study: string | null
-          from_year: number
-          id: string
-          institution: string
-          is_current: boolean
-          order_index: number
-          profile_id: string
-          to_year: number | null
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          degree: string
-          description?: string | null
-          field_of_study?: string | null
-          from_year: number
-          id?: string
-          institution: string
-          is_current?: boolean
-          order_index?: number
-          profile_id: string
-          to_year?: number | null
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          degree?: string
-          description?: string | null
-          field_of_study?: string | null
-          from_year?: number
-          id?: string
-          institution?: string
-          is_current?: boolean
-          order_index?: number
-          profile_id?: string
-          to_year?: number | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "talent_education_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "talent_profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      talent_inquiries: {
-        Row: {
-          admin_notes: string | null
-          budget: string | null
-          company_name: string
-          created_at: string
-          employer_name: string
-          hiring_requirement: string
-          id: string
-          inquiry_status: string
-          job_type: string | null
-          message: string | null
-          talent_profile_id: string
-          updated_at: string
-          work_email: string
-        }
-        Insert: {
-          admin_notes?: string | null
-          budget?: string | null
-          company_name: string
-          created_at?: string
-          employer_name: string
-          hiring_requirement: string
-          id?: string
-          inquiry_status?: string
-          job_type?: string | null
-          message?: string | null
-          talent_profile_id: string
-          updated_at?: string
-          work_email: string
-        }
-        Update: {
-          admin_notes?: string | null
-          budget?: string | null
-          company_name?: string
-          created_at?: string
-          employer_name?: string
-          hiring_requirement?: string
-          id?: string
-          inquiry_status?: string
-          job_type?: string | null
-          message?: string | null
-          talent_profile_id?: string
-          updated_at?: string
-          work_email?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "talent_inquiries_talent_profile_id_fkey"
-            columns: ["talent_profile_id"]
-            isOneToOne: false
-            referencedRelation: "talent_profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      talent_profile_views: {
-        Row: {
-          created_at: string
-          id: string
-          profile_id: string
-          source: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          profile_id: string
-          source?: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          profile_id?: string
-          source?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "talent_profile_views_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "talent_profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      talent_profiles: {
-        Row: {
-          admin_notes: string | null
-          approval_status: string
-          available_for_work: boolean
-          available_from: string | null
-          avatar_url: string | null
-          bio: string
-          consent_public_listing: boolean
-          created_at: string
-          currency: string
-          education: string | null
-          email: string
-          employment_history: string | null
-          english_level: string | null
-          experience_level: string
-          full_name: string
-          gender: string | null
-          github_url: string | null
-          hourly_rate: number | null
-          id: string
-          instagram_username: string | null
-          is_featured: boolean
-          is_public: boolean
-          job_title: string
-          job_types: string[] | null
-          language_list: string[] | null
-          last_active_at: string | null
-          linkedin_url: string | null
-          loom_video_url: string | null
-          nationality: string | null
-          notice_period: string | null
-          phone: string | null
-          primary_role_category: string | null
-          remote_preference: string | null
-          residency: string
-          resume_url: string | null
-          salary_max_annual: number | null
-          salary_max_monthly: number | null
-          salary_min_annual: number | null
-          salary_min_monthly: number | null
-          skill_tags: string[] | null
-          skills: string
-          slug: string | null
-          spoken_languages: string | null
+          name: string
+          plural: string
+          skills: string[]
+          slug: string
+          sort_order: number
           summary: string
-          twitter_url: string | null
-          updated_at: string
-          visa_sponsorship_required: boolean | null
-          website_url: string | null
-          work_status: string
-          years_of_experience: number | null
         }
         Insert: {
-          admin_notes?: string | null
-          approval_status?: string
-          available_for_work?: boolean
-          available_from?: string | null
-          avatar_url?: string | null
-          bio: string
-          consent_public_listing?: boolean
           created_at?: string
-          currency?: string
-          education?: string | null
-          email: string
-          employment_history?: string | null
-          english_level?: string | null
-          experience_level: string
-          full_name: string
-          gender?: string | null
-          github_url?: string | null
-          hourly_rate?: number | null
-          id?: string
-          instagram_username?: string | null
-          is_featured?: boolean
-          is_public?: boolean
-          job_title: string
-          job_types?: string[] | null
-          language_list?: string[] | null
-          last_active_at?: string | null
-          linkedin_url?: string | null
-          loom_video_url?: string | null
-          nationality?: string | null
-          notice_period?: string | null
-          phone?: string | null
-          primary_role_category?: string | null
-          remote_preference?: string | null
-          residency: string
-          resume_url?: string | null
-          salary_max_annual?: number | null
-          salary_max_monthly?: number | null
-          salary_min_annual?: number | null
-          salary_min_monthly?: number | null
-          skill_tags?: string[] | null
-          skills: string
-          slug?: string | null
-          spoken_languages?: string | null
+          name: string
+          plural: string
+          skills?: string[]
+          slug: string
+          sort_order?: number
           summary: string
-          twitter_url?: string | null
-          updated_at?: string
-          visa_sponsorship_required?: boolean | null
-          website_url?: string | null
-          work_status: string
-          years_of_experience?: number | null
         }
         Update: {
-          admin_notes?: string | null
-          approval_status?: string
-          available_for_work?: boolean
-          available_from?: string | null
-          avatar_url?: string | null
-          bio?: string
-          consent_public_listing?: boolean
           created_at?: string
-          currency?: string
-          education?: string | null
-          email?: string
-          employment_history?: string | null
-          english_level?: string | null
-          experience_level?: string
-          full_name?: string
-          gender?: string | null
-          github_url?: string | null
-          hourly_rate?: number | null
-          id?: string
-          instagram_username?: string | null
-          is_featured?: boolean
-          is_public?: boolean
-          job_title?: string
-          job_types?: string[] | null
-          language_list?: string[] | null
-          last_active_at?: string | null
-          linkedin_url?: string | null
-          loom_video_url?: string | null
-          nationality?: string | null
-          notice_period?: string | null
-          phone?: string | null
-          primary_role_category?: string | null
-          remote_preference?: string | null
-          residency?: string
-          resume_url?: string | null
-          salary_max_annual?: number | null
-          salary_max_monthly?: number | null
-          salary_min_annual?: number | null
-          salary_min_monthly?: number | null
-          skill_tags?: string[] | null
-          skills?: string
-          slug?: string | null
-          spoken_languages?: string | null
+          name?: string
+          plural?: string
+          skills?: string[]
+          slug?: string
+          sort_order?: number
           summary?: string
-          twitter_url?: string | null
-          updated_at?: string
-          visa_sponsorship_required?: boolean | null
-          website_url?: string | null
-          work_status?: string
-          years_of_experience?: number | null
         }
         Relationships: []
       }
-      talent_status_history: {
+      salaries: {
         Row: {
-          changed_by: string
-          created_at: string
-          from_status: string | null
-          id: string
-          profile_id: string
-          reason: string | null
-          to_status: string
-        }
-        Insert: {
-          changed_by?: string
-          created_at?: string
-          from_status?: string | null
-          id?: string
-          profile_id: string
-          reason?: string | null
-          to_status: string
-        }
-        Update: {
-          changed_by?: string
-          created_at?: string
-          from_status?: string | null
-          id?: string
-          profile_id?: string
-          reason?: string | null
-          to_status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "talent_status_history_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "talent_profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      talent_work_experience: {
-        Row: {
-          created_at: string
-          from_year: number
-          id: string
-          is_current: boolean
-          order_index: number
-          organization: string
-          profile_id: string
-          responsibilities: string | null
-          role: string
-          to_year: number | null
+          basis: string
+          country: string
+          currency: string
+          methodology: string | null
+          p25: number
+          p50: number | null
+          p75: number
+          role_slug: string
+          sample_size: number | null
+          source_period: string | null
+          sources: string[]
           updated_at: string
         }
         Insert: {
-          created_at?: string
-          from_year: number
-          id?: string
-          is_current?: boolean
-          order_index?: number
-          organization: string
-          profile_id: string
-          responsibilities?: string | null
-          role: string
-          to_year?: number | null
+          basis?: string
+          country: string
+          currency: string
+          methodology?: string | null
+          p25: number
+          p50?: number | null
+          p75: number
+          role_slug: string
+          sample_size?: number | null
+          source_period?: string | null
+          sources: string[]
           updated_at?: string
         }
         Update: {
-          created_at?: string
-          from_year?: number
-          id?: string
-          is_current?: boolean
-          order_index?: number
-          organization?: string
-          profile_id?: string
-          responsibilities?: string | null
-          role?: string
-          to_year?: number | null
+          basis?: string
+          country?: string
+          currency?: string
+          methodology?: string | null
+          p25?: number
+          p50?: number | null
+          p75?: number
+          role_slug?: string
+          sample_size?: number | null
+          source_period?: string | null
+          sources?: string[]
           updated_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "talent_work_experience_profile_id_fkey"
-            columns: ["profile_id"]
+            foreignKeyName: "salaries_role_slug_fkey"
+            columns: ["role_slug"]
             isOneToOne: false
-            referencedRelation: "talent_profiles"
-            referencedColumns: ["id"]
+            referencedRelation: "roles"
+            referencedColumns: ["slug"]
           },
         ]
-      }
-      telegram_preferences: {
-        Row: {
-          email: string
-          job_category: string[] | null
-          job_location: string[] | null
-          job_type: string[] | null
-          updated_at: string | null
-        }
-        Insert: {
-          email: string
-          job_category?: string[] | null
-          job_location?: string[] | null
-          job_type?: string[] | null
-          updated_at?: string | null
-        }
-        Update: {
-          email?: string
-          job_category?: string[] | null
-          job_location?: string[] | null
-          job_type?: string[] | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      telegram_subscribers: {
-        Row: {
-          created_at: string | null
-          email: string | null
-          id: string
-          is_paid: boolean
-          linked_at: string | null
-          plan: string
-          price_locked_cents: number | null
-          source: string | null
-          status: string
-          subscription_expires_at: string | null
-          telegram_chat_id: number
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          email?: string | null
-          id?: string
-          is_paid?: boolean
-          linked_at?: string | null
-          plan?: string
-          price_locked_cents?: number | null
-          source?: string | null
-          status?: string
-          subscription_expires_at?: string | null
-          telegram_chat_id: number
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          email?: string | null
-          id?: string
-          is_paid?: boolean
-          linked_at?: string | null
-          plan?: string
-          price_locked_cents?: number | null
-          source?: string | null
-          status?: string
-          subscription_expires_at?: string | null
-          telegram_chat_id?: number
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      tools: {
-        Row: {
-          category: string | null
-          created_at: string | null
-          description: string | null
-          developer_link: string | null
-          developer_name: string | null
-          facebook_url: string | null
-          id: string
-          is_featured: boolean | null
-          linkedin_url: string | null
-          logo_url: string | null
-          meta_description: string | null
-          name: string | null
-          one_liner: string | null
-          pricing_tiers: Json | null
-          pricing_type: string[] | null
-          seo_title: string | null
-          slug: string | null
-          status: string | null
-          tags: string[] | null
-          twitter_url: string | null
-          visit_url: string | null
-        }
-        Insert: {
-          category?: string | null
-          created_at?: string | null
-          description?: string | null
-          developer_link?: string | null
-          developer_name?: string | null
-          facebook_url?: string | null
-          id?: string
-          is_featured?: boolean | null
-          linkedin_url?: string | null
-          logo_url?: string | null
-          meta_description?: string | null
-          name?: string | null
-          one_liner?: string | null
-          pricing_tiers?: Json | null
-          pricing_type?: string[] | null
-          seo_title?: string | null
-          slug?: string | null
-          status?: string | null
-          tags?: string[] | null
-          twitter_url?: string | null
-          visit_url?: string | null
-        }
-        Update: {
-          category?: string | null
-          created_at?: string | null
-          description?: string | null
-          developer_link?: string | null
-          developer_name?: string | null
-          facebook_url?: string | null
-          id?: string
-          is_featured?: boolean | null
-          linkedin_url?: string | null
-          logo_url?: string | null
-          meta_description?: string | null
-          name?: string | null
-          one_liner?: string | null
-          pricing_tiers?: Json | null
-          pricing_type?: string[] | null
-          seo_title?: string | null
-          slug?: string | null
-          status?: string | null
-          tags?: string[] | null
-          twitter_url?: string | null
-          visit_url?: string | null
-        }
-        Relationships: []
       }
     }
     Views: {
@@ -1273,24 +742,6 @@ export type Database = {
           logo_url: string | null
           name: string | null
           slug: string | null
-        }
-        Relationships: []
-      }
-      get_matching_chat_ids: {
-        Row: {
-          created_at: string | null
-          currency: string | null
-          email: string | null
-          goes_public_at: string | null
-          job_category: string[] | null
-          job_id: string | null
-          job_location: string[] | null
-          job_type: string[] | null
-          max_salary: number | null
-          min_salary: number | null
-          slug: string | null
-          telegram_chat_id: number | null
-          title: string | null
         }
         Relationships: []
       }
@@ -1328,7 +779,6 @@ export type Database = {
           updated_at: string | null
           valid_through: string | null
           visibility_plan: string | null
-          zapier_posted: boolean | null
         }
         Relationships: [
           {
@@ -1353,54 +803,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      matching_telegram_chat_ids: {
-        Row: {
-          chat_id: number | null
-          email: string | null
-          job_category: string[] | null
-          job_location: string[] | null
-          job_type: string[] | null
-        }
-        Relationships: []
-      }
-      matching_telegram_early_access: {
-        Row: {
-          chat_id: number | null
-          company_name: string | null
-          currency: string | null
-          email: string | null
-          goes_public_at: string | null
-          job_category: string[] | null
-          job_created_at: string | null
-          job_id: string | null
-          job_location: string[] | null
-          job_title: string | null
-          job_type: string[] | null
-          max_salary: number | null
-          min_salary: number | null
-          slug: string | null
-          status: string | null
-        }
-        Relationships: []
-      }
-      matching_telegram_jobs: {
-        Row: {
-          chat_id: number | null
-          created_at: string | null
-          currency: string | null
-          email: string | null
-          goes_public_at: string | null
-          job_category: string[] | null
-          job_id: string | null
-          job_location: string[] | null
-          job_title: string | null
-          job_type: string[] | null
-          max_salary: number | null
-          min_salary: number | null
-          slug: string | null
-        }
-        Relationships: []
       }
       sorted_companies: {
         Row: {
@@ -1438,10 +840,7 @@ export type Database = {
     }
     Functions: {
       archive_expired_jobs: { Args: never; Returns: undefined }
-      calculate_talent_completeness: {
-        Args: { p: Database["public"]["Tables"]["talent_profiles"]["Row"] }
-        Returns: number
-      }
+      expire_stale_jobs: { Args: never; Returns: number }
       get_job_stats: {
         Args: { p_job_id: string }
         Returns: {
@@ -1457,32 +856,15 @@ export type Database = {
           views: number
         }[]
       }
-      get_pending_talent_count: { Args: never; Returns: number }
-      get_talent_approval_breakdown: {
-        Args: never
+      job_events_daily: {
+        Args: { p_end: string; p_start: string }
         Returns: {
-          status: string
-          total: number
-        }[]
-      }
-      get_talent_stats: {
-        Args: { p_profile_ids: string[] }
-        Returns: {
-          completeness_score: number
-          inquiry_count: number
-          profile_id: string
-          view_count: number
+          clicks: number
+          day: string
+          views: number
         }[]
       }
       monthly_blog_posts: {
-        Args: never
-        Returns: {
-          month: number
-          total: number
-          year: number
-        }[]
-      }
-      monthly_new_talent: {
         Args: never
         Returns: {
           month: number
@@ -1498,14 +880,6 @@ export type Database = {
           year: number
         }[]
       }
-      monthly_published_tools: {
-        Args: never
-        Returns: {
-          month: number
-          total: number
-          year: number
-        }[]
-      }
       monthly_registered_companies: {
         Args: never
         Returns: {
@@ -1514,29 +888,25 @@ export type Database = {
           year: number
         }[]
       }
-      search_talent_profiles: {
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
+      top_jobs_by_event: {
+        Args: { p_event_type: string; p_limit?: number }
+        Returns: {
+          event_count: number
+          job_id: string
+        }[]
+      }
+      top_jobs_by_event_windowed: {
         Args: {
-          p_available_only?: boolean
+          p_end: string
+          p_event_type: string
           p_limit?: number
-          p_offset?: number
-          p_query?: string
-          p_status?: string
+          p_start: string
         }
         Returns: {
-          approval_status: string
-          available_for_work: boolean
-          available_from: string
-          created_at: string
-          email: string
-          experience_level: string
-          full_name: string
-          id: string
-          is_featured: boolean
-          is_public: boolean
-          job_title: string
-          residency: string
-          skills: string
-          total_count: number
+          event_count: number
+          job_id: string
         }[]
       }
     }
@@ -1667,6 +1037,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },

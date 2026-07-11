@@ -18,7 +18,10 @@ type Props = {
     jobType?: string;
     remoteType?: string | null;
     category?: string;
+    /** Country: Malaysia | Singapore. Drives the /job-location taxonomy link. */
     location?: string;
+    /** Malaysian city, if one is set. Null for Singapore and remote roles. */
+    city?: string | null;
     tags?: string[];
     applyUrl?: string;
     title: string;
@@ -160,17 +163,32 @@ export default function JobMetaBox({ job }: Props) {
           </div>
         )}
 
-        {job.location && (
-          <div className="flex flex-col col-span-2">
-            <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Location</span>
-            <Link
-              href={`/job-location/${slugify(cleanLocation(job.location))}`}
-              className="bg-purple-100 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-md hover:bg-purple-200 transition w-fit"
-            >
-              {cleanLocation(job.location)}
-            </Link>
-          </div>
-        )}
+        {job.location && (() => {
+          const country = cleanLocation(job.location);
+          const city = job.city?.trim();
+          // Cities are Malaysia-only — Singapore is a city-state, and remote
+          // roles have no office. Both fall back to the country alone.
+          const showCity = Boolean(city) && country === 'Malaysia';
+
+          return (
+            <div className="flex flex-col col-span-2">
+              <span className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Location</span>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {showCity && (
+                  <span className="text-xs font-medium text-gray-700">{city},</span>
+                )}
+                {/* The country is the link — it's the only real taxonomy. There
+                    are no city landing pages, so the city stays plain text. */}
+                <Link
+                  href={`/job-location/${slugify(country)}`}
+                  className="bg-purple-100 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-md hover:bg-purple-200 transition w-fit"
+                >
+                  {country}
+                </Link>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {job.tags && job.tags.length > 0 && (
