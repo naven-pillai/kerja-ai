@@ -41,14 +41,14 @@ export default function AboutContent() {
         />
         <div className="relative max-w-3xl mx-auto px-6 pt-28 pb-20 text-center">
           <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#1D4ED8] mb-4">
-            About Kerja-AI
+            About Kerja AI
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
             AI is reshaping Malaysian and Singaporean careers. This is the{' '}
             <span className="text-[#1D4ED8]">board</span> built for it.
           </h1>
           <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
-            I&apos;m Naven. I built Kerja-AI because there was no board built for
+            I&apos;m Naven. I built Kerja AI because there was no board built for
             one thing: AI, machine learning and data careers in Malaysia and
             Singapore. TalentCorp expects around 697,000 jobs to be highly
             affected by AI within three to five years — so I wanted one place

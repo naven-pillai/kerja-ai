@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   if (!company) {
     return {
       title: 'Company Not Found',
-      description: 'We could not find this company on Kerja-AI. Browse companies hiring AI and data talent in Malaysia and Singapore instead.',
+      description: 'We could not find this company on Kerja AI. Browse companies hiring AI and data talent in Malaysia and Singapore instead.',
     };
   }
 
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   const description = clamp(
     company.description ??
       company.tagline ??
-      `See open AI, machine learning and data roles at ${company.name} on Kerja-AI, the job board for AI and data careers in Malaysia and Singapore.`
+      `See open AI, machine learning and data roles at ${company.name} on Kerja AI, the job board for AI and data careers in Malaysia and Singapore.`
   );
 
   return {

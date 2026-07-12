@@ -28,7 +28,7 @@ export async function generateMetadata({
 
   // Dropped the year: the layout now appends " - Kerja AI" (11 chars).
   const title = `AI, Machine Learning & Data Jobs in ${name}`;
-  const description = `${name} AI, machine learning and data roles on Kerja-AI — the niche board for the KL–Singapore corridor. Compare RM and SGD offers, updated weekly.`;
+  const description = `${name} AI, machine learning and data roles on Kerja AI — the niche board for the KL–Singapore corridor. Compare RM and SGD offers, updated weekly.`;
   const url = `${BASE_URL}/job-location/${slug}`;
 
   return {
@@ -110,22 +110,22 @@ export default async function LocationPage({
   const faqs = [
     {
       q: `What do AI and data jobs in ${name} pay?`,
-      a: `Pay depends on the role and your level, and it is quoted in ${name}'s local currency — RM in Malaysia, SGD in Singapore. Because Kerja-AI covers both sides of the KL–Singapore corridor, you can line up ${name} offers against the other market before you decide.`,
+      a: `Pay depends on the role and your level, and it is quoted in ${name}'s local currency — RM in Malaysia, SGD in Singapore. Because Kerja AI covers both sides of the KL–Singapore corridor, you can line up ${name} offers against the other market before you decide.`,
     },
     {
       q: `Which AI and data roles are hiring most in ${name}?`,
       a:
         topCategories.length > 0
-          ? `Right now the most active ${name} categories on Kerja-AI are ${topCategories.slice(0, 3).join(', ')}. Demand tracks what companies are actually building — model work, data pipelines, and applied AI.`
-          : `AI Engineering, Machine Learning Engineering, and Data Science tend to lead hiring in ${name}. Kerja-AI lists roles across all eleven AI and data categories.`,
+          ? `Right now the most active ${name} categories on Kerja AI are ${topCategories.slice(0, 3).join(', ')}. Demand tracks what companies are actually building — model work, data pipelines, and applied AI.`
+          : `AI Engineering, Machine Learning Engineering, and Data Science tend to lead hiring in ${name}. Kerja AI lists roles across all eleven AI and data categories.`,
     },
     {
       q: `Do I need to be based in ${name} to apply?`,
       a: `It depends on the employer. Some ${name} roles need you on the ground for tax or work-pass reasons; others hire across the KL–Singapore corridor. Each listing states its requirement, so you know before you apply.`,
     },
     {
-      q: `How do I apply for ${name} AI jobs on Kerja-AI?`,
-      a: `Pick any role on this page and follow the link straight to the employer's own application. Kerja-AI sends you direct — no account, no middleman. Posting a role is free for employers, so new ${name} listings arrive often.`,
+      q: `How do I apply for ${name} AI jobs on Kerja AI?`,
+      a: `Pick any role on this page and follow the link straight to the employer's own application. Kerja AI sends you direct — no account, no middleman. Posting a role is free for employers, so new ${name} listings arrive often.`,
     },
   ];
 
@@ -181,7 +181,7 @@ export default async function LocationPage({
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl leading-relaxed">
             {jobs.length > 0
-              ? `${jobs.length} AI, machine learning and data role${jobs.length === 1 ? '' : 's'} open in ${name} right now. Kerja-AI tracks only this work — the roles AI is creating, on one board built for it.`
+              ? `${jobs.length} AI, machine learning and data role${jobs.length === 1 ? '' : 's'} open in ${name} right now. Kerja AI tracks only this work — the roles AI is creating, on one board built for it.`
               : `AI, machine learning and data roles in ${name}. New listings go up every week as AI reshapes hiring here — check back soon.`}
           </p>
 

@@ -8,7 +8,7 @@ export const metadata = {
     title: 'AI Career Guides for Malaysia & Singapore',
     description: 'Guides on breaking into AI, machine learning and data roles in Malaysia and Singapore — what to learn, what pays, and how AI is reshaping careers here.',
     url: 'https://kerja-ai.com/blog',
-    siteName: 'Kerja-AI',
+    siteName: 'Kerja AI',
     type: 'website',
   },
 };

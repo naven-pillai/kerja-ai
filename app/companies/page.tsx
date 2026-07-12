@@ -8,7 +8,7 @@ export const metadata = {
     title: 'Companies Hiring AI & Data Talent in MY & SG',
     description: 'Browse companies hiring for AI, machine learning and data roles in Malaysia and Singapore. Profiles stay live even after a role closes.',
     url: 'https://kerja-ai.com/companies',
-    siteName: 'Kerja-AI',
+    siteName: 'Kerja AI',
     type: 'website',
   },
 };

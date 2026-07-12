@@ -109,7 +109,7 @@ export async function POST(req: Request) {
 
     // 3. Send email notification to admin
     await getResend().emails.send({
-      from: 'Kerja-AI <noreply@kerja-ai.com>',
+      from: 'Kerja AI <noreply@kerja-ai.com>',
       to: ADMIN_EMAIL,
       subject: '🆕 New Newsletter Subscriber',
       html: `
@@ -117,7 +117,7 @@ export async function POST(req: Request) {
         <p><strong>Email:</strong> ${escapeHtml(normalizedEmail)}</p>
         <p><strong>Location:</strong> ${escapeHtml(normalizedLocation) || 'Unknown'}</p>
         <hr />
-        <p>Kerja-AI.com</p>
+        <p>Kerja AI.com</p>
       `,
     })
 

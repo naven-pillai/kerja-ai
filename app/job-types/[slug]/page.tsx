@@ -28,7 +28,7 @@ export async function generateMetadata({
 
   // Dropped the year: the layout now appends " - Kerja AI" (11 chars).
   const title = `${name} AI & Data Jobs in Malaysia & Singapore`;
-  const description = `${name} AI, machine learning and data jobs in Malaysia and Singapore. Kerja-AI is the niche board for these roles — post one free, browse the rest.`;
+  const description = `${name} AI, machine learning and data jobs in Malaysia and Singapore. Kerja AI is the niche board for these roles — post one free, browse the rest.`;
   const url = `${BASE_URL}/job-types/${slug}`;
 
   return {
@@ -147,18 +147,18 @@ export default async function JobTypePage({
   const faqs = [
     {
       q: `What does a ${name} AI or data job mean?`,
-      a: `A ${name} role means ${ctx.what}. On Kerja-AI every one of these is an AI, machine learning or data job — from AI Engineering to Data Annotation — hiring across Malaysia and Singapore.`,
+      a: `A ${name} role means ${ctx.what}. On Kerja AI every one of these is an AI, machine learning or data job — from AI Engineering to Data Annotation — hiring across Malaysia and Singapore.`,
     },
     {
       q: `How many hours does a ${nameLower} role involve?`,
-      a: `${name} roles on Kerja-AI are ${ctx.hours}. Hours shift by employer and project, so check each listing for what a given team expects.`,
+      a: `${name} roles on Kerja AI are ${ctx.hours}. Hours shift by employer and project, so check each listing for what a given team expects.`,
     },
     {
       q: `Why choose ${nameLower} AI or data work?`,
       a: `${name} roles offer ${ctx.benefit}. With AI reshaping hiring across Malaysia and Singapore, this is a fast way into the work that is actually growing.`,
     },
     {
-      q: `How do I find ${nameLower} AI jobs on Kerja-AI?`,
+      q: `How do I find ${nameLower} AI jobs on Kerja AI?`,
       a: `Every listing on this page is a ${nameLower} AI, machine learning or data role. Filter further by category or location on the jobs page, and check back often — posting is free for employers, so new roles land regularly.`,
     },
   ];

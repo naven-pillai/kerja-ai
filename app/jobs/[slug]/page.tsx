@@ -60,16 +60,31 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
     job.status === 'archived' ||
     (job.expires_at != null && dayjs().isAfter(dayjs(job.expires_at)));
 
-  // The job's own title is the page title; the layout appends " - Kerja AI".
-  const ogTitle = job.seo_title ?? job.title;
+  const companyName = job.company?.name ?? 'a company hiring in Malaysia or Singapore';
+  const country = Array.isArray(job.job_location) ? job.job_location[0] : job.job_location;
+  const where = formatJobLocation(country, job.city);
+
+  // "<job title> <company> - Kerja AI". The layout appends the 11-char suffix,
+  // leaving 49 for the page title — a long job title plus a long company name
+  // overruns that, so degrade gracefully:
+  //   job + company  ->  job alone  ->  truncated job
+  const ogTitle = (() => {
+    // seo_title is the SEO-tuned job NAME (it duplicates `title` on most rows,
+    // but differs on some) — it is not a full title override, so the company is
+    // still appended. Some titles carry stray whitespace, hence the trim.
+    const jobName = (job.seo_title?.trim() || job.title).trim();
+    const company = job.company?.name?.trim();
+
+    const withCompany = company ? `${jobName} ${company}` : jobName;
+    if (withCompany.length <= 49) return withCompany;
+    if (jobName.length <= 49) return jobName;
+    return `${jobName.slice(0, 48).trimEnd()}…`;
+  })();
 
   // Google wants roughly 120-160 chars. Admin/AI-written seo_description is
   // often far shorter than that (Bjak's is 73), which ships a thin snippet and
   // invites Google to rewrite it. Top it up from the job's own fields rather
   // than trusting whatever is in the column.
-  const companyName = job.company?.name ?? 'a company hiring in Malaysia or Singapore';
-  const country = Array.isArray(job.job_location) ? job.job_location[0] : job.job_location;
-  const where = formatJobLocation(country, job.city);
 
   const ogDescription = (() => {
     const base = job.seo_description?.trim();
@@ -77,7 +92,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
     const context =
       `${job.title} at ${companyName}${where ? ` in ${where}` : ''}. ` +
-      `Read the full brief, salary context and how to apply on Kerja-AI — the job board built only for AI and data roles.`;
+      `Read the full brief, salary context and how to apply on Kerja AI — the job board built only for AI and data roles.`;
     const text = base ? `${base} ${context}` : context;
     return text.length > 158 ? `${text.slice(0, 155).trimEnd()}…` : text;
   })();

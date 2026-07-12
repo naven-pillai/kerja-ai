@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   description:
     'The job board for AI, machine learning and data careers in Malaysia and Singapore. Real roles, salary context in RM and SGD, and zero general-board noise.',
   openGraph: {
-    siteName: 'Kerja-AI',
+    siteName: 'Kerja AI',
     type: 'website',
     images: [{ url: '/default-og-image-1200x630.png', width: 1200, height: 630 }],
   },

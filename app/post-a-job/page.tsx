@@ -21,7 +21,7 @@ export default function PostAJobPage() {
           Hire AI &amp; data talent in Malaysia and Singapore
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-          Kerja-AI is the job board for AI, machine learning and data careers in
+          Kerja AI is the job board for AI, machine learning and data careers in
           Malaysia and Singapore. Post your role in minutes and reach people who came
           here for exactly this work — not the whole internet.
         </p>

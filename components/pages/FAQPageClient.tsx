@@ -6,7 +6,7 @@ import { ChevronDown, Mail } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'What is Kerja-AI?',
+    question: 'What is Kerja AI?',
     answer:
       'The job board for AI, machine learning and data careers in Malaysia and Singapore. Not a general board \u2014 you won\u2019t find retail or admin roles here, only AI, ML and data work. Think of JobStreet\u2019s territory narrowed to one field that\u2019s growing fast.',
   },
@@ -28,7 +28,7 @@ const faqs = [
   {
     question: 'How is this different from JobStreet or Hiredly?',
     answer:
-      'Those are general boards \u2014 thousands of roles across every industry, with AI and data jobs buried somewhere inside. Kerja-AI does one thing: AI, ML and data careers in MY and SG. You skip the filtering and see only what\u2019s relevant to you.',
+      'Those are general boards \u2014 thousands of roles across every industry, with AI and data jobs buried somewhere inside. Kerja AI does one thing: AI, ML and data careers in MY and SG. You skip the filtering and see only what\u2019s relevant to you.',
   },
   {
     question: 'What roles count as AI and data here?',
@@ -66,7 +66,7 @@ const faqs = [
       'Go to kerja-ai.com/post-job and post it free. Your listing reaches people specifically looking for AI, ML and data work in Malaysia and Singapore \u2014 not the whole internet, just the audience that matches.',
   },
   {
-    question: 'Can I partner with Kerja-AI?',
+    question: 'Can I partner with Kerja AI?',
     answer:
       'If you\u2019re building something for AI and data professionals in MY or SG \u2014 a tool, a community, a course \u2014 I\u2019m open to it. Email info@kerja-ai.com and tell me what you have in mind.',
   },
@@ -115,7 +115,7 @@ export default function FAQPageClient() {
             Questions we get asked a lot
           </h1>
           <p className="text-base sm:text-lg text-gray-500 max-w-lg mx-auto leading-relaxed">
-            The honest answers on what Kerja-AI is, who it&apos;s for, and how
+            The honest answers on what Kerja AI is, who it&apos;s for, and how
             it&apos;s different from a general job board.
           </p>
         </div>

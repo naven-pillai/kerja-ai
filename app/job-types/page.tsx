@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     'Filter AI, machine learning and data jobs in Malaysia and Singapore by type — full-time, part-time, contract, freelance, or internship.',
   alternates: { canonical: `${BASE_URL}/job-types` },
   openGraph: {
-    title: 'AI & Data Jobs by Type | Kerja-AI',
+    title: 'AI & Data Jobs by Type - Kerja AI',
     description: 'Full-time, part-time, contract, freelance, and internship AI and data roles in Malaysia and Singapore.',
     url: `${BASE_URL}/job-types`,
     type: 'website',

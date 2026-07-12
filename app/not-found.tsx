@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '404 — Page Not Found | Kerja-AI',
+  title: '404 — Page Not Found',
   description: "This page doesn't exist. But real AI and data jobs in Malaysia and Singapore do.",
 };
 

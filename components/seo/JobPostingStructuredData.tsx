@@ -238,7 +238,7 @@ export default function JobPostingStructuredData({
     }
   } else {
     // Location unset — Google requires applicantLocationRequirements for
-    // TELECOMMUTE roles only. Default to Kerja-AI's two markets.
+    // TELECOMMUTE roles only. Default to Kerja AI's two markets.
     const apacDefault = ['Malaysia', 'Singapore'];
     if (isFullyRemote) {
       schema.applicantLocationRequirements = apacDefault.map(c => ({ '@type': 'Country', name: c }));
