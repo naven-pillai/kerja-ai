@@ -2,14 +2,18 @@
 
 import Link from 'next/link';
 import { CheckCircle, ArrowRight, UserPlus, Briefcase, Eye, Zap } from 'lucide-react';
-import Confetti from 'react-confetti';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
+// Confetti sizes itself from the window, so it can't render on the server.
+// next/dynamic says that outright, which lets the state simply start as `true`
+// instead of being switched on by a setState inside an effect.
+const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
+
 export default function NewsletterSuccessPage() {
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(true);
 
   useEffect(() => {
-    setShowConfetti(true);
     const timer = setTimeout(() => setShowConfetti(false), 5000);
     return () => clearTimeout(timer);
   }, []);

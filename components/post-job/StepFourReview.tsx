@@ -58,16 +58,20 @@ function Field({ label, value }: { label: string; value?: string | null }) {
 export default function StepFourReview({ formData, prevStep, handleSubmit, goToStep, isSubmitting = false }: Props) {
   const [errors, setErrors] = useState<ValidationErrors>({});
 
-  // Create a stable object URL and revoke it when logo changes or component unmounts
-  const logoBlobUrl = useRef<string | null>(null);
-  const logoPreviewUrl = useMemo(() => {
-    if (logoBlobUrl.current) URL.revokeObjectURL(logoBlobUrl.current);
-    if (!formData.companyLogo) { logoBlobUrl.current = null; return null; }
-    const url = URL.createObjectURL(formData.companyLogo);
-    logoBlobUrl.current = url;
-    return url;
-  }, [formData.companyLogo]);
-  useEffect(() => () => { if (logoBlobUrl.current) URL.revokeObjectURL(logoBlobUrl.current); }, []);
+  // Blob URL for the logo preview, revoked when the logo changes or on unmount.
+  //
+  // The ref this used to keep is gone: it was both read and written inside the
+  // useMemo, i.e. during render, which React does not allow — under a re-render
+  // that React throws away, it would revoke a URL still on screen. Keying the
+  // cleanup to the URL itself does the same job without the ref.
+  const logoPreviewUrl = useMemo(
+    () => (formData.companyLogo ? URL.createObjectURL(formData.companyLogo) : null),
+    [formData.companyLogo]
+  );
+  useEffect(() => {
+    if (!logoPreviewUrl) return;
+    return () => URL.revokeObjectURL(logoPreviewUrl);
+  }, [logoPreviewUrl]);
 
   const validateBeforeSubmit = () => {
     const validation = validateFields(formData, [

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FormState } from '@/components/blog/BlogPostForm';
 import Image from 'next/image'; // ✅ Import Image
 
@@ -12,12 +12,11 @@ type Props = {
 export default function FeaturedImageCard({ formData, handleChange }: Props) {
   const [imageValid, setImageValid] = useState(true);
 
-  useEffect(() => {
-    // Reset validation when user clears field
-    if (!formData.featured_image) {
-      setImageValid(true);
-    }
-  }, [formData.featured_image]);
+  // An empty field is never "invalid" — there's nothing to complain about yet.
+  // Deriving that beats the old effect, which reset the flag only when the field
+  // was cleared through this input and left a stale error if the parent cleared
+  // the form.
+  const showInvalid = Boolean(formData.featured_image) && !imageValid;
 
   const validateImageURL = (url: string) => {
     try {
@@ -44,16 +43,16 @@ export default function FeaturedImageCard({ formData, handleChange }: Props) {
         onBlur={handleBlur}
         placeholder="Paste the full image URL here (https://...)"
         className={`w-full border rounded-lg p-3 text-sm focus:ring-2 focus:ring-[#1D4ED8] focus:outline-none ${
-          imageValid ? 'border-gray-300' : 'border-red-500'
+          showInvalid ? 'border-red-500' : 'border-gray-300'
         }`}
       />
 
-      {!imageValid && (
+      {showInvalid && (
         <p className="text-sm text-red-500 mt-1">⚠️ Please enter a valid URL (must start with http or https)</p>
       )}
 
       {/* Preview */}
-      {formData.featured_image && imageValid ? (
+      {formData.featured_image && !showInvalid ? (
         <div className="relative w-full max-h-64 mt-4 rounded-lg overflow-hidden border">
           <Image
             src={formData.featured_image}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { createSupabaseClient } from '@/lib/supabase-client';
 import toast from 'react-hot-toast';
 import type { Database } from '@/types/supabase';
@@ -18,10 +18,11 @@ type Category = Database['public']['Tables']['categories']['Row'];
 export default function CategoryCard({ formData, handleChange }: Props) {
   const [categoryOptions, setCategoryOptions] = useState<string[]>([]);
   const [customCategory, setCustomCategory] = useState('');
-  const [loadingCategories, setLoadingCategories] = useState(false);
+  // Starts true: the first load is already in flight by the time this paints,
+  // so flipping it on from inside the effect only bought an extra render.
+  const [loadingCategories, setLoadingCategories] = useState(true);
 
-  const fetchCategories = async () => {
-    setLoadingCategories(true);
+  const fetchCategories = useCallback(async () => {
     const supabase = createSupabaseClient();
 
     const { data, error } = await supabase
@@ -31,16 +32,28 @@ export default function CategoryCard({ formData, handleChange }: Props) {
     if (error) {
       console.error('Error fetching categories:', error.message);
       toast.error('Failed to fetch categories');
-    } else if (data) {
-      setCategoryOptions((data as Category[]).map((item) => item.name));
+      return;
     }
 
-    setLoadingCategories(false);
-  };
+    if (data) {
+      setCategoryOptions((data as Category[]).map((item) => item.name));
+    }
+  }, []);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    let cancelled = false;
+
+    void (async () => {
+      await fetchCategories();
+      // The old version had no cancellation: navigating away mid-request still
+      // set state on an unmounted component.
+      if (!cancelled) setLoadingCategories(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchCategories]);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleChange('category', e.target.value);

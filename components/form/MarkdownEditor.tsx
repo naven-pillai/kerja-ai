@@ -1,7 +1,16 @@
 'use client';
 
-import { Editor } from '@tinymce/tinymce-react';
-import { useRef, useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { useRef } from 'react';
+import type { Editor as EditorComponent } from '@tinymce/tinymce-react';
+
+// TinyMCE touches window on import, so it must not render on the server.
+// next/dynamic states that declaratively; the old `mounted` flag did it with a
+// setState inside an effect, which re-rendered every mount for nothing.
+const Editor = dynamic(() => import('@tinymce/tinymce-react').then((m) => m.Editor), {
+  ssr: false,
+  loading: () => <div>Loading editor...</div>,
+});
 
 type Props = {
   value: string;
@@ -9,16 +18,7 @@ type Props = {
 };
 
 export default function MarkdownEditor({ value, onChange }: Props) {
-  const editorRef = useRef<Editor['editor'] | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true); // Only mount TinyMCE on the client side
-  }, []);
-
-  if (!mounted) {
-    return <div>Loading editor...</div>; // Optional loading fallback
-  }
+  const editorRef = useRef<EditorComponent['editor'] | null>(null);
 
   return (
     <div>

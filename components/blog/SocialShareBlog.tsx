@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { FaFacebookF, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
+import { SITE_URL } from '@/lib/seo';
 
 export type SocialShareBlogProps = {
   title: string;
@@ -9,15 +9,11 @@ export type SocialShareBlogProps = {
 };
 
 export default function SocialShareBlog({ title, slug }: SocialShareBlogProps) {
-  const [currentUrl, setCurrentUrl] = useState(`https://kerja-ai.com/blog/${slug}`);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(window.location.href);
-    }
-  }, [slug]);
-
-  const encodedUrl = encodeURIComponent(currentUrl);
+  // Deliberately the canonical URL, not window.location.href. The old code
+  // started from the canonical and then overwrote it on mount with whatever was
+  // in the address bar — so anyone sharing from a link that carried ?utm=… or
+  // any other query string propagated it to every reader.
+  const encodedUrl = encodeURIComponent(`${SITE_URL}/blog/${slug}`);
   const encodedTitle = encodeURIComponent(`Check out this article: ${title}`);
 
   const socialLinks = [

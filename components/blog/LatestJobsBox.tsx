@@ -15,6 +15,11 @@ type Job = {
 export default async function LatestJobsBox() {
   const supabase = await createSupabaseServerClient();
 
+  // This is an async Server Component: the body runs once per request on the
+  // server, not inside a React render pass, so reading the clock here is not
+  // the impurity the rule is guarding against — and a "jobs from the last 12
+  // hours" window cannot be computed without one.
+  // eslint-disable-next-line react-hooks/purity
   const twelveHoursAgo = new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString();
 
   const { data: jobs } = await supabase

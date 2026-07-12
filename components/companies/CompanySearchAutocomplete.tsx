@@ -67,9 +67,14 @@ export default function CompanySearchAutocomplete({
     return () => document.removeEventListener('mousedown', onDocMouseDown);
   }, []);
 
-  useEffect(() => {
+  // Reset the highlighted suggestion whenever the query changes. Adjusted
+  // during render rather than in an effect, which would leave the old row
+  // highlighted for one paint against the new suggestion list.
+  const [lastQuery, setLastQuery] = useState(query);
+  if (lastQuery !== query) {
+    setLastQuery(query);
     setActiveIndex(-1);
-  }, [query]);
+  }
 
   return (
     <div className="w-full lg:w-[420px]" ref={wrapperRef}>

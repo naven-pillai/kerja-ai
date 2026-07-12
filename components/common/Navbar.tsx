@@ -15,9 +15,15 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname() ?? '';
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lastPathname, setLastPathname] = useState(pathname);
 
-  // Close menu on route change
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  // Close the menu on route change. Adjusted during render rather than in an
+  // effect: the effect version painted the new page with the menu still open,
+  // then re-rendered to close it.
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
+    setMenuOpen(false);
+  }
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);

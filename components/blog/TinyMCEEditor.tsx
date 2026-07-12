@@ -1,8 +1,17 @@
 'use client';
 
-import { Editor } from '@tinymce/tinymce-react';
-import { useRef, useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+import { useRef } from 'react';
 import type { Editor as TinyMCEEditorType } from 'tinymce';
+
+// TinyMCE touches window on import, so it must not render on the server.
+// next/dynamic states that declaratively; the old `mounted` flag did it with
+// a setState inside an effect, which re-rendered every mount for nothing.
+const Editor = dynamic(() => import('@tinymce/tinymce-react').then((m) => m.Editor), {
+  ssr: false,
+  loading: () => <div>Loading editor...</div>,
+});
 
 type Props = {
   value: string;
@@ -11,15 +20,6 @@ type Props = {
 
 export default function TinyMCEEditor({ value, onChange }: Props) {
   const editorRef = useRef<TinyMCEEditorType | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div>Loading editor...</div>;
-  }
 
   return (
     <div className="border rounded-lg overflow-hidden">

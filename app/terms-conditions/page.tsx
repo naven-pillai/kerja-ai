@@ -79,7 +79,7 @@ export default function TermsAndConditionsPage() {
             <section id="applications">
               <h2 className="text-lg font-bold text-gray-900 mb-3">3. Application Process</h2>
               <p>
-                Job applications are submitted directly through the employer's provided link or email. Kerja AI does not intervene in the hiring process and bears no responsibility for employer decisions, applicant conduct, or the outcome of any recruitment process.
+                Job applications are submitted directly through the employer&apos;s provided link or email. Kerja AI does not intervene in the hiring process and bears no responsibility for employer decisions, applicant conduct, or the outcome of any recruitment process.
               </p>
             </section>
 
@@ -135,7 +135,7 @@ export default function TermsAndConditionsPage() {
             <section id="liability">
               <h2 className="text-lg font-bold text-gray-900 mb-3">9. Limitation of Liability</h2>
               <p>
-                Kerja AI is provided on an "as is" basis. We make no warranties regarding the accuracy of listings or the outcome of any application or hire. To the fullest extent permitted by law, Kerja AI shall not be liable for any indirect, incidental, or consequential damages arising from use of the platform.
+                Kerja AI is provided on an &quot;as is&quot; basis. We make no warranties regarding the accuracy of listings or the outcome of any application or hire. To the fullest extent permitted by law, Kerja AI shall not be liable for any indirect, incidental, or consequential damages arising from use of the platform.
               </p>
             </section>
 

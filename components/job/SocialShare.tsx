@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaFacebookF, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
 import { Copy, Check } from 'lucide-react';
+import { SITE_URL } from '@/lib/seo';
 
 type Props = {
   job: {
@@ -40,17 +41,14 @@ export default function SocialShare({ job }: Props) {
   const tweetText = job.companyName
     ? `${job.companyName} is hiring a ${job.title} in Malaysia/Singapore. Apply here:`
     : `${job.title} role open in Malaysia/Singapore. Apply here:`;
-  const [jobUrl, setJobUrl] = useState('');
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setJobUrl(`${window.location.origin}/jobs/${job.slug}`);
-    }
-  }, [job.slug]);
+  // Built from the canonical origin rather than window.location.origin, which
+  // was only readable after mount — so the share links rendered empty on the
+  // server and for the first paint.
+  const jobUrl = `${SITE_URL}/jobs/${job.slug}`;
 
   const handleCopy = async () => {
-    if (!jobUrl) return;
     await navigator.clipboard.writeText(jobUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

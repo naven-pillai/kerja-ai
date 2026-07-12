@@ -1,7 +1,17 @@
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { SITE_URL } from '@/lib/seo';
+
+// Module scope, not the component body: rebuilt on every render it was a fresh
+// object each time, so the useMemo below could never actually memoise on it.
+const defaultNotes = {
+  blog: 'from Kerja AI.com (AI & data careers in Malaysia & Singapore)',
+  jobs: 'from Kerja AI.com (AI & data jobs in Malaysia & Singapore)',
+  custom: 'from Kerja AI.com',
+} as const;
 
 // ---- Inline icons ----
 const IconGoogle = () => (
@@ -72,13 +82,9 @@ export default function SmartSummarizeBar({
   hideOnScroll = true,
   className = '',
 }: SmartSummarizeBarProps) {
-  const [clientUrl, setClientUrl] = useState<string | undefined>();
+  const pathname = usePathname();
   const [hidden, setHidden] = useState(false);
   const lastY = useRef<number>(0);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') setClientUrl(window.location.href);
-  }, []);
 
   useEffect(() => {
     if (!hideOnScroll) return;
@@ -92,12 +98,10 @@ export default function SmartSummarizeBar({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hideOnScroll]);
 
-  const resolvedUrl = clientUrl || pageUrl || articleUrl || 'https://kerja-ai.com';
-  const defaultNotes = {
-    blog: 'from Kerja AI.com (AI & data careers in Malaysia & Singapore)',
-    jobs: 'from Kerja AI.com (AI & data jobs in Malaysia & Singapore)',
-    custom: 'from Kerja AI.com',
-  } as const;
+  // Canonical URL for the current page. This used to be window.location.href
+  // read in an effect, which meant the first render had no URL at all and any
+  // query string in the address bar (?utm=…, ?email=…) leaked into the prompt.
+  const resolvedUrl = pathname ? `${SITE_URL}${pathname}` : pageUrl || articleUrl || SITE_URL;
 
   const computedPrompt = useMemo(() => {
     if (promptOverride) return promptOverride;
