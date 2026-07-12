@@ -110,7 +110,7 @@ export default function NewsletterPageClient({ issues }: Props) {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1]">
-            The Kerja-AI newsletter
+            The Kerja AI newsletter
             <br className="hidden sm:block" />
             <span className="text-[#1D4ED8]"> actually worth opening.</span>
           </h1>

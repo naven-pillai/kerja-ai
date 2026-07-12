@@ -8,7 +8,7 @@ import {
 } from '@/lib/request-security';
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@kerja-ai.com';
-const FROM_EMAIL = process.env.RESEND_FROM || 'Kerja-AI <noreply@kerja-ai.com>';
+const FROM_EMAIL = process.env.RESEND_FROM || 'Kerja AI <noreply@kerja-ai.com>';
 const MAX_BODY_BYTES = 30 * 1024;
 
 const Schema = z.object({

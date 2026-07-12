@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Kerja-AI <noreply@kerja-ai.com>',
+          from: 'Kerja AI <noreply@kerja-ai.com>',
           to: [inbox],
           reply_to: [emailValue],
           subject: `[Contact] ${escapeHtml(normalizedSubject)}`,

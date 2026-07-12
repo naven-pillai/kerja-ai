@@ -82,7 +82,7 @@ export default function WhyPostHere() {
           Posting a job anywhere is easy.
           <br className="hidden sm:block" />
           Getting it in front of people who actually do AI and data work — that&apos;s the hard part.
-          <span className="text-gray-900 font-medium"> Kerja-AI is built for exactly that.</span>
+          <span className="text-gray-900 font-medium"> Kerja AI is built for exactly that.</span>
         </p>
 
         {/* proof row */}
@@ -141,7 +141,7 @@ export default function WhyPostHere() {
           icon={<MegaphoneIcon className="h-6 w-6 text-sky-600" />}
           kicker="Right audience"
           title="In front of people already searching for this"
-          desc="Kerja-AI is a content-led board built around AI and data careers in Malaysia and Singapore. Your role sits where that audience already reads, searches and browses — not lost in a feed of unrelated jobs."
+          desc="Kerja AI is a content-led board built around AI and data careers in Malaysia and Singapore. Your role sits where that audience already reads, searches and browses — not lost in a feed of unrelated jobs."
         />
       </div>
 

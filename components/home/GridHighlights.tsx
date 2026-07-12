@@ -10,7 +10,7 @@ export default function GridHighlights() {
         {/* Single 29KB image — behind 70% black overlay, quality difference is invisible */}
         <Image
           src="/kerja-ai-background-mobile.webp"
-          alt="Kerja-AI background"
+          alt="Kerja AI background"
           fill
           priority
           quality={70}

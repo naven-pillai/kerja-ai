@@ -41,12 +41,12 @@ export default function Footer() {
             <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
               <Image
                 src="/kerja-ai-logo.png"
-                alt="KerjaAI"
+                alt="Kerja AI"
                 width={32}
                 height={32}
                 className="rounded-md"
               />
-              <span className="text-base font-bold text-white tracking-tight">Kerja-AI</span>
+              <span className="text-base font-bold text-white tracking-tight">Kerja AI</span>
             </Link>
             <p className="text-sm leading-relaxed text-gray-400 max-w-65">
               The dedicated job board for AI, machine learning and data careers in Malaysia and Singapore. Built for the region&apos;s AI talent.
@@ -123,7 +123,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-400">
-          <span>© {new Date().getFullYear()} Kerja-AI. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Kerja AI. All rights reserved.</span>
           <span>Built for AI &amp; data talent in Malaysia and Singapore 🇲🇾 🇸🇬</span>
         </div>
       </div>

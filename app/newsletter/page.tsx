@@ -4,29 +4,29 @@ import NewsletterPageClient from '@/components/newsletter/NewsletterPageClient';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
+  title: 'Newsletter — Weekly AI & Data Jobs, MY & SG',
   description:
     'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam, one-click unsubscribe.',
   alternates: { canonical: 'https://kerja-ai.com/newsletter' },
   openGraph: {
-    title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
+    title: 'Newsletter — Weekly AI & Data Jobs, MY & SG',
     description:
       'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam.',
     url: 'https://kerja-ai.com/newsletter',
-    siteName: 'Kerja-AI',
+    siteName: 'Kerja AI',
     type: 'website',
     images: [
       {
         url: 'https://kerja-ai.com/default-og-image-1200x630.png',
         width: 1200,
         height: 630,
-        alt: 'Kerja-AI Newsletter — Weekly AI & Data Jobs in Malaysia & Singapore',
+        alt: 'Kerja AI Newsletter — Weekly AI & Data Jobs in Malaysia & Singapore',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
+    title: 'Newsletter — Weekly AI & Data Jobs, MY & SG',
     description:
       'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam.',
     images: ['https://kerja-ai.com/default-og-image-1200x630.png'],
@@ -124,13 +124,13 @@ const faqStructuredData = {
 const webPageStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Kerja-AI Weekly Newsletter — AI & Data Jobs in Malaysia & Singapore',
+  name: 'Kerja AI Weekly Newsletter — AI & Data Jobs in Malaysia & Singapore',
   description:
     'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore — delivered to your inbox, free.',
   url: 'https://kerja-ai.com/newsletter',
   publisher: {
     '@type': 'Organization',
-    name: 'Kerja-AI',
+    name: 'Kerja AI',
     url: 'https://kerja-ai.com',
     logo: {
       '@type': 'ImageObject',
@@ -142,7 +142,7 @@ const webPageStructuredData = {
   potentialAction: {
     '@type': 'SubscribeAction',
     target: 'https://kerja-ai.com/newsletter',
-    name: 'Subscribe to Kerja-AI Newsletter',
+    name: 'Subscribe to Kerja AI Newsletter',
   },
 };
 

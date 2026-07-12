@@ -26,13 +26,14 @@ export async function generateMetadata({
   const name = jobCategories.find((c) => slugify(c) === slug);
   if (!name) return {};
 
-  // Long category names blow past the ~60-char title limit with the year, so
-  // only append (2026) for shorter names.
+  // The root layout appends " - Kerja AI" (11 chars), leaving 49 for the page
+  // title. Long category names ("Machine Learning Engineering" = 28) can't also
+  // carry the full country names, so they fall back to MY & SG.
   const title =
-    name.length > 22
-      ? `${name} Jobs in Malaysia & Singapore`
-      : `${name} Jobs in Malaysia & Singapore (2026)`;
-  const description = `${name} jobs across Malaysia and Singapore. Kerja-AI is the board built only for AI and data careers, with new roles added every week.`;
+    name.length > 19
+      ? `${name} Jobs in MY & SG`
+      : `${name} Jobs in Malaysia & Singapore`;
+  const description = `${name} jobs across Malaysia and Singapore. Kerja AI is the board built only for AI and data careers, with new roles added every week.`;
   const url = `${BASE_URL}/job-categories/${slug}`;
 
   return {
@@ -116,24 +117,24 @@ export default async function CategoryPage({
   const faqs = [
     {
       q: `What does a ${name} role in Malaysia or Singapore involve?`,
-      a: `A ${name} role covers the build-and-ship side of AI: shaping data, training or wiring up models, and getting them into production. Employers on Kerja-AI hire for real AI, machine learning and data teams across Malaysia and Singapore, not generic tech work.`,
+      a: `A ${name} role covers the build-and-ship side of AI: shaping data, training or wiring up models, and getting them into production. Employers on Kerja AI hire for real AI, machine learning and data teams across Malaysia and Singapore, not generic tech work.`,
     },
     {
       q: `Which skills get you hired for ${nameLower} jobs in MY and SG?`,
       a:
         topTypes.length > 0
-          ? `Most ${nameLower} openings on Kerja-AI are ${topTypes.join(', ')} positions. Employers weigh real project work — models shipped, data problems solved — over titles alone. Each listing spells out the exact stack it wants.`
+          ? `Most ${nameLower} openings on Kerja AI are ${topTypes.join(', ')} positions. Employers weigh real project work — models shipped, data problems solved — over titles alone. Each listing spells out the exact stack it wants.`
           : `Employers hiring ${nameLower} talent weigh shipped project work — models, pipelines, real data problems — over titles alone. Each listing spells out the exact stack and level it wants.`,
     },
     {
       q: `Where are most ${nameLower} jobs — Malaysia or Singapore?`,
       a:
         topLocations.length > 0
-          ? `Right now ${nameLower} roles on Kerja-AI concentrate in ${topLocations.slice(0, 3).join(', ')}. The KL–Singapore corridor is where most AI and data hiring happens, and comparing RM against SGD offers is worth the effort.`
-          : `${name} roles on Kerja-AI run across Malaysia and Singapore — the KL–Singapore corridor, where most AI and data hiring sits. Comparing RM against SGD offers is worth the effort.`,
+          ? `Right now ${nameLower} roles on Kerja AI concentrate in ${topLocations.slice(0, 3).join(', ')}. The KL–Singapore corridor is where most AI and data hiring happens, and comparing RM against SGD offers is worth the effort.`
+          : `${name} roles on Kerja AI run across Malaysia and Singapore — the KL–Singapore corridor, where most AI and data hiring sits. Comparing RM against SGD offers is worth the effort.`,
     },
     {
-      q: `How do I apply for ${nameLower} jobs on Kerja-AI?`,
+      q: `How do I apply for ${nameLower} jobs on Kerja AI?`,
       a: `Click any role on this page that fits, and you go straight to the employer's own application — no account, no middleman. New ${nameLower} roles land regularly, so it is worth bookmarking this page and checking back.`,
     },
   ];
@@ -190,7 +191,7 @@ export default async function CategoryPage({
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl leading-relaxed">
             {jobs.length > 0
-              ? `${jobs.length} ${nameLower} role${jobs.length === 1 ? '' : 's'} open across Malaysia and Singapore right now. Kerja-AI lists only AI, machine learning and data work — the jobs AI is creating, not the whole board.`
+              ? `${jobs.length} ${nameLower} role${jobs.length === 1 ? '' : 's'} open across Malaysia and Singapore right now. Kerja AI lists only AI, machine learning and data work — the jobs AI is creating, not the whole board.`
               : `${name} roles across Malaysia and Singapore. New listings go up as AI reshapes hiring here — check back soon.`}
           </p>
 

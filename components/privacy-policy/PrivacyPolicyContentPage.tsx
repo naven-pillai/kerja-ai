@@ -23,7 +23,7 @@ export default function PrivacyPolicyContentPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Privacy Policy</h1>
           <p className="text-gray-500 mt-2 text-sm">Last updated: March 18, 2026</p>
           <p className="text-gray-600 mt-4 text-sm leading-relaxed max-w-2xl">
-            This Privacy Policy explains how <strong>Kerja-AI.com</strong> collects, uses, and protects the information you provide when using our platform.
+            This Privacy Policy explains how <strong>Kerja AI.com</strong> collects, uses, and protects the information you provide when using our platform.
           </p>
         </div>
       </div>
@@ -126,7 +126,7 @@ export default function PrivacyPolicyContentPage() {
             <section id="updates">
               <h2 className="text-lg font-bold text-gray-900 mb-3">9. Updates to This Policy</h2>
               <p>
-                We may revise this Privacy Policy from time to time. When we do, we will update the date at the top of this page. Your continued use of Kerja-AI after any changes constitutes your acceptance of the updated policy.
+                We may revise this Privacy Policy from time to time. When we do, we will update the date at the top of this page. Your continued use of Kerja AI after any changes constitutes your acceptance of the updated policy.
               </p>
             </section>
 

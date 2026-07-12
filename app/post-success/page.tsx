@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Job submitted — pending review | Kerja-AI',
+  title: 'Job Submitted — Pending Review',
   robots: { index: false, follow: false },
 };
 
@@ -16,7 +16,7 @@ export default function PostSuccessPage() {
         </div>
         <h1 className="text-3xl font-bold text-gray-900 mb-3">Your job has been submitted</h1>
         <p className="text-gray-600 mb-8">
-          Thanks for posting on Kerja-AI. Your listing is pending a quick review and will
+          Thanks for posting on Kerja AI. Your listing is pending a quick review and will
           go live shortly. We&apos;ll email you once it&apos;s published.
         </p>
         <div className="flex items-center justify-center gap-3">

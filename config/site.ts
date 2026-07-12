@@ -1,15 +1,15 @@
-// Single source of truth for Kerja-AI brand + site config.
+// Single source of truth for Kerja AI brand + site config.
 // Sister site to Kerja-Remote; AI/ML jobs for Malaysia & Singapore.
 
 export const SITE = {
-  name: 'Kerja-AI',
-  shortName: 'Kerja-AI',
+  name: 'Kerja AI',
+  shortName: 'Kerja AI',
   domain: 'kerja-ai.com',
   url: 'https://kerja-ai.com',
   adminUrl: 'https://admin.kerja-ai.com',
   tagline: 'AI, Machine Learning & Data Jobs in Malaysia & Singapore',
   description:
-    'Kerja-AI is the dedicated job board for artificial intelligence, machine learning and data careers in Malaysia and Singapore. Find AI engineering, ML, data science, NLP and computer vision roles.',
+    'Kerja AI is the dedicated job board for artificial intelligence, machine learning and data careers in Malaysia and Singapore. Find AI engineering, ML, data science, NLP and computer vision roles.',
   // UTM source stamped on outbound apply links
   utmSource: 'kerja-ai',
   emails: {
@@ -30,7 +30,7 @@ export const SITE = {
   },
 } as const;
 
-// Brand palette — sampled from the Kerja-AI logo (deep blue -> teal gradient).
+// Brand palette — sampled from the Kerja AI logo (deep blue -> teal gradient).
 export const BRAND = {
   primary: '#1D4ED8', // deep blue
   primaryHover: '#1E40AF',

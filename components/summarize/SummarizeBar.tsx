@@ -94,9 +94,9 @@ export default function SmartSummarizeBar({
 
   const resolvedUrl = clientUrl || pageUrl || articleUrl || 'https://kerja-ai.com';
   const defaultNotes = {
-    blog: 'from Kerja-AI.com (AI & data careers in Malaysia & Singapore)',
-    jobs: 'from Kerja-AI.com (AI & data jobs in Malaysia & Singapore)',
-    custom: 'from Kerja-AI.com',
+    blog: 'from Kerja AI.com (AI & data careers in Malaysia & Singapore)',
+    jobs: 'from Kerja AI.com (AI & data jobs in Malaysia & Singapore)',
+    custom: 'from Kerja AI.com',
   } as const;
 
   const computedPrompt = useMemo(() => {

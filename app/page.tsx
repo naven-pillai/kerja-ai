@@ -10,29 +10,31 @@ import HomeScrollFix from '@/components/home/HomeScrollFix';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'AI & Data Jobs in Malaysia & Singapore | Kerja-AI 2026',
-  description: 'AI, machine learning and data jobs in Malaysia and Singapore. TalentCorp projects ~697,000 roles will be reshaped by AI — Kerja-AI lists the ones hiring now.',
+  // `absolute` bypasses the layout template — otherwise this would render as
+  // "Kerja AI - ... - Kerja AI".
+  title: { absolute: 'Kerja AI - AI, ML & Data Jobs in Malaysia & Singapore' },
+  description: 'AI, machine learning and data jobs in Malaysia and Singapore. Kerja AI is the board built only for these roles — real openings, salary context in RM and SGD.',
   alternates: {
     canonical: 'https://kerja-ai.com',
   },
   openGraph: {
-    title: 'AI & Data Jobs in Malaysia & Singapore | Kerja-AI 2026',
+    title: 'Kerja AI - AI, ML & Data Jobs in Malaysia & Singapore',
     description: 'The job board for AI, machine learning and data careers in Malaysia and Singapore. One place for the roles AI is creating across the KL–Singapore corridor.',
     url: 'https://kerja-ai.com',
-    siteName: 'Kerja-AI',
+    siteName: 'Kerja AI',
     type: 'website',
     images: [
       {
         url: 'https://kerja-ai.com/default-og-image-1200x630.png',
         width: 1200,
         height: 630,
-        alt: 'Kerja-AI — AI, ML & Data Jobs in Malaysia & Singapore',
+        alt: 'Kerja AI — AI, ML & Data Jobs in Malaysia & Singapore',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI & Data Jobs in Malaysia & Singapore | Kerja-AI 2026',
+    title: 'Kerja AI - AI, ML & Data Jobs in Malaysia & Singapore',
     description: 'The job board for AI, machine learning and data careers in Malaysia and Singapore — the roles AI is creating across the KL–Singapore corridor.',
     images: ['https://kerja-ai.com/default-og-image-1200x630.png'],
   },
@@ -93,7 +95,7 @@ const homeStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Kerja-AI',
+    name: 'Kerja AI',
     url: 'https://kerja-ai.com',
     logo: 'https://kerja-ai.com/logo.png',
     description:
@@ -107,7 +109,7 @@ const homeStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Kerja-AI',
+    name: 'Kerja AI',
     url: 'https://kerja-ai.com',
     potentialAction: {
       '@type': 'SearchAction',

@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
   if (!blog) {
     return {
-      title: 'Post Not Found | Kerja-AI',
+      title: 'Post Not Found',
       description: 'This blog post could not be found.',
     };
   }
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   const metaDescription = blog.seo_description || truncate(blog.content, 160);
 
   return {
-    title: `${metaTitle} | Kerja-AI`,
+    title: metaTitle,
     description: metaDescription,
     alternates: { canonical: blogUrl },
     openGraph: {
@@ -104,7 +104,7 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
         datePublished={blog.created_at ?? blog.updated_at ?? new Date().toISOString()}
         dateModified={blog.updated_at ?? new Date().toISOString()}
         featuredImage={featuredImage}
-        authorName="Kerja-AI Team"
+        authorName="Kerja AI Team"
       />
 
       {/* Page body */}

@@ -6,13 +6,13 @@ import { slugify } from '@/lib/slugify';
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kerja-ai.com';
 
 export const metadata: Metadata = {
-  title: 'AI & Data Jobs by Location: Malaysia & Singapore | Kerja-AI',
+  title: 'AI & Data Jobs by Location: Malaysia & Singapore',
   description:
-    'Compare AI, machine learning and data jobs in Malaysia and Singapore — the KL–Singapore corridor — and weigh RM against SGD offers on Kerja-AI.',
+    'Compare AI, machine learning and data jobs in Malaysia and Singapore — the KL–Singapore corridor — and weigh RM against SGD offers on Kerja AI.',
   alternates: { canonical: `${BASE_URL}/job-location` },
   openGraph: {
-    title: 'AI & Data Jobs by Location | Kerja-AI',
-    description: 'AI, machine learning and data jobs in Malaysia and Singapore — compare RM and SGD offers on Kerja-AI.',
+    title: 'AI & Data Jobs by Location - Kerja AI',
+    description: 'AI, machine learning and data jobs in Malaysia and Singapore — compare RM and SGD offers on Kerja AI.',
     url: `${BASE_URL}/job-location`,
     type: 'website',
   },

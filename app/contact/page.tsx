@@ -97,7 +97,7 @@ export default function ContactPage() {
             Let&apos;s talk
           </h1>
           <p className="text-base sm:text-lg text-gray-500 max-w-lg mx-auto leading-relaxed">
-            A question about a role, hiring on Kerja-AI, a partnership, or feedback — send it over and I&apos;ll reply within 1–2 business days.
+            A question about a role, hiring on Kerja AI, a partnership, or feedback — send it over and I&apos;ll reply within 1–2 business days.
           </p>
         </div>
       </section>

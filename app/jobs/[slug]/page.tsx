@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { after } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import dayjs from 'dayjs';
+import { formatJobLocation } from '@/lib/formatLocation';
 
 // Components
 import JobHeader from '@/components/job/JobHeader';
@@ -59,10 +60,44 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
     job.status === 'archived' ||
     (job.expires_at != null && dayjs().isAfter(dayjs(job.expires_at)));
 
-  const ogTitle = job.seo_title ?? `AI & Data Job Opening in Malaysia & Singapore | Kerja-AI`;
-  const ogDescription =
-    job.seo_description ??
-    `An open AI, machine learning or data role in Malaysia or Singapore. Read the full brief, salary context and how to apply, on Kerja-AI.`;
+  const companyName = job.company?.name ?? 'a company hiring in Malaysia or Singapore';
+  const country = Array.isArray(job.job_location) ? job.job_location[0] : job.job_location;
+  const where = formatJobLocation(country, job.city);
+
+  // "<job title> <company> - Kerja AI". The layout appends the 11-char suffix,
+  // leaving 49 for the page title — a long job title plus a long company name
+  // overruns that, so degrade gracefully:
+  //   job + company  ->  job alone  ->  truncated job
+  const ogTitle = (() => {
+    // seo_title is the SEO-tuned job NAME (it duplicates `title` on most rows,
+    // but differs on some) — it is not a full title override, so the company is
+    // still appended. Some titles carry stray whitespace, hence the trim.
+    const jobName = (job.seo_title?.trim() || job.title).trim();
+    const company = job.company?.name?.trim();
+
+    // "<job> [<company>]" — the brackets separate the two, which a bare space
+    // ran together ("Applied AI Engineer Bjak").
+    const withCompany = company ? `${jobName} [${company}]` : jobName;
+    if (withCompany.length <= 49) return withCompany;
+    if (jobName.length <= 49) return jobName;
+    return `${jobName.slice(0, 48).trimEnd()}…`;
+  })();
+
+  // Google wants roughly 120-160 chars. Admin/AI-written seo_description is
+  // often far shorter than that (Bjak's is 73), which ships a thin snippet and
+  // invites Google to rewrite it. Top it up from the job's own fields rather
+  // than trusting whatever is in the column.
+
+  const ogDescription = (() => {
+    const base = job.seo_description?.trim();
+    if (base && base.length >= 120) return base.length > 158 ? `${base.slice(0, 155).trimEnd()}…` : base;
+
+    const context =
+      `${job.title} at ${companyName}${where ? ` in ${where}` : ''}. ` +
+      `Read the full brief, salary context and how to apply on Kerja AI — the job board built only for AI and data roles.`;
+    const text = base ? `${base} ${context}` : context;
+    return text.length > 158 ? `${text.slice(0, 155).trimEnd()}…` : text;
+  })();
   const ogImage = job.company?.logo_url ?? 'https://kerja-ai.com/default-og-image.png';
   const jobUrl = `https://kerja-ai.com/jobs/${slug}`;
 
