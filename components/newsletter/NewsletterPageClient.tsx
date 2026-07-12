@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { newsletterGroups, newsletterGroupSlugs } from '@/constants/newsletter-groups';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import { NEWSLETTER_FORM_ANCHOR, SUBSCRIBED_COOKIE } from '@/lib/newsletterHandoff';
 import Image from 'next/image';
 import { Mail, ChevronDown, ExternalLink } from 'lucide-react';
 import CountryCombobox from '@/components/common/CountryCombobox';
@@ -20,6 +22,8 @@ type NewsletterIssue = {
 
 type Props = {
   issues: NewsletterIssue[];
+  /** Email carried over from a compact form elsewhere on the site. */
+  initialEmail?: string;
 };
 
 const faqs = [
@@ -41,15 +45,27 @@ const faqs = [
   },
 ];
 
-export default function NewsletterPageClient({ issues }: Props) {
+export default function NewsletterPageClient({ issues, initialEmail = '' }: Props) {
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  // The compact forms elsewhere on the site capture an email and send the
+  // subscriber here to finish. The server reads it off the query string and
+  // hands it down, so the field is already filled in the HTML — no hydration
+  // mismatch, and it survives with JS still booting.
+  const handedOff = Boolean(initialEmail);
+
+  const [email, setEmail] = useState(initialEmail);
   const [name, setName] = useState('');
   const [country, setCountry] = useState('');
   const [website, setWebsite] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+
+  // Email's already in — put the cursor on the next thing they need.
+  useEffect(() => {
+    if (handedOff) nameRef.current?.focus();
+  }, [handedOff]);
   // Default to every group. Defaulting to none would mean a user who ignores
   // the checkboxes silently receives nothing.
   const [categories, setCategories] = useState<string[]>([...newsletterGroupSlugs]);
@@ -96,6 +112,8 @@ export default function NewsletterPageClient({ issues }: Props) {
         return;
       }
 
+      // Signup actually completed here, so the inline card can stop asking.
+      Cookies.set(SUBSCRIBED_COOKIE, 'true', { expires: 365 });
       router.push('/newsletter-success');
     } catch {
       setError('An unexpected error occurred');
@@ -129,10 +147,17 @@ export default function NewsletterPageClient({ issues }: Props) {
             Singapore. Real openings only — no filler, no general jobs padding the list.
           </p>
 
+          {handedOff && (
+            <p className="mt-6 mx-auto max-w-lg rounded-xl border border-blue-200 bg-blue-50/70 px-4 py-2.5 text-sm text-[#1E40AF]">
+              Almost there — add your name and pick the roles you want.
+            </p>
+          )}
+
           {/* Inline signup form */}
           <form
+            id={NEWSLETTER_FORM_ANCHOR}
             onSubmit={handleSubmit}
-            className="mt-10 max-w-lg mx-auto"
+            className="mt-10 max-w-lg mx-auto scroll-mt-24"
           >
             <input
               type="text"
@@ -148,6 +173,7 @@ export default function NewsletterPageClient({ issues }: Props) {
             <div className="flex flex-col gap-3">
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
+                  ref={nameRef}
                   type="text"
                   aria-label="First name"
                   placeholder="First name"

@@ -1,62 +1,42 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore } from 'react';
+import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { Mail } from 'lucide-react';
+import { SUBSCRIBED_COOKIE, looksLikeEmail, newsletterHandoffHref } from '@/lib/newsletterHandoff';
+
+/** Cookies are client-only, and this one can't change while the page is open. */
+const noopSubscribe = () => () => {};
+const isSubscribed = () => Cookies.get(SUBSCRIBED_COOKIE) === 'true';
+const isSubscribedOnServer = () => false;
 
 export default function NewsletterCard() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
-  const [website, setWebsite] = useState('');
-  const [country, setCountry] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (Cookies.get('kr_subscribed') === 'true') {
-      setSubmitted(true);
-      return;
-    }
-    fetch('/api/geo').then((r) => r.json()).then((d) => {
-      if (d.country) setCountry(d.country);
-    }).catch(() => {});
-  }, []);
+  // The cookie is set on /newsletter once the signup actually completes — not
+  // here, since this card only hands the email over. Read via
+  // useSyncExternalStore so the server snapshot is explicit: no hydration
+  // mismatch, no setState in an effect.
+  const subscribed = useSyncExternalStore(noopSubscribe, isSubscribed, isSubscribedOnServer);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Hands off to /newsletter rather than subscribing here, so the subscriber
+  // picks their categories instead of being opted into all four by default.
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!/\S+@\S+\.\S+/.test(email)) {
+    if (!looksLikeEmail(email)) {
       setError('Enter a valid email.');
       return;
     }
 
-    setLoading(true);
-
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, website, location: country }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || 'Something went wrong.');
-        return;
-      }
-
-      Cookies.set('kr_subscribed', 'true', { expires: 365 });
-      setSubmitted(true);
-    } catch {
-      setError('Unexpected error. Try again.');
-    } finally {
-      setLoading(false);
-    }
+    router.push(newsletterHandoffHref(email));
   };
 
-  if (submitted) return null;
+  if (subscribed) return null;
 
   return (
     <div className="flex items-center gap-4 p-5 rounded-xl border border-dashed border-blue-200 bg-gradient-to-r from-blue-50/60 to-white">
@@ -72,16 +52,6 @@ export default function NewsletterCard() {
 
       <form onSubmit={handleSubmit} className="flex items-center gap-2 shrink-0">
         <input
-          type="text"
-          name="website"
-          value={website}
-          onChange={(e) => setWebsite(e.target.value)}
-          tabIndex={-1}
-          autoComplete="off"
-          className="hidden"
-          aria-hidden="true"
-        />
-        <input
           type="email"
           value={email}
           required
@@ -92,10 +62,9 @@ export default function NewsletterCard() {
         />
         <button
           type="submit"
-          disabled={loading}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition disabled:opacity-60 whitespace-nowrap"
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition whitespace-nowrap"
         >
-          {loading ? '...' : 'Subscribe'}
+          Subscribe
         </button>
       </form>
     </div>

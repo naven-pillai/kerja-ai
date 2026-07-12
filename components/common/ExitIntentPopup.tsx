@@ -4,12 +4,10 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 import { getCookie, setCookie } from '@/utils/cookies';
-import CountryCombobox from '@/components/common/CountryCombobox';
-import { getCountryList } from '@/utils/getCountries';
+import { looksLikeEmail, newsletterHandoffHref } from '@/lib/newsletterHandoff';
 
 const COOKIE_NAME = 'kr_exit_popup_dismissed';
 const COOKIE_DAYS = 90;
-const countries = getCountryList();
 
 const OWN_HOSTS = ['kerja-ai.com', 'www.kerja-ai.com', 'localhost'];
 
@@ -47,26 +45,10 @@ export default function ExitIntentPopup() {
 
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState('');
-  const [country, setCountry] = useState('');
-  const [website, setWebsite] = useState(''); // honeypot
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   // Stores the external URL the user was heading to
   const pendingUrlRef = useRef<string | null>(null);
-
-  // Auto-detect country
-  useEffect(() => {
-    fetch('/api/geo')
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.country) {
-          const found = countries.find((c) => c.code === d.country);
-          if (found) setCountry(found.name);
-        }
-      })
-      .catch(() => {});
-  }, []);
 
   const dismiss = useCallback(() => {
     setVisible(false);
@@ -123,46 +105,27 @@ export default function ExitIntentPopup() {
     };
   }, [pathname]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // Hands off to /newsletter rather than subscribing here, so the subscriber
+  // picks their categories instead of being opted into all four by default.
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
 
-    if (!/\S+@\S+\.\S+/.test(email)) {
+    if (!looksLikeEmail(email)) {
       setError('Please enter a valid email address.');
       return;
     }
 
-    setLoading(true);
+    // If they were heading somewhere, let them go.
+    const pendingUrl = pendingUrlRef.current;
+    pendingUrlRef.current = null;
+    setVisible(false);
+    setCookie(COOKIE_NAME, '1', COOKIE_DAYS);
 
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, location: country, website }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || 'An error occurred');
-        return;
-      }
-
-      // If they were heading somewhere, let them go after subscribing
-      const pendingUrl = pendingUrlRef.current;
-      pendingUrlRef.current = null;
-      setVisible(false);
-      setCookie(COOKIE_NAME, '1', COOKIE_DAYS);
-
-      if (pendingUrl) {
-        window.open(pendingUrl, '_blank', 'noopener');
-      }
-      router.push('/newsletter-success');
-    } catch {
-      setError('An unexpected error occurred');
-    } finally {
-      setLoading(false);
+    if (pendingUrl) {
+      window.open(pendingUrl, '_blank', 'noopener');
     }
+    router.push(newsletterHandoffHref(email));
   };
 
   if (!visible) return null;
@@ -204,35 +167,21 @@ export default function ExitIntentPopup() {
             onSubmit={handleSubmit}
             className="flex flex-col gap-3 pt-2"
           >
-            {/* Honeypot */}
-            <input
-              type="text"
-              name="website"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-              tabIndex={-1}
-              autoComplete="off"
-              className="hidden"
-              aria-hidden="true"
-            />
-
             <input
               type="email"
               required
+              aria-label="Email address"
               placeholder="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-5 py-3 rounded-full border border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1D4ED8] text-sm"
             />
 
-            <CountryCombobox selected={country} onChange={setCountry} />
-
             <button
               type="submit"
-              disabled={loading}
-              className="w-full bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-6 py-3 rounded-full text-sm font-semibold transition disabled:opacity-60 cursor-pointer"
+              className="w-full bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-6 py-3 rounded-full text-sm font-semibold transition cursor-pointer"
             >
-              {loading ? 'Subscribing...' : 'Send Me Jobs — It\u2019s Free'}
+              {'Send Me Jobs — It\u2019s Free'}
             </button>
           </form>
 

@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import NewsletterPageClient from '@/components/newsletter/NewsletterPageClient';
 
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
   title: 'Newsletter — Weekly AI & Data Jobs, MY & SG',
   description:
@@ -59,6 +57,9 @@ async function getNewsletterIssues() {
           Accept: 'application/json',
           Authorization: `Bearer ${API_KEY}`,
         },
+        // Reading ?email= makes this route render per request. Cache the one
+        // expensive part so that costs a render, not a MailerLite round-trip.
+        next: { revalidate: 3600 },
       }
     );
 
@@ -146,8 +147,17 @@ const webPageStructuredData = {
   },
 };
 
-export default async function NewsletterPage() {
-  const issues = await getNewsletterIssues();
+export default async function NewsletterPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ email?: string }>;
+}) {
+  const [issues, params] = await Promise.all([getNewsletterIssues(), searchParams]);
+
+  // Carried over from a compact form elsewhere on the site. Capped, and the
+  // API validates it properly on submit — this only prefills a field.
+  const initialEmail = (params.email ?? '').trim().slice(0, 320);
+
   return (
     <>
       <script
@@ -162,7 +172,7 @@ export default async function NewsletterPage() {
           __html: JSON.stringify(webPageStructuredData),
         }}
       />
-      <NewsletterPageClient issues={issues} />
+      <NewsletterPageClient issues={issues} initialEmail={initialEmail} />
     </>
   );
 }
