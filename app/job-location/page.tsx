@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { jobLocations } from '@/constants/job-filters';
 import { slugify } from '@/lib/slugify';
+import { OG_IMAGES } from '@/lib/seo';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kerja-ai.com';
 
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
     description: 'AI, machine learning and data jobs in Malaysia and Singapore — compare RM and SGD offers on Kerja AI.',
     url: `${BASE_URL}/job-location`,
     type: 'website',
+    images: OG_IMAGES,
   },
 };
 

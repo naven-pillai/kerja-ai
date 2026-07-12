@@ -13,10 +13,25 @@ import { shouldShowCity, MALAYSIAN_CITY_REGIONS } from '@/lib/formatLocation';
  * office, so claiming a physical locality would misrepresent it (Google expects
  * TELECOMMUTE + applicantLocationRequirements for those instead).
  */
+/**
+ * Google's JobPosting spec asks for addressCountry as an ISO 3166-1 alpha-2
+ * code, not a display name. It tolerates "Malaysia", but the code is what the
+ * spec actually says, so emit that and fall back to the raw value if we meet a
+ * country we don't know.
+ */
+const COUNTRY_CODES: Record<string, string> = {
+  malaysia: 'MY',
+  singapore: 'SG',
+};
+
+function toCountryCode(country: string): string {
+  return COUNTRY_CODES[country.trim().toLowerCase()] ?? country;
+}
+
 function buildAddress(country: string, city: string | null | undefined, isFullyRemote: boolean) {
   const address: Record<string, string> = {
     '@type': 'PostalAddress',
-    addressCountry: country,
+    addressCountry: toCountryCode(country),
   };
 
   if (!isFullyRemote && shouldShowCity(country, city)) {
@@ -109,6 +124,7 @@ export default function JobPostingStructuredData({
   applyUrl,
   salary,
   remoteType,
+  identifier,
 }: {
   title: string;
   description: string;
@@ -118,8 +134,13 @@ export default function JobPostingStructuredData({
   hiringOrganization: {
     name: string;
     logo: string;
+    /** Our own company page. Used as a fallback identity link only. */
     url: string;
+    /** The employer's own website. What sameAs is actually supposed to point at. */
+    website?: string | null;
   };
+  /** Stable id for the posting — Google recommends one so it can dedupe. */
+  identifier?: string | null;
   jobLocation: string | string[]; // ⬅️ updated
   /** Malaysian city, if set. Feeds addressLocality/addressRegion. */
   city?: string | null;
@@ -158,12 +179,23 @@ export default function JobPostingStructuredData({
     hiringOrganization: {
       '@type': 'Organization',
       name: hiringOrganization.name,
-      sameAs: hiringOrganization.url,
+      // sameAs is meant to identify the employer, so it should be the
+      // employer's own site. Our /companies page is only a fallback for the
+      // employers we have no website on record for.
+      sameAs: hiringOrganization.website?.trim() || hiringOrganization.url,
       logo: hiringOrganization.logo,
     },
     directApply: true,
     url: applyUrl,
   };
+
+  if (identifier) {
+    schema.identifier = {
+      '@type': 'PropertyValue',
+      name: hiringOrganization.name,
+      value: identifier,
+    };
+  }
 
   if (isFullyRemote) {
     schema.jobLocationType = 'TELECOMMUTE';
@@ -245,7 +277,7 @@ export default function JobPostingStructuredData({
     }
     schema.jobLocation = apacDefault.map(c => ({
       '@type': 'Place',
-      address: { '@type': 'PostalAddress', addressCountry: c },
+      address: { '@type': 'PostalAddress', addressCountry: toCountryCode(c) },
     }));
   }
 

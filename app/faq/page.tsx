@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import FAQPageClient from "@/components/pages/FAQPageClient";
+import { OG_IMAGES } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "FAQ — AI & Data Jobs in Malaysia & Singapore",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
     url: "https://kerja-ai.com/faq",
     siteName: "Kerja AI",
     type: "website",
+    images: OG_IMAGES,
   },
   alternates: { canonical: "https://kerja-ai.com/faq" },
 };

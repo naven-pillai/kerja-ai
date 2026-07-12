@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGES } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact — AI & Data Jobs, Malaysia & Singapore",
@@ -11,5 +12,6 @@ export const metadata: Metadata = {
     url: "https://kerja-ai.com/contact",
     siteName: "Kerja AI",
     type: "website",
+    images: OG_IMAGES,
   },
 };

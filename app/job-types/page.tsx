@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { jobTypes } from '@/constants/job-filters';
 import { slugify } from '@/lib/slugify';
+import { OG_IMAGES } from '@/lib/seo';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kerja-ai.com';
 
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
     description: 'Full-time, part-time, contract, freelance, and internship AI and data roles in Malaysia and Singapore.',
     url: `${BASE_URL}/job-types`,
     type: 'website',
+    images: OG_IMAGES,
   },
 };
 

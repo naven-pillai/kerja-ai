@@ -8,6 +8,7 @@ import { JobWithCompany } from '@/types/custom';
 import { jobTypes, jobCategories, jobLocations } from '@/constants/job-filters';
 import { slugify } from '@/lib/slugify';
 import { slugify as catSlugify } from '@/utils/slugify';
+import { OG_IMAGES, TWITTER_IMAGES } from '@/lib/seo';
 
 export const revalidate = 3600;
 
@@ -35,8 +36,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, type: 'website' },
-    twitter: { card: 'summary_large_image', title, description },
+    openGraph: { title, description, url, type: 'website', images: OG_IMAGES },
+    twitter: { card: 'summary_large_image', title, description, images: TWITTER_IMAGES },
   };
 }
 

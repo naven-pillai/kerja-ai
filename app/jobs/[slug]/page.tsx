@@ -38,7 +38,7 @@ const getJob = cache(async (slug: string) => {
       seo_title, seo_description,
       job_type, job_category, job_location, city, remote_type, tags,
       min_salary, max_salary, currency,
-      company:companies(name, slug, logo_url)
+      company:companies(name, slug, logo_url, website)
     `)
     .eq('slug', slug)
     .maybeSingle();
@@ -223,7 +223,9 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
           name: companyName,
           logo: companyLogo,
           url: `https://kerja-ai.com/companies/${companySlug}`,
+          website: job.company?.website,
         }}
+        identifier={job.slug}
         jobLocation={jobLocationArray}
         city={job.city}
         remoteType={job.remote_type}

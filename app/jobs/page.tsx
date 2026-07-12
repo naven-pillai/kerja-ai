@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import JobsContentPage from '@/components/jobs/JobsContentPage';
+import CollectionStructuredData from '@/components/seo/CollectionStructuredData';
 import { createSupabasePublicClient } from '@/lib/supabase-public';
 import { JobWithCompany } from '@/types/custom';
 
@@ -49,5 +50,14 @@ export default async function JobsPage({
     (j) => !j.expires_at || dayjs().isBefore(dayjs(j.expires_at))
   );
 
-  return <JobsContentPage initialKeyword={q ?? ''} jobs={jobs} loadError={Boolean(error)} />;
+  return (
+    <>
+      <CollectionStructuredData
+        name="AI, ML & Data Jobs in Malaysia & Singapore"
+        description="AI, machine learning and data jobs across Malaysia and Singapore."
+        path="/jobs"
+      />
+      <JobsContentPage initialKeyword={q ?? ''} jobs={jobs} loadError={Boolean(error)} />
+    </>
+  );
 }

@@ -1,4 +1,6 @@
 import BlogContent from '@/components/blog/BlogContentPage';
+import CollectionStructuredData from '@/components/seo/CollectionStructuredData';
+import { OG_IMAGES } from '@/lib/seo';
 
 export const metadata = {
   title: 'AI Career Guides for Malaysia & Singapore',
@@ -10,9 +12,19 @@ export const metadata = {
     url: 'https://kerja-ai.com/blog',
     siteName: 'Kerja AI',
     type: 'website',
+    images: OG_IMAGES,
   },
 };
 
 export default function BlogPage() {
-  return <BlogContent />;
+  return (
+    <>
+      <CollectionStructuredData
+        name="AI Career Guides for Malaysia & Singapore"
+        description="Guides on breaking into AI, machine learning and data roles in Malaysia and Singapore."
+        path="/blog"
+      />
+      <BlogContent />
+    </>
+  );
 }
