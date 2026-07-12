@@ -187,7 +187,9 @@ export default async function CategoryPage({
           </nav>
 
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            <span className="text-[#1D4ED8]">{name}</span> Jobs in Malaysia &amp; Singapore
+            {/* String expression, not JSX text: a text node holding an entity
+                loses its leading space, gluing the heading to {name}. */}
+            <span className="text-[#1D4ED8]">{name}</span>{' Jobs in Malaysia & Singapore'}
           </h1>
           <p className="mt-3 text-gray-500 max-w-2xl leading-relaxed">
             {jobs.length > 0
