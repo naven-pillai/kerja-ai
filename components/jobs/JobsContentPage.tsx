@@ -6,6 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { SlidersHorizontal, X, SearchX, ChevronDown, Sparkles } from 'lucide-react';
 import { JobWithCompany } from '@/types/custom';
 import { Filters } from '@/types/filters';
+import { jobMatchesKeyword } from '@/lib/jobSearch';
 
 import JobCard from '@/components/common/JobCard';
 import JobsSidebar from '@/components/jobs/JobsSidebar';
@@ -59,10 +60,9 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
     let results = [...allJobs];
 
     if (filters.keyword) {
-      const kw = filters.keyword.toLowerCase();
-      results = results.filter(
-        (j) => j.title.toLowerCase().includes(kw) || j.company?.name?.toLowerCase().includes(kw)
-      );
+      // Searches title, company, categories, tags, type, location, city and
+      // remote type — see lib/jobSearch.ts for why title-only was broken.
+      results = results.filter((j) => jobMatchesKeyword(j, filters.keyword));
     }
     if (filters.category) {
       results = results.filter((j) => j.job_category?.includes(filters.category));
