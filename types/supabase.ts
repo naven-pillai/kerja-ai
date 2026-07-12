@@ -562,6 +562,7 @@ export type Database = {
       }
       newsletter_subscribers: {
         Row: {
+          categories: string[]
           country: string | null
           email: string
           id: string
@@ -570,6 +571,7 @@ export type Database = {
           subscribed_at: string | null
         }
         Insert: {
+          categories?: string[]
           country?: string | null
           email: string
           id?: string
@@ -578,6 +580,7 @@ export type Database = {
           subscribed_at?: string | null
         }
         Update: {
+          categories?: string[]
           country?: string | null
           email?: string
           id?: string

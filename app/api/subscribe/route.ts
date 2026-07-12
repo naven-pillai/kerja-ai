@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getResend } from '@/lib/resend'
 import { getSupabaseAdmin } from '@/lib/supabase-admin'
+import { resolveGroupIds, subscribe as mailerliteSubscribe } from '@/lib/mailerlite'
+import { isNewsletterGroupSlug, newsletterGroupSlugs } from '@/constants/newsletter-groups'
 import {
   isValidEmail,
   normalizeOptionalString,
@@ -21,6 +23,19 @@ function escapeHtml(value: unknown): string {
     .replace(/'/g, '&#039;');
 }
 
+/**
+ * Accept only slugs we know about. An unrecognised slug can't be silently
+ * passed through — it would resolve to no MailerLite group, and the subscriber
+ * would land in nothing and never receive an email.
+ *
+ * No categories (the compact email-only forms) means "everything".
+ */
+function normalizeCategories(input: unknown): string[] {
+  if (!Array.isArray(input)) return [...newsletterGroupSlugs];
+  const valid = input.filter(isNewsletterGroupSlug);
+  return valid.length > 0 ? Array.from(new Set(valid)) : [...newsletterGroupSlugs];
+}
+
 export async function POST(req: Request) {
   const crossSiteResponse = rejectCrossSiteRequest(req);
   if (crossSiteResponse) return crossSiteResponse;
@@ -35,8 +50,9 @@ export async function POST(req: Request) {
   });
   if (rateLimitResponse) return rateLimitResponse;
 
-  const { email, name, location, website } = await req.json()
+  const { email, name, location, website, categories } = await req.json()
 
+  // Honeypot — bots fill hidden fields. Report success so they don't retry.
   if (website) {
     return NextResponse.json({ message: 'Successfully subscribed!' })
   }
@@ -44,6 +60,7 @@ export async function POST(req: Request) {
   const normalizedEmail = normalizeOptionalString(email, 320)?.toLowerCase() ?? null;
   const normalizedName = normalizeOptionalString(name, 120);
   const normalizedLocation = normalizeOptionalString(location, 120);
+  const normalizedCategories = normalizeCategories(categories);
 
   if (!normalizedEmail) {
     return NextResponse.json({ message: 'Email is required' }, { status: 400 })
@@ -53,73 +70,81 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Invalid email address' }, { status: 400 })
   }
 
-  const API_KEY = process.env.MAILERLITE_API_KEY
-  const GROUP_ID = process.env.MAILERLITE_GROUP_ID
-
-  if (!API_KEY || !GROUP_ID) {
-    return NextResponse.json(
-      { message: 'Missing MAILERLITE_API_KEY or MAILERLITE_GROUP_ID in environment' },
-      { status: 500 }
-    )
+  if (!process.env.MAILERLITE_API_KEY) {
+    console.error('MAILERLITE_API_KEY is not configured');
+    return NextResponse.json({ message: 'Subscription is unavailable right now' }, { status: 500 })
   }
 
   try {
-    // 1. Subscribe to MailerLite
-    const res = await fetch('https://connect.mailerlite.com/api/subscribers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
-      },
-      body: JSON.stringify({
-        email: normalizedEmail,
-        name: normalizedName,
-        resubscribe: true,
-        groups: [GROUP_ID],
-        fields: {
-          country: normalizedLocation || '',
-        },
-      }),
-    })
+    // 1. Resolve our slugs to MailerLite group ids by NAME.
+    //
+    // Falls back to the legacy single MAILERLITE_GROUP_ID when the per-category
+    // groups don't exist yet, so this ships safely BEFORE the MailerLite groups
+    // are created — signups keep working exactly as they do today.
+    let groupIds = await resolveGroupIds(normalizedCategories);
 
-    const data = await res.json()
-
-    if (!res.ok) {
-      // Log upstream (MailerLite) detail server-side rather than reflecting it.
-      console.error('MailerLite subscribe failed:', res.status, data)
-      return NextResponse.json({ message: 'Subscription failed' }, { status: res.status })
+    if (groupIds.length === 0) {
+      const legacy = process.env.MAILERLITE_GROUP_ID;
+      if (legacy) {
+        groupIds = [legacy];
+      } else {
+        console.warn(
+          '[subscribe] no MailerLite groups matched',
+          normalizedCategories,
+          '— subscriber will be created with no group'
+        );
+      }
     }
 
-    // 2. Save to Supabase
+    const result = await mailerliteSubscribe({
+      email: normalizedEmail,
+      name: normalizedName,
+      country: normalizedLocation,
+      groupIds,
+    });
+
+    if (!result.ok) {
+      // Log upstream detail server-side rather than reflecting it to the caller.
+      console.error('MailerLite subscribe failed:', result.status, result.detail)
+      return NextResponse.json({ message: 'Subscription failed' }, { status: 502 })
+    }
+
+    // 2. Save to Supabase.
     const { error: supabaseError } = await getSupabaseAdmin().from('newsletter_subscribers').upsert(
       {
         email: normalizedEmail,
         name: normalizedName,
         country: normalizedLocation,
+        categories: normalizedCategories,
         source: 'website',
       },
       { onConflict: 'email' }
     );
 
     if (supabaseError) {
+      // MailerLite already has them, so the subscription itself succeeded —
+      // don't tell the user it failed just because our own copy didn't save.
       console.error('Supabase newsletter upsert error:', supabaseError);
-      return NextResponse.json({ message: 'Failed to save subscriber' }, { status: 500 })
     }
 
-    // 3. Send email notification to admin
-    await getResend().emails.send({
-      from: 'Kerja AI <noreply@kerja-ai.com>',
-      to: ADMIN_EMAIL,
-      subject: '🆕 New Newsletter Subscriber',
-      html: `
-        <p><strong>Name:</strong> ${escapeHtml(normalizedName) || '-'}</p>
-        <p><strong>Email:</strong> ${escapeHtml(normalizedEmail)}</p>
-        <p><strong>Location:</strong> ${escapeHtml(normalizedLocation) || 'Unknown'}</p>
-        <hr />
-        <p>Kerja AI.com</p>
-      `,
-    })
+    // 3. Notify admin (best-effort — never fail the signup over this).
+    try {
+      await getResend().emails.send({
+        from: 'Kerja AI <noreply@kerja-ai.com>',
+        to: ADMIN_EMAIL,
+        subject: '🆕 New Newsletter Subscriber',
+        html: `
+          <p><strong>Name:</strong> ${escapeHtml(normalizedName) || '-'}</p>
+          <p><strong>Email:</strong> ${escapeHtml(normalizedEmail)}</p>
+          <p><strong>Location:</strong> ${escapeHtml(normalizedLocation) || 'Unknown'}</p>
+          <p><strong>Categories:</strong> ${escapeHtml(normalizedCategories.join(', '))}</p>
+          <hr />
+          <p>kerja-ai.com</p>
+        `,
+      })
+    } catch (notifyError) {
+      console.error('Admin notification failed (subscriber was still saved):', notifyError)
+    }
 
     return NextResponse.json({ message: 'Successfully subscribed!' })
   } catch (error) {

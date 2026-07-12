@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { newsletterGroups, newsletterGroupSlugs } from '@/constants/newsletter-groups';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Mail, ChevronDown, ExternalLink } from 'lucide-react';
@@ -49,6 +50,14 @@ export default function NewsletterPageClient({ issues }: Props) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  // Default to every group. Defaulting to none would mean a user who ignores
+  // the checkboxes silently receives nothing.
+  const [categories, setCategories] = useState<string[]>([...newsletterGroupSlugs]);
+
+  const toggleCategory = (slug: string) =>
+    setCategories((prev) =>
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
+    );
 
   useEffect(() => {
     fetch('/api/geo')
@@ -77,7 +86,7 @@ export default function NewsletterPageClient({ issues }: Props) {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name, location: country, website }),
+        body: JSON.stringify({ email, name, location: country, website, categories }),
       });
 
       const data = await res.json();
@@ -166,10 +175,55 @@ export default function NewsletterPageClient({ issues }: Props) {
                 />
               </div>
 
+              {/* Category picker. Defaults to everything selected — a user who
+                  ignores this should still get the full digest, not silence. */}
+              <fieldset className="w-full text-left rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+                <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                  What do you want to hear about?
+                </legend>
+
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  {newsletterGroups.map((group) => {
+                    const checked = categories.includes(group.slug);
+                    return (
+                      <label
+                        key={group.slug}
+                        className={`flex cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition ${
+                          checked
+                            ? 'border-[#1D4ED8]/40 bg-blue-50/60'
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleCategory(group.slug)}
+                          className="mt-0.5 h-4 w-4 shrink-0 accent-[#1D4ED8] cursor-pointer"
+                        />
+                        <span className="min-w-0">
+                          <span className="block text-sm font-medium text-gray-900">
+                            {group.label}
+                          </span>
+                          <span className="block text-xs text-gray-500 leading-snug">
+                            {group.description}
+                          </span>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {categories.length === 0 && (
+                  <p className="mt-2 text-xs text-amber-700">
+                    Pick at least one — otherwise there&apos;s nothing to send you.
+                  </p>
+                )}
+              </fieldset>
+
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-[0.98] text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-all disabled:opacity-60 cursor-pointer shadow-sm"
+                disabled={loading || categories.length === 0}
+                className="w-full bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-[0.98] text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer shadow-sm"
               >
                 {loading ? 'Subscribing...' : 'Subscribe — It\'s Free'}
               </button>
