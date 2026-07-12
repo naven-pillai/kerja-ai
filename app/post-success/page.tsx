@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Job submitted — pending review | Kerja-AI',
+  title: 'Job Submitted — Pending Review',
   robots: { index: false, follow: false },
 };
 

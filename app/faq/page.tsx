@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import FAQPageClient from "@/components/pages/FAQPageClient";
 
 export const metadata: Metadata = {
-  title: "FAQ | Kerja-AI — AI & Data Jobs in Malaysia & Singapore",
+  title: "FAQ — AI & Data Jobs in Malaysia & Singapore",
   description:
     "Straight answers about Kerja-AI, the AI and data job board for Malaysia and Singapore — is it free, are the jobs real, and how it differs from JobStreet.",
   openGraph: {

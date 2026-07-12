@@ -3,7 +3,7 @@ import WhyPostHere from '@/components/post-a-job/WhyPostHere';
 import { SITE } from '@/config/site';
 
 export const metadata = {
-  title: `Post an AI or Data Job in Malaysia & Singapore | ${SITE.name}`,
+  title: 'Post an AI or Data Job in Malaysia & Singapore',
   description:
     'Reach people actively looking for AI, machine learning and data jobs in Malaysia and Singapore — not the whole internet. Posting is free at launch.',
   // Thin marketing variant of /post-job — canonicalize to the real form.

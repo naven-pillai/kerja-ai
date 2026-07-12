@@ -10,8 +10,10 @@ import HomeScrollFix from '@/components/home/HomeScrollFix';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'AI & Data Jobs in Malaysia & Singapore | Kerja-AI 2026',
-  description: 'AI, machine learning and data jobs in Malaysia and Singapore. TalentCorp projects ~697,000 roles will be reshaped by AI — Kerja-AI lists the ones hiring now.',
+  // `absolute` bypasses the layout template — otherwise this would render as
+  // "Kerja AI - ... - Kerja AI".
+  title: { absolute: 'Kerja AI - AI, ML & Data Jobs in Malaysia & Singapore' },
+  description: 'AI, machine learning and data jobs in Malaysia and Singapore. Kerja-AI is the board built only for these roles — real openings, salary context in RM and SGD.',
   alternates: {
     canonical: 'https://kerja-ai.com',
   },

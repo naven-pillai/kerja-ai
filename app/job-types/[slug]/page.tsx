@@ -26,7 +26,8 @@ export async function generateMetadata({
   const name = jobTypes.find((t) => slugify(t) === slug);
   if (!name) return {};
 
-  const title = `${name} AI & Data Jobs in Malaysia & Singapore (2026)`;
+  // Dropped the year: the layout now appends " - Kerja AI" (11 chars).
+  const title = `${name} AI & Data Jobs in Malaysia & Singapore`;
   const description = `${name} AI, machine learning and data jobs in Malaysia and Singapore. Kerja-AI is the niche board for these roles — post one free, browse the rest.`;
   const url = `${BASE_URL}/job-types/${slug}`;
 

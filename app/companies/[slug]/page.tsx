@@ -27,18 +27,26 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
   if (!company) {
     return {
-      title: 'Company Not Found | Kerja-AI',
+      title: 'Company Not Found',
       description: 'We could not find this company on Kerja-AI. Browse companies hiring AI and data talent in Malaysia and Singapore instead.',
     };
   }
 
-  const description =
-    company.description?.slice(0, 160) ??
-    company.tagline ??
-    `See open AI, machine learning and data roles at ${company.name} on Kerja-AI.`;
+  // Google truncates around 160. A hard slice(0,160) overran once entities were
+  // encoded, and cut mid-word — trim at a word boundary instead.
+  const clamp = (text: string, max = 158) =>
+    text.length <= max ? text : `${text.slice(0, max - 1).replace(/\s+\S*$/, '')}…`;
+
+  const description = clamp(
+    company.description ??
+      company.tagline ??
+      `See open AI, machine learning and data roles at ${company.name} on Kerja-AI, the job board for AI and data careers in Malaysia and Singapore.`
+  );
 
   return {
-    title: `${company.name} AI & Data Jobs | Kerja-AI`,
+    // Bare company name — the root layout's template appends " - Kerja AI",
+    // giving "Bjak - Kerja AI".
+    title: company.name,
     description,
     alternates: { canonical: `https://kerja-ai.com/companies/${slug}` },
   };

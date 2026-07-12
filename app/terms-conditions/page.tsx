@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions for Kerja-AI — AI & Data Job Board',
+  title: 'Terms & Conditions',
   description:
     'Terms & Conditions for Kerja-AI — the job board for AI, machine learning and data careers in Malaysia and Singapore. Listings, IP, privacy, and user conduct.',
   alternates: {

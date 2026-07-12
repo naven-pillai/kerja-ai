@@ -26,12 +26,13 @@ export async function generateMetadata({
   const name = jobCategories.find((c) => slugify(c) === slug);
   if (!name) return {};
 
-  // Long category names blow past the ~60-char title limit with the year, so
-  // only append (2026) for shorter names.
+  // The root layout appends " - Kerja AI" (11 chars), leaving 49 for the page
+  // title. Long category names ("Machine Learning Engineering" = 28) can't also
+  // carry the full country names, so they fall back to MY & SG.
   const title =
-    name.length > 22
-      ? `${name} Jobs in Malaysia & Singapore`
-      : `${name} Jobs in Malaysia & Singapore (2026)`;
+    name.length > 19
+      ? `${name} Jobs in MY & SG`
+      : `${name} Jobs in Malaysia & Singapore`;
   const description = `${name} jobs across Malaysia and Singapore. Kerja-AI is the board built only for AI and data careers, with new roles added every week.`;
   const url = `${BASE_URL}/job-categories/${slug}`;
 

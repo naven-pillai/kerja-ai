@@ -20,7 +20,17 @@ const titillium = Titillium_Web({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kerja-ai.com'),
-  title: 'Kerja-AI | AI & Data Careers in Malaysia & Singapore',
+  // Every page sets only its own title; the template appends the brand. That
+  // keeps the "<page> - Kerja AI" convention in one place instead of repeating
+  // the suffix across 20+ files (where it had already drifted into three
+  // different separators).
+  //
+  // Budget: Google truncates around 60 chars. " - Kerja AI" costs 11, so a page
+  // title has 49 to work with.
+  title: {
+    default: 'Kerja AI - AI, ML & Data Jobs in Malaysia & Singapore',
+    template: '%s - Kerja AI',
+  },
   description:
     'The job board for AI, machine learning and data careers in Malaysia and Singapore. Real roles, salary context in RM and SGD, and zero general-board noise.',
   openGraph: {

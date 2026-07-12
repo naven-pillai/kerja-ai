@@ -4,12 +4,12 @@ import NewsletterPageClient from '@/components/newsletter/NewsletterPageClient';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
+  title: 'Newsletter — Weekly AI & Data Jobs, MY & SG',
   description:
     'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam, one-click unsubscribe.',
   alternates: { canonical: 'https://kerja-ai.com/newsletter' },
   openGraph: {
-    title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
+    title: 'Newsletter — Weekly AI & Data Jobs, MY & SG',
     description:
       'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam.',
     url: 'https://kerja-ai.com/newsletter',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Newsletter | Kerja-AI — Weekly AI & Data Jobs, MY & SG',
+    title: 'Newsletter — Weekly AI & Data Jobs, MY & SG',
     description:
       'One email a week with new AI, machine learning and data jobs across Malaysia and Singapore. Free, no spam.',
     images: ['https://kerja-ai.com/default-og-image-1200x630.png'],

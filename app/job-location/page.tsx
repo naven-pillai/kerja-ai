@@ -6,7 +6,7 @@ import { slugify } from '@/lib/slugify';
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kerja-ai.com';
 
 export const metadata: Metadata = {
-  title: 'AI & Data Jobs by Location: Malaysia & Singapore | Kerja-AI',
+  title: 'AI & Data Jobs by Location: Malaysia & Singapore',
   description:
     'Compare AI, machine learning and data jobs in Malaysia and Singapore — the KL–Singapore corridor — and weigh RM against SGD offers on Kerja-AI.',
   alternates: { canonical: `${BASE_URL}/job-location` },

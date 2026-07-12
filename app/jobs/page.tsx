@@ -4,7 +4,7 @@ import { createSupabasePublicClient } from '@/lib/supabase-public';
 import { JobWithCompany } from '@/types/custom';
 
 export const metadata = {
-  title: 'AI, ML & Data Jobs in Malaysia & Singapore 2026 | Kerja-AI',
+  title: 'AI, ML & Data Jobs in Malaysia & Singapore',
   description:
     'AI, machine learning and data jobs across Malaysia and Singapore. One board built for these roles — filter by category, salary and location, and post free.',
   alternates: {

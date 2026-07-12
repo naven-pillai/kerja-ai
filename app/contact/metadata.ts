@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Kerja-AI — AI & Data Jobs, Malaysia & Singapore",
+  title: "Contact — AI & Data Jobs, Malaysia & Singapore",
   description:
     "Reach Kerja-AI, the AI and data job board for Malaysia and Singapore. Questions, hiring, partnerships or feedback — we reply within 1–2 business days.",
   alternates: { canonical: "https://kerja-ai.com/contact" },
