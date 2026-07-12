@@ -34,7 +34,7 @@ export default function StepTwoJob(props: Props) {
 
   const autoCurrency = useMemo(
     () => (formData ? currencyMap[formData.jobLocation] || 'USD' : 'USD'),
-    [formData?.jobLocation, formData]
+    [formData]
   );
 
   const [currencyLocked, setCurrencyLocked] = useState(() => {
