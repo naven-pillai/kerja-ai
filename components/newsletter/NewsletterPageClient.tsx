@@ -107,8 +107,8 @@ export default function NewsletterPageClient({ issues }: Props) {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50/60 to-white pt-20 pb-16 md:pt-28 md:pb-24">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1D4ED8]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <section className="relative overflow-hidden bg-linear-to-b from-blue-50/60 to-white pt-20 pb-16 md:pt-28 md:pb-24">
+        <div className="absolute top-0 right-0 w-125 h-125 bg-[#1D4ED8]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
         <div className="relative max-w-3xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 bg-white border border-blue-200 rounded-full px-4 py-1.5 mb-6 shadow-sm">
@@ -263,7 +263,7 @@ export default function NewsletterPageClient({ issues }: Props) {
                   className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-[#1D4ED8]/30 hover:shadow-lg transition group"
                 >
                   {/* Screenshot */}
-                  <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
+                  <div className="relative aspect-4/3 bg-gray-100 overflow-hidden">
                     {issue.screenshotUrl ? (
                       <Image
                         src={issue.screenshotUrl}
