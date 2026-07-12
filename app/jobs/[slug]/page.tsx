@@ -75,7 +75,9 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
     const jobName = (job.seo_title?.trim() || job.title).trim();
     const company = job.company?.name?.trim();
 
-    const withCompany = company ? `${jobName} ${company}` : jobName;
+    // "<job> [<company>]" — the brackets separate the two, which a bare space
+    // ran together ("Applied AI Engineer Bjak").
+    const withCompany = company ? `${jobName} [${company}]` : jobName;
     if (withCompany.length <= 49) return withCompany;
     if (jobName.length <= 49) return jobName;
     return `${jobName.slice(0, 48).trimEnd()}…`;
