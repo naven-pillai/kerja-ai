@@ -50,7 +50,7 @@ function Field({ label, value }: { label: string; value?: string | null }) {
   return (
     <div>
       <dt className="text-xs text-gray-500">{label}</dt>
-      <dd className="text-sm text-gray-900 mt-0.5 break-words">{value}</dd>
+      <dd className="text-sm text-gray-900 mt-0.5 wrap-break-wordword">{value}</dd>
     </div>
   );
 }
@@ -132,7 +132,7 @@ export default function StepFourReview({ formData, prevStep, handleSubmit, goToS
                 alt="Company Logo"
                 width={56}
                 height={56}
-                className="rounded-xl object-contain border border-gray-100 flex-shrink-0"
+                className="rounded-xl object-contain border border-gray-100 shrink-0"
               />
             )}
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 flex-1">
@@ -201,7 +201,7 @@ export default function StepFourReview({ formData, prevStep, handleSubmit, goToS
       {/* Validation Summary */}
       {hasErrors && (
         <div className="mx-6 mb-4 p-3 bg-red-50 border border-red-200 text-sm text-red-600 rounded-lg flex items-center gap-2">
-          <CheckCircle className="w-4 h-4 flex-shrink-0" />
+          <CheckCircle className="w-4 h-4 shrink-0" />
           Please fix the highlighted issues above before submitting.
         </div>
       )}

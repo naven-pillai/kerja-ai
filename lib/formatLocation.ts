@@ -54,3 +54,30 @@ export function formatJobLocation(
 
   return countryName;
 }
+
+/**
+ * The location as it should read inside a sentence — a share tweet, say.
+ *
+ * job_location is a list: a role can be open in more than one country. The same
+ * city rule still holds, so:
+ *   Malaysia + Kuala Lumpur -> "Kuala Lumpur, Malaysia"
+ *   Singapore               -> "Singapore"   (city-state; never "Singapore, Singapore")
+ *   Malaysia + Singapore    -> "Malaysia and Singapore"  — a city belongs to only
+ *                              one of them, so naming it would misplace the role
+ *   nothing on record       -> ""            — the caller drops the phrase entirely
+ *                              rather than inventing a location
+ */
+export function formatShareLocation(
+  countries: string | string[] | null | undefined,
+  city: string | null | undefined
+): string {
+  const list = (Array.isArray(countries) ? countries : [countries])
+    .map((c) => (c ?? '').trim())
+    .filter(Boolean);
+
+  if (list.length === 0) return '';
+  if (list.length === 1) return formatJobLocation(list[0], city);
+  if (list.length === 2) return `${list[0]} and ${list[1]}`;
+
+  return `${list.slice(0, -1).join(', ')} and ${list[list.length - 1]}`;
+}

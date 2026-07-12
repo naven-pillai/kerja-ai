@@ -39,7 +39,7 @@ export default function NewsletterCard() {
   if (subscribed) return null;
 
   return (
-    <div className="flex items-center gap-4 p-5 rounded-xl border border-dashed border-blue-200 bg-gradient-to-r from-blue-50/60 to-white">
+    <div className="flex items-center gap-4 p-5 rounded-xl border border-dashed border-blue-200 bg-linear-to-r from-blue-50/60 to-white">
       <div className="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
         <Mail className="w-5 h-5 text-blue-600" />
       </div>

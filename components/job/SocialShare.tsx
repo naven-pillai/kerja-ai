@@ -10,6 +10,8 @@ type Props = {
     title: string;
     slug: string;
     companyName?: string;
+    /** Already formatted, e.g. "Kuala Lumpur, Malaysia" or "Singapore". Empty when unknown. */
+    location?: string;
   };
 };
 
@@ -38,9 +40,20 @@ const platforms = [
 ];
 
 export default function SocialShare({ job }: Props) {
-  const tweetText = job.companyName
-    ? `${job.companyName} is hiring a ${job.title} in Malaysia/Singapore. Apply here:`
-    : `${job.title} role open in Malaysia/Singapore. Apply here:`;
+  // The tweet used to say "in Malaysia/Singapore" for every job, whichever
+  // country it was actually in. Now it names the real one — with the city when
+  // we have it, and nothing at all rather than a guess when we don't.
+  const where = job.location?.trim();
+  const inWhere = where ? ` in ${where}` : '';
+
+  // Trimmed: a handful of titles carry leading/trailing whitespace from the
+  // admin, which showed up in the tweet as "Data Analyst  in Kuala Lumpur".
+  const title = job.title.trim();
+  const company = job.companyName?.trim();
+
+  const tweetText = company
+    ? `${company} is hiring a ${title}${inWhere}. Apply here:`
+    : `${title} role open${inWhere}. Apply here:`;
   const [copied, setCopied] = useState(false);
 
   // Built from the canonical origin rather than window.location.origin, which

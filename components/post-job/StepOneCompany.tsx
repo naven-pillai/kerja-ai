@@ -178,7 +178,7 @@ export default function StepOneCompany({ formData, handleChange, nextStep }: Pro
               <img
                 src={logoPreviewUrl}
                 alt="Company Logo"
-                className="w-16 h-16 rounded-lg object-contain flex-shrink-0"
+                className="w-16 h-16 rounded-lg object-contain shrink-0"
               />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-700 truncate">{formData.companyLogo?.name}</p>
@@ -187,7 +187,7 @@ export default function StepOneCompany({ formData, handleChange, nextStep }: Pro
               <button
                 type="button"
                 onClick={() => handleChange('companyLogo', null)}
-                className="p-1.5 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors flex-shrink-0"
+                className="p-1.5 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>

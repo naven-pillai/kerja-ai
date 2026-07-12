@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { after } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import dayjs from 'dayjs';
-import { formatJobLocation } from '@/lib/formatLocation';
+import { formatJobLocation, formatShareLocation } from '@/lib/formatLocation';
 
 // Components
 import JobHeader from '@/components/job/JobHeader';
@@ -300,7 +300,14 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
               currency: job.currency ?? null,
             }}
           />
-          <SocialShare job={{ title: job.title, slug: job.slug, companyName }} />
+          <SocialShare
+            job={{
+              title: job.title,
+              slug: job.slug,
+              companyName,
+              location: formatShareLocation(jobLocationArray, job.city),
+            }}
+          />
           <NewsletterSidebar />
         </div>
 
@@ -325,7 +332,14 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
               currency: job.currency ?? null,
             }}
           />
-          <SocialShare job={{ title: job.title, slug: job.slug, companyName }} />
+          <SocialShare
+            job={{
+              title: job.title,
+              slug: job.slug,
+              companyName,
+              location: formatShareLocation(jobLocationArray, job.city),
+            }}
+          />
           <NewsletterSidebar />
         </aside>
 
