@@ -376,72 +376,6 @@ export type Database = {
           },
         ]
       }
-      job_ingestion: {
-        Row: {
-          city: string | null
-          country: string | null
-          created_at: string
-          error: string | null
-          extracted: Json | null
-          id: string
-          job_id: string | null
-          raw_company: string | null
-          raw_location: string | null
-          raw_title: string | null
-          source_name: string | null
-          source_url: string
-          status: string
-          updated_at: string
-        }
-        Insert: {
-          city?: string | null
-          country?: string | null
-          created_at?: string
-          error?: string | null
-          extracted?: Json | null
-          id?: string
-          job_id?: string | null
-          raw_company?: string | null
-          raw_location?: string | null
-          raw_title?: string | null
-          source_name?: string | null
-          source_url: string
-          status?: string
-          updated_at?: string
-        }
-        Update: {
-          city?: string | null
-          country?: string | null
-          created_at?: string
-          error?: string | null
-          extracted?: Json | null
-          id?: string
-          job_id?: string | null
-          raw_company?: string | null
-          raw_location?: string | null
-          raw_title?: string | null
-          source_name?: string | null
-          source_url?: string
-          status?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "job_ingestion_job_id_fkey"
-            columns: ["job_id"]
-            isOneToOne: false
-            referencedRelation: "jobs"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "job_ingestion_job_id_fkey"
-            columns: ["job_id"]
-            isOneToOne: false
-            referencedRelation: "jobs_with_payment"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       job_payments: {
         Row: {
           amount: number
@@ -520,6 +454,7 @@ export type Database = {
           paid_at: string | null
           paid_currency: string | null
           remote_type: string
+          search_vector: unknown
           seo_description: string | null
           seo_title: string | null
           slug: string
@@ -554,6 +489,7 @@ export type Database = {
           paid_at?: string | null
           paid_currency?: string | null
           remote_type?: string
+          search_vector?: unknown
           seo_description?: string | null
           seo_title?: string | null
           slug: string
@@ -588,6 +524,7 @@ export type Database = {
           paid_at?: string | null
           paid_currency?: string | null
           remote_type?: string
+          search_vector?: unknown
           seo_description?: string | null
           seo_title?: string | null
           slug?: string
@@ -863,6 +800,19 @@ export type Database = {
           day: string
           views: number
         }[]
+      }
+      jobs_search_vector: {
+        Args: {
+          p_category: string[]
+          p_city: string
+          p_description: string
+          p_job_type: string[]
+          p_location: string[]
+          p_remote_type: string
+          p_tags: string[]
+          p_title: string
+        }
+        Returns: unknown
       }
       monthly_blog_posts: {
         Args: never

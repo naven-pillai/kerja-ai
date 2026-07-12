@@ -37,8 +37,15 @@ type Props = {
 
 export default function JobsContentPage({ initialKeyword = '', jobs, loadError = false }: Props) {
   const [allJobs] = useState<JobWithCompany[]>(jobs);
-  const [filteredJobs, setFilteredJobs] = useState<JobWithCompany[]>(jobs);
   const [activeFilters, setActiveFilters] = useState<Filters>({ ...emptyFilters, keyword: initialKeyword });
+  /**
+   * Ids whose DESCRIPTION matches, from Postgres full-text search.
+   *
+   * Keyed by the query that produced them, so a slow response for "python" can
+   * never be applied to a later search for "rust".
+   */
+  const [descriptionMatches, setDescriptionMatches] =
+    useState<{ query: string; ids: Set<string> }>({ query: '', ids: new Set() });
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -57,40 +64,73 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
   const handleApply = useCallback((filters: Filters) => {
     setVisibleCount(15);
     setActiveFilters(filters);
-    let results = [...allJobs];
-
-    if (filters.keyword) {
-      // Searches title, company, categories, tags, type, location, city and
-      // remote type — see lib/jobSearch.ts for why title-only was broken.
-      results = results.filter((j) => jobMatchesKeyword(j, filters.keyword));
-    }
-    if (filters.category) {
-      results = results.filter((j) => j.job_category?.includes(filters.category));
-    }
-    if (filters.location) {
-      results = results.filter((j) => j.job_location?.includes(filters.location));
-    }
-    if (filters.remoteType) {
-      results = results.filter((j) => j.remote_type === filters.remoteType);
-    }
-    if (filters.jobType) {
-      results = results.filter((j) =>
-        Array.isArray(j.job_type) ? j.job_type.includes(filters.jobType) : j.job_type === filters.jobType
-      );
-    }
-    if (filters.skills) {
-      const tags = filters.skills.toLowerCase().split(',').map((t) => t.trim()).filter(Boolean);
-      results = results.filter((j) => j.tags?.some((t) => tags.includes(t.toLowerCase())));
-    }
-
-    setFilteredJobs(results);
-  }, [allJobs]);
+  }, []);
 
   const handleClear = useCallback(() => {
     setVisibleCount(15);
     setActiveFilters(emptyFilters);
-    setFilteredJobs(allJobs);
-  }, [allJobs]);
+  }, []);
+
+  // Ask Postgres which jobs match the query in their DESCRIPTION body.
+  //
+  // Descriptions are ~4.5 KB of HTML each and the board holds every published
+  // job, so shipping them to the browser just to search them would cost ~0.9 MB
+  // at 200 jobs. The server matches and returns ids only.
+  //
+  // The sidebar already debounces (300ms), so activeFilters.keyword is settled
+  // by the time this runs.
+  useEffect(() => {
+    const q = activeFilters.keyword.trim();
+    // No query: nothing to fetch. The memo below ignores any stale ids because
+    // they're keyed by the query that produced them.
+    if (!q) return;
+
+    const controller = new AbortController();
+
+    fetch(`/api/job-search?q=${encodeURIComponent(q)}`, { signal: controller.signal })
+      .then((r) => (r.ok ? r.json() : { ids: [] }))
+      .then((d: { ids?: string[] }) =>
+        setDescriptionMatches({ query: q, ids: new Set(d.ids ?? []) })
+      )
+      // Network failure or an aborted in-flight request: fall back silently to
+      // the local match rather than blanking the board.
+      .catch(() => {});
+
+    return () => controller.abort();
+  }, [activeFilters.keyword]);
+
+  const filteredJobs = useMemo(() => {
+    let results = allJobs;
+    const f = activeFilters;
+
+    if (f.keyword) {
+      // Only trust description ids that came back for THIS query — a slow
+      // response for an earlier one must not leak into the current results.
+      const descIds =
+        descriptionMatches.query === f.keyword.trim() ? descriptionMatches.ids : null;
+
+      // Local match is instant (title, company, categories, tags, city, ...);
+      // the server adds description-body hits. Union of the two, so typing feels
+      // immediate and description matches fill in a moment later.
+      results = results.filter(
+        (j) => jobMatchesKeyword(j, f.keyword) || (descIds?.has(j.id) ?? false)
+      );
+    }
+    if (f.category) results = results.filter((j) => j.job_category?.includes(f.category));
+    if (f.location) results = results.filter((j) => j.job_location?.includes(f.location));
+    if (f.remoteType) results = results.filter((j) => j.remote_type === f.remoteType);
+    if (f.jobType) {
+      results = results.filter((j) =>
+        Array.isArray(j.job_type) ? j.job_type.includes(f.jobType) : j.job_type === f.jobType
+      );
+    }
+    if (f.skills) {
+      const tags = f.skills.toLowerCase().split(',').map((t) => t.trim()).filter(Boolean);
+      results = results.filter((j) => j.tags?.some((t) => tags.includes(t.toLowerCase())));
+    }
+
+    return results;
+  }, [allJobs, activeFilters, descriptionMatches]);
 
   // Sort displayed jobs
   const displayedJobs = useMemo(() => {
