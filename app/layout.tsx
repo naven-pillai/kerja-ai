@@ -2,6 +2,7 @@ import '@/app/globals.css'
 import Navbar from '@/components/common/Navbar'
 import Footer from '@/components/common/Footer'
 import ClickyAnalytics from '@/components/analytics/ClickyAnalytics'
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from 'sonner'
 import ExitIntentPopup from '@/components/common/ExitIntentPopup'
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="min-h-[80vh]">{children}</main>
         <Footer />
         <ClickyAnalytics />
+        <GoogleAnalytics />
         <SpeedInsights />
         <Toaster position="top-center" richColors />
         <ExitIntentPopup />
