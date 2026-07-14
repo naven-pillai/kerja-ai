@@ -27,9 +27,9 @@ export default function NewsletterSidebar() {
   return (
     <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100">
       {/* Hero band */}
-      <div className="relative bg-gradient-to-br from-[#0b1220] via-[#0d3b3a] to-[#1D4ED8] px-5 pt-5 pb-6">
+      <div className="relative bg-linear-to-br from-[#0b1220] via-[#0d3b3a] to-[#1D4ED8] px-5 pt-5 pb-6">
         {/* Subtle radial glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(20,184,166,0.25),_transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(20,184,166,0.25),transparent_70%)] pointer-events-none" />
 
         <div className="relative">
           <div className="flex items-center gap-1.5 mb-3">
