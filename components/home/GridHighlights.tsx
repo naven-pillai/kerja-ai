@@ -7,14 +7,15 @@ export default function GridHighlights() {
     <section className="relative overflow-hidden py-16 md:py-24">
       {/* Background image (Next/Image for responsiveness) */}
       <div className="absolute inset-0 -z-10">
-        {/* Single 29KB image — behind 70% black overlay, quality difference is invisible */}
+        {/* 73KB webp — behind the overlay below, quality difference is invisible */}
         <Image
-          src="/kerja-ai-background-mobile.webp"
-          alt="Kerja AI background"
+          src="/kerja-ai-homepage-background.webp"
+          alt=""
+          aria-hidden="true"
           fill
           priority
           quality={70}
-          className="object-cover object-[center_25%] md:object-center"
+          className="object-cover object-[center_35%] md:object-center"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/70 md:bg-black/60" />
