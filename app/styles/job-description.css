@@ -1,11 +1,20 @@
 .job-description {
-  font-family: 'Inter', sans-serif;
+  /* Titillium Web, the site body font. Was a literal 'Inter' string that did
+     not match the next/font family name and silently fell back to system-ui. */
+  font-family: var(--font-sans);
   font-size: 0.9375rem; /* 15px — slightly tighter than 16px */
   color: #334155; /* slate-700 */
   line-height: 1.6;
 }
 
-/* Headings */
+/* Headings — Titillium Web too, overriding the global Inter heading rule so the
+   whole description reads in one font. */
+.job-description h2,
+.job-description h3,
+.job-description h4 {
+  font-family: var(--font-sans);
+}
+
 .job-description h2 {
   font-size: 1.25rem;   /* 20px — clear section title */
   margin-top: 2rem;

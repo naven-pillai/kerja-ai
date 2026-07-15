@@ -115,7 +115,7 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
           <article className="min-w-0">
 
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight tracking-tight mb-4">
+            <h1 className="font-body text-3xl md:text-4xl font-bold text-gray-900 leading-tight tracking-tight mb-4">
               {blog.title}
             </h1>
 

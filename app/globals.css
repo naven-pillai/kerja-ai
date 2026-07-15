@@ -33,6 +33,14 @@
   }
 }
 
+/* Titillium Web (the site body font) as an explicit utility. The blog post and
+   job pages render their whole article in Titillium — body and headings — so
+   their page titles opt out of the Inter heading rule above with this class.
+   --font-sans already resolves to Titillium Web with fallbacks. */
+@utility font-body {
+  font-family: var(--font-sans);
+}
+
 /* Animations */
 @keyframes rainbowScroll {
   0% { background-position: 0% 50%; }

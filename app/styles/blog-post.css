@@ -1,7 +1,9 @@
 /* Root container */
 .blog-post {
   color: #1e1e1e;
-  font-family: 'Inter', system-ui, sans-serif;
+  /* Titillium Web, the site body font. Was a literal 'Inter' string that did
+     not match the next/font family name and silently fell back to system-ui. */
+  font-family: var(--font-sans);
   font-size: 1.0625rem; /* 17px — optimal reading size */
   line-height: 1.85;
   max-width: 100%;
@@ -30,6 +32,9 @@
 .blog-post h2,
 .blog-post h3,
 .blog-post h4 {
+  /* Titillium Web too — overrides the global Inter heading rule for in-article
+     headings, so the whole post reads in one font. */
+  font-family: var(--font-sans);
   font-weight: 700;
   color: #0f172a;
   scroll-margin-top: 100px;
