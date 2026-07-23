@@ -100,7 +100,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
       .select(`
         id, title, slug, created_at, apply_url,
         job_type, job_category, job_location, city, remote_type,
-        min_salary, max_salary, tags, is_featured, expires_at,
+        min_salary, max_salary, currency, tags, is_featured, expires_at,
         company:companies(name, slug, logo_url)
       `)
       .eq('company_id', company.id)
