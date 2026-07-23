@@ -10,6 +10,7 @@ import CompanyLogo from '@/components/common/CompanyLogo';
 import RemoteTypePill from '@/components/common/RemoteTypePill';
 import { formatSalaryRange } from '@/utils/formatSalary';
 import { formatJobLocation } from '@/lib/formatLocation';
+import { resolveSalaryCurrency } from '@/constants/job-filters';
 import { categoryColorMap, jobTypeColorMap } from '@/lib/categoryStyles';
 
 dayjs.extend(relativeTime);
@@ -32,7 +33,9 @@ export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
   // "Kuala Lumpur, Malaysia" when a city is set; the country alone otherwise
   // (Singapore, remote roles, and jobs that predate the city column).
   const locationLabel = formatJobLocation(jobLocation, job.city);
-  const currency = Array.isArray(job.currency) ? job.currency[0] : job.currency;
+  // Falls back to the job's country when currency is unset, so a salary is
+  // never rendered as a bare number with no idea which currency it is in.
+  const currency = resolveSalaryCurrency(job.currency, jobLocation);
 
   const isFeatured = job.is_featured === true;
   const createdAt = job.created_at ? dayjs(job.created_at) : null;

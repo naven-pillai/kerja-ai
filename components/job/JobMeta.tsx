@@ -8,6 +8,7 @@ import { shouldShowCity } from '@/lib/formatLocation';
 import { slugify } from '@/utils/slugify';
 import { formatApplyUrl } from '@/utils/formatApplyUrl';
 import { formatSalaryRange } from '@/utils/formatSalary';
+import { resolveSalaryCurrency } from '@/constants/job-filters';
 import RemoteTypePill from '@/components/common/RemoteTypePill';
 
 dayjs.extend(relativeTime);
@@ -93,7 +94,9 @@ export default function JobMetaBox({ job }: Props) {
   // ✅ Pick from camelCase OR snake_case
   const minRaw = job.minSalary ?? job.min_salary ?? null;
   const maxRaw = job.maxSalary ?? job.max_salary ?? null;
-  const currency = job.currency ?? 'MYR';
+  // Was hardcoded to 'MYR', which printed a Singapore salary as RM whenever the
+  // currency was unset. Derive it from the job's country instead.
+  const currency = resolveSalaryCurrency(job.currency, cleanLocation(job.location)) ?? '';
 
   const min = toNumber(minRaw);
   const max = toNumber(maxRaw);
