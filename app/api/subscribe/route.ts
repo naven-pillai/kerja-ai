@@ -3,6 +3,7 @@ import { getResend } from '@/lib/resend'
 import { getSupabaseAdmin } from '@/lib/supabase-admin'
 import { resolveGroupIds, subscribe as mailerliteSubscribe } from '@/lib/mailerlite'
 import { isNewsletterGroupSlug, newsletterGroupSlugs } from '@/constants/newsletter-groups'
+import { normalizeSubscriberCountry } from '@/constants/newsletter-countries'
 import {
   isValidEmail,
   normalizeOptionalString,
@@ -59,7 +60,7 @@ export async function POST(req: Request) {
 
   const normalizedEmail = normalizeOptionalString(email, 320)?.toLowerCase() ?? null;
   const normalizedName = normalizeOptionalString(name, 120);
-  const normalizedLocation = normalizeOptionalString(location, 120);
+  const normalizedLocation = normalizeSubscriberCountry(location);
   const normalizedCategories = normalizeCategories(categories);
 
   if (!normalizedEmail) {
@@ -68,6 +69,17 @@ export async function POST(req: Request) {
 
   if (!isValidEmail(normalizedEmail)) {
     return NextResponse.json({ message: 'Invalid email address' }, { status: 400 })
+  }
+
+  // Kerja AI only lists jobs in Malaysia and Singapore, so we only take
+  // subscribers there. Enforced here rather than only in the form: this
+  // endpoint is public, and until now it accepted any country string at all —
+  // which is how subscribers from outside the corridor got in.
+  if (!normalizedLocation) {
+    return NextResponse.json(
+      { message: 'Kerja AI only covers Malaysia and Singapore. Please choose one to subscribe.' },
+      { status: 400 }
+    )
   }
 
   if (!process.env.MAILERLITE_API_KEY) {

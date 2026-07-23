@@ -7,10 +7,10 @@ import Cookies from 'js-cookie';
 import { NEWSLETTER_FORM_ANCHOR, SUBSCRIBED_COOKIE } from '@/lib/newsletterHandoff';
 import Image from 'next/image';
 import { Mail, ChevronDown, ExternalLink } from 'lucide-react';
-import CountryCombobox from '@/components/common/CountryCombobox';
-import { getCountryList } from '@/utils/getCountries';
-
-const countries = getCountryList();
+import {
+  subscriberCountries,
+  subscriberCountryByCode,
+} from '@/constants/newsletter-countries';
 
 type NewsletterIssue = {
   id: string;
@@ -79,10 +79,11 @@ export default function NewsletterPageClient({ issues, initialEmail = '' }: Prop
     fetch('/api/geo')
       .then((r) => r.json())
       .then((d) => {
-        if (d.country) {
-          const found = countries.find((c) => c.code === d.country);
-          if (found) setCountry(found.name);
-        }
+        // Only preselect a country we actually serve. A visitor detected
+        // elsewhere is left unselected rather than being shown a country the
+        // form cannot submit.
+        const match = subscriberCountryByCode[d.country as string];
+        if (match) setCountry(match);
       })
       .catch(() => {});
   }, []);
@@ -93,6 +94,11 @@ export default function NewsletterPageClient({ issues, initialEmail = '' }: Prop
 
     if (!/\S+@\S+\.\S+/.test(email)) {
       setError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!country) {
+      setError('Please choose Malaysia or Singapore.');
       return;
     }
 
@@ -193,13 +199,46 @@ export default function NewsletterPageClient({ issues, initialEmail = '' }: Prop
                 />
               </div>
 
-              <div className="w-full">
-                <CountryCombobox
-                  selected={country}
-                  onChange={setCountry}
-                  inputClassName="w-full px-5 py-3.5 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] text-sm shadow-sm"
-                />
-              </div>
+              {/* Country. Two options rather than a searchable list of ~200:
+                  Kerja AI only lists jobs in these markets, so anywhere else
+                  would be a digest of unreachable jobs. */}
+              <fieldset className="w-full text-left rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+                <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                  Where are you?
+                </legend>
+
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  {subscriberCountries.map((name) => {
+                    const checked = country === name;
+                    return (
+                      <label
+                        key={name}
+                        className={`flex cursor-pointer items-center gap-2.5 rounded-lg border p-2.5 transition ${
+                          checked
+                            ? 'border-[#1D4ED8]/40 bg-blue-50/60'
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="country"
+                          value={name}
+                          checked={checked}
+                          onChange={() => setCountry(name)}
+                          className="h-4 w-4 shrink-0 accent-[#1D4ED8] cursor-pointer"
+                        />
+                        <span className="text-sm font-medium text-gray-900">{name}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {!country && (
+                  <p className="mt-2 text-xs text-gray-500">
+                    We only cover Malaysia and Singapore for now.
+                  </p>
+                )}
+              </fieldset>
 
               {/* Category picker. Defaults to everything selected — a user who
                   ignores this should still get the full digest, not silence. */}
@@ -248,7 +287,7 @@ export default function NewsletterPageClient({ issues, initialEmail = '' }: Prop
 
               <button
                 type="submit"
-                disabled={loading || categories.length === 0}
+                disabled={loading || categories.length === 0 || !country}
                 className="w-full bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-[0.98] text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer shadow-sm"
               >
                 {loading ? 'Subscribing...' : 'Subscribe — It\'s Free'}
