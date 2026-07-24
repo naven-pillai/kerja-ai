@@ -33,3 +33,26 @@ export function sanitize(html: string, extra?: sanitizeHtml.IOptions): string {
 export function looksLikeHtml(value: string): boolean {
   return /<\/?[a-z][\s\S]*>/i.test(value);
 }
+
+/**
+ * True when the value would actually show the reader something.
+ *
+ * A rich-text editor does not produce an empty string for an empty field — it
+ * produces "<p></p>" or "<p>&nbsp;</p>". Those are truthy, so a plain
+ * `summary?.trim()` check renders an empty highlighted box on a post whose
+ * author cleared the field.
+ */
+export function hasVisibleContent(value: string | null | undefined): boolean {
+  if (!value) return false;
+
+  const text = value
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;|&#160;|&#xa0;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (text) return true;
+
+  // Media on its own is still something to show, even with no text around it.
+  return /<(img|iframe|video)\b/i.test(value);
+}

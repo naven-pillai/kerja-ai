@@ -4,6 +4,7 @@ import { Sparkles } from 'lucide-react';
 import { createSupabaseServerClient } from '@/lib/supabase-server';
 import { formatDate, truncate, readingTime } from '@/lib/utils';
 import { extractHeadingsFromHTML } from '@/lib/extractHeadingsFromHTML';
+import { sanitize, hasVisibleContent, looksLikeHtml } from '@/lib/sanitize';
 
 import BlogContent from '@/components/blog/BlogContent';
 import RelatedPosts from '@/components/blog/RelatedPosts';
@@ -173,7 +174,7 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
 
                 whitespace-pre-line so the author can break it into short lines
                 from the admin textarea without needing HTML. */}
-            {blog.summary?.trim() && (
+            {hasVisibleContent(blog.summary) && (
               <aside
                 aria-labelledby="post-summary-heading"
                 className="my-8 overflow-hidden rounded-2xl border border-blue-100 bg-linear-to-br from-blue-50 to-white shadow-sm"
@@ -191,9 +192,24 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
                     </h2>
                   </div>
 
-                  <p className="whitespace-pre-line text-[15px] leading-relaxed text-gray-700 md:text-base">
-                    {blog.summary.trim()}
-                  </p>
+                  {/* Summaries written before this field became rich text are
+                      plain text whose meaning lives in its blank lines. Feeding
+                      those through dangerouslySetInnerHTML would collapse every
+                      break into one run-on paragraph, so they keep
+                      whitespace-pre-line instead.
+
+                      Editor output is sanitised on the way out — author-supplied
+                      markup, same treatment as the post body. */}
+                  {looksLikeHtml(blog.summary ?? '') ? (
+                    <div
+                      className="blog-summary text-[15px] leading-relaxed text-gray-700 md:text-base"
+                      dangerouslySetInnerHTML={{ __html: sanitize(blog.summary ?? '') }}
+                    />
+                  ) : (
+                    <p className="whitespace-pre-line text-[15px] leading-relaxed text-gray-700 md:text-base">
+                      {blog.summary?.trim()}
+                    </p>
+                  )}
                 </div>
               </aside>
             )}

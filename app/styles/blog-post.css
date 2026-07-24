@@ -236,3 +236,55 @@
     padding: 0.6rem 0.75rem;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Summary box (top of a post). Rich text from the editor, so it needs its own
+   spacing rules — the surrounding aside sets colour and size, and these keep a
+   short paragraph or a couple of bullets tight inside the box rather than
+   inheriting the article's generous article-body rhythm.
+--------------------------------------------------------------------------- */
+.blog-summary > :first-child {
+  margin-top: 0;
+}
+
+.blog-summary > :last-child {
+  margin-bottom: 0;
+}
+
+.blog-summary p {
+  margin: 0.6em 0;
+  line-height: 1.7;
+}
+
+.blog-summary ul,
+.blog-summary ol {
+  margin: 0.6em 0;
+  padding-left: 1.25rem;
+}
+
+.blog-summary ul {
+  list-style-type: disc;
+}
+
+.blog-summary ol {
+  list-style-type: decimal;
+}
+
+.blog-summary li {
+  margin-bottom: 0.3rem;
+}
+
+.blog-summary li::marker {
+  color: #1D4ED8;
+}
+
+.blog-summary a {
+  color: #1D4ED8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blog-summary strong {
+  font-weight: 700;
+  color: #0f172a;
+}
