@@ -4,6 +4,12 @@ import { jobLocations, jobCategories, jobTypes } from '@/constants/job-filters';
 import { slugify as locSlugify } from '@/lib/slugify';
 import { slugify as catSlugify } from '@/utils/slugify';
 import { SITE } from '@/config/site';
+import {
+  salaryCategories,
+  salaryCountries,
+  slugifyCategory,
+  slugifyCountry,
+} from '@/constants/salary-data';
 
 const BASE = SITE.url;
 
@@ -16,6 +22,7 @@ const topRoutes: MetadataRoute.Sitemap = [
 
 // Tier 2: SEO landing pages (taxonomies)
 const taxonomyRootRoutes: MetadataRoute.Sitemap = [
+  { url: `${BASE}/salary`,              lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
   { url: `${BASE}/job-location`,        lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.7 },
   { url: `${BASE}/job-categories`,      lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.7 },
   { url: `${BASE}/job-types`,           lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.7 },
@@ -105,6 +112,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Order matters: Google prioritizes URLs that appear earlier in the sitemap.
   // Jobs and blog posts come first to direct crawl budget there.
+  // Salary pages are fully static (four categories x two countries, plus the
+  // per-category hub), so they can be enumerated without touching the database.
+  const salaryRoutes: MetadataRoute.Sitemap = salaryCategories.flatMap((category) => {
+    const categorySlug = slugifyCategory(category);
+    return [
+      {
+        url: `${BASE}/salary/${categorySlug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      },
+      ...salaryCountries.map((country) => ({
+        url: `${BASE}/salary/${categorySlug}/${slugifyCountry(country)}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      })),
+    ];
+  });
+
   return [
     ...topRoutes,
     ...jobRoutes,
@@ -114,6 +141,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...categoryRoutes,
     ...jobTypeRoutes,
     ...companyRoutes,
+    ...salaryRoutes,
     ...staticRoutes,
   ];
 }
