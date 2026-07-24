@@ -14,6 +14,7 @@ import {
   legacyCategorySlugToRoleSlug,
 } from '../constants/salary-data.ts';
 import { jobCategories } from '../constants/job-filters.ts';
+import { slugify } from '../utils/slugify.ts';
 
 test('every salary role maps to a real job category', () => {
   // The role name is what a reader searches for; the category is what links the
@@ -23,6 +24,19 @@ test('every salary role maps to a real job category', () => {
     assert.ok(
       jobCategories.includes(role.jobCategory),
       `"${role.name}" maps to "${role.jobCategory}", which is not a job category`
+    );
+  }
+});
+
+test('each role links to its own category page, not the whole board', () => {
+  // The "browse jobs" button on a salary page must land on that category's
+  // taxonomy page. Sending everyone to /jobs makes the button useless — a
+  // reader on the data scientist page wants data science jobs.
+  for (const role of salaryRoles) {
+    assert.equal(
+      role.jobCategorySlug,
+      slugify(role.jobCategory),
+      `${role.name}: stored slug has drifted from slugify("${role.jobCategory}")`
     );
   }
 });

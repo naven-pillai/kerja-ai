@@ -117,8 +117,11 @@ export default async function SalaryRolePage({ params }: { params: Promise<{ rol
         <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-5">
           <p className="text-sm text-gray-600">
             Hiring or job hunting in this field?{' '}
-            <Link href="/jobs" className="font-semibold text-[#1D4ED8] hover:text-[#1E40AF]">
-              {`Browse open ${role.jobCategory.toLowerCase()} roles`}
+            <Link
+              href={`/job-categories/${role.jobCategorySlug}`}
+              className="font-semibold text-[#1D4ED8] hover:text-[#1E40AF]"
+            >
+              {`Browse open ${role.jobCategory} roles`}
             </Link>
             .
           </p>

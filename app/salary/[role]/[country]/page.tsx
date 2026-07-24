@@ -154,10 +154,10 @@ export default async function SalaryRoleCountryPage({
             {`Compare with ${other} →`}
           </Link>
           <Link
-            href="/jobs"
+            href={`/job-categories/${role.jobCategorySlug}`}
             className="rounded-xl bg-[#1D4ED8] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1E40AF]"
           >
-            {`Browse ${role.jobCategory.toLowerCase()} jobs`}
+            {`Browse ${role.jobCategory} jobs`}
           </Link>
         </div>
 

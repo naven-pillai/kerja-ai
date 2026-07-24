@@ -73,16 +73,36 @@ function band(
  * `jobCategory` keeps each role tied to the board's taxonomy, so a salary page
  * can still link to the matching jobs and a test can still assert the category
  * is real. It is a subset of jobCategories, on purpose — see the note above.
+ *
+ * `jobCategorySlug` is that category's /job-categories/ URL. Stored rather than
+ * derived because this file stays dependency-free for the test runner; a test
+ * asserts it matches what slugify() produces, so the two cannot drift.
  */
 export const salaryRoles = [
-  { slug: 'data-scientist', name: 'Data Scientist', jobCategory: 'Data Science' },
-  { slug: 'data-engineer', name: 'Data Engineer', jobCategory: 'Data Engineering' },
+  {
+    slug: 'data-scientist',
+    name: 'Data Scientist',
+    jobCategory: 'Data Science',
+    jobCategorySlug: 'data-science',
+  },
+  {
+    slug: 'data-engineer',
+    name: 'Data Engineer',
+    jobCategory: 'Data Engineering',
+    jobCategorySlug: 'data-engineering',
+  },
   {
     slug: 'machine-learning-engineer',
     name: 'Machine Learning Engineer',
     jobCategory: 'Machine Learning Engineering',
+    jobCategorySlug: 'machine-learning-engineering',
   },
-  { slug: 'ai-engineer', name: 'AI Engineer', jobCategory: 'AI Engineering' },
+  {
+    slug: 'ai-engineer',
+    name: 'AI Engineer',
+    jobCategory: 'AI Engineering',
+    jobCategorySlug: 'ai-engineering',
+  },
 ] as const;
 
 export type SalaryRole = (typeof salaryRoles)[number];
