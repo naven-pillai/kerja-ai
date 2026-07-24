@@ -2,45 +2,58 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  salaryCategories,
+  salaryRoles,
   salaryCountries,
   salaryData,
   salarySources,
   currencyByCountry,
-  categoryFromSlug,
+  roleFromSlug,
   countryFromSlug,
-  slugifyCategory,
   slugifyCountry,
   formatMonthly,
+  legacyCategorySlugToRoleSlug,
 } from '../constants/salary-data.ts';
 import { jobCategories } from '../constants/job-filters.ts';
 
-test('every salary category is a real job category', () => {
-  // A salary page for a category the board does not list would be orphan content.
-  for (const category of salaryCategories) {
-    assert.ok(jobCategories.includes(category), `"${category}" is not a job category`);
+test('every salary role maps to a real job category', () => {
+  // The role name is what a reader searches for; the category is what links the
+  // page back to the board. A role pointing at a category the board does not
+  // list would produce a "browse jobs" link that finds nothing.
+  for (const role of salaryRoles) {
+    assert.ok(
+      jobCategories.includes(role.jobCategory),
+      `"${role.name}" maps to "${role.jobCategory}", which is not a job category`
+    );
   }
 });
 
-test('we only publish the categories with credible local data', () => {
+test('roles are named for the job, not the field', () => {
+  // "Data Scientist", not "Data Science" — the thing a person is, not the
+  // discipline. Every one of ours ends in a noun for a person.
+  for (const role of salaryRoles) {
+    assert.doesNotMatch(role.name, /(ing|ence|Science)$/, `"${role.name}" reads as a field`);
+  }
+});
+
+test('we only publish the roles with credible local data', () => {
   // Deliberately four. Adding one means new sourcing, not just a new entry —
   // this test is here to make that a conscious decision.
-  assert.equal(salaryCategories.length, 4);
+  assert.equal(salaryRoles.length, 4);
 });
 
 test('every country/category pair has a band', () => {
   for (const country of salaryCountries) {
-    for (const category of salaryCategories) {
-      assert.ok(salaryData[country]?.[category], `missing ${country} / ${category}`);
+    for (const role of salaryRoles) {
+      assert.ok(salaryData[country]?.[role.slug], `missing ${country} / ${role.name}`);
     }
   }
 });
 
 test('bands rise with seniority and never invert', () => {
   for (const country of salaryCountries) {
-    for (const category of salaryCategories) {
-      const { entry, mid, senior, overall } = salaryData[country][category];
-      const where = `${country} / ${category}`;
+    for (const role of salaryRoles) {
+      const { entry, mid, senior, overall } = salaryData[country][role.slug];
+      const where = `${country} / ${role.name}`;
 
       for (const [name, b] of [['entry', entry], ['mid', mid], ['senior', senior]]) {
         assert.ok(b.min > 0, `${where} ${name} min must be positive`);
@@ -62,17 +75,17 @@ test('figures are monthly, not annual', () => {
   // A stray annual figure would render as a wildly wrong monthly band. Nothing
   // in these two markets pays a six-figure monthly salary at senior level.
   for (const country of salaryCountries) {
-    for (const category of salaryCategories) {
-      const { overall } = salaryData[country][category];
-      assert.ok(overall.max < 60_000, `${country} / ${category}: ${overall.max} looks annual`);
-      assert.ok(overall.min > 1_000, `${country} / ${category}: ${overall.min} looks too low`);
+    for (const role of salaryRoles) {
+      const { overall } = salaryData[country][role.slug];
+      assert.ok(overall.max < 60_000, `${country} / ${role.name}: ${overall.max} looks annual`);
+      assert.ok(overall.min > 1_000, `${country} / ${role.name}: ${overall.min} looks too low`);
     }
   }
 });
 
 test('slugs round-trip', () => {
-  for (const category of salaryCategories) {
-    assert.equal(categoryFromSlug(slugifyCategory(category)), category);
+  for (const role of salaryRoles) {
+    assert.equal(roleFromSlug(role.slug), role);
   }
   for (const country of salaryCountries) {
     assert.equal(countryFromSlug(slugifyCountry(country)), country);
@@ -80,14 +93,23 @@ test('slugs round-trip', () => {
 });
 
 test('unknown slugs resolve to null rather than throwing', () => {
-  assert.equal(categoryFromSlug('prompt-engineering'), null);
-  assert.equal(categoryFromSlug(''), null);
+  assert.equal(roleFromSlug('prompt-engineer'), null);
+  assert.equal(roleFromSlug(''), null);
   assert.equal(countryFromSlug('indonesia'), null);
 });
 
+test('every retired category URL still points somewhere real', () => {
+  // These shipped live and are indexed. A typo here is a 404 on a page that
+  // used to work, which is worse than never having published it.
+  for (const [legacy, roleSlug] of Object.entries(legacyCategorySlugToRoleSlug)) {
+    assert.ok(roleFromSlug(roleSlug), `${legacy} redirects to unknown role "${roleSlug}"`);
+  }
+  assert.equal(Object.keys(legacyCategorySlugToRoleSlug).length, salaryRoles.length);
+});
+
 test('slugs are URL-safe', () => {
-  for (const category of salaryCategories) {
-    assert.match(slugifyCategory(category), /^[a-z0-9-]+$/);
+  for (const role of salaryRoles) {
+    assert.match(role.slug, /^[a-z0-9-]+$/);
   }
 });
 
@@ -113,9 +135,9 @@ test('currency matches the market', () => {
 test('Singapore pays more than Malaysia in nominal terms', () => {
   // A sanity check on the whole dataset: if this ever flips, a currency or a
   // decimal point has gone wrong somewhere.
-  for (const category of salaryCategories) {
-    const my = salaryData.Malaysia[category].mid;
-    const sg = salaryData.Singapore[category].mid;
-    assert.ok(sg.min > my.min, `${category}: SGD mid floor should exceed MYR`);
+  for (const role of salaryRoles) {
+    const my = salaryData.Malaysia[role.slug].mid;
+    const sg = salaryData.Singapore[role.slug].mid;
+    assert.ok(sg.min > my.min, `${role.name}: SGD mid floor should exceed MYR`);
   }
 });

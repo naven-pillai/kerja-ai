@@ -64,6 +64,17 @@ const nextConfig: NextConfig = {
       // Common inbound company path alias
       ['/remote-companies',       '/companies'],
       ['/remote-companies/:slug', '/companies/:slug'],
+      // Salary pages moved from the field to the role — "data scientist salary"
+      // is what people search, not "data science salary". These shipped live and
+      // are in the sitemap, so they redirect rather than 404.
+      ['/salary/data-science',                  '/salary/data-scientist'],
+      ['/salary/data-science/:country',         '/salary/data-scientist/:country'],
+      ['/salary/data-engineering',              '/salary/data-engineer'],
+      ['/salary/data-engineering/:country',     '/salary/data-engineer/:country'],
+      ['/salary/machine-learning-engineering',          '/salary/machine-learning-engineer'],
+      ['/salary/machine-learning-engineering/:country', '/salary/machine-learning-engineer/:country'],
+      ['/salary/ai-engineering',                '/salary/ai-engineer'],
+      ['/salary/ai-engineering/:country',       '/salary/ai-engineer/:country'],
     ] as const;
 
     return legacy.flatMap(([source, destination]) => [

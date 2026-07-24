@@ -63,15 +63,30 @@ function band(
   };
 }
 
-/** Categories we publish salary data for. A subset of jobCategories, on purpose. */
-export const salaryCategories = [
-  'Data Science',
-  'Data Engineering',
-  'Machine Learning Engineering',
-  'AI Engineering',
+/**
+ * The roles we publish salary data for.
+ *
+ * Named for the job, not the field — people search "data scientist salary",
+ * not "data science salary", and a pay band describes a person's role rather
+ * than a discipline.
+ *
+ * `jobCategory` keeps each role tied to the board's taxonomy, so a salary page
+ * can still link to the matching jobs and a test can still assert the category
+ * is real. It is a subset of jobCategories, on purpose — see the note above.
+ */
+export const salaryRoles = [
+  { slug: 'data-scientist', name: 'Data Scientist', jobCategory: 'Data Science' },
+  { slug: 'data-engineer', name: 'Data Engineer', jobCategory: 'Data Engineering' },
+  {
+    slug: 'machine-learning-engineer',
+    name: 'Machine Learning Engineer',
+    jobCategory: 'Machine Learning Engineering',
+  },
+  { slug: 'ai-engineer', name: 'AI Engineer', jobCategory: 'AI Engineering' },
 ] as const;
 
-export type SalaryCategory = (typeof salaryCategories)[number];
+export type SalaryRole = (typeof salaryRoles)[number];
+export type SalaryRoleSlug = SalaryRole['slug'];
 
 export const salaryCountries = ['Malaysia', 'Singapore'] as const;
 export type SalaryCountry = (typeof salaryCountries)[number];
@@ -100,11 +115,11 @@ export const currencyByCountry: Record<SalaryCountry, { code: string; prefix: st
 //                     RM18,000–55,000/mo were rejected — they are inconsistent
 //                     with every observed dataset for this market.
 // ─────────────────────────────────────────────────────────────────────────────
-const malaysia: Record<SalaryCategory, SalaryByLevel> = {
-  'Data Science':                 band([4_000, 6_500], [6_500, 10_000], [10_000, 15_000]),
-  'Data Engineering':             band([3_800, 6_000], [6_000, 9_500],  [9_500, 14_500]),
-  'Machine Learning Engineering': band([4_500, 7_000], [7_000, 11_000], [11_000, 16_000]),
-  'AI Engineering':               band([5_000, 7_500], [7_500, 12_000], [12_000, 18_000]),
+const malaysia: Record<SalaryRoleSlug, SalaryByLevel> = {
+  'data-scientist':             band([4_000, 6_500], [6_500, 10_000], [10_000, 15_000]),
+  'data-engineer':              band([3_800, 6_000], [6_000, 9_500],  [9_500, 14_500]),
+  'machine-learning-engineer':  band([4_500, 7_000], [7_000, 11_000], [11_000, 16_000]),
+  'ai-engineer':                band([5_000, 7_500], [7_500, 12_000], [12_000, 18_000]),
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -123,14 +138,14 @@ const malaysia: Record<SalaryCategory, SalaryByLevel> = {
 //   AI Engineering    Morgan McKinley SG AI/ML Engineer S$100–170k/yr
 //                     (≈S$8,300–14,200/mo), market range S$5,400–18,300/mo.
 // ─────────────────────────────────────────────────────────────────────────────
-const singapore: Record<SalaryCategory, SalaryByLevel> = {
-  'Data Science':                 band([4_500, 7_000], [7_500, 12_000], [12_000, 20_000]),
-  'Data Engineering':             band([4_600, 7_000], [7_000, 11_000], [11_000, 16_000]),
-  'Machine Learning Engineering': band([5_000, 7_500], [8_000, 12_500], [12_500, 19_000]),
-  'AI Engineering':               band([5_400, 8_000], [8_500, 14_000], [14_000, 20_000]),
+const singapore: Record<SalaryRoleSlug, SalaryByLevel> = {
+  'data-scientist':             band([4_500, 7_000], [7_500, 12_000], [12_000, 20_000]),
+  'data-engineer':              band([4_600, 7_000], [7_000, 11_000], [11_000, 16_000]),
+  'machine-learning-engineer':  band([5_000, 7_500], [8_000, 12_500], [12_500, 19_000]),
+  'ai-engineer':                band([5_400, 8_000], [8_500, 14_000], [14_000, 20_000]),
 };
 
-export const salaryData: Record<SalaryCountry, Record<SalaryCategory, SalaryByLevel>> = {
+export const salaryData: Record<SalaryCountry, Record<SalaryRoleSlug, SalaryByLevel>> = {
   Malaysia: malaysia,
   Singapore: singapore,
 };
@@ -161,17 +176,24 @@ export const METHODOLOGY_NOTE =
   'ads to publish our own figures. Individual offers vary with company size, ' +
   'funding stage, and whether the employer is a local firm or a multinational.';
 
-export function slugifyCategory(category: string): string {
-  return category.toLowerCase().replace(/\//g, ' ').replace(/\s+/g, '-');
-}
-
 export function slugifyCountry(country: string): string {
   return country.toLowerCase();
 }
 
-export function categoryFromSlug(slug: string): SalaryCategory | null {
-  return salaryCategories.find((c) => slugifyCategory(c) === slug) ?? null;
+export function roleFromSlug(slug: string): SalaryRole | null {
+  return salaryRoles.find((r) => r.slug === slug) ?? null;
 }
+
+/**
+ * The old category-based URLs (/salary/data-science) that shipped before roles.
+ * Kept so next.config can redirect them rather than leaving live pages to 404.
+ */
+export const legacyCategorySlugToRoleSlug: Record<string, SalaryRoleSlug> = {
+  'data-science': 'data-scientist',
+  'data-engineering': 'data-engineer',
+  'machine-learning-engineering': 'machine-learning-engineer',
+  'ai-engineering': 'ai-engineer',
+};
 
 export function countryFromSlug(slug: string): SalaryCountry | null {
   return salaryCountries.find((c) => slugifyCountry(c) === slug) ?? null;

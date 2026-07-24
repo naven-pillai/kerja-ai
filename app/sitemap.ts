@@ -4,12 +4,7 @@ import { jobLocations, jobCategories, jobTypes } from '@/constants/job-filters';
 import { slugify as locSlugify } from '@/lib/slugify';
 import { slugify as catSlugify } from '@/utils/slugify';
 import { SITE } from '@/config/site';
-import {
-  salaryCategories,
-  salaryCountries,
-  slugifyCategory,
-  slugifyCountry,
-} from '@/constants/salary-data';
+import { salaryRoles, salaryCountries, slugifyCountry } from '@/constants/salary-data';
 
 const BASE = SITE.url;
 
@@ -114,17 +109,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Jobs and blog posts come first to direct crawl budget there.
   // Salary pages are fully static (four categories x two countries, plus the
   // per-category hub), so they can be enumerated without touching the database.
-  const salaryRoutes: MetadataRoute.Sitemap = salaryCategories.flatMap((category) => {
-    const categorySlug = slugifyCategory(category);
+  const salaryRoutes: MetadataRoute.Sitemap = salaryRoles.flatMap((role) => {
+    const roleSlug = role.slug;
     return [
       {
-        url: `${BASE}/salary/${categorySlug}`,
+        url: `${BASE}/salary/${roleSlug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
       },
       ...salaryCountries.map((country) => ({
-        url: `${BASE}/salary/${categorySlug}/${slugifyCountry(country)}`,
+        url: `${BASE}/salary/${roleSlug}/${slugifyCountry(country)}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.7,

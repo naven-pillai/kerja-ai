@@ -2,12 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
-  salaryCategories,
+  salaryRoles,
   salaryCountries,
   salaryData,
-  categoryFromSlug,
+  roleFromSlug,
   countryFromSlug,
-  slugifyCategory,
   slugifyCountry,
   formatMonthly,
   currencyByCountry,
@@ -19,9 +18,9 @@ import { OG_IMAGES, TWITTER_IMAGES } from '@/lib/seo';
 export const revalidate = 86400;
 
 export function generateStaticParams() {
-  return salaryCategories.flatMap((c) =>
+  return salaryRoles.flatMap((r) =>
     salaryCountries.map((country) => ({
-      category: slugifyCategory(c),
+      role: r.slug,
       country: slugifyCountry(country),
     }))
   );
@@ -30,17 +29,17 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ category: string; country: string }>;
+  params: Promise<{ role: string; country: string }>;
 }): Promise<Metadata> {
-  const { category: cSlug, country: nSlug } = await params;
-  const category = categoryFromSlug(cSlug);
+  const { role: rSlug, country: nSlug } = await params;
+  const role = roleFromSlug(rSlug);
   const country = countryFromSlug(nSlug);
-  if (!category || !country) return { title: 'Salary Not Found' };
+  if (!role || !country) return { title: 'Salary Not Found' };
 
-  const bands = salaryData[country][category];
-  const title = `${category} Salary in ${country}`;
-  const description = `${category} pay in ${country}: ${formatMonthly(bands.overall.min, country)}–${formatMonthly(bands.overall.max, country)} a month, broken down by entry, mid and senior level.`;
-  const url = `https://kerja-ai.com/salary/${cSlug}/${nSlug}`;
+  const bands = salaryData[country][role.slug];
+  const title = `${role.name} Salary in ${country}`;
+  const description = `${role.name} pay in ${country}: ${formatMonthly(bands.overall.min, country)}–${formatMonthly(bands.overall.max, country)} a month, broken down by entry, mid and senior level.`;
+  const url = `https://kerja-ai.com/salary/${rSlug}/${nSlug}`;
 
   return {
     title,
@@ -51,17 +50,17 @@ export async function generateMetadata({
   };
 }
 
-export default async function SalaryCategoryCountryPage({
+export default async function SalaryRoleCountryPage({
   params,
 }: {
-  params: Promise<{ category: string; country: string }>;
+  params: Promise<{ role: string; country: string }>;
 }) {
-  const { category: cSlug, country: nSlug } = await params;
-  const category = categoryFromSlug(cSlug);
+  const { role: rSlug, country: nSlug } = await params;
+  const role = roleFromSlug(rSlug);
   const country = countryFromSlug(nSlug);
-  if (!category || !country) notFound();
+  if (!role || !country) notFound();
 
-  const bands = salaryData[country][category];
+  const bands = salaryData[country][role.slug];
   const other = salaryCountries.find((c) => c !== country)!;
   const { code } = currencyByCountry[country];
 
@@ -75,22 +74,22 @@ export default async function SalaryCategoryCountryPage({
         {
           '@type': 'ListItem',
           position: 3,
-          name: category,
-          item: `https://kerja-ai.com/salary/${cSlug}`,
+          name: role.name,
+          item: `https://kerja-ai.com/salary/${rSlug}`,
         },
         {
           '@type': 'ListItem',
           position: 4,
           name: country,
-          item: `https://kerja-ai.com/salary/${cSlug}/${nSlug}`,
+          item: `https://kerja-ai.com/salary/${rSlug}/${nSlug}`,
         },
       ],
     },
     {
       '@context': 'https://schema.org',
       '@type': 'OccupationAggregationByEmployer',
-      name: category,
-      description: `${category} salary benchmarks in ${country}.`,
+      name: role.name,
+      description: `${role.name} salary benchmarks in ${country}.`,
       occupationLocation: [{ '@type': 'Country', name: country }],
       estimatedSalary: {
         '@type': 'MonetaryAmountDistribution',
@@ -112,26 +111,27 @@ export default async function SalaryCategoryCountryPage({
       />
 
       <main className="max-w-3xl mx-auto px-4 py-12 md:py-16">
-        <nav aria-label="Breadcrumb" className="mb-4 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-4 flex flex-wrap items-center gap-2 text-xs text-gray-500"
+        >
           <Link href="/salary" className="hover:text-[#1D4ED8]">
             Salaries
           </Link>
           <span>/</span>
-          <Link href={`/salary/${cSlug}`} className="hover:text-[#1D4ED8]">
-            {category}
+          <Link href={`/salary/${rSlug}`} className="hover:text-[#1D4ED8]">
+            {role.name}
           </Link>
           <span>/</span>
           <span className="text-gray-700">{country}</span>
         </nav>
 
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
-          {`${category} Salary in ${country}`}
+          {`${role.name} Salary in ${country}`}
         </h1>
 
         <div className="mt-6 rounded-2xl border border-blue-100 bg-linear-to-br from-blue-50 to-white p-5 md:p-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#1D4ED8]">
-            Market range
-          </p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#1D4ED8]">Market range</p>
           <p className="mt-1.5 text-2xl md:text-3xl font-bold text-gray-900">
             {formatMonthly(bands.overall.min, country)} –{' '}
             {formatMonthly(bands.overall.max, country)}
@@ -148,7 +148,7 @@ export default async function SalaryCategoryCountryPage({
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href={`/salary/${cSlug}/${slugifyCountry(other)}`}
+            href={`/salary/${rSlug}/${slugifyCountry(other)}`}
             className="rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-[#1D4ED8]/40 hover:text-[#1D4ED8]"
           >
             {`Compare with ${other} →`}
@@ -157,7 +157,7 @@ export default async function SalaryCategoryCountryPage({
             href="/jobs"
             className="rounded-xl bg-[#1D4ED8] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1E40AF]"
           >
-            {`Browse ${category.toLowerCase()} jobs`}
+            {`Browse ${role.jobCategory.toLowerCase()} jobs`}
           </Link>
         </div>
 

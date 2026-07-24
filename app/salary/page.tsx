@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
-  salaryCategories,
+  salaryRoles,
   salaryCountries,
   salaryData,
   formatMonthly,
-  slugifyCategory,
   slugifyCountry,
 } from '@/constants/salary-data';
 import SalaryMeta from '@/components/salary/SalaryMeta';
@@ -50,27 +49,27 @@ export default function SalaryIndexPage() {
         </p>
 
         <div className="mt-10 space-y-4">
-          {salaryCategories.map((category) => (
+          {salaryRoles.map((role) => (
             <article
-              key={category}
+              key={role.slug}
               className="rounded-2xl border border-gray-200 bg-white p-5 md:p-6 shadow-sm transition hover:border-[#1D4ED8]/30 hover:shadow-md"
             >
               <h2 className="text-lg font-bold text-gray-900">
                 <Link
-                  href={`/salary/${slugifyCategory(category)}`}
+                  href={`/salary/${role.slug}`}
                   className="hover:text-[#1D4ED8] transition"
                 >
-                  {category}
+                  {role.name}
                 </Link>
               </h2>
 
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {salaryCountries.map((country) => {
-                  const overall = salaryData[country][category].overall;
+                  const overall = salaryData[country][role.slug].overall;
                   return (
                     <Link
                       key={country}
-                      href={`/salary/${slugifyCategory(category)}/${slugifyCountry(country)}`}
+                      href={`/salary/${role.slug}/${slugifyCountry(country)}`}
                       className="rounded-xl border border-gray-100 bg-gray-50/70 px-4 py-3 transition hover:border-[#1D4ED8]/30 hover:bg-blue-50/50"
                     >
                       <span className="block text-xs font-semibold uppercase tracking-wide text-gray-500">

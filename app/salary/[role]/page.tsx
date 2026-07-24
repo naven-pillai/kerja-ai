@@ -2,11 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
-  salaryCategories,
+  salaryRoles,
   salaryCountries,
   salaryData,
-  categoryFromSlug,
-  slugifyCategory,
+  roleFromSlug,
   slugifyCountry,
   formatMonthly,
 } from '@/constants/salary-data';
@@ -17,20 +16,20 @@ import { OG_IMAGES, TWITTER_IMAGES } from '@/lib/seo';
 export const revalidate = 86400;
 
 export function generateStaticParams() {
-  return salaryCategories.map((c) => ({ category: slugifyCategory(c) }));
+  return salaryRoles.map((r) => ({ role: r.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ category: string }>;
+  params: Promise<{ role: string }>;
 }): Promise<Metadata> {
-  const { category: slug } = await params;
-  const category = categoryFromSlug(slug);
-  if (!category) return { title: 'Salary Not Found' };
+  const { role: slug } = await params;
+  const role = roleFromSlug(slug);
+  if (!role) return { title: 'Salary Not Found' };
 
-  const title = `${category} Salary in Malaysia & Singapore`;
-  const description = `What ${category} roles pay each month in Malaysia and Singapore, by experience level. Built from NodeFlair, Jobstreet, Robert Walters and Michael Page data.`;
+  const title = `${role.name} Salary in Malaysia & Singapore`;
+  const description = `What a ${role.name.toLowerCase()} earns each month in Malaysia and Singapore, by experience level. Built from NodeFlair, Jobstreet, Robert Walters and Michael Page data.`;
   const url = `https://kerja-ai.com/salary/${slug}`;
 
   return {
@@ -42,14 +41,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function SalaryCategoryPage({
-  params,
-}: {
-  params: Promise<{ category: string }>;
-}) {
-  const { category: slug } = await params;
-  const category = categoryFromSlug(slug);
-  if (!category) notFound();
+export default async function SalaryRolePage({ params }: { params: Promise<{ role: string }> }) {
+  const { role: slug } = await params;
+  const role = roleFromSlug(slug);
+  if (!role) notFound();
 
   const breadcrumb = {
     '@context': 'https://schema.org',
@@ -60,7 +55,7 @@ export default async function SalaryCategoryPage({
       {
         '@type': 'ListItem',
         position: 3,
-        name: category,
+        name: role.name,
         item: `https://kerja-ai.com/salary/${slug}`,
       },
     ],
@@ -79,19 +74,19 @@ export default async function SalaryCategoryPage({
             Salaries
           </Link>
           <span>/</span>
-          <span className="text-gray-700">{category}</span>
+          <span className="text-gray-700">{role.name}</span>
         </nav>
 
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
-          {`${category} Salary in Malaysia & Singapore`}
+          {`${role.name} Salary in Malaysia & Singapore`}
         </h1>
         <p className="mt-4 max-w-2xl text-gray-600 leading-relaxed">
-          {`Gross monthly pay for ${category.toLowerCase()} roles, by experience level, in both markets.`}
+          {`Gross monthly pay for a ${role.name.toLowerCase()}, by experience level, in both markets.`}
         </p>
 
         <div className="mt-10 space-y-10">
           {salaryCountries.map((country) => {
-            const bands = salaryData[country][category];
+            const bands = salaryData[country][role.slug];
             return (
               <section key={country}>
                 <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
@@ -123,7 +118,7 @@ export default async function SalaryCategoryPage({
           <p className="text-sm text-gray-600">
             Hiring or job hunting in this field?{' '}
             <Link href="/jobs" className="font-semibold text-[#1D4ED8] hover:text-[#1E40AF]">
-              Browse open {category.toLowerCase()} roles
+              {`Browse open ${role.jobCategory.toLowerCase()} roles`}
             </Link>
             .
           </p>
