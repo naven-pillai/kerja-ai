@@ -102,6 +102,7 @@ export type Database = {
           seo_title: string | null
           slug: string
           status: string
+          summary: string | null
           title: string
           updated_at: string | null
         }
@@ -125,6 +126,7 @@ export type Database = {
           seo_title?: string | null
           slug: string
           status?: string
+          summary?: string | null
           title: string
           updated_at?: string | null
         }
@@ -148,6 +150,7 @@ export type Database = {
           seo_title?: string | null
           slug?: string
           status?: string
+          summary?: string | null
           title?: string
           updated_at?: string | null
         }

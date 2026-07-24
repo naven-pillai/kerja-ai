@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { cache } from 'react';
+import { Sparkles } from 'lucide-react';
 import { createSupabaseServerClient } from '@/lib/supabase-server';
 import { formatDate, truncate, readingTime } from '@/lib/utils';
 import { extractHeadingsFromHTML } from '@/lib/extractHeadingsFromHTML';
@@ -29,7 +30,7 @@ const getBlog = cache(async (slug: string) => {
   const { data } = await supabase
     .from('blogs')
     .select(
-      'id, title, slug, content, featured_image, category, updated_at, created_at, seo_title, seo_description'
+      'id, title, slug, content, summary, featured_image, category, updated_at, created_at, seo_title, seo_description'
     )
     .eq('slug', slug)
     .maybeSingle<Blog>();
@@ -164,6 +165,38 @@ export default async function BlogSlugPage({ params }: { params: Promise<PagePar
                 priority
               />
             </div>
+
+            {/* Summary — the "what this post covers" note, sitting between the
+                hero image and the body so a reader can decide whether to commit
+                before scrolling. Rendered only when one is set, so posts without
+                a summary show nothing rather than an empty box.
+
+                whitespace-pre-line so the author can break it into short lines
+                from the admin textarea without needing HTML. */}
+            {blog.summary?.trim() && (
+              <aside
+                aria-labelledby="post-summary-heading"
+                className="my-8 overflow-hidden rounded-2xl border border-blue-100 bg-linear-to-br from-blue-50 to-white shadow-sm"
+              >
+                <div className="border-l-4 border-[#1D4ED8] p-5 md:p-6">
+                  <div className="mb-3 flex items-center gap-2.5">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#1D4ED8]/10">
+                      <Sparkles className="h-4 w-4 text-[#1D4ED8]" aria-hidden="true" />
+                    </span>
+                    <h2
+                      id="post-summary-heading"
+                      className="text-xs font-bold uppercase tracking-widest text-[#1D4ED8]"
+                    >
+                      Summary
+                    </h2>
+                  </div>
+
+                  <p className="whitespace-pre-line text-[15px] leading-relaxed text-gray-700 md:text-base">
+                    {blog.summary.trim()}
+                  </p>
+                </div>
+              </aside>
+            )}
 
             {/* Body */}
             <BlogContent content={updatedHtml} />
