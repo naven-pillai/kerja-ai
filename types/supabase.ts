@@ -676,6 +676,60 @@ export type Database = {
           },
         ]
       }
+      salary_submissions: {
+        Row: {
+          bonus_months: number | null
+          city: string | null
+          company_type: string | null
+          country: string
+          created_at: string
+          industry?: string | null
+          employment_type?: string | null
+          currency: string
+          id: string
+          job_category: string
+          job_title: string | null
+          monthly_salary: number
+          status: string
+          work_arrangement: string | null
+          years_experience: string
+        }
+        Insert: {
+          bonus_months?: number | null
+          city?: string | null
+          company_type?: string | null
+          country: string
+          created_at?: string
+          industry?: string | null
+          employment_type?: string | null
+          currency: string
+          id?: string
+          job_category: string
+          job_title?: string | null
+          monthly_salary: number
+          status?: string
+          work_arrangement?: string | null
+          years_experience: string
+        }
+        Update: {
+          bonus_months?: number | null
+          city?: string | null
+          company_type?: string | null
+          country?: string
+          created_at?: string
+          industry?: string | null
+          employment_type?: string | null
+          currency?: string
+          id?: string
+          job_category?: string
+          job_title?: string | null
+          monthly_salary?: number
+          status?: string
+          work_arrangement?: string | null
+          years_experience?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       companies_with_job_count: {

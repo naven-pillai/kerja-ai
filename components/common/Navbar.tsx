@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 
 const navItems = [
   { label: 'Jobs', href: '/jobs' },
+  { label: 'Salaries', href: '/salary' },
   { label: 'Companies', href: '/companies' },
   { label: 'Blog', href: '/blog' },
 ];

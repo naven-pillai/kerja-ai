@@ -100,6 +100,12 @@ export default function SalaryIndexPage() {
             wildly with observed pay. We would rather publish nothing than publish a number
             you might negotiate against.
           </p>
+          <Link
+            href="/salary/contribute"
+            className="mt-3 inline-block text-sm font-semibold text-amber-900 underline underline-offset-2 hover:text-amber-950"
+          >
+            Help fix that — share your salary anonymously →
+          </Link>
         </section>
 
         <SalaryMeta countries={[...salaryCountries]} />
