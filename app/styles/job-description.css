@@ -71,7 +71,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #1D4ED8;
+  /* Same slate as the list text, not the brand blue. */
+  background-color: currentColor;
   flex-shrink: 0;
 }
 
@@ -94,7 +95,8 @@
   top: 0;
   font-size: 0.8125rem;
   font-weight: 700;
-  color: #1D4ED8;
+  /* Same slate as the list text, not the brand blue. */
+  color: currentColor;
   min-width: 1.25rem;
 }
 

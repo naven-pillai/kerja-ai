@@ -83,7 +83,8 @@
 }
 
 .blog-post li::marker {
-  color: #1D4ED8;
+  /* Same as the list text, not the brand blue. */
+  color: currentColor;
 }
 
 /* Blockquotes */
@@ -275,7 +276,8 @@
 }
 
 .blog-summary li::marker {
-  color: #1D4ED8;
+  /* Same as the list text, not the brand blue. */
+  color: currentColor;
 }
 
 .blog-summary a {
