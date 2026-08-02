@@ -4,9 +4,9 @@ import { OG_IMAGES, TWITTER_IMAGES } from '@/lib/seo';
 
 // A static segment, so Next serves this before /companies/[slug] — no company
 // is slugged "singapore", so nothing is shadowed.
-const title = 'AI & Data Companies in Singapore';
+const title = 'Companies Hiring AI & Data Talent in Singapore';
 const description =
-  'Companies building AI, machine learning and data teams in Singapore. Profiles stay live even after a role closes.';
+  'Companies with open AI, machine learning and data roles in Singapore right now. HQ anywhere — what counts is where they are hiring.';
 
 export const metadata = {
   title,

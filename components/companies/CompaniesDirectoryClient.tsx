@@ -5,7 +5,6 @@ import CompanyCard from './CompanyCard';
 import CompaniesToolbar from './CompaniesToolbar';
 import Pagination from './Pagination';
 import { usePagination } from './hooks/usePagination';
-import { hqCountry } from '@/lib/companyLocation';
 
 type Company = {
   id: string;
@@ -28,8 +27,6 @@ type Props = {
   enableSearch?: boolean;
   defaultFilter?: 'all' | 'hiring';
   maxSuggestions?: number;
-  /** Hidden on the country pages, where every company is already in one market. */
-  showLocationFilter?: boolean;
 };
 
 const PER_PAGE = 25;
@@ -39,7 +36,6 @@ export default function CompaniesDirectoryClient({
   enableSearch = true,
   defaultFilter = 'all',
   maxSuggestions = 8,
-  showLocationFilter = true,
 }: Props) {
   const [filter, setFilter] = useState<'all' | 'hiring'>(defaultFilter);
   const [query, setQuery] = useState('');
@@ -47,7 +43,6 @@ export default function CompaniesDirectoryClient({
   const [sort, setSort] = useState<SortOption>('alpha-asc');
   const [industryFilter, setIndustryFilter] = useState('');
   const [sizeFilter, setSizeFilter] = useState('');
-  const [regionFilter, setRegionFilter] = useState('');
   const [policyFilter, setPolicyFilter] = useState('');
 
   const hiringCount = useMemo(
@@ -61,10 +56,6 @@ export default function CompaniesDirectoryClient({
     return [...new Set(vals)].sort();
   }, [companies]);
 
-  const regions = useMemo(() => {
-    const present = new Set(companies.map((c) => hqCountry(c.hq_location)).filter(Boolean));
-    return (['Malaysia', 'Singapore'] as const).filter((c) => present.has(c));
-  }, [companies]);
 
   const policies = useMemo(() => {
     const vals = companies.map((c) => c.remote_policy).filter(Boolean) as string[];
@@ -91,11 +82,10 @@ export default function CompaniesDirectoryClient({
     if (q) result = result.filter((c) => c.name.toLowerCase().includes(q));
     if (industryFilter) result = result.filter((c) => c.industry === industryFilter);
     if (sizeFilter) result = result.filter((c) => c.company_size === sizeFilter);
-    if (regionFilter) result = result.filter((c) => hqCountry(c.hq_location) === regionFilter);
     if (policyFilter) result = result.filter((c) => c.remote_policy === policyFilter);
 
     return result;
-  }, [baseCompanies, query, industryFilter, sizeFilter, regionFilter, policyFilter]);
+  }, [baseCompanies, query, industryFilter, sizeFilter, policyFilter]);
 
   const sorted = useMemo(() => {
     const arr = [...filtered];
@@ -112,7 +102,7 @@ export default function CompaniesDirectoryClient({
   // follow the defaultFilter prop. Both are adjusted during render — React's
   // documented alternative to an effect — so there is no throwaway pass showing
   // the old page against the new results.
-  const filterKey = [filter, query, industryFilter, sizeFilter, regionFilter, policyFilter, sort].join(' ');
+  const filterKey = [filter, query, industryFilter, sizeFilter, policyFilter, sort].join(' ');
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -131,7 +121,6 @@ export default function CompaniesDirectoryClient({
     setSort('alpha-asc');
     setIndustryFilter('');
     setSizeFilter('');
-    setRegionFilter('');
     setPolicyFilter('');
     setPage(1);
   }
@@ -156,15 +145,11 @@ export default function CompaniesDirectoryClient({
         setIndustryFilter={setIndustryFilter}
         sizeFilter={sizeFilter}
         setSizeFilter={setSizeFilter}
-        regionFilter={regionFilter}
-        setRegionFilter={setRegionFilter}
         policyFilter={policyFilter}
         setPolicyFilter={setPolicyFilter}
         industries={industries}
         sizes={sizes}
-        regions={regions}
         policies={policies}
-        showLocationFilter={showLocationFilter}
       />
 
       {sorted.length === 0 ? (

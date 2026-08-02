@@ -2,7 +2,10 @@ import { createSupabaseServerClient } from '@/lib/supabase-server';
 import NewsletterCard from '@/components/common/NewsletterCard';
 import CompaniesDirectoryClient from '@/components/companies/CompaniesDirectoryClient';
 import CompaniesSubNav from '@/components/companies/CompaniesSubNav';
-import { hqCountry, type CompanyCountry } from '@/lib/companyLocation';
+import {
+  hiringCountriesFromJobLocations,
+  type CompanyCountry,
+} from '@/lib/companyLocation';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,6 +13,7 @@ interface Job {
   id: string;
   status: string | null;
   expires_at: string | null;
+  job_location: string[] | string | null;
 }
 
 interface CompanyRow {
@@ -37,6 +41,8 @@ export type CompanyForDirectory = {
   company_size: string | null;
   hq_location: string | null;
   remote_policy: string | null;
+  /** Markets this company has an active job in, e.g. ['Malaysia']. */
+  hiringCountries: CompanyCountry[];
 };
 
 export default async function RemoteCompaniesPage({
@@ -63,7 +69,8 @@ export default async function RemoteCompaniesPage({
       jobs (
         id,
         status,
-        expires_at
+        expires_at,
+        job_location
       )
     `
     )
@@ -98,23 +105,26 @@ export default async function RemoteCompaniesPage({
       company_size: company.company_size,
       hq_location: company.hq_location,
       remote_policy: company.remote_policy,
+      // The markets this company is hiring in, from its active jobs.
+      hiringCountries: hiringCountriesFromJobLocations(activeJobs.map((j) => j.job_location)),
     };
   });
 
-  // Country pages show only companies in that market. Filtering here rather
-  // than in the client keeps the stats and the list in agreement.
+  // A country page shows companies hiring in that market — those with an active
+  // job located there, whatever their HQ. Filtering here rather than in the
+  // client keeps the stats and the list in agreement.
   const visibleCompanies = country
-    ? companies.filter((c) => hqCountry(c.hq_location) === country)
+    ? companies.filter((c) => c.hiringCountries.includes(country))
     : companies;
 
   const hiringCount = visibleCompanies.filter((c) => c.isHiring).length;
   const totalJobs = visibleCompanies.reduce((sum, c) => sum + c.jobCount, 0);
 
   const heading = country
-    ? `AI & Data Companies in ${country}`
+    ? `Companies Hiring AI & Data Talent in ${country}`
     : 'Companies hiring AI and data talent in Malaysia and Singapore';
   const subtitle = country
-    ? `The teams building AI, ML and data functions in ${country}. Profiles stay up even after a role closes, so you can keep tracking a company you want to work for.`
+    ? `Teams with open AI, ML and data roles in ${country} right now. Profiles stay up even after a role closes, so you can keep tracking a company you want to work for.`
     : 'The teams building AI, ML and data functions across Malaysia and Singapore, in one place. Profiles stay up even after a role closes, so you can keep tracking a company you want to work for.';
 
   return (
@@ -154,7 +164,6 @@ export default async function RemoteCompaniesPage({
           defaultFilter="all"
           enableSearch
           maxSuggestions={8}
-          showLocationFilter={!country}
         />
       </div>
     </section>

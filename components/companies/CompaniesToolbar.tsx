@@ -31,16 +31,12 @@ type Props = {
   setIndustryFilter: (v: string) => void;
   sizeFilter: string;
   setSizeFilter: (v: string) => void;
-  regionFilter: string;
-  setRegionFilter: (v: string) => void;
   policyFilter: string;
   setPolicyFilter: (v: string) => void;
 
   industries: string[];
   sizes: string[];
-  regions: string[];
   policies: string[];
-  showLocationFilter?: boolean;
 
   showingCount: number;
   onReset: () => void;
@@ -65,15 +61,11 @@ export default function CompaniesToolbar({
   setIndustryFilter,
   sizeFilter,
   setSizeFilter,
-  regionFilter,
-  setRegionFilter,
   policyFilter,
   setPolicyFilter,
   industries,
   sizes,
-  regions,
   policies,
-  showLocationFilter = true,
   showingCount,
   onReset,
 }: Props) {
@@ -82,7 +74,6 @@ export default function CompaniesToolbar({
     filter !== 'all' ||
     industryFilter !== '' ||
     sizeFilter !== '' ||
-    regionFilter !== '' ||
     policyFilter !== '' ||
     sort !== 'alpha-asc';
 
@@ -127,19 +118,6 @@ export default function CompaniesToolbar({
           </select>
         )}
 
-        {showLocationFilter && regions.length > 0 && (
-          <select
-            value={regionFilter}
-            onChange={(e) => setRegionFilter(e.target.value)}
-            className={selectClass}
-            aria-label="Filter by location"
-          >
-            <option value="">All Locations</option>
-            {regions.map((r) => (
-              <option key={r} value={r}>{r}</option>
-            ))}
-          </select>
-        )}
 
         {policies.length > 0 && (
           <select value={policyFilter} onChange={(e) => setPolicyFilter(e.target.value)} className={selectClass}>
