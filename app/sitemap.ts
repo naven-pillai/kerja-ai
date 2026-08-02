@@ -22,6 +22,8 @@ const taxonomyRootRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE}/job-categories`,      lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.7 },
   { url: `${BASE}/job-types`,           lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.7 },
   { url: `${BASE}/companies`,           lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.6 },
+  { url: `${BASE}/companies/malaysia`,  lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.6 },
+  { url: `${BASE}/companies/singapore`, lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.6 },
 ];
 
 // Tier 3: low-frequency static pages

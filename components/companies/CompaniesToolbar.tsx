@@ -40,6 +40,7 @@ type Props = {
   sizes: string[];
   regions: string[];
   policies: string[];
+  showLocationFilter?: boolean;
 
   showingCount: number;
   onReset: () => void;
@@ -72,6 +73,7 @@ export default function CompaniesToolbar({
   sizes,
   regions,
   policies,
+  showLocationFilter = true,
   showingCount,
   onReset,
 }: Props) {
@@ -125,9 +127,14 @@ export default function CompaniesToolbar({
           </select>
         )}
 
-        {regions.length > 0 && (
-          <select value={regionFilter} onChange={(e) => setRegionFilter(e.target.value)} className={selectClass}>
-            <option value="">All Regions</option>
+        {showLocationFilter && regions.length > 0 && (
+          <select
+            value={regionFilter}
+            onChange={(e) => setRegionFilter(e.target.value)}
+            className={selectClass}
+            aria-label="Filter by location"
+          >
+            <option value="">All Locations</option>
             {regions.map((r) => (
               <option key={r} value={r}>{r}</option>
             ))}
