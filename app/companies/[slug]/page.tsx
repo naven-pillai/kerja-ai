@@ -106,6 +106,7 @@ export default async function RemoteCompanyPage({ params }: { params: Promise<Pa
       .eq('company_id', company.id)
       .eq('status', 'published')
       .or(`expires_at.is.null,expires_at.gt.${now}`)
+      .order('is_featured', { ascending: false })
       .order('created_at', { ascending: false }),
     similarQuery,
   ]);

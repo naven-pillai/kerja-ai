@@ -44,6 +44,7 @@ export default function RelatedJobs({ category, tags, excludeJobId }: Props) {
               .not('goes_public_at', 'is', null)
               .contains('job_category', [normalizedCategory])
               .neq('id', excludeJobId)
+              .order('is_featured', { ascending: false })
               .order('created_at', { ascending: false })
               .limit(6)
           : Promise.resolve({ data: null }),
@@ -56,6 +57,7 @@ export default function RelatedJobs({ category, tags, excludeJobId }: Props) {
               .not('goes_public_at', 'is', null)
               .overlaps('tags', tags)
               .neq('id', excludeJobId)
+              .order('is_featured', { ascending: false })
               .order('created_at', { ascending: false })
               .limit(6)
           : Promise.resolve({ data: null }),

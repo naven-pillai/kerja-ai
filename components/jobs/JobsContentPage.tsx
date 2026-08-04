@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { SlidersHorizontal, X, SearchX, ChevronDown, Sparkles } from 'lucide-react';
+import { SlidersHorizontal, X, SearchX, Sparkles } from 'lucide-react';
 import { JobWithCompany } from '@/types/custom';
 import { Filters } from '@/types/filters';
 import { jobMatchesKeyword } from '@/lib/jobSearch';
@@ -16,7 +16,6 @@ import Link from 'next/link';
 
 dayjs.extend(relativeTime);
 
-type SortOption = 'featured' | 'newest';
 
 const emptyFilters: Filters = {
   keyword: '',
@@ -46,9 +45,7 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
    */
   const [descriptionMatches, setDescriptionMatches] =
     useState<{ query: string; ids: Set<string> }>({ query: '', ids: new Set() });
-  const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-  const [isSortOpen, setIsSortOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(15);
 
   // Close mobile drawer when clicking outside / on overlay
@@ -132,25 +129,27 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
     return results;
   }, [allJobs, activeFilters, descriptionMatches]);
 
-  // Sort displayed jobs
-  const displayedJobs = useMemo(() => {
-    const sorted = [...filteredJobs];
-    if (sortBy === 'newest') {
-      sorted.sort((a, b) => dayjs(b.created_at ?? 0).valueOf() - dayjs(a.created_at ?? 0).valueOf());
-    } else {
-      sorted.sort((a, b) => dayjs(b.created_at ?? 0).valueOf() - dayjs(a.created_at ?? 0).valueOf());
-    }
-    return sorted;
-  }, [filteredJobs, sortBy]);
+  // Newest first within each group; the featured/regular split below pins
+  // featured roles above the rest.
+  const displayedJobs = useMemo(
+    () =>
+      [...filteredJobs].sort(
+        (a, b) => dayjs(b.created_at ?? 0).valueOf() - dayjs(a.created_at ?? 0).valueOf()
+      ),
+    [filteredJobs]
+  );
 
+  // Featured roles are always pinned to the top, whatever the sort — the sort
+  // orders within each group, it does not let a newer non-featured role jump
+  // above a featured one.
   const featuredJobs = useMemo(
-    () => (sortBy === 'featured' ? displayedJobs.filter((j) => j.is_featured) : []),
-    [displayedJobs, sortBy]
+    () => displayedJobs.filter((j) => j.is_featured),
+    [displayedJobs]
   );
 
   const allRegularJobs = useMemo(
-    () => (sortBy === 'featured' ? displayedJobs.filter((j) => !j.is_featured) : displayedJobs),
-    [displayedJobs, sortBy]
+    () => displayedJobs.filter((j) => !j.is_featured),
+    [displayedJobs]
   );
 
   const regularJobs = useMemo(
@@ -176,11 +175,6 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
     const updated = { ...activeFilters, [key]: '' };
     setActiveFilters(updated);
     handleApply(updated);
-  };
-
-  const sortLabels: Record<SortOption, string> = {
-    featured: 'Featured first',
-    newest: 'Newest first',
   };
 
   return (
@@ -249,34 +243,6 @@ export default function JobsContentPage({ initialKeyword = '', jobs, loadError =
                 </p>
 
                 <div className="flex items-center gap-2">
-                  {/* Sort dropdown */}
-                  <div className="relative">
-                    <button
-                      onClick={() => setIsSortOpen((v) => !v)}
-                      className="inline-flex items-center gap-1.5 text-sm text-gray-600 border border-gray-200 bg-white px-3 py-2 rounded-lg hover:border-gray-300 transition"
-                    >
-                      {sortLabels[sortBy]}
-                      <ChevronDown size={14} className={`transition-transform ${isSortOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    {isSortOpen && (
-                      <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-20">
-                        {(Object.entries(sortLabels) as [SortOption, string][]).map(([key, label]) => (
-                          <button
-                            key={key}
-                            onClick={() => { setSortBy(key); setIsSortOpen(false); setVisibleCount(15); }}
-                            className={`w-full text-left px-4 py-2 text-sm transition ${
-                              sortBy === key
-                                ? 'text-[#1D4ED8] font-semibold bg-gray-50'
-                                : 'text-gray-700 hover:bg-gray-50'
-                            }`}
-                          >
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
                   {/* Mobile filter button */}
                   <button
                     onClick={() => setIsMobileFilterOpen(true)}
