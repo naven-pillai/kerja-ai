@@ -95,14 +95,15 @@ export default async function FeaturedJobsSection() {
           )}
         </div>
 
-        <div className="mt-10 text-center">
-          <Link
-            href="/jobs"
-            className="inline-block bg-[#1D4ED8] hover:bg-[#1E40AF] text-white font-semibold py-3 px-6 rounded-lg transition"
-          >
-            Browse All AI &amp; Data Jobs →
-          </Link>
-        </div>
+        {/* Full-width "continue the list" bar rather than a centered pill —
+            this section's heading and cards are left-aligned, so the CTA spans
+            the list it belongs to instead of floating in the middle. */}
+        <Link
+          href="/jobs"
+          className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl border border-[#1D4ED8]/30 bg-white px-6 py-4 text-base font-semibold text-[#1D4ED8] transition hover:bg-[#1D4ED8] hover:text-white"
+        >
+          Browse all AI &amp; data jobs →
+        </Link>
       </div>
     </section>
   );
