@@ -15,6 +15,9 @@
  * differentiator and it should be shown, not buried in prose.
  */
 
+import Link from 'next/link';
+import { Briefcase, Building2, Globe2, BadgeCheck } from 'lucide-react';
+
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
@@ -46,17 +49,44 @@ async function fetchLiveJobs(): Promise<LiveJob[]> {
   }
 }
 
+type Stat = {
+  value: string;
+  label: string;
+  href?: string;
+  icon: React.ReactNode;
+};
+
 export default async function LivePlatformStats() {
   const live = await fetchLiveJobs();
 
   const roleCount = live.length;
   const companyCount = new Set(live.map((j) => j.company_id).filter(Boolean)).size;
 
-  const stats = [
-    { value: roleCount.toLocaleString('en-US'), label: roleCount === 1 ? 'live role' : 'live roles' },
-    { value: companyCount.toLocaleString('en-US'), label: 'hiring companies' },
-    { value: '2', label: 'markets — MY & SG' },
-    { value: '100%', label: 'manually reviewed' },
+  const stats: Stat[] = [
+    {
+      value: roleCount.toLocaleString('en-US'),
+      label: roleCount === 1 ? 'live role' : 'live roles',
+      href: '/jobs',
+      icon: <Briefcase className="h-4 w-4" />,
+    },
+    {
+      value: companyCount.toLocaleString('en-US'),
+      label: 'hiring companies',
+      href: '/companies',
+      icon: <Building2 className="h-4 w-4" />,
+    },
+    {
+      // Flags rather than a bare "2" — it names the markets instead of counting
+      // them, which reads as substance, not filler.
+      value: '🇲🇾 🇸🇬',
+      label: 'Malaysia & Singapore',
+      icon: <Globe2 className="h-4 w-4" />,
+    },
+    {
+      value: '100%',
+      label: 'manually reviewed',
+      icon: <BadgeCheck className="h-4 w-4" />,
+    },
   ];
 
   const trust = [
@@ -67,23 +97,41 @@ export default async function LivePlatformStats() {
   ];
 
   return (
-    <section className="border-y border-gray-100 bg-white py-8">
+    <section className="border-b border-gray-100 bg-linear-to-b from-slate-50/80 to-white py-9">
       <div className="mx-auto max-w-5xl px-4">
-        <dl className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <dt className="sr-only">{s.label}</dt>
-              <dd>
-                <span className="block text-3xl font-extrabold tracking-tight text-[#1D4ED8]">
-                  {s.value}
-                </span>
-                <span className="mt-1 block text-sm text-gray-600">{s.label}</span>
-              </dd>
-            </div>
-          ))}
+        <dl className="grid grid-cols-2 sm:grid-cols-4 sm:divide-x sm:divide-gray-200/70">
+          {stats.map((stat) => {
+            // The two live counts double as navigation — they are the proof and
+            // the thing a visitor most wants to click.
+            const inner = (
+              <>
+                <dt className="flex items-center justify-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+                  <span className="text-gray-300">{stat.icon}</span>
+                  {stat.label}
+                </dt>
+                <dd className="mt-1.5 text-3xl font-extrabold tracking-tight text-[#1D4ED8]">
+                  {stat.value}
+                </dd>
+              </>
+            );
+            return (
+              <div key={stat.label} className="px-2 py-1 text-center">
+                {stat.href ? (
+                  <Link
+                    href={stat.href}
+                    className="block rounded-lg transition hover:text-[#1E40AF] [&_dd]:transition-colors [&:hover_dd]:text-[#1E40AF]"
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  inner
+                )}
+              </div>
+            );
+          })}
         </dl>
 
-        <ul className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-gray-500">
+        <ul className="mx-auto mt-7 flex max-w-3xl flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-gray-100 pt-5 text-xs font-medium text-gray-500">
           {trust.map((item) => (
             <li key={item} className="flex items-center gap-1.5">
               <svg
