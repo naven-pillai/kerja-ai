@@ -11,6 +11,7 @@ import RemoteTypePill from '@/components/common/RemoteTypePill';
 import { formatSalaryRange } from '@/utils/formatSalary';
 import { formatJobLocation } from '@/lib/formatLocation';
 import { resolveSalaryCurrency } from '@/constants/job-filters';
+import { seniorityFromTitle } from '@/utils/seniorityFromTitle';
 
 dayjs.extend(relativeTime);
 
@@ -18,21 +19,6 @@ type Props = {
   job: JobWithCompany;
   showEarlyAccessBadge?: boolean;
 };
-
-/**
- * There is no seniority column, so read it off the title. Most senior first, so
- * "Senior Staff Engineer" resolves to Lead rather than Senior. Returns null when
- * the title says nothing — better to show no label than a guessed one.
- */
-function seniorityFromTitle(title: string): string | null {
-  const t = title.toLowerCase();
-  if (/\b(head|director|vp|chief|principal)\b/.test(t)) return 'Lead';
-  if (/\b(lead|staff)\b/.test(t)) return 'Lead';
-  if (/\b(senior|snr|sr)\b/.test(t)) return 'Senior';
-  if (/\b(junior|jnr|graduate|entry|associate)\b/.test(t)) return 'Junior';
-  if (/\b(intern|internship)\b/.test(t)) return 'Intern';
-  return null;
-}
 
 export default function JobCard({ job, showEarlyAccessBadge = false }: Props) {
   const jobCategories = Array.isArray(job.job_category)

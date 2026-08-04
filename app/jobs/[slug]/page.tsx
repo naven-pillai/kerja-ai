@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { formatJobLocation, formatShareLocation } from '@/lib/formatLocation';
 
 // Components
-import JobHeader from '@/components/job/JobHeader';
+import JobDetailHeader from '@/components/job/JobDetailHeader';
 import JobMetaBox from '@/components/job/JobMeta';
 import CompanyCard from '@/components/job/CompanyCard';
 import SocialShare from '@/components/job/SocialShare';
@@ -37,7 +37,7 @@ const getJob = cache(async (slug: string) => {
       expires_at, goes_public_at, status,
       seo_title, seo_description,
       job_type, job_category, job_location, city, remote_type, tags,
-      min_salary, max_salary, currency,
+      min_salary, max_salary, currency, is_featured,
       company:companies(name, slug, logo_url, website)
     `)
     .eq('slug', slug)
@@ -178,6 +178,11 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
     (typeof job.min_salary === 'number' && job.min_salary > 0) ||
     (typeof job.max_salary === 'number' && job.max_salary > 0);
 
+  // Header shows a "City, Country" label. Salary is deliberately not in the
+  // header — it stays in the sidebar facts box.
+  const primaryLocation = Array.isArray(jobLocationArray) ? jobLocationArray[0] : jobLocationArray;
+  const headerLocationLabel = formatJobLocation(primaryLocation, job.city);
+
   return (
     <>
       <ScrollToTopOnRouteChange />
@@ -266,9 +271,20 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
 
       <section className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-4 gap-10">
         {/* Main */}
-        <div className="space-y-10 lg:col-span-3">
-          <JobHeader title={job.title} />
-          <JobSummarizeBar slug={job.slug} title={job.title} />
+        <div className="space-y-8 lg:col-span-3">
+          {/* The five questions — what, who, where, pay, how to apply — up top. */}
+          <JobDetailHeader
+            title={job.title}
+            companyName={companyName}
+            companyLogo={companyLogo}
+            companySlug={companySlug}
+            locationLabel={headerLocationLabel}
+            jobCategory={jobCategory ?? null}
+            remoteType={job.remote_type}
+            jobType={jobType ?? null}
+            isFeatured={job.is_featured === true}
+            datePosted={datePosted}
+          />
 
           <JobDescription
             description={job.description}
@@ -277,6 +293,10 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
             jobTitle={job.title}
             slug={job.slug}
           />
+
+          {/* AI summary sits after the human-readable description — it supports
+              the decision, it no longer dominates the introduction. */}
+          <JobSummarizeBar slug={job.slug} title={job.title} />
         </div>
 
         {/* Sidebar mobile */}
@@ -311,8 +331,9 @@ export default async function JobSlugPage({ params }: { params: Promise<PagePara
           <NewsletterSidebar />
         </div>
 
-        {/* Sidebar desktop */}
-        <aside className="hidden lg:flex lg:flex-col space-y-6">
+        {/* Sidebar desktop — sticky, so the apply action and key facts stay in
+            view as the reader scrolls the description. */}
+        <aside className="hidden lg:flex lg:flex-col space-y-6 lg:sticky lg:top-24 lg:self-start">
           <CompanyCard companyName={companyName} logoUrl={companyLogo} companySlug={companySlug} />
           <JobMetaBox
             job={{
