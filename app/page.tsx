@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import HeroSection from '@/components/home/HeroSection';
+import LivePlatformStats from '@/components/home/LivePlatformStats';
 import GridHighlights from '@/components/home/GridHighlights';
 import FeaturedJobsSection from '@/components/home/FeaturedJobsSection';
+import SalarySnapshot from '@/components/home/SalarySnapshot';
 import LatestBlogSection from '@/components/home/LatestBlogSection';
 import NewsletterCTA from '@/components/common/NewsletterCTA';
 import HomeScrollFix from '@/components/home/HomeScrollFix';
@@ -131,13 +133,24 @@ export default function HomePage() {
       />
       <HomeScrollFix />
       <HeroSection />
-      <GridHighlights />
+
+      {/* Proof and opportunities first; the explainer comes after. A visitor is
+          here to find a role, so show real numbers and real jobs before the
+          "why us" pitch. */}
+      <LivePlatformStats />
+
       <Suspense fallback={<FeaturedJobsSkeleton />}>
         <FeaturedJobsSection />
       </Suspense>
+
+      <GridHighlights />
+
+      <SalarySnapshot />
+
       <Suspense fallback={<LatestBlogSkeleton />}>
         <LatestBlogSection />
       </Suspense>
+
       <NewsletterCTA />
     </main>
   );

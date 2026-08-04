@@ -50,12 +50,14 @@ export default function GridHighlights() {
           />
         </div>
 
-        {/* CTA Button → jobs page */}
+        {/* Points at companies, not jobs — the "Browse jobs" CTA already sits
+            directly above this section under the job list, and this band is
+            about the teams doing the hiring. */}
         <Link
-          href="/jobs"
+          href="/companies"
           className="inline-flex items-center justify-center rounded-xl bg-[#1D4ED8] px-6 py-4 font-semibold text-white shadow-md transition hover:bg-[#1E40AF] hover:-translate-y-0.5"
         >
-          Browse AI &amp; Data Jobs
+          See who&apos;s hiring →
         </Link>
       </div>
     </section>
